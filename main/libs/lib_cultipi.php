@@ -648,6 +648,92 @@ function getCultiPiStatus() {
 }
 // }}}
 
+// {{{ get_webcam_conf()
+// ROLE Create webcam conf
+// RET Web cam conf
+function get_webcam_conf() {
+        $return=array();
+
+        for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) {
+            if(is_file("/etc/culticam/webcam$i.conf")) {
+                $handle = fopen("/etc/culticam/webcam$i.conf", "r");
+                if($handle) {
+                    while(($line = fgets($handle)) !== false) {
+                    // process the line read.
+                    if(strpos($line, "resolution")!==false) {
+                        $value=explode(" ",$line);
+                        $return[$i]['resolution']=trim($value[1]);
+                    }
+
+                    if(strpos($line, "brightness")!==false) {
+                        $value=explode("=",$line);
+                        $value[1]=trim($value[1]);
+                        $return[$i]['brightness']=substr($value[1],0,strlen($value[1])-1);
+                    }
+
+                    if(strpos($line, "contrast")!==false) {
+                        $value=explode("=",$line);
+                        $value[1]=trim($value[1]);
+                        $return[$i]['contrast']=substr($value[1],0,strlen($value[1])-1);
+                    }
+
+                    if(strpos($line, "palette")!==false) {
+                        $value=explode(" ",$line);
+                        $return[$i]['palette']=trim($value[1]);
+                    }
+
+                    if(strpos($line, "title")!==false) {
+                        $value=explode("\"",$line);
+                        $return[$i]['name']=trim($value[1]);
+                    }
+                    }
+                    fclose($handle);
+                } 
+                else
+                {
+                    // error opening the file.
+                    $return[$i]['resolution']="400x300";
+                    $return[$i]['brightness']="55";
+                    $return[$i]['contrast']="33";
+                    $return[$i]['palette']="MJPEG";
+                    $return[$i]['name']="Webcam $i";
+                }
+            } 
+            else
+            {
+                // error The file doesnot exists
+                $return[$i]['resolution']="400x300";
+                $return[$i]['brightness']="55";
+                $return[$i]['contrast']="33";
+                $return[$i]['palette']="MJPEG";
+                $return[$i]['name']="Webcam $i";
+            }
+        }
+
+        for($i=0;$i<count($return);$i++)
+        {
+            $name=$i+1;
+            
+            if(!array_key_exists('name', $return[$i])) 
+                $return[$i]['name']="Webcam $name";
+            
+            if(!array_key_exists('palette', $return[$i]))
+                $return[$i]['palette']="AUTO";
+            
+            if(!array_key_exists('resolution', $return[$i]))
+                $return[$i]['resolution']="400x300";
+            
+            if(!array_key_exists('brightness', $return[$i]))
+                $return[$i]['brightness']="55";
+            
+            if(!array_key_exists('contrast', $return[$i]))
+                $return[$i]['contrast']="33";
+        }
+        
+        return $return;
+  }
+// }}}
+
 }
 
 ?>

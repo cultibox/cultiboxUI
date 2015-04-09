@@ -65,15 +65,20 @@ if(strcmp("$wifi_gw","")==0) $wifi_gw="0.0.0.0";
 $eth_phy=get_phy_addr("eth0");
 $wlan_phy=get_phy_addr("wlan0");
 
-if(find_config($net_config,"wlan0","wpa-psk","bool")) {
+if(find_config($net_config,"wlan0","wpa-psk","bool"))
+{
     $wifi_key_type="WPA AUTO";
     $wifi_password=find_config($net_config,"wlan0","wpa-psk ","val");
     $wifi_ssid=find_config($net_config,"wlan0","wpa-ssid","val");
-} else if(find_config($net_config,"wlan0","wireless-key","val")) {
+} 
+else if(find_config($net_config,"wlan0","wireless-key","val"))
+{
     $wifi_key_type="WEP";
     $wifi_password=find_config($net_config,"wlan0","wireless-key","val");
     $wifi_ssid=find_config($net_config,"wlan0","wireless-essid","val");
-} else {
+}
+else
+{
     $wifi_key_type="NONE";
     $wifi_ssid=find_config($net_config,"wlan0","wireless-essid","val");
 }
@@ -82,11 +87,17 @@ if(find_config($net_config,"wlan0","wpa-psk","bool")) {
 if(strpos("$wifi_ssid","cultipi_")===0) $wifi_ssid="";
 
 
-$webcam_conf=get_webcam_conf();
+$webcam_conf = cultipi\get_webcam_conf();
 
-for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) {
-    if(is_file("/tmp/webcam$i.jpg")) {
-        $screen{$i}="/tmp/webcam$i.jpg";
+for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++)
+{
+    if(is_file("/tmp/webcam$i.jpg"))
+    {
+        $screen{$i} = "/tmp/webcam$i.jpg";
+    }
+    else 
+    {
+        $screen{$i} = "";
     }
 }
 
