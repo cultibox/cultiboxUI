@@ -49,25 +49,6 @@ $cost=get_configuration("SHOW_COST");
 ?>
 <!DOCTYPE HTML>
 <head>
-<?php
-    $filename = '../../VERSION.txt';
-    if (file_exists($filename)) {
-        clearstatcache();
-        $time=time();
-        $mod_time=filemtime($filename);
-        $duration=$time-$mod_time;
-
-        //If software is opened 10mn after the installation or the upgrade, we delete the cache:
-        if($duration<600) { 
-            header( 'Expires: Sat, 26 Jul 1997 05:00:00 GMT' );
-            header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s' ) . ' GMT' );
-            header( 'Cache-Control: no-store, no-cache, must-revalidate' );
-            header( 'Cache-Control: post-check=0, pre-check=0', false );
-            header( 'Pragma: no-cache' ); 
-        }
-    }
-?>
-
     <title>Cultibox</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -88,16 +69,14 @@ $cost=get_configuration("SHOW_COST");
     <script type="text/javascript" src="/cultibox/main/libs/js/exporting.js?v=<?=@filemtime('main/libs/js/exporting.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery-ui-timepicker-addon.js?v=<?=@filemtime('main/libs/js/jquery-ui-timepicker-addon.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.colourPicker.js?v=<?=@filemtime('main/libs/js/jquery.colourPicker.js')?>"></script>
-    <script type="text/javascript" src="/cultibox/main/libs/js/cultibox.js?v=<?=@filemtime('main/libs/js/cultibox.js')?>"></script>
-    <script type="text/javascript" src="/cultibox/main/libs/js/cultibox-utils.js?v=<?=@filemtime('main/libs/js/cultibox-utils.js')?>"></script>
-    <script type="text/javascript" src="/cultibox/main/libs/js/fullcalendar.js?v=<?=@filemtime('main/libs/js/fullcalendar.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.blockUI.js?v=<?=@filemtime('main/libs/js/jquery.blockUI.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/scrollTo.js?v=<?=@filemtime('main/libs/js/scrollTo.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/fileDownload.js?v=<?=@filemtime('main/libs/js/fileDownload.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.ui.datepicker-<?php echo substr($_COOKIE['LANG'], 0 , 2); ?>.js?v=<?=@filemtime('main/libs/js/jquery.ui.datepicker-'.substr($_COOKIE['LANG'], 0 , 2).'.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/fileUpload.js?v=<?=@filemtime('main/libs/js/fileUpload.js')?>"></script>
+    <script type="text/javascript" src="/cultibox/main/libs/js/r.js"></script>
+    
 </head>
-
 
 <body id="page" class="page">
     <div id="diff_conf" style="display:none">
@@ -174,7 +153,7 @@ $cost=get_configuration("SHOW_COST");
                 <div class="message" style="display:none" title="<?php echo __('MESSAGE_BOX'); ?>">
                     <br />
                     <div id="pop_up_information_container">
-                        <img src="main/libs/img/informations.png" alt="" />
+                        <img src="/cultibox/main/libs/img/informations.png" alt="" />
                         <label class="info_title"><?php echo __('INFORMATION'); ?>:</label>
                         <div class="info"  id="pop_up_information_part">
                             <ul>
@@ -183,7 +162,7 @@ $cost=get_configuration("SHOW_COST");
                         </div>
                     </div>
                     <div id="pop_up_error_container">
-                        <img src="main/libs/img/warning.png" alt="" />
+                        <img src="/cultibox/main/libs/img/warning.png" alt="" />
                         <label class="error_title"><?php  echo __('WARNING'); ?>:</label>
                         <div class="error" id="pop_up_error_part">
                             <ul>
@@ -204,8 +183,50 @@ $cost=get_configuration("SHOW_COST");
                 <div id="main" class="grid-block">
                     <div id="maininner" class="grid-box">
                         <div id="content" class="grid-block">
-                        </div>
-                        <div class="shortlogo"><img src="main/libs/img/shortlogo2.png" alt=""></div>
+                        
+                        <p class="title_conf">
+                            Aide
+                        </p>
+                        <a href="/cultibox/help.php">Retour au sommaire</a>
+
+
+                        <?php 
+
+                        // Ouverture du fichier
+                        $wiki = "Home";
+                        if(isset($_GET['wiki']) && !empty($_GET['wiki']))
+                        {
+                           $wiki = $_GET['wiki'];
+                        }
+                        
+                        
+                        require_once('main/libs/Michelf/Markdown.inc.php');
+                        
+                        $parser = new Michelf\Markdown;
+                        $parser->url_filter_func = function ($url) {
+                            if (strpos($url, "http") !== false) 
+                            {
+                                return $url;
+                            }
+                            else if (strpos($url, "img/") !== false)
+                            {
+                                return "main/cultibox.wiki/" . $url;
+                            }
+                            else 
+                            {
+                                return "help.php?wiki=" . $url;
+                            }
+                        };
+                        $my_html = $parser->transform(file_get_contents("main/cultibox.wiki/" . $wiki . ".md"));
+                        
+
+                        echo $my_html;
+
+                        ?>
+
+
+                        
+                        <div class="shortlogo"><img src="/cultibox/main/libs/img/shortlogo2.png" alt=""></div>
                     </div> 
                 </div>
             </div>
@@ -223,3 +244,5 @@ $cost=get_configuration("SHOW_COST");
     </div>
 </body>
 </html>
+
+
