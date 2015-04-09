@@ -1,0 +1,3 @@
+[submodule "main/cultibox.wiki"]
+	path = main/cultibox.wiki
+	url = https://github.com/cultibox/cultibox.wiki.git
