@@ -142,7 +142,7 @@ $cost=get_configuration("SHOW_COST");
                         <div id="box">                      
                             <img src="/cultibox/main/libs/img/box.png" alt="">
                         </div>
-                                    
+
                         <a class="logo" href="/cultibox" id="welcome-logo"><img src="/cultibox/main/libs/img/logo_cultibox.png" alt=""></a>    
                     </div>
                 </header>
