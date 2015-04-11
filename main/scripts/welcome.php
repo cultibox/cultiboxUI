@@ -13,7 +13,6 @@ $sd_card=""; //Path of the SD card
 $wizard=true; 
 $nb_plugs = get_configuration("NB_PLUGS",$main_error); //Get current actives number of plugs
 $compat=true; //Variable to check if the browser used is compatible with the software
-$notes=array(); //Array which will contains notes displayed in the welcome pages
 $browser=get_browser_infos(); //Get browsers informations by PHP: browser name, version...
 
 // Trying to find if a cultibox SD card is currently plugged and if it's the case, get the path to this SD card
@@ -47,8 +46,6 @@ if(isset($nb_plugs)&&(!empty($nb_plugs))) {
 }
 
 $user_agent = getenv("HTTP_USER_AGENT");
-
-get_notes($notes,$_COOKIE['LANG'],$main_error);
 
 //Compute time loading for debug option
 $end_load = getmicrotime();

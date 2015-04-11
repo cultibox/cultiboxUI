@@ -9,14 +9,12 @@
     <p class="text_info"><?php echo __('WELCOME_MESSAGE'); ?></p>
     <br />
     <?php if($wizard) { ?>
-        <div class="text_info"><?php echo __('WELCOME_TUTO'); ?>:<br /><?php echo __('WELCOME_REQUIEREMENT'); ?></div>
-        <br />
         <p class="text_info"><?php echo __('WELCOME_FOLLOW_LINK'); ?>:</p>
         <form action="/cultibox/index.php?menu=wizard" method="post">
             <p class="p_center"><input type="submit" name="go_wizard" id="go_wizard" value="<?php echo __('WELCOME_WIZARD'); ?>"></p>
         </form>
     <?php } else { ?>
-    <hr />
+    <hr class="hr_welcome" />
     <br />
     <table class="table_width">
         <tr>
@@ -59,48 +57,131 @@
         </tr>
     </table>
     <br />
-    <hr />
+    <hr class="hr_welcome" />
     <?php } ?>
 </div>
 
 <br /><div id="compat" style="display:none" class="text_info"><?php echo __('ERROR_COMPAT_BROWSER'); ?></div>
 
-<?php if((count($notes)>0)&&(!$wizard)) { ?>
+<?php if(!$wizard) { ?>
 <br />
 <p class="welcome_title"><?php echo __('DID_YOU_KNOW'); ?></p>
-  <?php foreach($notes as $note) { ?>
 <br />
+
 <table class="table_width">
-        <tr>
-            <td class="border_note_title"></td>
-            <td class="title_note"><?php echo $note['title']; ?></td>
-            <td></td>
-        </tr>
+    <tr>
+        <td class="border_note_title"></td>
+        <td class="title_note"><?php echo __('DOCUMENTATION'); ?></td>
+        <td></td>
+    </tr>
 </table>
-<table class="table_width">
-        <tr>
-            <td class="border_note_desc"></td>
-            <td><?php echo $note['desc']; ?></td>
-            <td class="border_note_desc"></td>
-        </tr>
-</table>
-        <?php if((!empty($note['image']))||(!empty($note['link']))) { ?>
 <table class="table_width">
     <tr>
         <td class="border_note_desc"></td>
-        <td class="image_note"><?php if((!empty($note['image']))&&(!empty($note['link']))) { ?><?php if(strcmp($note['type_link'],"mail")==0) { ?><a href="mailto:<?php echo $note['link']; ?>" <?php if(strcmp($note['type_link'],"external")==0) { ?>target="_blank" <?php } ?> class="note_link"><img src="main/libs/img/<?php echo $note['image']; ?>" alt="<?php echo $note['title']; ?>" /></a> <?php } else { ?><a href="<?php echo $note['link']; ?>" <?php if(strcmp($note['type_link'],"external")==0) { ?>target="_blank" <?php } ?> class="note_link"><img src="main/libs/img/<?php echo $note['image']; ?>" alt="<?php echo $note['title']; ?>" /></a><?php } ?>
-                               <?php } elseif((!empty($note['image']))&&(empty($note['link']))) { ?><img src="main/libs/img/<?php echo $note['image']; ?>" alt="<?php echo $note['title']; ?>" /></td>
-                                <?php } else { ?><?php if(strcmp($note['type_link'],"mail")==0) { ?><a href="mailto:<?php echo $note['link']; ?>" class="note_link"><?php echo $note['link']; ?></a> <?php } else { ?><a href="<?php echo $note['link']; ?>" <?php if(strcmp($note['type_link'],"external")==0) { ?>target="_blank" <?php } ?> class="note_link"><?php echo $note['link']; ?></a><?php } ?>
-
-                                <?php } ?>
+        <td><?php echo __('DOCUMENTATION_LINK'); ?></td>
         <td class="border_note_desc"></td>
     </tr>
 </table>
-        <?php 
-        }
-    }
-} 
-?>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td class="image_note"><a href="https://github.com/cultibox/cultibox/wiki" target="_blank"  class="note_link">https://github.com/cultibox/cultibox/wiki</a></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<br />
+
+<table class="table_width">
+    <tr>
+        <td class="border_note_title"></td>
+        <td class="title_note"><?php echo __('QUESTIONS'); ?></td>
+        <td></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td><?php echo __('QUESTIONS_CONTENT'); ?></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td class="image_note"><a href="mailto:support@cultibox.fr" class="note_link">support@cultibox.fr</a></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<br />
+
+<table class="table_width">
+    <tr>
+        <td class="border_note_title"></td>
+        <td class="title_note"><?php echo __('ACCESSOIRE'); ?></td>
+        <td></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td><?php echo __('ACCESSOIRE_CONTENT'); ?></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td class="image_note"><a href="http://www.cultibox.fr" target="_blank"  class="note_link">http://www.cultibox.fr</a></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<br />
+
+<table class="table_width">
+    <tr>
+        <td class="border_note_title"></td>
+        <td class="title_note"><?php echo __('RECYCLAGE'); ?></td>
+        <td></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td><?php echo __('RECYCLAGE_CONTENT'); ?></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td class="image_note"><img src="main/libs/img/recycling.png" alt="Recyclage" /></td>
+       <td class="border_note_desc"></td>
+    </tr>
+</table>
+<br />
+
+<table class="table_width">
+    <tr>
+        <td class="border_note_title"></td>
+        <td class="title_note"><?php echo __('WARANTLY'); ?></td>
+        <td></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td><?php echo __('WARANTLY_CONTENT'); ?></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<table class="table_width">
+    <tr>
+        <td class="border_note_desc"></td>
+        <td class="image_note"><a href="mailto:support@cultibox.fr" class="note_link">support@cultibox.fr</a></td>
+        <td class="border_note_desc"></td>
+    </tr>
+</table>
+<?php } ?>
 
 <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>
 <button id="wifi_wizard">wifi wizard</button>

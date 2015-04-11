@@ -40,6 +40,36 @@ msgid "MENU_WEBCAM"
 msgstr "Webcam"
 
 #For the welcome part
+msgid "DOCUMENTATION"
+msgstr "Documentation"
+
+msgid "DOCUMENTATION_LINK"
+msgstr "La version la plus à jour de l'aide est disponible à l'adresse suivante:"
+
+msgid "QUESTIONS"
+msgstr "Des questions?"
+
+msgid "QUESTIONS_CONTENT"
+msgstr "Si l'aide ne suffit pas pour répondre à une de vos questions, envoyez-nous un mail à l'adresse suivante :"
+
+msgid "ACCESSOIRE"
+msgstr "Accessoires"
+
+msgid "ACCESSOIRE_CONTENT"
+msgstr "Vous pouvez compléter votre pack en achetant des capteurs supplémentaires, des prises ou encore d'autres accessoires en vous rendant sur le site :"
+
+msgid "RECYCLAGE"
+msgstr "Recyclage"
+
+msgid "RECYCLAGE_CONTENT"
+msgstr "Chez Cultibox nous retraitons tous les éléments de nos produits. L'emballage peut être recyclé et la Cultibox contient une pile lithium qui ne doit pas être jetée à la poubelle. Pour un recyclage optimal, renvoyez-nous la Cultibox et vous serez récompensé."
+
+msgid "WARANTLY"
+msgstr "Garantie"
+
+msgid "WARANTLY_CONTENT"
+msgstr "La Cultibox ainsi que ses accessoires sont garantis deux ans. Nous assurons la garantie en direct, sans intermédiaire. Pour nous contacter :"
+
 msgid "WELCOME_TITLE"
 msgstr "Bienvenue dans le logiciel de configuration de la Cultibox"
 
@@ -48,12 +78,6 @@ msgstr "Le saviez-vous?"
 
 msgid "WELCOME_MESSAGE"
 msgstr "Ce logiciel va vous permettre de manipuler simplement votre Cultibox afin de la configurer, de visualiser les données enregistrées ou encore d'accéder à certaines fonctionnalités telles que le calcul du coût d'électricité ou la création d'un calendrier de culture."
-
-msgid "WELCOME_TUTO"
-msgstr "<b>Note :</b> pour ceux qui possèdent l'ancienne version de la Cultibox (<b>Green Box</b>), il vous faudra absolument"
-
-msgid "WELCOME_REQUIEREMENT"
-msgstr "<ul class='list_class'><li>enlever vos anciennes prises qui ne sont plus compatibles et connecter celles de la Cultibox</li><li>déconnecter votre Green Box qui peut causer des interférences avec la Cultibox</li></ul>"
 
 msgid "WELCOME_FOLLOW_LINK"
 msgstr "Cliquer sur le bouton suivant pour lancer l'assistant de configuration et commencer à manipuler votre Cultibox"
