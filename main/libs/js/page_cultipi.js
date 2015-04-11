@@ -1081,79 +1081,91 @@ $(document).ready(function(){
             url: "main/modules/external/synoptic.php",
             success: function (data) {
 
-            var objJSON = jQuery.parseJSON(data);
+                var objJSON = jQuery.parseJSON(data);
 
-            if (objJSON.error == "") {
-            
-                $.each( objJSON, function( key, value ) {
-                    if (key != "error") {
-                    
-                        // Change text and opacity
-                        if (value != "DEFCOM" && value != "TIMEOUT" ) {
-                            newBaseName = baseName($('img[name="syno_elemSensorImage_' + key + '"]').attr('src'));
-                            var valueSplitted = value.split(" "); 
-                            switch(newBaseName) {
-                                case 'T_RH_sensor.png' :
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "°C " + valueSplitted[1] + "RH");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "°C " + valueSplitted[1] + "RH");
-                                    break;
-                                case 'water_T_sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "°C");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "°C");
-                                    break;
-                                case 'level_sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
-                                    break;
-                                case 'pH-sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ph");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ph");
-                                    break;
-                                case 'conductivity-sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ec");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ec");
-                                    break;
-                                case 'dissolved-oxygen-sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "OD");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "OD");
-                                    break;
-                                case 'ORP-sensor.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ORP");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ORP");
-                                    break;
-                                case 'symbole_cuve.png': 
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
-                                    break;
-                                default :
-                                    $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "???");
-                                    $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "???");
-                                    break;
+                if (objJSON.error == "") {
+                
+                    $.each( objJSON, function( key, value ) {
+                        if (key != "error") {
+                        
+                            // Change text and opacity
+                            if (value != "DEFCOM" && value != "TIMEOUT" ) {
+                                newBaseName = baseName($('img[name="syno_elemSensorImage_' + key + '"]').attr('src'));
+                                var valueSplitted = value.split(" "); 
+                                switch(newBaseName) {
+                                    case 'T_RH_sensor.png' :
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "°C " + valueSplitted[1] + "RH");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "°C " + valueSplitted[1] + "RH");
+                                        break;
+                                    case 'water_T_sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "°C");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "°C");
+                                        break;
+                                    case 'level_sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
+                                        break;
+                                    case 'pH-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ph");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ph");
+                                        break;
+                                    case 'conductivity-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ec");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ec");
+                                        break;
+                                    case 'dissolved-oxygen-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "OD");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "OD");
+                                        break;
+                                    case 'ORP-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ORP");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ORP");
+                                        break;
+                                    case 'symbole_cuve.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
+                                        break;
+                                    default :
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "???");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "???");
+                                        break;
+                                }
+                                $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "1");
+                            } else if (value == "TIMEOUT") {
+                                $('#syno_elemValueSensor_val1_' + key).html("");
+                                $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',"<?php echo __('TIMEOUT'); ?>");
+                                $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "0.4");
+                            } else {
+                                $('#syno_elemValueSensor_val1_' + key).html("");
+                                $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',"<?php echo __('DEFCOM'); ?>");
+                                $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "0.4");
                             }
-                            $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "1");
-                        } else if (value == "TIMEOUT") {
-                            $('#syno_elemValueSensor_val1_' + key).html("");
-                            $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',"<?php echo __('TIMEOUT'); ?>");
-                            $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "0.4");
-                        } else {
-                            $('#syno_elemValueSensor_val1_' + key).html("");
-                            $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',"<?php echo __('DEFCOM'); ?>");
-                            $('img[name="syno_elemSensorImage_' + key + '"]').css("opacity", "0.4");
-                        }
 
-                    }
-                });
+                        }
+                    });
+                    
+                    var ladate=new Date();
+                    $('#synoptic_updateSensorHour').html("<b>"+addZ(ladate.getHours())+":"+addZ(ladate.getMinutes())+":"+addZ(ladate.getSeconds())+"</b>");
+                    
+                }
+
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updateSensors, 3000)
+                );
                 
-                var ladate=new Date();
-                $('#synoptic_updateSensorHour').html("<b>"+addZ(ladate.getHours())+":"+addZ(ladate.getMinutes())+":"+addZ(ladate.getSeconds())+"</b>");
-                
-            }
-            updateIsAked = 0;
             }, error: function(data) {
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updateSensors, 3000)
+                );
             }
         });
     }
-    $.timeout.push(setInterval(updateSensors, 3000));
+    // Call the function the first time
+    $.timeout.push(
+        setTimeout(updateSensors, 3000)
+    );
 
     // Loop for updating plugs
     function updatePlugs() {
@@ -1213,13 +1225,24 @@ $(document).ready(function(){
                     $('#synoptic_updatePlugHour').html("<b>"+addZ(ladate.getHours())+":"+addZ(ladate.getMinutes())+":"+addZ(ladate.getSeconds())+"</b>");
                     
                 }
-                
-                updateIsAked = 0;
+
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updatePlugs, 2000)
+                );
             }, error: function(data) {
+                
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updatePlugs, 2000)
+                );
             }
         });
     }
-    $.timeout.push(setInterval(updatePlugs, 2000));
+    // Call the function the first time
+    $.timeout.push(
+        setTimeout(updatePlugs, 2000)
+    );
     
     // Loop for updating plugs
     function updateCultipiStatus() {
@@ -1270,12 +1293,26 @@ $(document).ready(function(){
                             break;
                     }
                 }
+                
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updateCultipiStatus, 5000)
+                );
+                
             }, error: function(data) {
+                
+                // Call again !
+                $.timeout.push(
+                    setTimeout(updateCultipiStatus, 5000)
+                );
+                
             }
         });
     }
-    $.timeout.push(setInterval(updateCultipiStatus, 5000));
-    
+    // Call the function the first time
+    $.timeout.push(
+        setTimeout(updateCultipiStatus, 5000)
+    );
     
 
     // Display services logs:

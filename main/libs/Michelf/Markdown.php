@@ -747,7 +747,7 @@ class Markdown implements MarkdownInterface {
 
 		$alt_text = $this->encodeAttribute($alt_text);
 		$url = $this->encodeURLAttribute($url);
-		$result = "<img src=\"$url\" alt=\"$alt_text\"";
+		$result = "<img style=\"max-width:900px;\" src=\"$url\" alt=\"$alt_text\"";
 		if (isset($title)) {
 			$title = $this->encodeAttribute($title);
 			$result .=  " title=\"$title\""; # $title already quoted
@@ -1039,7 +1039,7 @@ class Markdown implements MarkdownInterface {
 	# Create a code span markup for $code. Called from handleSpanToken.
 	#
 		$code = htmlspecialchars(trim($code), ENT_NOQUOTES);
-		return $this->hashPart("<code>$code</code>");
+		return $this->hashPart("<pre><code>$code</code></pre>");
 	}
 
 
