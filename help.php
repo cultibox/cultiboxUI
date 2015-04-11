@@ -117,8 +117,8 @@ $cost=get_configuration("SHOW_COST");
                             </ul>
                         </div>
 
-                                          
-                        <div id="box">                      
+
+                        <div id="box">
                             <img src="/cultibox/main/libs/img/box.png" alt="">
                         </div>
                                     
