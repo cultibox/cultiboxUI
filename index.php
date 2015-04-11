@@ -129,7 +129,7 @@ check_database();
 
                                 <li class="translate"><a href="/cultibox/index.php?lang=de_DE" id="de_DE"><img src="/cultibox/main/libs/img/de.gif" alt="Übersetzen Sie die Software Deutsch (DE)" title="Übersetzen Sie die Software Deutsch (DE)" /></a></li>
                                 
-                                <li ><a <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>href="/documentation_cultibox.pdf"<?php } else { ?>href="/cultibox/main/docs/documentation_cultibox.pdf" <?php } ?> target="_blank"><img src="/cultibox/main/libs/img/help.png" alt="<?php echo __('MENU_HELP'); ?>" title="<?php echo __('MENU_HELP'); ?>" /></a></li>
+                                <li><a href="/cultibox/main/cultibox.wiki"><img src="/cultibox/main/libs/img/help.png" alt="<?php echo __('MENU_HELP'); ?>" title="<?php echo __('MENU_HELP'); ?>" /></a></li>
                             
                             </ul>
                         </div>
