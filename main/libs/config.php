@@ -170,13 +170,21 @@ $GLOBALS['MAX_WEBCAM'] = 4;
 
 // ----------------- Cultipi config ----------------- 
 //Slave IP:
-$GLOBALS_CULTIPI['USE_REMOTE_SLAVE'] = 0;
+$GLOBALS['CULTIPI']['USE_REMOTE_SLAVE'] = 0;
 
 // Remote sensors
-$GLOBALS_CULTIPI['USE_REMOTE_SENSOR'] = 0;
+$GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] = 0;
 
 // Direct read
-$GLOBALS_CULTIPI['USE_DIRECT_READ'] = 0;
+$GLOBALS['CULTIPI']['USE_DIRECT_READ'] = 0;
+
+// Trace level for cultipi 
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['cultiPi']          = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']  = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverHisto']      = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']        = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate'] = "info";
+
 // -------------------------------------------------- 
 
 // Load user config file
