@@ -15,7 +15,7 @@
             <td <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) echo 'class="center_menu" '; ?>>
                 <button id="div_system_label" class="menu_h1" onclick="expand('system_interface'); return false;"><?php echo __('SYSTEM_CONF'); ?></button>
             </td>
-            <td <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) echo 'class="center_menu" '; ?>>
+            <td <?php if($GLOBALS['MODE'] == "cultipi") {echo 'style="display:none"'; }?> >
                 <button id="div_alarm_label" class="menu_h1" onclick="expand('alarm_interface'); return false;"><?php echo __('CONFIGURE_ALARM'); ?></button>
             </td>
             <td>
@@ -41,7 +41,7 @@
 
 <div id="div_user_interface" style="display:none">
     <table class="conf-table">
-        <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>
+       <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>
        <tr>
              <td class="conf-marge"></td>
              <td class="conf-marge-td"><?php echo __('CHECK_STATISTICS'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_SEND_INFOS'); ?>" /></td>
@@ -181,11 +181,10 @@
 
     </table>
 </div>
-
-
 <!-- End of Cultibox tab -->
 
 <!-- Start of Alarme tab -->
+
 <div id="div_alarm_interface" style="display:none">
         <table class="conf-table">
         <tr>  
