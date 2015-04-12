@@ -115,17 +115,8 @@ msgstr "Curve OD Colore"
 msgid "CONFIGURE_ORP"
 msgstr "Curve di colore ORP"
 
-msgid "CONFIGURE_FREQUENCY"
-msgstr "Frequenza di registrazione del clima (in minuti)"
-
-msgid "CONFIGURE_POWER_FREQUENCY"
-msgstr "Potenza frequenza di registrazione (in minuti)"
-
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Numero di prese nel sistema"
-
-msgid "CONFIGURE_PLUGS_FREQUENCY"
-msgstr "Frequenza di aggiornamento dello stato di presa (in secondi)"
 
 msgid "VALIDATION_CONF"
 msgstr "Salva configurazione"
@@ -210,9 +201,6 @@ msgstr "Errore formattazione della scheda SD"
 
 msgid "ALARM_DESCRIPTION"
 msgstr "L'allarme del Cultibox disattiva tutti i punti vendita dove la cultura della sicurezza lo spazio è in gioco Impostare una temperatura che, se superato, provoca l'eliminazione di tutte le catture. <br /> <br /> <b> Attenzione </b>: una volta raggiunta questa soglia, preso intersecano e Cultibox non tornare a uno stato normale prima di aver riconosciuto l'allarme direttamente sul caso."
-
-msgid "SHOW_COST"
-msgstr "Visualizza il menu che costano"
 
 msgid "RESET_MINMAX"
 msgstr "Ripristino del min / max"
@@ -1605,9 +1593,6 @@ msgstr "Questa funzione consente di cambiare la password necessaria per il colle
 msgid "TOOLTIP_AVANCED_PLUG_WIZARD"
 msgstr "La procedura guidata consente solo il collegamento di un portalampada 1. Se si desidera collegare un altro elemento, andare al onget 'Jack'"
 
-msgid "TOOLTIP_SHOW_WEBCAM"
-msgstr "Abilitando questa opzione è possibile accedere alla pagina del 'Webcam' che appare nella barra del menu principale"
-
 msgid "TOOLTIP_SEND_INFOS"
 msgstr "Attivando questa opzione, si consente l'invio di informazioni ad un sito remoto per assistere nello sviluppo e nella correzione degli errori del sistema Cultibox. Le informazioni inviate riguardano: la versione del software, il tipo di browser, le versioni del firmware del vostro Cultibox e il tipo di sistema operativo"
 
@@ -1619,15 +1604,6 @@ msgstr "Il Cultibox userà l'unità adottata per usare solo la potenza necessari
 
 msgid "TOOLTIP_POWER"
 msgstr "L'alimentazione del componente collegato. Compilare questo campo permette di calcolare il consumo del vostro sistema, il suo prezzo ..."
-
-msgid "TOOLTIP_RECORD_FREQ"
-msgstr "Questa opzione consente di configurare la frequenza con cui l'Cultibox registra dati provenienti da sensori"
-
-msgid "TOOLTIP_POWER_FREQ"
-msgstr "Questa opzione consente di configurare la frequenza con cui l'Cultibox salva i valori di consumo energetico."
-
-msgid "TOOLTIP_PLUG_FREQ"
-msgstr "Questa opzione consente di configurare la frequenza con cui verrà aggiornato lo stato (on / off) del pescato."
 
 msgid "TOOLTIP_POWER_LOG"
 msgstr "Questa opzione calcola e visualizza la potenza consumata per / presa (s) selezionato (s). Per rendere questo possibile, si riempirà 'potere' campo nella parte configurazione delle catture"
@@ -1698,9 +1674,6 @@ msgstr "Questa funzione consente di esportare un programma in un formato CSV (le
 msgid "TOOLTIP_IMPORT_PROGRAM"
 msgstr "Questa funzione consente di importare un programma da un file CSV (leggibile da un foglio di calcolo). Il file di importazione può essere creato con la funzione di esportazione da un altro utente Cultibox per lo scambio di programmi o da un'altra della vostra decisione di attuare lo stesso programma a più riprese"
 
-msgid "TOOLTIP_ADVANCED_REGUL_OPTIONS"
-msgstr "Se si attiva questa opzione, è possibile scegliere il sensore (s) utilizzato per il controllo e il metodo di calcolo"
-
 msgid "TOOLTIP_REPEAT_VALUE"
 msgstr "Questo valore definisce la frequenza sarà ripetuta il vostro evento. Ad esempio, se l'evento inizia alle 01:00:00 ET che la ripetizione è 04:00:00, il prossimo evento inizierà alle ore 05:00:00. Tempo per le prove è aggiunto l'ora di inizio della manifestazione per determinare l'inizio del prossimo evento. Il tempo minimo consentito è di 5 minuti."
 
@@ -1712,9 +1685,6 @@ msgstr "È possibile scegliere fino a tre differenti funzioni per la vostra attr
 
 msgid "TOOLTIP_REGUL_SECOND"
 msgstr "Se il controllo secondario è attivata nella configurazione software, questo campo visualizza lo stato per l'uscita selezionato: acceso o spento. Se il controllo è abilitato per l'uscita selezionata, troverete anche informazioni sulla configurazione di questo regolamento."
-
-msgid "TOOLTIP_SHOW_COST"
-msgstr "Abilitando questa opzione è possibile accedere alla pagina che costano vostro impianto attraverso il menu 'costo' che appare nella barra del menu principale"
 
 msgid "TOOLTIP_RESET_MINMAX"
 msgstr "Questo campo consente di scegliere il tempo di ripristino di min / max di tutti i sensori visualizzate sullo schermo Cultibox"

@@ -115,17 +115,8 @@ msgstr "Color OD curves"
 msgid "CONFIGURE_ORP"
 msgstr "Color ORP curves"
 
-msgid "CONFIGURE_FREQUENCY"
-msgstr "Recording frequency of climate (in minutes)"
-
-msgid "CONFIGURE_POWER_FREQUENCY"
-msgstr "Recording frequency power (in minutes)"
-
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Number of sockets in your system"
-
-msgid "CONFIGURE_PLUGS_FREQUENCY"
-msgstr "Frequency of updating the status of taken (in seconds)"
 
 msgid "VALIDATION_CONF"
 msgstr "Save Configuration"
@@ -210,9 +201,6 @@ msgstr "Error formatting the SD card"
 
 msgid "ALARM_DESCRIPTION"
 msgstr "The alarm of the Cultibox turns off all outlets where space security culture is at stake Set a temperature which, when exceeded, causes the removal of all catches. <br /> <br /> <b> Warning </b>: once this threshold is reached, taken intersect and Cultibox not return to a normal state until you have acknowledged the alarm directly on the case."
-
-msgid "SHOW_COST"
-msgstr "View menu costing"
 
 msgid "RESET_MINMAX"
 msgstr "Resetting the min / max"
@@ -1604,9 +1592,6 @@ msgstr "This feature allows you to change the password required when connecting 
 msgid "TOOLTIP_AVANCED_PLUG_WIZARD"
 msgstr "The wizard only allows the connection of a lamp socket 1. If you want to connect another item, go to the onget 'Plug'"
 
-msgid "TOOLTIP_SHOW_WEBCAM"
-msgstr "By enabling this option you can have access to the page of the 'Webcam' which appears in the main menu bar"
-
 msgid "TOOLTIP_SEND_INFOS"
 msgstr "By enabling this option, you allow sending information to a remote site to assist in the development and correction of errors Cultibox system. The information sent include: the software version, the browser type, the firmware versions of the Cultibox and your type of operating system"
 
@@ -1618,15 +1603,6 @@ msgstr "The Cultibox will use the drive taken to use only the power required equ
 
 msgid "TOOLTIP_POWER"
 msgstr "The power of the connected equipment. Fill in this field allows you to calculate the consumption of your system, its price ..."
-
-msgid "TOOLTIP_RECORD_FREQ"
-msgstr "This option allows you to configure the frequency at which the Cultibox records sensors data."
-
-msgid "TOOLTIP_POWER_FREQ"
-msgstr "This option allows you to configure the frequency at which the Cultibox saves the values ​​of energy consumption."
-
-msgid "TOOLTIP_PLUG_FREQ"
-msgstr "This option allows you to configure the frequency with which will be updated the status (on / off) of your catch."
 
 msgid "TOOLTIP_POWER_LOG"
 msgstr "This option calculates and displays the power consumed for / the socket (s) selected (s). To make this possible it will fill the field 'power' in the configuration portion of the catch"
@@ -1697,9 +1673,6 @@ msgstr "This feature allows you to export a program in a CSV format (readable by
 msgid "TOOLTIP_IMPORT_PROGRAM"
 msgstr "This feature allows you to import a program from a CSV file (readable by a spreadsheet). The import file can be created by the export function by another user Cultibox to exchange programs or from another of your decision to implement the same program in multiple takes"
 
-msgid "TOOLTIP_ADVANCED_REGUL_OPTIONS"
-msgstr "If you enable this option, you can choose the sensor (s) used for the control and the method of calculation"
-
 msgid "TOOLTIP_REPEAT_VALUE"
 msgstr "This value defines how often your event will be repeated. For example, if your event starts at 1:00:00 ET that repetition is 4:00:00, the next event will start at 5:00:00. Rehearsal time is added to the start time of the event to determine the start of the next event. The minimum time allowed is 5 minutes."
 
@@ -1711,9 +1684,6 @@ msgstr "You can choose up to three different functions for your equipment depend
 
 msgid "TOOLTIP_REGUL_SECOND"
 msgstr "If the secondary control is enabled in the software configuration, this field displays the status for the selected outlet: on or off. If the control is enabled for the selected outlet, you will also find information about the configuration of this regulation."
-
-msgid "TOOLTIP_SHOW_COST"
-msgstr "By enabling this option you can access the page costing your facility through the menu 'cost' which appears in the main menu bar"
 
 msgid "TOOLTIP_RESET_MINMAX"
 msgstr "This field allows you to choose the time of reset of min / max of all sensors displayed on the screen Cultibox"

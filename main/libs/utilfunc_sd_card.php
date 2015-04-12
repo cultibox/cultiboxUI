@@ -49,8 +49,8 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $plg  = "$cnf/plg";
     $prg  = "$cnf/prg";
     $bin  = "$sd_card/bin";
-    $recordfrequency = get_configuration("RECORD_FREQUENCY",$main_error);
-    $updatefrequency = get_configuration("UPDATE_PLUGS_FREQUENCY",$main_error);
+    $recordfrequency = "1"; 
+    $updatefrequency = "1"; 
 
    
     if(!isset($GLOBALS['MODE']) || $GLOBALS['MODE'] != "cultipi") { 
@@ -371,7 +371,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         }
     
 
-        $powerfrequency = get_configuration("POWER_FREQUENCY",$main_error);
+        $powerfrequency = "1";
         $alarmenable    = get_configuration("ALARM_ACTIV",$main_error);
         $alarmvalue     = get_configuration("ALARM_VALUE",$main_error);
         $resetvalue     = get_configuration("RESET_MINMAX",$main_error);

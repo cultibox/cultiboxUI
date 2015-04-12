@@ -115,17 +115,8 @@ msgstr "Color de las curvas de OD"
 msgid "CONFIGURE_ORP"
 msgstr "Color de las curvas de ORP"
 
-msgid "CONFIGURE_FREQUENCY"
-msgstr "Frecuencia de grabación del clima (en minutos)"
-
-msgid "CONFIGURE_POWER_FREQUENCY"
-msgstr "Frecuencia de grabación de la potencia (en minutos)"
-
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Números de enchufes en vuestro sistema"
-
-msgid "CONFIGURE_PLUGS_FREQUENCY"
-msgstr "Frecuencia de actualización del estado de los enchufes(en segundos)"
 
 msgid "VALIDATION_CONF"
 msgstr "Grabar la configuración"
@@ -210,9 +201,6 @@ msgstr "Error durante el formateo de la tarjeta SD"
 
 msgid "ALARM_DESCRIPTION"
 msgstr "El alarma de la Cultibox permite apagar todos los enchufes cuando la seguridad del entorno de cultivo esta amenazada. Definir una temperatura limite, en cuanto esta alcanzada , se apagaran todos los enchufes. <br /><br /><b>Cuidado</b>:una vez esta temperatura alcanzada, los enchufes se apagan y la Cultibox no volverá a su estado normal sino que se tendrá que desactivar manualmente el alarma directamente en la caja."
-
-msgid "SHOW_COST"
-msgstr "Enseñar el menú de calculo de coste"
 
 msgid "RESET_MINMAX"
 msgstr "Reseteo del min/max"
@@ -1604,9 +1592,6 @@ msgstr "Esta característica le permite cambiar la contraseña necesaria al cone
 msgid "TOOLTIP_AVANCED_PLUG_WIZARD"
 msgstr "El asistente sólo permite la conexión de un casquillo de la lámpara 1. Si desea conectar otro tema, vaya a la onget 'Enchufe'"
 
-msgid "TOOLTIP_SHOW_WEBCAM"
-msgstr "Al activar esta opción se puede tener acceso a la página de la 'webcam' que aparece en la barra del menú principal"
-
 msgid "TOOLTIP_SEND_INFOS"
 msgstr "Activando esta opción, se permite el envió de informaciones a una pagina remota para ayudar el desarrollo y la corrección de errores del sistema Cultibox. Los datos enviados son: versiones del software, tipo de navegador, versiones de los firmwares de la Cultibox y sistema operativo empleado."
 
@@ -1618,15 +1603,6 @@ msgstr "La Cultibox utilizará el regulador de intensidad  para emplear exclusiv
 
 msgid "TOOLTIP_POWER"
 msgstr "La potencia del equipo conectado. Llenar este campo permite calcular el consumo de su instalación , su precio… "
-
-msgid "TOOLTIP_RECORD_FREQ"
-msgstr "Esta opción le permite configurar la frecuencia con la que el Cultibox registra los datos de los sensores"
-
-msgid "TOOLTIP_POWER_FREQ"
-msgstr "Esta opción permite configurar la frecuencia con cual la Cultibox graba los datos de consumo de energía."
-
-msgid "TOOLTIP_PLUG_FREQ"
-msgstr "Esta opción permite configurar la frecuencia de actualización del estado (activo o inactivo ) de sus enchufes."
 
 msgid "TOOLTIP_POWER_LOG"
 msgstr "Esta opción calcula y enseña la potencia consumida para el/los  enchufe(s) determinado(s). Para que eso funcione, hay que llenar el campo ‘potencia’ en la parte de configuración de los enchufes."
@@ -1697,9 +1673,6 @@ msgstr "Esa funcionalidad permite exportar un programa en formato csv ( que se p
 msgid "TOOLTIP_IMPORT_PROGRAM"
 msgstr "Esa funcionalidad permite importar un programa desde un fichero csv ( que se puede leer con un tabulador). Se puede crear con la función exportación un fichero echo por otro usuario Cultibox, para intercambiar programas o para aplicar un mismo programa a varios enchufes desde uno de sus enchufes."
 
-msgid "TOOLTIP_ADVANCED_REGUL_OPTIONS"
-msgstr "Si se activa esa opción, se podrá elegir el o los sensores usado(s) para realizar la regulación y el modo de calculo."
-
 msgid "TOOLTIP_REPEAT_VALUE"
 msgstr "Ese valor define con que frecuencia el evento será repetido. Por ejemplo, si el evento empieza a 01:00:00 y que la repetición es de 04:00:00, el siguiente evento empezara a 05:00:00. El tiempo de repetición se añade a la hora de inicio del evento con un mínimo de 5mm."
 
@@ -1711,9 +1684,6 @@ msgstr "Se puede elegir hasta 3 funcionamientos distintos para su equito según 
 
 msgid "TOOLTIP_REGUL_SECOND"
 msgstr "Si la regulación segundaria esta activada en la configuración del software, este campo indica su estado para el enchufe seleccionado: activada o desactivada. Si la regulación esta activada para el enchufe seleccionado, se encontrara también las informaciones de la configuración de esta regulación. "
-
-msgid "TOOLTIP_SHOW_COST"
-msgstr "Activando esa opción , se puede tener acceso a la pagina de calculo de coste de su instalación usando el menú ‘Coste’ que aparece en la barra del menú principal. "
 
 msgid "TOOLTIP_RESET_MINMAX"
 msgstr "Ese campo permite definir la hora de reseteo del min/max de todos los sensores presentes en la pantalla de la Cultibox"

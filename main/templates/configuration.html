@@ -54,22 +54,11 @@
        <?php } ?>
         <tr>
             <td class="conf-marge"></td>
-            <td class="conf-marge-td"><?php echo __('ADVANCED_REGUL_OPTIONS'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_SECOND_REGUL_ENABLE'); ?><?php echo __('TOOLTIP_ADVANCED_REGUL_OPTIONS'); ?>" /></td>
+            <td class="conf-marge-td"><?php echo __('ADVANCED_REGUL_OPTIONS'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_SECOND_REGUL_ENABLE'); ?>" /></td>
             <td>
                 <select name="advanced_regul_options" id="advanced_regul_options">
                     <option value="True" <?php if(strcmp("$advanced_regul","True")==0) echo "selected"; ?>><?php echo __('YES'); ?></option>
                     <option value="False" <?php if(strcmp("$advanced_regul","False")==0) echo "selected"; ?>><?php echo __('NO'); ?></option>
-                </select>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td><?php echo __('SHOW_COST'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_SHOW_COST'); ?>" /></td>
-            <td>
-                <select name="show_cost" id="show_cost">
-                    <option value="1"><?php echo __('YES'); ?></option>
-                    <option value="0" <?php if(!$show_cost) echo "selected"; ?>><?php echo __('NO'); ?></option>
                 </select>
             </td>
             <td></td>
@@ -109,7 +98,7 @@
     <table class="conf-table">
         <tr>
             <td class="conf-marge"></td>
-            <td><?php echo __('CONFIGURE_NB_PLUGS'); ?>:</td>
+            <td class="conf-marge-td"><?php echo __('CONFIGURE_NB_PLUGS'); ?>:</td>
             <td>
                <select name="nb_plugs" id="nb_plugs">
                     <?php
@@ -122,49 +111,6 @@
                         }
                     ?>
             </select>
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-marge-td">
-               <?php echo __('CONFIGURE_FREQUENCY'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_RECORD_FREQ'); ?>" />
-            </td>
-            <td>
-               <select name="record_frequency" id="record_frequency">
-                  <?php
-                  foreach($GLOBALS['LIST_RECORD_FREQUENCY'] as $value) {
-                     if(!strcmp ("$value","$record_frequency")) {
-                        echo "<option value=\"${value}\" selected>${value}</option>";
-                     } else {
-                        echo "<option value=\"${value}\">${value}</option>";
-                     }
-                  }
-                  ?>
-               </select>
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td class="conf-marge"></td>
-            <td>
-               <?php echo __('CONFIGURE_PLUGS_FREQUENCY'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_PLUG_FREQ'); ?>" />
-            </td>
-            <td>
-               <select name="update_plugs_frequency" id="update_plugs_frequency">
-                  <?php
-                  foreach($GLOBALS['LIST_UPDATE_FREQUENCY'] as $value) {
-                     $val=$value;
-                     if(!strcmp ("$value","$update_frequency")) {
-                        echo "<option value=\"${value}\" selected>${val}</option>";
-                     } else {
-                        echo "<option value=\"${value}\">${val}</option>";
-                     }
-                  }
-                  ?>
-                  </select>
             </td>
             <td></td>
         </tr>
@@ -361,7 +307,7 @@
     <p><?php echo __('ERROR_IMPORT_CONF'); ?></p>
 </div>
 
-<div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" /></div>
+<div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" alt="" /></div>
 
 <script>expand("<?php echo $submenu; ?>");</script>
 

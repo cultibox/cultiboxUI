@@ -18,9 +18,6 @@ $GLOBALS['SOFT_PORT'] = '6891';
 // List of available colors for graphics:
 $GLOBALS['LIST_GRAPHIC_COLOR'] = array('blue','red', 'green', 'black','purple','orange','pink','brown','yellow');
 
-// List of the recording frequency available: (in minute)
-$GLOBALS['LIST_RECORD_FREQUENCY'] = array('1','5','30');
-
 // Number of max plugs managed by the cultibox
 $GLOBALS['NB_MAX_PLUG'] = '16';
 
@@ -56,10 +53,6 @@ $GLOBALS['NB_MAX_CANAL_XMAX'] = '3';
 
 // Number of maximal module dimmer ouput with Cultipi
 $GLOBALS['NB_MAX_MODULE_XMAX'] = '1';
-
-
-// List of the updating plugs frequency: 
-$GLOBALS['LIST_UPDATE_FREQUENCY'] = array('1','5');
 
 // Colors for plugs program:
 $GLOBALS['LIST_GRAPHIC_COLOR_PROGRAM'] = array('#0033CC','#FF0000', '#336600', '#F6F61A','#FF9900','#006666','#999966','#663300','#FF0066','#CC66FF','#660000','#3D96AE','#DB843D','#00FF00','#CCFF33','#B5CA92');
@@ -165,7 +158,7 @@ $GLOBALS['WEBCAM_RESOLUTION'] = array("320x240", "320x480", "400x300","480x360",
 $GLOBALS['WEBCAM_PALETTE'] = array("AUTO", "PNG","JPEG","MJPEG","S561","RGB32","RGB24","BGR32","BGR24","YUYV","UYVY","YUV420P","BAYER","SGBRG8","SGRBG8","RGB565","RGB555","Y16","GREY");
 
 // Software mode : cultipi or cultibox:
-$GLOBALS['MODE'] = "cultibox";
+$GLOBALS['MODE']="cultibox";
 
 // For cultipi : path to the conf (for windows : C:/cultibox/xampp/htdocs/cultibox)
 $GLOBALS['CULTIPI_CONF_PATH'] = "/etc/cultipi";

@@ -115,17 +115,8 @@ msgstr "Farbe OD-Kurven"
 msgid "CONFIGURE_ORP"
 msgstr "Farbe ORP Kurven"
 
-msgid "CONFIGURE_FREQUENCY"
-msgstr "Aufnahmefrequenz von Klima (in Minuten)"
-
-msgid "CONFIGURE_POWER_FREQUENCY"
-msgstr "Recording Frequenzleistung (in Minuten)"
-
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Anzahl der Steckdosen in Ihrem System"
-
-msgid "CONFIGURE_PLUGS_FREQUENCY"
-msgstr "Häufigkeit der Aktualisierung des Status entnommen (in Sekunden)"
 
 msgid "VALIDATION_CONF"
 msgstr "Konfiguration speichern"
@@ -210,9 +201,6 @@ msgstr "Fehler beim Formatieren der SD-Karte"
 
 msgid "ALARM_DESCRIPTION"
 msgstr "Der Alarm des Cultibox schaltet alle Verkaufsstellen, wo Raumsicherheit Kultur steht auf dem Spiel Stellen eine Temperatur, die bei Überschreiten bewirkt, dass die Entfernung aller Fänge. <br /> <br /> <b> Warnung </b>: Ist diese Schwelle erreicht ist, entnommen schneiden und Cultibox nicht zu einem normalen Zustand zurück, bis Sie den Alarm direkt auf den Fall bestätigt wurden."
-
-msgid "SHOW_COST"
-msgstr "Menü Ansicht kostet"
 
 msgid "RESET_MINMAX"
 msgstr "Zurücksetzen der min / max"
@@ -1616,15 +1604,6 @@ msgstr "Die Cultibox die WSC-Laufwerk verwenden, um nur die Leistung erforderlic
 msgid "TOOLTIP_POWER"
 msgstr "Die Macht der angeschlossenen Geräte. Füllen Sie bitte dieses Feld können Sie den Verbrauch Ihres Systems, ist der Preis berechnen ..."
 
-msgid "TOOLTIP_RECORD_FREQ"
-msgstr "Diese Option ermöglicht es Ihnen, die Frequenz, mit der die Cultibox zeichnet Daten von Sensoren konfigurieren"
-
-msgid "TOOLTIP_POWER_FREQ"
-msgstr "Diese Option ermöglicht es Ihnen, die Frequenz, mit der die Cultibox speichert die Werte des Energieverbrauchs zu konfigurieren."
-
-msgid "TOOLTIP_PLUG_FREQ"
-msgstr "Diese Option ermöglicht Ihnen, die Häufigkeit, mit der den Status (an / aus) von Fang aktualisiert werden, konfigurieren."
-
 msgid "TOOLTIP_POWER_LOG"
 msgstr "Diese Option berechnet und zeigt die Stromversorgung / die Steckdose (n), ausgewählt (n) verbraucht. Um dieses möglich zu machen wird es das Feld 'Macht' in der Konfigurationsteil des Fangs füllen"
 
@@ -1694,9 +1673,6 @@ msgstr "Diese Funktion ermöglicht es Ihnen, ein Programm in einer CSV-Format (l
 msgid "TOOLTIP_IMPORT_PROGRAM"
 msgstr "Mit dieser Funktion können Sie ein Programm aus einer CSV-Datei (lesbar mit einer Tabellenkalkulation) zu importieren. Die Importdatei kann durch die Export-Funktion von einem anderen Benutzer erstellt Cultibox Programme auszutauschen oder von anderen Ihrer Entscheidung, das gleiche Programm in mehreren Umsetzung erfolgt"
 
-msgid "TOOLTIP_ADVANCED_REGUL_OPTIONS"
-msgstr "Wenn Sie diese Option aktivieren, können Sie die für die Steuerung verwendet Sensor (en) und die Berechnungsmethode zu wählen"
-
 msgid "TOOLTIP_REPEAT_VALUE"
 msgstr "Dieser Wert legt fest, wie oft Ihre Veranstaltung wiederholt werden. Zum Beispiel, wenn Sie Ihre Veranstaltung beginnt am 01.00.00, dass ET 04.00.00 Wiederholung ist, wird die nächste Veranstaltung wird am 05.00.00 beginnen. Probenzeit zu der Startzeit des Ereignisses aufgenommen, um den Beginn des nächsten Ereignisses zu bestimmen. Die erlaubte Mindestdauer beträgt 5 Minuten."
 
@@ -1708,9 +1684,6 @@ msgstr "Sie können bis zu drei verschiedene Funktionen für Ihre Geräte je nac
 
 msgid "TOOLTIP_REGUL_SECOND"
 msgstr "Wenn die Sekundärregelung ist in der Software-Konfiguration aktiviert, zeigt dieses Feld den Status für den ausgewählten Ausgang: an oder aus. Wenn die Steuerung für den ausgewählten Ausgang aktiviert ist, finden Sie auch Informationen über die Konfiguration dieser Verordnung."
-
-msgid "TOOLTIP_SHOW_COST"
-msgstr "Durch die Aktivierung dieser Option, die Sie auf die Seite zugreifen können Kalkulation Ihrer Einrichtung durch das Menü 'Kosten', die in der Hauptmenüleiste erscheint."
 
 msgid "TOOLTIP_RESET_MINMAX"
 msgstr "Hier können Sie die Zeit der Reset min / max aller auf dem Bildschirm angezeigt Cultibox Sensoren wählen"
@@ -1777,9 +1750,6 @@ msgstr "Mit dieser Funktion können Sie ein Programm von Spiel- und Entscheidung
 
 msgid "TOOLTIP_IMPORT_SET_PROGRAM"
 msgstr "Diese Funktion ermöglicht es Ihnen, ein Spielprogramm aus einer Datei importieren. Die Importdatei kann durch die Export-Funktion von einem anderen Benutzer Cultibox Austauschprogramme erstellt werden."
-
-msgid "TOOLTIP_SHOW_WEBCAM"
-msgstr "Durch die Aktivierung dieser Option können Sie den Zugriff auf die Seite der 'Webcam', die in der Hauptmenüleiste angezeigt haben"
 
 
 #For the debug part:

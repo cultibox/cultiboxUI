@@ -19,10 +19,7 @@ function check_db() {
     $conf_index_col["COLOR_EC_GRAPH"]       = array ( 'Field' => "COLOR_EC_GRAPH", 'Type' => "varchar(30)", 'default_value' => "yellow",'carac' => "NOT NULL");
     $conf_index_col["COLOR_OD_GRAPH"]       = array ( 'Field' => "COLOR_OD_GRAPH", 'Type' => "varchar(30)", 'default_value' => "red",'carac' => "NOT NULL");
     $conf_index_col["COLOR_ORP_GRAPH"]      = array ( 'Field' => "COLOR_ORP_GRAPH", 'Type' => "varchar(30)", 'default_value' => "blue",'carac' => "NOT NULL");
-    $conf_index_col["RECORD_FREQUENCY"]     = array ( 'Field' => "RECORD_FREQUENCY", 'Type' => "int(11)", 'default_value' => 5,'carac' => "NOT NULL");
-    $conf_index_col["POWER_FREQUENCY"]      = array ( 'Field' => "POWER_FREQUENCY", 'Type' => "int(11)", 'default_value' => 5,'carac' => "NOT NULL");
     $conf_index_col["NB_PLUGS"]             = array ( 'Field' => "NB_PLUGS", 'Type' => "int(11)", 'default_value' => 3,'carac' => "NOT NULL");
-    $conf_index_col["UPDATE_PLUGS_FREQUENCY"] = array ( 'Field' => "UPDATE_PLUGS_FREQUENCY", 'Type' => "int(20)", 'default_value' => 1,'carac' => "NOT NULL");
     $conf_index_col["ALARM_ACTIV"]          = array ( 'Field' => "ALARM_ACTIV", 'Type' => "varchar(4)", 'default_value' => "0000",'carac' => "NOT NULL");
     $conf_index_col["ALARM_VALUE"]          = array ( 'Field' => "ALARM_VALUE", 'Type' => "varchar(5)", 'default_value' => "60.00",'carac' => "NOT NULL");
     $conf_index_col["COST_PRICE"]           = array ( 'Field' => "COST_PRICE", 'Type' => "decimal(6,4)", 'default_value' => 0.1249,'carac' => "NOT NULL");
@@ -33,7 +30,6 @@ function check_db() {
     $conf_index_col["COST_TYPE"]            = array ( 'Field' => "COST_TYPE", 'Type' => "varchar(20)", 'default_value' => "standard",'carac' => "NOT NULL");
     $conf_index_col["STATISTICS"]           = array ( 'Field' => "STATISTICS", 'Type' => "varchar(5)", 'default_value' => "True",'carac' => "NOT NULL");
     $conf_index_col["ADVANCED_REGUL_OPTIONS"] = array ( 'Field' => "ADVANCED_REGUL_OPTIONS", 'Type' => "varchar(5)", 'default_value' => "False",'carac' => "NOT NULL");
-    $conf_index_col["SHOW_COST"]            = array ( 'Field' => "SHOW_COST", 'Type' => "tinyint(1)", 'default_value' => 0,'carac' => "NOT NULL");
     $conf_index_col["RESET_MINMAX"]         = array ( 'Field' => "RESET_MINMAX", 'Type' => "varchar(5)", 'default_value' => "00:00",'carac' => "NOT NULL");
     $conf_index_col["RTC_OFFSET"]           = array ( 'Field' => "RTC_OFFSET", 'Type' => "int(11)", 'default_value' => 0,'carac' => "NOT NULL");
     $conf_index_col["REMOVE_1000_CHANGE_LIMIT"] = array ( 'Field' => "REMOVE_1000_CHANGE_LIMIT", 'Type' => "varchar(5)", 'default_value' => "False",'carac' => "NOT NULL");
@@ -70,10 +66,7 @@ function check_db() {
             ."COLOR_EC_GRAPH varchar(30) NOT NULL DEFAULT 'yellow',"
             ."COLOR_OD_GRAPH varchar(30) NOT NULL DEFAULT 'red',"
             ."COLOR_ORP_GRAPH varchar(30) NOT NULL DEFAULT 'blue',"
-            ."RECORD_FREQUENCY int(11) NOT NULL DEFAULT '5',"
-            ."POWER_FREQUENCY int(11) NOT NULL DEFAULT '5',"
             ."NB_PLUGS int(11) NOT NULL DEFAULT '3',"
-            ."UPDATE_PLUGS_FREQUENCY int(20) NOT NULL DEFAULT '1',"
             ."ALARM_ACTIV varchar(4) NOT NULL DEFAULT '0000',"
             ."ALARM_VALUE varchar(5) NOT NULL DEFAULT '60.00',"
             ."COST_PRICE decimal(6,4) NOT NULL DEFAULT '0.1249',"
@@ -84,7 +77,6 @@ function check_db() {
             ."COST_TYPE varchar(20) NOT NULL DEFAULT 'standard',"
             ."STATISTICS varchar(5) NOT NULL DEFAULT 'True',"
             ."ADVANCED_REGUL_OPTIONS VARCHAR(5) NOT NULL DEFAULT 'False',"
-            ."SHOW_COST tinyint(1) NOT NULL DEFAULT 0,"
             ."RESET_MINMAX VARCHAR(5) NOT NULL DEFAULT '00:00',"
             ."RTC_OFFSET int(11) NOT NULL DEFAULT '0',"
             ."REMOVE_1000_CHANGE_LIMIT VARCHAR(5) NOT NULL DEFAULT 'False',"
@@ -101,7 +93,7 @@ function check_db() {
             print_r($ret);
         }
 
-         $sql = "INSERT INTO configuration (id, VERSION, COLOR_HUMIDITY_GRAPH, COLOR_TEMPERATURE_GRAPH, COLOR_WATER_GRAPH, COLOR_LEVEL_GRAPH, COLOR_PH_GRAPH, COLOR_EC_GRAPH, COLOR_OD_GRAPH, COLOR_ORP_GRAPH, RECORD_FREQUENCY, POWER_FREQUENCY, NB_PLUGS, UPDATE_PLUGS_FREQUENCY, ALARM_ACTIV, ALARM_VALUE, COST_PRICE, COST_PRICE_HP, COST_PRICE_HC, START_TIME_HC, STOP_TIME_HC, COST_TYPE, STATISTICS,ADVANCED_REGUL_OPTIONS,SHOW_COST,RESET_MINMAX, RTC_OFFSET, ENABLE_LED) VALUES (1, '2.0.12-amd64', 'blue', 'red', 'orange', 'pink', 'brown', 'yellow', 'red', 'blue', 5, 1, 3, 1, '0000', '60', 0.1225, 0.1353, 0.0926, '22:30', '06:30', 'standard', 'True', 'False', 0, '00:00',0, '0001');";
+         $sql = "INSERT INTO configuration (id, VERSION, COLOR_HUMIDITY_GRAPH, COLOR_TEMPERATURE_GRAPH, COLOR_WATER_GRAPH, COLOR_LEVEL_GRAPH, COLOR_PH_GRAPH, COLOR_EC_GRAPH, COLOR_OD_GRAPH, COLOR_ORP_GRAPH,NB_PLUGS, ALARM_ACTIV, ALARM_VALUE, COST_PRICE, COST_PRICE_HP, COST_PRICE_HC, START_TIME_HC, STOP_TIME_HC, COST_TYPE, STATISTICS,ADVANCED_REGUL_OPTIONS,RESET_MINMAX, RTC_OFFSET, ENABLE_LED) VALUES (1, '2.0.12-amd64', 'blue', 'red', 'orange', 'pink', 'brown', 'yellow', 'red', 'blue', 3, '0000', '60', 0.1225, 0.1353, 0.0926, '22:30', '06:30', 'standard', 'True', 'False', '00:00',0, '0001');";
         // Insert row:
         try {
             $sth = $db->prepare($sql);
@@ -112,41 +104,7 @@ function check_db() {
         }
 
     } else {
-        //For version > 2.0.02:
-        $sql = "SELECT SECOND_REGUL FROM configuration;";
-        try {
-            $sth=$db->prepare("$sql");
-            $sth-> execute();
-            $res=$sth->fetch();
-        } catch(PDOException $e) {
-            $ret=$e->getMessage();
-        }
-
-        if ($res != null) {
-            $sql = "UPDATE configuration SET ADVANCED_REGUL_OPTIONS = CASE WHEN SECOND_REGUL  LIKE 'True' THEN 'True' ELSE ADVANCED_REGUL_OPTIONS END ;";
-
-            try {
-                $db->exec("$sql");
-            } catch(PDOException $e) {
-                $ret=$e->getMessage();
-            }
-        }
-
-
-        // Check column
         check_and_update_column_db ("configuration", $conf_index_col);
-
-
-        // Check value:
-
-        //For version > 2.0.02:
-        $sql = "UPDATE configuration SET UPDATE_PLUGS_FREQUENCY=1 WHERE UPDATE_PLUGS_FREQUENCY=-1;";
-
-        try {
-            $db->exec("$sql");
-        } catch(PDOException $e) {
-            $ret=$e->getMessage();
-        }
     } 
     $db=null;
     

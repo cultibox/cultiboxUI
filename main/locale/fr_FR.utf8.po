@@ -139,17 +139,8 @@ msgstr "Couleur des courbes d'OD"
 msgid "CONFIGURE_ORP"
 msgstr "Couleur des courbes d'ORP"
 
-msgid "CONFIGURE_FREQUENCY"
-msgstr "Fréquence d'enregistrement du climat (en minute)"
-
-msgid "CONFIGURE_POWER_FREQUENCY"
-msgstr "Fréquence d'enregistrement de la puissance (en minute)"
-
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Nombre de prises de votre système"
-
-msgid "CONFIGURE_PLUGS_FREQUENCY"
-msgstr "Fréquence de mise à jour de l'état des prises (en seconde)"
 
 msgid "VALIDATION_CONF"
 msgstr "Enregistrer la configuration"
@@ -221,7 +212,7 @@ msgid "RESET_CONFIRM_SD_CARD"
 msgstr "Êtes-vous sûr de vouloir formater votre carte SD? Vos fichiers de logs pourraient être détruits."
 
 msgid "ADVANCED_REGUL_OPTIONS"
-msgstr "Autoriser la modification des options avancées de régulation"
+msgstr "Activer le mode expert"
 
 msgid "FORMAT_PROGRESS"
 msgstr "Progression du formatage"
@@ -234,9 +225,6 @@ msgstr "Erreur lors du formatage de la carte SD"
 
 msgid "ALARM_DESCRIPTION"
 msgstr "L'alarme de la Cultibox permet d'éteindre toutes les prises lorsque la sécurité de l'espace de culture est en jeu. Définissez une température qui, une fois dépassée, provoque la coupure de toute les prises. <br /><br /><b>Attention</b>: une fois ce seuil atteint, les prises se coupent et la Cultibox ne reviendra à un état normale que lorsque vous aurez acquitté l'alarme directement sur le boitier."
-
-msgid "SHOW_COST"
-msgstr "Afficher le menu de calcul des coûts"
 
 msgid "RESET_MINMAX"
 msgstr "Remise à zéro du min/max"
@@ -1618,10 +1606,10 @@ msgid "TOOLTIP_WEBCAM"
 msgstr "Cliquez sur l'image pour afficher les webcams connectées"
 
 msgid "TOOLTIP_IMPORT_CONF"
-msgstr "Cette fonctionnalité permet d'importer une sauvegarde d'un logiciel Cultibox sous forme d'un fichier sql"
+msgstr "Cette fonctionnalité permet d'importer la configuration d'un logiciel Cultibox précédement exportée. Les données des capteurs et des puissances doivent être importées depuis l'onglet 'Logs'"
 
 msgid "TOOLTIP_EXPORT_CONF"
-msgstr "Cette fonctionnalité permet d'exporter la configuration du logiciel sous forme d'un fichier sql compréssé"
+msgstr "Cette fonctionnalité permet d'exporter la configuration du logiciel. Les données des capteurs et des puissances doivent être exportées depuis l'onglet 'Logs'"
 
 msgid "TOOLTIP_CHANGE_PWD"
 msgstr "Cette fonctionnalité permet de changer le mot de passe demandé lors de la connexion au logiciel"
@@ -1640,15 +1628,6 @@ msgstr "La Cultibox va utiliser la prise variateur pour n'utiliser que la puissa
 
 msgid "TOOLTIP_POWER"
 msgstr "La puissance de l'équipement branché. Renseigner ce champ vous permet de calculer la consommation de votre installation, son prix..."
-
-msgid "TOOLTIP_RECORD_FREQ"
-msgstr "Cette option permet de configurer la fréquence à laquelle la Cultibox enregistre les données issues des capteurs."
-
-msgid "TOOLTIP_POWER_FREQ"
-msgstr "Cette option permet de configurer la fréquence à laquelle la Cultibox enregistre les valeurs de consommation d'énergie."
-
-msgid "TOOLTIP_PLUG_FREQ"
-msgstr "Cette option permet de configurer la fréquence à laquelle sera mis à jour l'état (Marche/Arrêt) de vos prises."
 
 msgid "TOOLTIP_POWER_LOG"
 msgstr "Cette option calcule et affiche la puissance consommée pour la/les prise(s) sélectionnée(s). Pour que cela soit possible il faudra renseigner le champ 'puissance' dans la partie de configuration des prises"
@@ -1693,7 +1672,7 @@ msgid "TOOLTIP_REGUL_SENSOR"
 msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
 
 msgid "TOOLTIP_SECOND_REGUL_ENABLE"
-msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Il n'est pas nécessaire de l'activer pour qu'une prise régule la température ou l'humidité. Une fois activée, la régulation est configurable pour une prise différente du type 'Lampe' et 'Autre'. Les options de configuration de la régulation secondaire seront disponible dans l'onglet 'Prises'"
+msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Une fois activée, cette option vous permet d'accèder au mode expert qui comprend de nouvelles fonctionnalités: régulation secondaire, programmes journaliers... Pour plus d'information, se reporter à la documentation"
 
 msgid "TOOLTIP_CONFIG_LOG_SEARCH"
 msgstr "Lorsque vous chargez la page des logs, le logiciel enregistre vos logs des capteurs et de puissance pour les 31 derniers jours. Cette fonctionnalité vous permet de charger des logs plus anciens en fonction du nombre de mois souhaité"
@@ -1719,9 +1698,6 @@ msgstr "Cette fonctionnalité vous permet d'exporter un programme dans un format
 msgid "TOOLTIP_IMPORT_PROGRAM"
 msgstr "Cette fonctionnalité permet d'importer un programme depuis un fichier csv (lisible par un tableur). Le fichier à importer peut être créé par la fonction d'exportation par un autre utilisateur Cultibox pour échanger des programmes ou depuis une autre de vos prises pour appliquer un même programme à plusieurs prises"
 
-msgid "TOOLTIP_ADVANCED_REGUL_OPTIONS"
-msgstr "Si vous activez cette option, vous aurez la possibilité de choisir le ou les capteurs utilisé(s) pour la régulation ainsi que le mode de calcul"
-
 msgid "TOOLTIP_REPEAT_VALUE"
 msgstr "Cette valeur définit à quelle fréquence votre événement sera répété. Par exemple, si votre événement commence à 01:00:00 et que la répétition est de 04:00:00, l'événement suivant débutera à 05:00:00. Le temps de répétition est ajouté au temps de départ de l'événement pour déterminer le départ de l'événement suivant. Le temps minimum autorisé est de 5mn."
 
@@ -1733,9 +1709,6 @@ msgstr "Vous pouvez choisir jusqu'à trois fonctionnements différents pour votr
 
 msgid "TOOLTIP_REGUL_SECOND"
 msgstr "Si la régulation secondaire est activée dans la configuration du logiciel, ce champ affiche son état pour la prise sélectionnée: activée ou désactivée. Si la régulation est activée pour la prise sélectionnée, vous trouverez aussi les informations concernant la configuration de cette régulation."
-
-msgid "TOOLTIP_SHOW_COST"
-msgstr "En activant cette option vous pouvez avoir accès à la page de calcul des coûts de votre installation grâce au menu 'Coût' qui apparaît dans la barre du menu principal"
 
 msgid "TOOLTIP_RESET_MINMAX"
 msgstr "Ce champs permet de choisir l'heure de remise à zéro du min/max de tous les capteurs affichés sur l'écran de la Cultibox"
@@ -1803,10 +1776,6 @@ msgstr "Par défaut, le temps minimum de répétition d'une action cyclique pour
 msgid "TOOLTIP_1000_CHANGE_LIMIT"
 msgstr "Une limite de 1000 changements pour toutes les prises confondues est fixée initialement. Vous pouvez désactiver cette limite grâce à cette option."
 
-msgid "TOOLTIP_SHOW_WEBCAM"
-msgstr "En activant cette option vous pouvez avoir accès à la page de la 'Webcam' qui apparaît dans la barre du menu principal"
-
-
 
 #For the debug part:
 msgid "GENERATE_TIME"
@@ -1823,7 +1792,7 @@ msgstr "Programme courant"
 
 # For the Cultipi part 
 msgid "EXPORT_CONF"
-msgstr "Exporter la configuration"
+msgstr "Exporter la configuration actuelle"
 
 msgid "CULTIPI_CONFIRM_UPDATE"
 msgstr "Des mises à jour sont disponibles, voulez-vous les installer?"

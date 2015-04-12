@@ -68,12 +68,11 @@ if((!isset($path))||(empty($path))) {
             }
 
             //Creating conf file:
-            $update_frequency = get_configuration("UPDATE_PLUGS_FREQUENCY",$out);
-            if($update_frequency == "-1") $update_frequency="0";
+            $update_frequency = "1";
             if(!write_sd_conf_file($path,
-                                    get_configuration("RECORD_FREQUENCY",$out),
+                                    "1",
                                     $update_frequency,
-                                    get_configuration("POWER_FREQUENCY",$out),
+                                    "1",
                                     get_configuration("ALARM_ACTIV",$out),
                                     get_configuration("ALARM_VALUE",$out),
                                     get_configuration("RESET_MINMAX",$out),
@@ -82,7 +81,6 @@ if((!isset($path))||(empty($path))) {
                 echo -1;
                 return 0;
             }
-
 
 
             // Creating log.txt file:
