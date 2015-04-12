@@ -19,16 +19,6 @@ define("ERROR_COPY_PLGIDX", "14");
 // RET 0 if the sd card is updated, 1 if the sd card has been updated, return > 1 if an error occured
 function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$force_rtc_offset=false) {
 
-    // Load config cultipi 
-    if(is_file("main/libs/config_cultipi.php")) {
-       require_once 'main/libs/config_cultipi.php';
-    } else if(is_file("../libs/config_cultipi.php")) {
-       require_once '../libs/config_cultipi.php';
-    } else {
-       require_once '../../libs/config_cultipi.php';
-    }
-
-
     // Check if SD card has been found
     if(empty($sd_card) || !isset($sd_card)  || $sd_card == "")
     {

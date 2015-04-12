@@ -168,6 +168,17 @@ $GLOBALS['CULTIPI_CONF_TEMP_PATH'] = $GLOBALS['CULTIPI_CONF_PATH'] . "/conf_tmp"
 // Maximal number of webcam plugged:
 $GLOBALS['MAX_WEBCAM'] = 4;
 
+// ----------------- Cultipi config ----------------- 
+//Slave IP:
+$GLOBALS_CULTIPI['USE_REMOTE_SLAVE'] = 0;
+
+// Remote sensors
+$GLOBALS_CULTIPI['USE_REMOTE_SENSOR'] = 0;
+
+// Direct read
+$GLOBALS_CULTIPI['USE_DIRECT_READ'] = 0;
+// -------------------------------------------------- 
+
 // Load user config file
 $directory_user_config = 'main/libs/user_config/';
 if (is_dir('../../libs/user_config/')) {
