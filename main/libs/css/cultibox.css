@@ -723,7 +723,7 @@ a.logo img{
 }
 
 td.conf-marge-td {
-  width:45%;
+  width:52%;
 }
 
 td.conf-field-cultipi {
@@ -994,9 +994,15 @@ P.imp_center{
 .fileupload-buttonbar .toggle {
   margin-bottom: 5px;
 }
-.progress-animated .bar {
+.progress-animated {
   background: url(../img/progressbar.gif) !important;
 }
+
+.bar {
+    height: 18px;
+    background: #849325;
+}
+
 .fileupload-loading {
   float: right;
   width: 32px;

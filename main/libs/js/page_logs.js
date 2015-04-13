@@ -166,7 +166,6 @@ loadLog = function(nb_day,pourcent,type,pourcent,search,sd_card) {
 
 // Define datepicker
 $(function() {
-
     $("#datepicker_from, #datepicker_to, #datepicker_from_power, #datepicker_to_power, #datepicker_export_from, #datepicker_export_to, #datepicker_export_power_to, #datepicker_export_power_from").datepicker({
         dateFormat: "yy-mm-dd",
         showButtonPanel: true,
@@ -287,8 +286,130 @@ Highcharts.setOptions({
 $(function () {
     var chart;
     $(document).ready(function() {
-         pop_up_remove("main_error");
-         pop_up_remove("main_info");
+
+        // Call the fileupload widget and set some parameters:
+        var upload_type="";
+        $('#import_logs_csv_file, #import_logs_power_csv_file').fileupload({
+            dataType: 'json',
+            url: 'main/modules/external/files.php',
+            add: function (e, data) {
+                $("#ui_db_management").dialog('close');
+                if($(this).attr('id')=='import_logs_csv_file') {
+                    upload_type="logs";
+                } else {
+                    upload_type="power";
+                }
+                data.submit();
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_csv').css(
+                    'width',
+                    progress + '%'
+                );
+
+                $("#progress_csv").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>"
+                });
+
+                if(progress==100) {
+                    $('#progress_bar_csv').css('width','0%');
+                    $("#progress_csv").dialog('close');
+                }
+            },
+            done: function (e, data) {
+                e.preventDefault();
+
+                var name="";
+                $.each(data.result.files, function (index, file) {
+                    name=file.name;
+                });
+
+
+                $.blockUI({
+                    message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                    centerY: 0,
+                    css: {
+                        top: '20%',
+                        border: 'none',
+                        padding: '5px',
+                        backgroundColor: 'grey',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        opacity: .9,
+                        color: '#fffff'
+                    },
+                    onBlock: function() {
+                        
+                        $.ajax({
+                            cache: false,
+                            async: false,
+                            url: "main/modules/external/import_csv_logs.php",
+                            data: {filename:name,table:upload_type},
+                            success: function (data) {
+                            var json = jQuery.parseJSON(data);
+                            $.unblockUI();
+                            if(json=="0") {
+                                $("#success_import_logs").dialog({
+                                    width: 550,
+                                    modal: true,
+                                    closeOnEscape: false,
+                                    dialogClass: "popup_message",
+                                    buttons: [{
+                                        text: CLOSE_button,
+                                        "id": "btnClose",
+                                        click: function () {
+                                            $(this).dialog('close');    
+                                            get_content("logs",getFormInputs('display-log'));
+                                        }
+                                    }]      
+                                });
+                            } else {
+                                $("#error_import_logs").dialog({
+                                    width: 550,
+                                    modal: true,
+                                    closeOnEscape: false,
+                                    dialogClass: "popup_error",
+                                    buttons: [{
+                                        text: CLOSE_button,
+                                        "id": "btnClose",
+                                        click: function () {
+                                            $(this).dialog('close');
+                                            get_content("logs",getFormInputs('display-log'));
+                                        }
+                                    }]
+                                });
+                            }
+                            }, error: function (data) {
+                            $.unblockUI();
+                            $("#error_import_logs").dialog({
+                                    width: 550,
+                                    modal: true,
+                                    closeOnEscape: false,
+                                    dialogClass: "popup_error",
+                                    buttons: [{
+                                        text: CLOSE_button,
+                                        "id": "btnClose",
+                                        click: function () {
+                                            $(this).dialog('close');
+                                            get_content("logs",getFormInputs('display-log'));
+                                        }
+                                    }]
+                            });
+                            }
+                        });
+                    }
+                });
+             }
+        });
+
+        pop_up_remove("main_error");
+        pop_up_remove("main_info");
 
 
         // For each information, show it
@@ -601,7 +722,7 @@ $(function () {
                 shared: true,
                 useHTML: true,
                 formatter: function() {
-                    var s = '<p align="center"><b>'+ Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'</b></p><table class="table_width"><tr>';
+                    var s = '<table class="table_width"><tr>';
                     var chart = $('#container').highcharts();
 
                     var xVal=this.x;
@@ -624,7 +745,32 @@ $(function () {
                         if(count%2===0) s=s+"</tr><tr>";
                     });
 
-                    $("#data").html(s) ;
+                    $("#data_logs").html(s);
+                    var position="";
+                    if($("#data_logs").is(':visible')) { 
+                        position=$("#data_logs").offset();
+                    } else {
+                        alert("pouet");
+                        position='right top';
+                    }
+                    $("#data_logs").dialog({
+                        resizable: true,
+                        width: 700,
+                        modal: false,
+                        position: position,
+                        closeOnEscape: false,
+                        dialogClass: "popup_message",
+                        title: '<b>'+Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'</b>',
+                        buttons: [{
+                            text: CLOSE_button,
+                            "id": "btnClose",
+                            click: function () {
+                                $(this).dialog('close');
+                            }
+                        }]
+                    });
+
+                    
                     return false;
                 }
             },
@@ -1256,16 +1402,17 @@ $(document).ready(function() {
                             $("#select_curve").dialog("open");
                         }
                     });
+                    updateTooltipMinMax();
                 },
                 error: function() {
                     $.unblockUI();
                     if(($(cheBu).attr("datatype")=="power")||($(cheBu).attr("datatype")=="program")) {
                         $("#select_curve").dialog("open");
                     }
+                    updateTooltipMinMax();
                 },
                 cache: false
             });
-            updateTooltipMinMax();
         } 
         else 
         {
@@ -1303,7 +1450,7 @@ $(document).ready(function() {
 
         $("#select_curve").dialog({
             resizable: false,
-            width: 750,
+            width: 800,
             closeOnEscape: true,
             dialogClass: "popup_message",
             modal: true,
@@ -1455,13 +1602,13 @@ $(document).ready(function() {
                     }
                 });
                                         
-                //Update tooltip min/max:
-                updateTooltipMinMax();
-
                 // Readraw graph
                 //chart.redraw();
                 chart = new Highcharts.Chart(chart.options);
                 chart.render();
+
+                //Update tooltip min/max:
+                updateTooltipMinMax();
 
             });
         });
@@ -1737,7 +1884,12 @@ $(document).ready(function() {
                 for (j = 0; j < chart.series[i].yData.length; j++) {
                     total += chart.series[i].yData[j];
                 } 
-                seriesAvg = (total / chart.series[i].yData.length).toFixed(2); // fix decimal to 2 places
+
+                if(chart.series[i].yData.length!=0) {
+                    seriesAvg = (total / chart.series[i].yData.length).toFixed(2); // fix decimal to 2 places
+                } else {
+                    seriesAvg =  null;
+                }
 
                 // Sensor informations
                 textToDisplay += "<p style='text-align:center'><b><i><font color='"+chart.series[i].yAxis.userOptions.labels.style.color+"'>"+ chart.series[i].name + " : </font></i></b></p>";
@@ -1758,8 +1910,14 @@ $(document).ready(function() {
                 } else {
                     textToDisplay +=    "<b>N/A</b>";
                 }
-           
-                textToDisplay += "<br /><?php echo __('AVERAGE'); ?>: <b>"+seriesAvg+" "+chart.series[i].yAxis.userOptions.unit+"</b><br /><br />";
+
+               
+                textToDisplay += "<br /><?php echo __('AVERAGE'); ?>: ";
+                if(seriesAvg == null) {
+                    textToDisplay +=    "<b>N/A</b>";
+                } else { 
+                    textToDisplay += "<b>"+seriesAvg+" "+chart.series[i].yAxis.userOptions.unit+"</b><br /><br />";
+                }
             }
         }
     }

@@ -385,8 +385,8 @@
                 for($plugs=1;$plugs<=$nb_plugs;$plugs++) {
                     echo '<td class="log-div-margin-param"></td>';
                     $plugArrayTranslate =  translate_PlugType($plugs_infos[$plugs - 1]['PLUG_TYPE']);
-                    echo '<td class="log-marge-day-title">' . $plugs_infos[$plugs-1]["PLUG_NAME"] . " (" . $plugArrayTranslate . ")";
-                    echo '<input type="checkbox" style="margin-right:30px;"'
+                    echo '<td>' . $plugs_infos[$plugs-1]["PLUG_NAME"] . " (" . $plugArrayTranslate . ")</td>";
+                    echo '<td><input type="checkbox" style="margin-right:30px;"'
                         . ' plug="' . $plugs . '"' 
                         . ' startDate="' . $legend_date . '"'
                         . ' name="select_program[]"'
@@ -399,7 +399,7 @@
                     if(in_array($plugs,$select_program)) {
                         echo ' checked';
                     }
-                    echo '> </td>';
+                    echo '></td>';
 
                     if($plugs % 3 == 0) { 
                         echo '<td class="log-div-margin-param"></td></tr><tr>';
@@ -426,8 +426,8 @@
                 for($plugs=1;$plugs<=$nb_plugs;$plugs++) {  
                     echo '<td class="log-div-margin-param"></td>';
                     $plugArrayTranslate =  translate_PlugType($plugs_infos[$plugs - 1]['PLUG_TYPE']);
-                    echo '<td class="log-marge-day-title">' . $plugs_infos[$plugs-1]["PLUG_NAME"] . " (" . $plugArrayTranslate . ")";
-                    echo '<input type="checkbox" style="margin-right:30px;"'
+                    echo '<td>' . $plugs_infos[$plugs-1]["PLUG_NAME"] . " (" . $plugArrayTranslate . ")</td>";
+                    echo '<td><input type="checkbox" style="margin-right:30px;"'
                         . ' plug="' . $plugs . '"' 
                         . ' startDate="' . $legend_date . '"'
                         . ' name="select_power[]"'
@@ -693,6 +693,27 @@
         <?php } ?>
     </form>
 
+    <!-- Import logs from csv -->
+    <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
+    <form action="/cultibox/index.php?menu=logs" method="get" name="import_log_csv" id="import_log_csv">
+        <table class="table_width">
+            <tr>
+                <td class="log-manage-marge"></td>
+                <td class="log-manage-title"><?php echo __('MANAGE_IMPORT_LOG_CSV'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_IMPORT_LOG_CSV'); ?>" /></td>
+                <td class="log-manage-field"><input type="file" id="import_logs_csv_file" name="files[]"></td>
+                <td></td>
+            </tr>
+        </table>
+        <input type="hidden" name="select_plug" value="<?php echo $select_plug; ?>">
+        <?php if($type == "month") { ?>
+            <input type="hidden" name="startmonth" value="<?php echo $startmonth; ?>">
+            <input type="hidden" name="startyear" value="<?php echo $startyear; ?>" >
+        <?php } else { ?>
+            <input type="hidden" name="startday" value="<?php echo $startday; ?>">
+        <?php } ?>
+    </form> 
+    <?php } ?>
+
     <!-- Delete power logs -->
     <form action="/cultibox/index.php?menu=logs" method="get" id="reset_log_power_form" name="reset_log_power_form">
         <table class="table_width">
@@ -726,9 +747,29 @@
         <?php } ?>
     </form>
 
+    <!-- Import logs from csv -->
+    <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
+    <form action="/cultibox/index.php?menu=logs" method="get" name="import_log_power_csv" id="import_log_power_csv">
+        <table class="table_width">
+            <tr>
+                <td class="log-manage-marge"></td>
+                <td class="log-manage-title"><?php echo __('MANAGE_IMPORT_LOG_POWER_CSV'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_IMPORT_LOG_POWER_CSV'); ?>" /></td>
+                <td class="log-manage-field"><input type="file" id="import_logs_power_csv_file" name="files[]"></td>
+                <td></td>
+            </tr>
+        </table>
+        <input type="hidden" name="select_plug" value="<?php echo $select_plug; ?>">
+        <?php if($type == "month") { ?>
+            <input type="hidden" name="startmonth" value="<?php echo $startmonth; ?>">
+            <input type="hidden" name="startyear" value="<?php echo $startyear; ?>" >
+        <?php } else { ?>
+            <input type="hidden" name="startday" value="<?php echo $startday; ?>">
+        <?php } ?>
+    </form>
+    <?php } ?>
 </div>
 
-<div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?></div>
+<div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" /></div>
 
 <div id="msg_power" title="" style="display: none;"></div>
 
@@ -804,8 +845,19 @@
 </div>
 
 
-<div id="data">
+<div id="data_logs" style="display:none">
+</div>
+
+<div id="progress_csv">
+    <div id="progress_bar_csv" class="bar" style="width: 0%;"></div>
 </div>
 
 
+<div id="success_import_logs" title="<?php echo __('IMPORT_LOGS'); ?>" style="display:none">
+    <p><?php echo __('SUCCESS_IMPORT_LOGS'); ?></p>
+</div>
 
+
+<div id="error_import_logs" title="<?php echo __('IMPORT_LOGS'); ?>" style="display:none">
+    <p><?php echo __('ERROR_IMPORT_LOGS'); ?></p>
+</div>

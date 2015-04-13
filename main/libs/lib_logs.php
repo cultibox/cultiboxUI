@@ -64,27 +64,19 @@ function export_table_csv($name="",$datefrom="",$dateto="",&$out) {
         unlink($file);
     }
 
-    
+    if(strcmp("$name","logs")==0) {
+        $field="timestamp, record1, record2, date_catch, time_catch, fake_log, sensor_nb";
+    } else {
+        $field="timestamp, record,  plug_number, date_catch, time_catch";
+    }
+
+    if((strcmp("$datefrom","")!=0)&&(strcmp("$dateto","")!=0)) {
+        $where='WHERE date_catch BETWEEN "'.$datefrom.'" AND "'.$dateto.'"';
+    }    
 
     $os=php_uname('s');
     switch($os) {
         case 'Linux':
-			if(strcmp("$name","logs")==0) {
-				$field="timestamp, record1, record2, date_catch, time_catch, sensor_nb";
-				$where='WHERE fake_log LIKE "False"';
-			} else {
-				$field="timestamp, record,  plug_number, date_catch, time_catch";
-				$where="";
-			}
-			
-			if((strcmp("$datefrom","")!=0)&&(strcmp("$dateto","")!=0)) {
-				if(strcmp("$where","")==0) {
-					$where='WHERE date_catch BETWEEN "'.$datefrom.'" AND "'.$dateto.'"';
-				} else {
-					$where=$where.' AND date_catch BETWEEN "'.$datefrom.'" AND "'.$dateto.'"';
-				}
-			}
-
             if(isset($GLOBALS['MODE']) && $GLOBALS['MODE'] == "cultipi") {
                 exec("/usr/bin/mysql --defaults-extra-file=/var/www/cultibox/sql_install/my-extra.cnf -B -h 127.0.0.1 --port=3891 cultibox -e 'SELECT ${field} FROM `${name}` ${where}' > $file");
             } else {
@@ -93,39 +85,9 @@ function export_table_csv($name="",$datefrom="",$dateto="",&$out) {
             break;
         case 'Mac':
         case 'Darwin':
-			if(strcmp("$name","logs")==0) {
-				$field="timestamp, record1, record2, date_catch, time_catch, sensor_nb";
-				$where='WHERE fake_log LIKE "False"';
-			} else {
-				$field="timestamp, record,  plug_number, date_catch, time_catch";
-				$where="";
-			}
-			
-            if((strcmp("$datefrom","")!=0)&&(strcmp("$dateto","")!=0)) {
-				if(strcmp("$where","")==0) {
-					$where='WHERE date_catch BETWEEN "'.$datefrom.'" AND "'.$dateto.'"';
-				} else {
-					$where=$where.' AND date_catch BETWEEN "'.$datefrom.'" AND "'.$dateto.'"';
-				}
-			}
 			exec("../../../../../bin/mysql --defaults-extra-file=/Applications/cultibox/xamppfiles/etc/my-extra.cnf -B -h 127.0.0.1 --port=3891 cultibox -e 'SELECT ${field} FROM `${name}` ${where}' > $file");
             break;
         case 'Windows NT':
-			if(strcmp("$name","logs")==0) {
-				$field="timestamp, record1, record2, date_catch, time_catch, sensor_nb";
-				$where="WHERE fake_log LIKE 'False'";
-			} else {
-				$field="timestamp, record,  plug_number, date_catch, time_catch";
-				$where="";
-			}
-	
-            if((strcmp("$datefrom","")!=0)&&(strcmp("$dateto","")!=0)) {
-				if(strcmp("$where","")==0) {
-					$where="WHERE date_catch BETWEEN '".$datefrom."' AND '".$dateto."'";
-				} else {
-					$where=$where." AND date_catch BETWEEN '".$datefrom."' AND '".$dateto."'";
-				}
-			}
 			exec("..\..\..\..\..\mysql\bin\mysql.exe --defaults-extra-file=\"C:\cultibox\\xampp\mysql\bin\my-extra.cnf\" -B -h 127.0.0.1 --port=3891 cultibox -e \"SELECT ${field} FROM `${name}` ${where}\" > $file");
 			break;
     }

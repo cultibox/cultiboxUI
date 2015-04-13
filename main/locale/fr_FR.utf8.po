@@ -237,6 +237,24 @@ msgstr "seconde(s)"
 
 
 # For the logs part:
+msgid "MANAGE_IMPORT_LOG_POWER_CSV"
+msgstr "Importer vos logs de puissance depuis un fichier"
+
+msgid "MANAGE_IMPORT_LOG_CSV"
+msgstr "Importer vos logs depuis un fichier"
+
+msgid "SUCCESS_IMPORT_LOGS"
+msgstr "Données des capteurs importées avec succés depuis un fichier"
+
+msgid "ERROR_IMPORT_LOGS"
+msgstr "Erreur lors de l'import des données des capteurs depuis un fichier"
+
+msgid "IMPORT_LOGS"
+msgstr "Import des données des capteurs"
+
+msgid "PROGRESS_CSV"
+msgstr "Progréssion de la récupération du fichier"
+
 msgid "HISTO_GRAPH"
 msgstr "Graphiques climatiques"
 
@@ -1651,7 +1669,7 @@ msgid "TOOLTIP_FORMAT_SD"
 msgstr "La carte SD sélectionnée sera rendue compatible Cultibox. Pour cela les fichiers de configuration des prises, des programmes et de la Cultibox seront régénérés en fonction de vos paramètres actuels et les fichiers contenant vos futurs logs seront mis en place. Si des logs sont déjà présents sur votre carte SD ils peuvent être perdus lors du processus<br /><b><i>Note: </i></b>afin que votre carte soit reconnue par la Cultibox, elle doit être formatée en FAT16 et ne doit donc pas dépasser 2Go"
 
 msgid "TOOLTIP_RESET_LOG"
-msgstr "En cliquant sur ce bouton toutes vos données des logs enregistrés seront supprimées. Cela peut être réalisé à la fin d'une culture, si vos logs ne vous sont plus utiles et que vous souhaitez libérer de l'espace sur votre ordinateur"
+msgstr "En cliquant sur ce bouton toutes les données enregistrées par les capteurs seront supprimées."
 
 msgid "TOOLTIP_MAX_POWER_PLUG_3500"
 msgstr "La prise 3500W permet de piloter des éléments gourmands en énergie. Les 3500W annoncés correspondent à une puissance résistive pure, par exemple un chauffage. Si vous branchez une lampe HPS ou MH sur cette prise, la puissance maximale autorisée est 600W"
@@ -1679,6 +1697,12 @@ msgstr "Lorsque vous chargez la page des logs, le logiciel enregistre vos logs d
 
 msgid "TOOLTIP_EXPORT_LOG_CSV"
 msgstr "Exporter vos informations de logs dans un fichier au format CSV"
+
+msgid "TOOLTIP_IMPORT_LOG_CSV"
+msgstr "Importer vos informations de logs depuis un fichier au format CSV"
+
+msgid "TOOLTIP_IMPORT_LOG_POWER_CSV"
+msgstr "Importer vos informations de logs de puissance depuis un fichier au format CSV"
 
 msgid "TOOLTIP_EXPORT_POWER_CSV"
 msgstr "Exporter vos informations de puissance dans un fichier au format CSV"
@@ -1775,6 +1799,7 @@ msgstr "Par défaut, le temps minimum de répétition d'une action cyclique pour
 
 msgid "TOOLTIP_1000_CHANGE_LIMIT"
 msgstr "Une limite de 1000 changements pour toutes les prises confondues est fixée initialement. Vous pouvez désactiver cette limite grâce à cette option."
+
 
 
 #For the debug part:
