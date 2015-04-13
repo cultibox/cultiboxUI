@@ -746,18 +746,18 @@ $(function () {
                     });
 
                     $("#data_logs").html(s);
+
                     var position="";
                     if($("#data_logs").is(':visible')) { 
-                        position=$("#data_logs").offset();
+                        var position=$("#data_logs").offset();
                     } else {
-                        alert("pouet");
-                        position='right top';
+                        var position='right top';
                     }
+
                     $("#data_logs").dialog({
                         resizable: true,
                         width: 700,
                         modal: false,
-                        position: position,
                         closeOnEscape: false,
                         dialogClass: "popup_message",
                         title: '<b>'+Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'</b>',
@@ -770,6 +770,15 @@ $(function () {
                         }]
                     });
 
+                    if(position!='right top') {
+                        $("#data_logs").dialog("widget").position({
+                            position
+                        });
+                    } else {
+                        $("#data_logs").dialog({
+                            position: position
+                        });
+                    }
                     
                     return false;
                 }
