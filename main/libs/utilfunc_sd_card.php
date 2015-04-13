@@ -19,16 +19,6 @@ define("ERROR_COPY_PLGIDX", "14");
 // RET 0 if the sd card is updated, 1 if the sd card has been updated, return > 1 if an error occured
 function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$force_rtc_offset=false) {
 
-    // Load config cultipi 
-    if(is_file("main/libs/config_cultipi.php")) {
-       require_once 'main/libs/config_cultipi.php';
-    } else if(is_file("../libs/config_cultipi.php")) {
-       require_once '../libs/config_cultipi.php';
-    } else {
-       require_once '../../libs/config_cultipi.php';
-    }
-
-
     // Check if SD card has been found
     if(empty($sd_card) || !isset($sd_card)  || $sd_card == "")
     {
@@ -72,7 +62,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         // Create cultipi conf.xml file
         $paramListCultipiConf[] = array (
             "name" => "verbose",
-            "level" => "warning"
+            "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['cultiPi']
         );
         create_conf_XML($sd_card . "/cultiPi/conf.xml" , $paramListCultipiConf);
         
@@ -114,7 +104,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         // Server acq sensor
         $paramListserverAcqSensor[] = array (
             "name" => "verbose",
-            "level" => "warning"
+            "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']
         );
         $paramListserverAcqSensor[] = array (
             "name" => "simulator",
@@ -122,13 +112,13 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         );
         //  <item name="network_read,1,ip" ip="192.178.0.10" />
         //  <item name="network_read,1,sensor" sensor="2" />
-        if ($GLOBALS_CULTIPI['USE_REMOTE_SENSOR'] == 1)
+        if ($GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] == 1)
         {
-            foreach ($GLOBALS_CULTIPI['REMOTE_SENSOR'] as $elemOfArray)
+            foreach ($GLOBALS['CULTIPI']['REMOTE_SENSOR'] as $elemOfArray)
             {
                 $paramListserverAcqSensor[] = array (
                     "name" => "network_read," . $elemOfArray["SENSOR_INDEX_IN_MASTER"] . ",ip",
-                    "ip" => $GLOBALS_CULTIPI['REMOTE_SLAVE']["IP_" . $elemOfArray["REMOTE_SLAVE"]]
+                    "ip" => $GLOBALS['CULTIPI']['REMOTE_SLAVE']["IP_" . $elemOfArray["REMOTE_SLAVE"]]
                 );
                 
                 $paramListserverAcqSensor[] = array (
@@ -137,9 +127,9 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
                 );
             }
         }
-        if ($GLOBALS_CULTIPI['USE_DIRECT_READ'] == 1)
+        if ($GLOBALS['CULTIPI']['USE_DIRECT_READ'] == 1)
         {
-            foreach ($GLOBALS_CULTIPI['DIRECT_SENSOR'] as $elemOfArray)
+            foreach ($GLOBALS['CULTIPI']['DIRECT_SENSOR'] as $elemOfArray)
             {
                 $paramListserverAcqSensor[] = array (
                     "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",input",
@@ -173,7 +163,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         // Server plug update
         $paramListServerPlugUpdate[] = array (
             "name" => "verbose",
-            "level" => "warning"
+            "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate']
         );
 
         $paramListServerPlugUpdate[] = array (
@@ -213,13 +203,13 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
 
         // Add network slave
         //  <item name="module_CULTIPI,ip,0" ip="192.168.1.10" />
-        if ($GLOBALS_CULTIPI['USE_REMOTE_SLAVE'] == 1)
+        if ($GLOBALS['CULTIPI']['USE_REMOTE_SLAVE'] == 1)
         {
-            for($index = 0 ; $index < $GLOBALS_CULTIPI['REMOTE_NB_SLAVE']; $index++)
+            for($index = 0 ; $index < $GLOBALS['CULTIPI']['REMOTE_NB_SLAVE']; $index++)
             {
                 $paramListServerPlugUpdate[] = array (
                     "name" => "module_CULTIPI,ip," . $index,
-                    "ip" => $GLOBALS_CULTIPI['REMOTE_SLAVE']["IP_" . $index]
+                    "ip" => $GLOBALS['CULTIPI']['REMOTE_SLAVE']["IP_" . $index]
                 );
             }
         }
@@ -228,7 +218,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         // Server histo
         $paramListServerHisto[] = array (
             "name" => "verbose",
-            "level" => "warning"
+            "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverHisto']
         );
         $paramListServerHisto[] = array (
             "name" => "logPeriode",
@@ -249,7 +239,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
 
         $paramListServerLog[] = array (
             "name" => "verbose",
-            "level" => "warning"
+            "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']
         );
 
         create_conf_XML($sd_card . "/serverLog/conf.xml" , $paramListServerLog);

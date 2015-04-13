@@ -158,7 +158,7 @@ $GLOBALS['WEBCAM_RESOLUTION'] = array("320x240", "320x480", "400x300","480x360",
 $GLOBALS['WEBCAM_PALETTE'] = array("AUTO", "PNG","JPEG","MJPEG","S561","RGB32","RGB24","BGR32","BGR24","YUYV","UYVY","YUV420P","BAYER","SGBRG8","SGRBG8","RGB565","RGB555","Y16","GREY");
 
 // Software mode : cultipi or cultibox:
-$GLOBALS['MODE']="cultibox";
+$GLOBALS['MODE'] = "cultibox";
 
 // For cultipi : path to the conf (for windows : C:/cultibox/xampp/htdocs/cultibox)
 $GLOBALS['CULTIPI_CONF_PATH'] = "/etc/cultipi";
@@ -167,6 +167,44 @@ $GLOBALS['CULTIPI_CONF_TEMP_PATH'] = $GLOBALS['CULTIPI_CONF_PATH'] . "/conf_tmp"
 
 // Maximal number of webcam plugged:
 $GLOBALS['MAX_WEBCAM'] = 4;
+
+// ----------------- Cultipi config ----------------- 
+//Slave IP:
+$GLOBALS['CULTIPI']['USE_REMOTE_SLAVE'] = 0;
+
+// Remote sensors
+$GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] = 0;
+
+// Direct read
+$GLOBALS['CULTIPI']['USE_DIRECT_READ'] = 0;
+
+// Trace level for cultipi 
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['cultiPi']          = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']  = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverHisto']      = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']        = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate'] = "info";
+
+// -------------------------------------------------- 
+
+// Load user config file
+$directory_user_config = 'main/libs/user_config/';
+if (is_dir('../../libs/user_config/')) {
+    $directory_user_config = '../../libs/user_config/';
+}
+foreach (scandir($directory_user_config) as $user_config_file)
+{
+    $fileName = $directory_user_config . $user_config_file;
+    // Check if it's a php file 
+    if (is_file($fileName))
+    {
+        $info = new SplFileInfo($fileName);
+        if ($info->getExtension() == "php")
+        {
+            require_once($fileName);
+        }
+    }
+}
 
 ?>
 
