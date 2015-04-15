@@ -43,7 +43,7 @@ function check_db() {
             ."prise int(11) NOT NULL DEFAULT '0',"
             ."tempsOn int(11) NOT NULL DEFAULT '0',"
             ."tempsOff int(11) NOT NULL DEFAULT '0',"
-            ."active varchar(5) NOT NULL DEFAULT 'on',"
+            ."active varchar(5) NOT NULL DEFAULT 'true',"
             ."coef decimal(6,2) NOT NULL DEFAULT '1.0' );";
 
         // Create table
@@ -73,6 +73,7 @@ function check_db() {
     $plateforme_col["pompeName"]     = array ( 'Field' => "pompeName", 'Type' => "VARCHAR(20)", "default_value" => "pompe", 'carac' => "NOT NULL");
     $plateforme_col["pompePrise"]    = array ( 'Field' => "pompePrise", 'Type' => "int(11)", "default_value" => 1, 'carac' => "NOT NULL");
     $plateforme_col["active"]        = array ( 'Field' => "active", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
+    $plateforme_col["limitDesamorcagePompe"]        = array ( 'Field' => "limitDesamorcagePompe", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
     $plateforme_col["tempsPerco"]    = array ( 'Field' => "tempsPerco", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["tempsMaxRemp"]  = array ( 'Field' => "tempsMaxRemp", 'Type' => "int(11)", "default_value" => 300, 'carac' => "NOT NULL");
     $plateforme_col["priseDansLT"]    = array ( 'Field' => "priseDansLT", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
@@ -100,7 +101,8 @@ function check_db() {
             ."ip VARCHAR(16) NOT NULL DEFAULT '1',"
             ."pompeName varchar(20) NOT NULL DEFAULT 'pompe',"
             ."pompePrise int(11) NOT NULL DEFAULT '1',"
-            ."active varchar(5) NOT NULL DEFAULT 'on',"
+            ."active varchar(5) NOT NULL DEFAULT 'true',"
+            ."limitDesamorcagePompe varchar(5) NOT NULL DEFAULT 'true',"
             ."tempsPerco int(11) NOT NULL DEFAULT '0',"
             ."tempsMaxRemp int(11) NOT NULL DEFAULT '100',"
             ."priseDansLT int(11) NOT NULL DEFAULT '0' );";
@@ -152,7 +154,7 @@ function check_db() {
             ."ip VARCHAR(16) NOT NULL DEFAULT '1',"
             ."pompeName varchar(20) NOT NULL DEFAULT 'pompe',"
             ."pompePrise int(11) NOT NULL DEFAULT '1',"
-            ."irriActive varchar(5) NOT NULL DEFAULT 'on');";
+            ."irriActive varchar(5) NOT NULL DEFAULT 'true');";
 
         // Create table
         try {
@@ -175,6 +177,7 @@ function check_db() {
     $engrais_col["name"]          = array ( 'Field' => "name", 'Type' => "VARCHAR(10)", "default_value" => "engrais", 'carac' => "NOT NULL");
     $engrais_col["prise"]         = array ( 'Field' => "prise", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $engrais_col["active"]        = array ( 'Field' => "active", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
+    $engrais_col["engraisId"]     = array ( 'Field' => "engraisId", 'Type' => "int(11)", "default_value" => 1, 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_engrais';";
@@ -196,7 +199,8 @@ function check_db() {
             ."id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
             ."name varchar(20) NOT NULL DEFAULT 'engrais',"
             ."prise int(11) NOT NULL DEFAULT '1',"
-            ."active varchar(5) NOT NULL DEFAULT 'on');";
+            ."active varchar(5) NOT NULL DEFAULT 'true',"
+            ."engraisId int(11) NOT NULL DEFAULT '1');";
 
         // Create table
         try {
@@ -274,8 +278,8 @@ function loadUserConfig ()
     $engraisList = $GLOBALS['PLUGIN_irrigation']['localtechnique']['engrais'];
     foreach ($engraisList as $key => $engrais)
     {
-        $sql = "INSERT INTO irrigation_engrais (name, prise, active) VALUES"
-            . "('{$engrais['nom']}','{$engrais['prise']}','{$engrais['active']}');";
+        $sql = "INSERT INTO irrigation_engrais (name, prise, active, engraisId) VALUES"
+            . "('{$engrais['nom']}','{$engrais['prise']}','{$engrais['active']}','{$key}');";
         $sth = $db->prepare($sql);
         $sth->execute();
     }
@@ -458,11 +462,16 @@ function createXML () {
         }        
     }
     
-    $ltList = getEngrais();
-    foreach ($ltList as $k => $lt) {
-        foreach ($lt as $key => $value) {
+    $engraisList = getEngrais();
+    // We add number of engrais
+    $paramServerIrrigationXML[] = array (
+        "key" => "nbEngrais" ,
+        "value" => count($engraisList)
+    );
+    foreach ($engraisList as $k => $engrais) {
+        foreach ($engrais as $key => $value) {
             $paramServerIrrigationXML[] = array (
-                "key" => "engrais," . $lt["id"] . "," . $key,
+                "key" => "engrais," . $engrais["engraisId"] . "," . $key,
                 "value" => $value
             );
         }        
