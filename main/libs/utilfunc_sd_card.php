@@ -106,13 +106,9 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
             // Check if function exists
             if (function_exists($plugin . '\addInStartXMLCultiCore'))
             {
-                echo 'add it';
                 // Add parameters
                 $paramListCultipiStart[] = call_user_func($plugin . '\addInStartXMLCultiCore');                                        
-            } else {
-                echo 'doesnot it';
-                
-            }
+            } 
         }
         
         create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart);
