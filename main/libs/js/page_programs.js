@@ -163,12 +163,7 @@ $(document).ready(function(){
         get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()+"&program_index_id="+$("#select_program_index_conf option:selected").val()));
     });
 
-    $("#jumpto").click(function(e) {
-        e.preventDefault();
-        get_content("plugs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()+"&submenu="+$("#selected_plug option:selected").val()));
-    });
-
-     $("#reset_submit").click(function(e) {
+    $("#reset_submit").click(function(e) {
         e.preventDefault();
 
         var prog_reset="";
@@ -551,7 +546,7 @@ $(document).ready(function(){
                                 data_array['reset_old_program']=$("input[type='checkbox'][name='reset_old_program']:checked").val();
 
                                 $.blockUI({
-                                    message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                    message: "<?php echo __('SAVING_DATA'); ?>  <img src='main/libs/img/waiting_small.gif' />",
                                     centerY: 0,
                                     css: {
                                         top: '20%',
@@ -627,7 +622,7 @@ $(document).ready(function(){
                     data_array['reset_old_program']=$("input[type='checkbox'][name='reset_old_program']:checked").val();
 
                       $.blockUI({
-                             message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                             message: "<?php echo __('SAVING_DATA'); ?>  <img src='main/libs/img/waiting_small.gif' />",
                              centerY: 0,
                              css: {
                                 top: '20%',
@@ -991,7 +986,7 @@ var showzoomX=false;
 var chart;
 $(document).ready(function() {
   $.blockUI({
-   message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+   message: "<?php echo __('LOADING_DATA'); ?>  <img src='main/libs/img/waiting_small.gif' />",
    centerY: 0,
    css: {
       top: '20%',
@@ -1595,5 +1590,8 @@ $(document).ready(function() {
         });
     });
 });
+
+
+<?php include('page_plugs.js'); ?>
 
 </script>

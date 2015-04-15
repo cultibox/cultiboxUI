@@ -126,31 +126,6 @@ function expand(div) {
 // }}}
 
 
-
-
-// {{{ expand_plug()
-// ROLE expand or reduce submenu of the plug configuration menu
-// IN div: number of the plug menu to be expanded
-//    nb: number of plug to be checked 
-// HOW IT WORKS: get div id to be expanded reduced other menu
-// USED BY: templates/plugs.html
-function expand_plug(div,nb) {
-      for(i=1;i<=nb;i++) {
-            div_plug=document.getElementById('div_selected_plug'+i)
-            div_label=document.getElementById('div_plug'+i);
-            if(div==i) {
-                    div_plug.style.display = "";
-                    div_label.style.color="#6E8915";
-                    
-            } else {
-                   div_plug.style.display = "none"; 
-                   div_label.style.color="black";
-            }
-            document.getElementById('submenu').value = div;
-      }
-}
-
-
 // {{{ expand_wizard()
 // ROLE expand or reduce submenu of the wizard menu
 // IN step: number of the step to be expanded

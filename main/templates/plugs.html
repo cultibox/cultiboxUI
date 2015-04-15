@@ -1,39 +1,13 @@
-<script>
-   $("[title]").tooltip({ position: { my: "left+15 center", at: "right center" } });
-   $(".href-wizard-msgbox").click(function(e) {
-       e.preventDefault();
-       get_content("wizard");
-   });
-</script>
+<div id="plugs_dialog" style="display:none">
+    <div id="div_plug_tabs">
+        <ul id="plug_tabs">
+            <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
+                <li><a href="#div_selected_plug<?php echo $i; ?>"><?php echo $plugs_infos[$i-1]['PLUG_NAME']; ?></a></li>
+            <?php } ?>
+        </ul>
 
-<br />
 <form action="/cultibox/index.php?menu=plugs" method="post" name="plugForm" id="plugForm">
     <input type="hidden" id="submenu" name="submenu" value="<?php echo $submenu; ?>" />
-    <p class="title_conf"><?php echo __('PLUG'); ?></p>
-    <br />
-    <table class="table_width">
-        <tr>
-            <td class="conf-menu-marge-plug"></td>
-            <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
-                <td class="menu-plug-item">
-                    <button id="div_plug<?php echo $i; ?>" class="menu_h1 <?php if(strcmp("$selected_plug","$i")==0) echo 'plug_menu_active'; ?>" onclick="expand_plug(<?php echo $i; ?>,<?php echo $nb_plugs; ?>); return false;"><?php echo $plugs_infos[$i-1]['PLUG_NAME']; ?></button>
-                </td>
-                <?php if($i%3==0) { ?>
-                    <td class="conf-menu-marge-plug"></td></tr><tr><td class="conf-menu-marge-plug"></td>
-                <?php }
-            } ?>
-
-            <?php $tmp_cnt=$nb_plugs % 3;
-            for($i=0;$i<3-$tmp_cnt;$i++) { ?>
-                <td></td>
-            <?php } ?>
-
-            <td class="conf-menu-marge-plug"></td>
-        </tr>
-    </table>
-    <br />
-    <hr />
-    <br />
     <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
         <div id="div_selected_plug<?php echo $i; ?>" style="<?php if($submenu != $i) echo 'display:none'; ?>">
             <br />
@@ -393,52 +367,20 @@
                                 <div id="error_second_tolerance_value_humi<?php echo $i; ?>" class='error_field' style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_TOLERANCE_VALUE_POURCENT','html'); ?></div>
                             </td>
                         </tr>
-
                     </table>
                 </div>
             </div>
             <br />
             <hr />
             <br />
-            <table class="table_width">
-                <tr>
-                    <td class="program-button">
-                        <button class="jumpto" name="jump_wizard<?php echo $i; ?>"  id="jump_wizard<?php echo $i; ?>">
-                            <?php echo __('JUMPTO_WIZARD'); ?>
-                        </button>
-                    </td>
-                    <td class="program-button">
-                        <input type="hidden" name="reccord" value="<?php echo __('VALIDATION_PLUG_CONF'); ?>">
-                        <div id="button_program<?php echo $i;?>">
-                            <button class="jumpto" name="jumpto<?php echo $i; ?>" id="jumpto<?php echo $i; ?>"  onclick='addHidden(document.forms["plugForm"], "<?php echo $i; ?>","jumpto");'>
-                                <?php echo __('SAVE_AND_CONFIGURE_PROGRAM').": $i"; ?>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-            <div id="format_style<?php echo $i; ?>" style="display:none">
-                <br />
-                <hr />
-                <br />
-            </div>
         </div>
 
     <?php } ?>
     <br />
     <br />
     <input type="hidden" name="submit_plugs" id="submit_plugs" value="submit_plugs">
-    <table class="table_width">
-        <tr>
-            <td></td>
-            <td class="program-valid-right">
-                <input type="submit" name="reccord" id="reccord_plugs" value="<?php echo __('VALIDATION_PLUG_CONF'); ?>">
-            </td>
-            <td></td>
-        </tr>
-    </table>
 </form>
+</div>
 
 
 <div id="warning_change_type_plug" style="display:none" title="<?php echo __('CONFIRMATION'); ?>">
@@ -454,4 +396,4 @@
     <p><?php echo __('ERROR_UPDATE_CONF'); ?></p>
 </div>
 
-<script>expand_plug("<?php echo $submenu.','.$nb_plugs; ?>");</script>
+<script>$('#div_plug_tabs').tabs('select', <?php echo $submenu-1; ?>);</script>

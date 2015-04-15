@@ -63,7 +63,7 @@ if(!isset($end_time)) {
 
 
 // Get configuration value
-$second_regul        = get_configuration("SECOND_REGUL",$main_error);
+$second_regul=get_configuration("ADVANCED_REGUL_OPTIONS",$main_error);
 $remove_1000_change_limit = get_configuration("REMOVE_1000_CHANGE_LIMIT",$main_error);
 $remove_5_minute_limit    = get_configuration("REMOVE_5_MINUTE_LIMIT",$main_error);
 
@@ -199,6 +199,8 @@ if(count($tmp_resume)>0) {
 if((strcmp($regul_program,"on")==0)||(strcmp($regul_program,"off")==0)) {
     $value_program="";
 } 
+
+require_once('plugs.php');
 
 //Compute time loading for debug option
 $end_load = getmicrotime();

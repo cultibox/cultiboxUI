@@ -173,6 +173,10 @@ td.log-div-margin-param {
     width: 2%;
 }
 
+td.log-tooltip {
+    width: 50%;
+}
+
 
 td.log-marge-day-main {
    width: 12%;
@@ -1084,3 +1088,11 @@ p.p_date_creation {
     font-style: italic;
     padding-left: 40px;
 }
+
+
+#div_plug_tabs { border:0; }
+
+.tabs-dialog .ui-dialog .ui-dialog-content, .ui-tabs { padding:0; }
+.tabs-dialog .ui-dialog-titlebar { display:none };
+
+

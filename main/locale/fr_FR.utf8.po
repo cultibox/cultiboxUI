@@ -15,11 +15,8 @@ msgstr "Configuration"
 msgid "MENU_LOGS"
 msgstr "Logs"
 
-msgid "MENU_PLUGS"
-msgstr "Prises"
-
 msgid "MENU_PROGS"
-msgstr "Programmes"
+msgstr "Prises"
 
 msgid "MENU_COST"
 msgstr "Coût"
@@ -34,7 +31,7 @@ msgid "MENU_HELP"
 msgstr "Ouvrir la documentation"
 
 msgid "MENU_CULTIPI"
-msgstr "Cultipi"
+msgstr "En direct"
 
 msgid "MENU_WEBCAM"
 msgstr "Webcam"
@@ -92,7 +89,7 @@ msgid "WELCOME_CALENDAR"
 msgstr "Page de programmation du calendrier de culture"
 
 msgid "WELCOME_PROGRAM"
-msgstr "Page de création et visualisation des programmes des prises"
+msgstr "Page de configuration des prises et de leurs fonctionnements"
 
 msgid "ENABLE_JAVASCRIPT"
 msgstr "Javascript est désactivé! Vous ne pourrez pas utiliser le logiciel et toutes ses fonctionnalités si vous n'activez pas Javascript."
@@ -1754,6 +1751,9 @@ msgstr "<b>Options avancées du calendrier:</b> gestion de l'affichage des fichi
 
 msgid "TOOLTIP_PARAMETERS_PROGRAM"
 msgstr "<b>Options avancées des programmes:</b> export ou import d'un programme, remise à zéro des programmes, ajout ou suppréssion de prises"
+
+msgid "TOOLTIP_PARAMETERS_PLUGS"
+msgstr "<b>Options avancées des prises:</b> nom des prises, tolérance, régulation..."
 
 msgid "TOOLTIP_PARAMETERS_LOGS"
 msgstr "<b>Options des courbes:</b> configurer la couleur des courbes"

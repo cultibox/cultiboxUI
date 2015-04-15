@@ -416,11 +416,6 @@ $(document).ready(function() {
        get_content("logs",get_array);
     });
 
-    $(".href-plugs").click(function(e) {
-       e.preventDefault();
-       get_content("plugs",get_array);
-    });
-
     $(".href-programs").click(function(e) {
        e.preventDefault();
        get_content("programs",get_array);
