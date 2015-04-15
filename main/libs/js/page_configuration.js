@@ -1417,7 +1417,7 @@ $(document).ready(function() {
     });
 
 
-    $("#submit_conf").click(function(e) {
+    $("#submit_conf_network").click(function(e) {
       e.preventDefault();
 
 

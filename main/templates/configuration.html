@@ -21,6 +21,12 @@
             <td>
                 <button id="div_card_label" <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) echo 'style="display:none" '; ?>class="menu_h1" onclick="expand('card_interface'); return false;"><?php echo __('CONFIGURE_CARD'); ?></button>
             </td>
+             <td <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { echo 'class="center_menu" '; } else { echo 'style="display:none" '; } ?>>
+                <button id="div_network_label" class="menu_h1" onclick="expand('network_conf_ui'); return false;"><?php echo __('CULTIPI_NETWORK_CONF'); ?></button>
+            </td>
+            <td <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { echo 'class="center_menu" '; } else { echo 'style="display:none" '; } ?>>
+                <button id="div_admin_label" class="menu_h1" onclick="expand('admin_ui'); return false;"><?php echo __('CULTIPI_ADMIN'); ?></button>
+            </td>
             <td class="conf-menu-marge"></td>
         </tr>
     </table>    
@@ -478,7 +484,7 @@
 <hr />
 <br />
 <p class="p_center">
-    <input type="submit" id="submit_conf" name="submit_conf" value="<?php echo __('SAVE_CONF'); ?>">
+    <input type="submit" id="submit_conf_network" name="submit_conf_network" value="<?php echo __('SAVE_CONF'); ?>">
 </p>
 </form>
 <br />

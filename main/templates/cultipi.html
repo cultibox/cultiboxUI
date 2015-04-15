@@ -8,24 +8,6 @@
     cultipi\check_db();
 ?>
 
-<br />
-<table class="table_width">
-    <tr>    
-        <td class="conf-menu-marge"></td>
-        <td class="center_menu" >
-            <button id="div_synoptic_label" class="cultipi_menu_h1" onclick="expand('synoptic_ui'); return false;"><?php echo __('CULTIPI_SYNOPTIC'); ?></button>
-        </td>
-        <td class="center_menu" >
-            <button id="div_network_label" class="cultipi_menu_h1" onclick="expand('network_conf_ui'); return false;"><?php echo __('CULTIPI_NETWORK_CONF'); ?></button>
-        </td>
-        <td class="center_menu" >
-            <button id="div_admin_label" class="cultipi_menu_h1" onclick="expand('admin_ui'); return false;"><?php echo __('CULTIPI_ADMIN'); ?></button>
-        </td>
-       <td class="conf-menu-marge"></td>
-    </tr>
-</table> 
-<br />
-
 <!-- Section synoptic -->
 <div id="div_synoptic_ui" style="">
     <!-- Display buttons -->
@@ -456,6 +438,3 @@
 
     <?php } ?>
 </div>
-
-<script>expand("<?php echo $submenu; ?>");</script>
-
