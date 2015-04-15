@@ -19,6 +19,14 @@ require_once('main/libs/config.php');
 require_once('main/libs/db_get_common.php');
 require_once 'main/libs/utilfunc.php';
 
+// Load every plugins 
+foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+    $fileName = 'main/plugin/' . $plugin . '/lib_' . $plugin . '.php';
+    if (is_file($fileName)) 
+    {
+        require_once $fileName;
+    }
+}
 
 //Set lang:
 if((isset($_COOKIE['LANG']))&&(!empty($_COOKIE['LANG']))) {
@@ -160,6 +168,18 @@ check_database();
                             <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
                                     <li id="menu-cultipi" class="level1 item164"><a href="/cultibox/index.php?menu=cultipi" class="level1 href-cultipi" ><span><?php echo __('MENU_CULTIPI'); ?></span></a></li>
                             <?php } ?>
+                            
+                            <?php
+                                // If there are some plugins to show in menu, display it 
+                                foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+                                    
+                                    // Check if function exists
+                                    if (function_exists($plugin . '\addInMenu'))
+                                    {
+                                        call_user_func($plugin . '\addInMenu');                                        
+                                    }
+                                }
+                            ?>
                    </ul>
             </div>               
 

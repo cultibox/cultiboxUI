@@ -277,36 +277,39 @@ function get_content(page,get_array) {
    $(".ui-dialog-content").not('.message').dialog('destroy').remove();
 
    $.blockUI({
-            message: LOADING+" <img src=\"main/libs/img/waiting_small.gif\" />",
-            centerY: 0,
-            css: {
-                top: '20%',
-                border: 'none',
-                padding: '5px',
-                backgroundColor: 'grey',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                opacity: .9,
-                color: '#fffff'
-            },
-            onBlock: function() {
-                $.ajax({
-                    cache: false,
-                    async: false,
-                    url: "main/modules/external/get_content.php",
-                    data: {page:page, get_array:JSON.stringify(get_array)}
-                }).done(function (data) {
-                    //Some odd chars appear when including php files due to echo include that returns true value, removing them:
-                    $("#content").html(data);
-                    $("#content").load();
-                    active_menu(page);
+        message: LOADING+" <img src=\"main/libs/img/waiting_small.gif\" />",
+        centerY: 0,
+        css: {
+            top: '20%',
+            border: 'none',
+            padding: '5px',
+            backgroundColor: 'grey',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .9,
+            color: '#fffff'
+        },
+        onBlock: function() {
+            $.ajax({
+                cache: false,
+                async: false,
+                url: "main/modules/external/get_content.php",
+                data: {
+                    page:page,
+                    get_array:JSON.stringify(get_array)
+                }
+            }).done(function (data) {
+                //Some odd chars appear when including php files due to echo include that returns true value, removing them:
+                $("#content").html(data);
+                $("#content").load();
+                active_menu(page);
 
-                    //Logs hav a special behaviour: interface is unlocked after graph is loaded.
-                    if(page!="logs") {
-                        $.unblockUI();
-                    }
-                });
-            }
+                //Logs hav a special behaviour: interface is unlocked after graph is loaded.
+                if(page!="logs") {
+                    $.unblockUI();
+                }
+            });
+        }
     });
 }
 
@@ -450,7 +453,7 @@ $(document).ready(function() {
        e.preventDefault();
        get_content("cultipi",get_array);
     });
-    
+
     //To deal with dynamic content with href in message box
     $('div.error').on('click', 'a', function(e) {
         e.preventDefault();

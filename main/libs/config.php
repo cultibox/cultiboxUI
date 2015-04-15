@@ -187,6 +187,11 @@ $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate'] = "info";
 
 // -------------------------------------------------- 
 
+
+// ----------------- Plugin ----------------- 
+$GLOBALS['PLUGIN'] = array();
+
+
 // Load user config file
 $directory_user_config = 'main/libs/user_config/';
 if (is_dir('../../libs/user_config/')) {
