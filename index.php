@@ -159,8 +159,6 @@ check_database();
 
                             <li id="menu-logs"><a href="/cultibox/index.php?menu=logs" class="level1 href-logs"><span><?php echo __('MENU_LOGS'); ?></span></a></li>
 
-                            <li id="menu-plugs"><a href="/cultibox/index.php?menu=plugs" class="level1 href-plugs"><span><?php echo __('MENU_PLUGS'); ?></span></a></li>
-
                             <li id="menu-programs"><a href="/cultibox/index.php?menu=programs" class="level1 href-programs"><span><?php echo __('MENU_PROGS'); ?></span></a></li>
 
                             <li id="menu-calendar"><a href="/cultibox/index.php?menu=calendar" class="level1 href-calendar"><span><?php echo __('MENU_CAL'); ?></span></a></li>

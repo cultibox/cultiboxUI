@@ -741,7 +741,7 @@ $(function () {
                         }
 
                         if(valueToTidsplay==null) valueToTidsplay="N/A";
-                        s += '<td><font color="' + serie.yAxis.userOptions.labels.style.color + '">' + serie.options.name + ' : '+ valueToTidsplay + " " + serie.options.tooltip.valueSuffix + '</font></td>';
+                        s += '<td class="log-tooltip"><font color="' + serie.yAxis.userOptions.labels.style.color + '">' + serie.options.name + ' : '+ valueToTidsplay + " " + serie.options.tooltip.valueSuffix + '</font></td>';
                         if(count%2===0) s=s+"</tr><tr>";
                     });
 
@@ -750,13 +750,17 @@ $(function () {
                     var position="";
                     if($("#data_logs").is(':visible')) { 
                         var position=$("#data_logs").offset();
+                        $("#data_logs").dialog("widget").position({
+                            position
+                        });
+                        $("#data_logs").dialog({
+                            title: '<b>'+Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'</b>'
+                        });
                     } else {
                         var position='right top';
-                    }
-
-                    $("#data_logs").dialog({
+                        $("#data_logs").dialog({
                         resizable: true,
-                        width: 700,
+                        width: 550,
                         modal: false,
                         closeOnEscape: false,
                         dialogClass: "popup_message",
@@ -768,18 +772,13 @@ $(function () {
                                 $(this).dialog('close');
                             }
                         }]
-                    });
-
-                    if(position!='right top') {
-                        $("#data_logs").dialog("widget").position({
-                            position
                         });
-                    } else {
+
                         $("#data_logs").dialog({
                             position: position
                         });
                     }
-                    
+
                     return false;
                 }
             },

@@ -1,18 +1,5 @@
-<script>
-<?php
-    if((isset($sd_card))&&(!empty($sd_card))) {
-        echo "sd_card = " . json_encode($sd_card) ;
-    } else {
-        echo 'sd_card = ""';
-    }
-?>
-
-
-sensors        = <?php echo json_encode($GLOBALS['NB_MAX_SENSOR_PLUG']) ?>;
-nb_plugs       = <?php echo json_encode($nb_plugs) ?>;
-plugs_infoJS   = <?php echo json_encode($plugs_infos); ?>;
-var main_error = <?php echo json_encode($main_error); ?>;
-var main_info = <?php echo json_encode($main_info); ?>;
+var sensors  = <?php echo json_encode($GLOBALS['NB_MAX_SENSOR_PLUG']); ?>;
+var nb_plugs = <?php echo json_encode($nb_plugs); ?>;
 var plug_alert_change= {};
 
 // {{{ getTolerance()
@@ -166,19 +153,6 @@ function getRegul(i,j) {
 
 
 $(document).ready(function(){
-     pop_up_remove("main_error");
-     pop_up_remove("main_info");
-
-    // For each information, show it
-    $.each(main_error, function(key, entry) {
-            pop_up_add_information(entry,"main_error","error");
-    });
-
-    // For each information, show it
-    $.each(main_info, function(key, entry) {
-            pop_up_add_information(entry,"main_info","information");
-    });
-
     // Update informations shows
     <?php
         for($i=1;$i<=$nb_plugs;$i++) {
@@ -191,23 +165,6 @@ $(document).ready(function(){
     ?>
     
     
-    
-    pop_up_add_information("<?php echo __('WIZARD_ENABLE_FUNCTION'); ?>: <a href='/cultibox/index.php?menu=wizard' class='href-wizard-msgbox'><img src='main/libs/img/wizard.png' alt='<?php echo __('WIZARD'); ?>' title='' id='wizard' /></a>", "jumpto_wizard", "information");
-
-    if(sd_card=="") {
-        $.ajax({
-            cache: false,
-            async: false,
-            url: "main/modules/external/set_variable.php",
-            data: {name:"LOAD_LOG", value: "False", duration: 36000}
-        });
-    }
-
-    $("#wizard").click(function(e) {
-        e.preventDefault();
-        get_content("wizard",getUrlVars("selected_plug=1"));
-    });
-
      $('select[id^="plug_sensor"]').change(function () {
         //Récupération du numéro de la prise en cours d'édition. L'information est contenue dans l'id de l'élément, on découpe donc l'id pour récupérer l'information
         var plug = $(this).attr('id').substring(11,12);
@@ -346,93 +303,106 @@ $(document).ready(function(){
         }
     });
 
-    // Check errors for the plugs part on submit:
-    $("#reccord_plugs, [id^='jumpto']").click(function(e) { 
-        var button_click=$(this).attr('id');
+    $('#div_plug_tabs').tabs();
+    // Display and control user form for settings
+
+    $("#plug_settings").click(function(e) {
         e.preventDefault();
-        var checked=true;
-        var jump_plug=1;
+        $('#div_plug_tabs').tabs('select', $("#selected_plug option:selected").val()-1);
+        var width=Math.round($(window).width()-($(window).width()*10/100));
+        $("#plugs_dialog").dialog({
+            resizable: true,
+            width: width,
+            modal: true,
+            closeOnEscape: true,
+            dialogClass: "tabs-dialog",
+            buttons: [{
+                text: SAVE_button,
+                "id": "btnClose",
+                click: function () {
+                    var checked=true;
+                    var jump_plug=0;
 
-        for(i=1;i<=nb_plugs;i++) {
+                    for(i=1;i<=nb_plugs;i++) {
 
-            $("#error_power_value"+i).css("display","none");
-            $("#error_tolerance_value_humi"+i).css("display","none");
-            $("#error_tolerance_value_temp"+i).css("display","none");
-            $("#error_tolerance_value_water"+i).css("display","none");
-            $("#error_second_tolerance_value_humi"+i).css("display","none");
-            $("#error_second_tolerance_value_temp"+i).css("display","none");
-            $("#error_regul_value"+i).css("display","none");
+                        $("#error_power_value"+i).css("display","none");
+                        $("#error_tolerance_value_humi"+i).css("display","none");
+                        $("#error_tolerance_value_temp"+i).css("display","none");
+                        $("#error_tolerance_value_water"+i).css("display","none");
+                        $("#error_second_tolerance_value_humi"+i).css("display","none");
+                        $("#error_second_tolerance_value_temp"+i).css("display","none");
+                        $("#error_regul_value"+i).css("display","none");
 
-            if($("#power_value"+i).val()) {
-                //Check power value:
-                $.ajax({
-                        cache: false,
-                        async: false,
-                        url: "main/modules/external/check_value.php",
-                        data: {
-                            value:$("#power_value"+i).val(),
-                            type:'numeric'
+                        if($("#power_value"+i).val()) {
+                            //Check power value:
+                            $.ajax({
+                                cache: false,
+                                async: false,
+                                url: "main/modules/external/check_value.php",
+                                data: {
+                                    value:$("#power_value"+i).val(),
+                                    type:'numeric'
+                                }
+                            }).done(function(data) {
+                                if(data!=1) {
+                                    $("#error_power_value"+i).show(700);
+                                    checked=false;
+                                    jump_plug=i-1;
+                                }
+                            });
                         }
-                    }).done(function(data) {
-                        if(data!=1) {
-                            $("#error_power_value"+i).show(700);
-                            checked=false;
-                            jump_plug=i;
-                        }
-                });
-            }
 
 
-            //Check tolerance value
-            if($("#plug_type"+i).val()=="heating" ||
-               $("#plug_type"+i).val()=="humidifier" ||
-               $("#plug_type"+i).val()=="dehumidifier" ||
-               $("#plug_type"+i).val()=="ventilator" || 
-               $("#plug_type"+i).val()=="pump" || 
-               $("#plug_type"+i).val()=="extractor" || 
-               $("#plug_type"+i).val()=="intractor" || 
-               $("#plug_type"+i).val()=="pumpfiling" || 
-               $("#plug_type"+i).val()=="pumpempting")
-            {
-                if($("#plug_tolerance"+i).val()=="0" || $("#plug_tolerance"+i).val()=="" )
-                {
-                   $("#plug_tolerance"+i).val('0'); 
-                } else { 
-                    $("#plug_tolerance"+i).val($("#plug_tolerance"+i).val().replace(",","."));
-                    $.ajax({
-                        cache: false,
-                        async: false,
-                        url: "main/modules/external/check_value.php",
-                        data: {
-                            value:$("#plug_tolerance"+i).val(),
-                            type:'tolerance',
-                            plug: $("#plug_type"+i).val()
-                        }
-                    }).done(function(data) {
-                        if(data!=1) {
-                            switch ($("#plug_type"+i).val()) {
-                                case 'humidifier' :
-                                case 'dehumidifier' :
-                                    $("#error_tolerance_value_humi"+i).show(700);
-                                    break;
-                                case 'extractor' :
-                                case 'intractor' :
-                                case 'ventilator' :
-                                case 'heating' :
-                                    $("#error_tolerance_value_temp"+i).show(700);
-                                    break;
-                                case 'pumpfiling' :
-                                case 'pumpempting' :
-                                case 'pump' :
-                                    $("#error_tolerance_value_water"+i).show(700);
-                                    break;
+                        //Check tolerance value
+                        if($("#plug_type"+i).val()=="heating" ||
+                        $("#plug_type"+i).val()=="humidifier" ||
+                        $("#plug_type"+i).val()=="dehumidifier" ||
+                        $("#plug_type"+i).val()=="ventilator" || 
+                        $("#plug_type"+i).val()=="pump" || 
+                        $("#plug_type"+i).val()=="extractor" || 
+                        $("#plug_type"+i).val()=="intractor" || 
+                        $("#plug_type"+i).val()=="pumpfiling" || 
+                        $("#plug_type"+i).val()=="pumpempting")
+                        {
+                            if($("#plug_tolerance"+i).val()=="0" || $("#plug_tolerance"+i).val()=="" )
+                            {
+                                $("#plug_tolerance"+i).val('0'); 
+                            } else { 
+                                $("#plug_tolerance"+i).val($("#plug_tolerance"+i).val().replace(",","."));
+                                $.ajax({
+                                    cache: false,
+                                    async: false,
+                                    url: "main/modules/external/check_value.php",
+                                    data: {
+                                        value:$("#plug_tolerance"+i).val(),
+                                        type:'tolerance',
+                                        plug: $("#plug_type"+i).val()
+                                    }
+                                }).done(function(data) {
+                                    if(data!=1) {
+                                        switch ($("#plug_type"+i).val()) {
+                                            case 'humidifier' :
+                                            case 'dehumidifier' :
+                                                $("#error_tolerance_value_humi"+i).show(700);
+                                                break;
+                                            case 'extractor' :
+                                            case 'intractor' :
+                                            case 'ventilator' :
+                                            case 'heating' :
+                                                $("#error_tolerance_value_temp"+i).show(700);
+                                                break;
+                                            case 'pumpfiling' :
+                                            case 'pumpempting' :
+                                            case 'pump' :
+                                                $("#error_tolerance_value_water"+i).show(700);
+                                                break;
+                                        }
+
+                                        checked=false;
+                                        jump_plug=i-1;
+                                    }
+                                });
                             }
-
-                            checked=false;
-                            jump_plug=i;
-                        }
-                    });
-                }
 
 
                 //Check the second regul values:
@@ -471,7 +441,7 @@ $(document).ready(function(){
                                 }
 
                                 checked=false;
-                                jump_plug=i;
+                                jump_plug=i-1;
                             }
                         });
                     } 
@@ -480,7 +450,7 @@ $(document).ready(function(){
                     if(($("#plug_regul_value"+i).val()=="0")||($("#plug_regul_value"+i).val()=="")) {
                         $("#error_regul_value"+i).show(700);
                         checked=false;
-                        jump_plug=i;
+                        jump_plug=i-1;
                     } else {
                         $("#plug_regul_value"+i).val($("#plug_regul_value"+i).val().replace(",","."));
                         $.ajax({
@@ -492,7 +462,7 @@ $(document).ready(function(){
                             if(data!=1) {
                                 $("#error_regul_value"+i).show(700);
                                 checked=false;
-                                jump_plug=i;
+                                jump_plug=i-1;
                             }
                         });
                     }
@@ -522,7 +492,7 @@ $(document).ready(function(){
                             $("#error_select_sensor"+i).show();
                             $("#plug_sensor"+i+"1 option[value='True']").prop('selected', 'selected');
                             checked=false;
-                            jump_plug=i;
+                            jump_plug=i-1;
                         } else {
                             // On efface le message d'erreur sinon
                             $("#error_select_sensor"+i).css("display","none");
@@ -656,11 +626,7 @@ $(document).ready(function(){
                                     });
 
 
-                                    if(button_click.toLowerCase().indexOf("jumpto") >= 0) {
-                                        get_content("programs",getUrlVars("selected_plug="+$("#submenu").val()));
-                                    } else {
-                                        get_content("plugs",getUrlVars("selected_plug="+$("#submenu").val()+"&submenu="+$("#submenu").val()));
-                                    }
+                                    get_content("programs",getUrlVars("selected_plug="+$("#submenu").val()));
                                 }
                             }]
                         });
@@ -676,8 +642,8 @@ $(document).ready(function(){
                             buttons: [{
                                 text: CLOSE_button,
                                 click: function () {
-                                    $( this ).dialog( "close" );
-                                    get_content("plugs",getUrlVars("selected_plug=1"));
+                                    $( this ).dialog( "close" );    
+                                    get_content("programs",getUrlVars("selected_plug="+$("#submenu").val()));
                                 }
                             }]
                         });
@@ -685,13 +651,17 @@ $(document).ready(function(){
                 }
             });
         } else {
-            expand_plug(jump_plug,<?php echo $nb_plugs; ?>);
+            $('#div_plug_tabs').tabs('select', jump_plug);
         }
-    });
-
-    $('[id^="jump_wizard"]').click(function(e) {
-        e.preventDefault();
-        get_content("wizard",getUrlVars("selected_plug="+$(this).attr("id").replace("jump_wizard","")));
+                }
+            },{
+                text: CLOSE_button,
+                "id": "btnClose",
+                click: function () {
+                    $( this ).dialog( "close" );
+                    return false;
+                }
+            }],
+        });
     });
 });
-</script>
