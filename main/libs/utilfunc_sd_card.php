@@ -1969,6 +1969,10 @@ function check_sd_card($sd="") {
 // RET true if we can, false else
 function create_conf_XML($file, $paramList) {
 
+    // Check if directory exists
+    if(!is_dir(dirname($file)))
+        mkdir(dirname($file));
+
     // Open in write mode
     $fid = fopen($file,"w+");
     

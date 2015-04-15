@@ -7,6 +7,81 @@
     Programmation
 </div>
 
+<h2>Action </h2>
+<button type="button" id="reload" >Recharger template</button> 
+<button type="button" id="save" >Sauvegarder</button> 
+<button type="button" id="applyConf" >Appliquer les valeurs sauvegardées</button> 
 
+<!-- Display every parameters for plateform-->
+<?php 
+
+
+// Les infos pour le local technique
+$localtechnique = irrigation\getLT();
+$engraisList = irrigation\getEngrais();
+echo '<h2>' . $localtechnique[0]['name'] . '</h2>';
+echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th></tr><tr>';
+echo '<td><input type="text" id="ip_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="20" size="10" value="' . $localtechnique[0]['ip'] . '" > </td>';
+echo '<td><input type="text" id="pompeName_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="20" size="10" value="' . $localtechnique[0]['pompeName'] . '" > </td>';
+echo '<td><input type="text" id="pompePrise_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="4" size="4" value="' . $localtechnique[0]['pompePrise'] . '" > </td>';
+$checked = "";
+if ($localtechnique[0]['irriActive'] == "true")
+    $checked = "checked";
+echo '<td><input type="checkbox" id="irriActive_localtechnique_' . $localtechnique[0]['id'] . '" ' . $checked . ' > </td>';
+echo '</tr></table>';
+
+echo '<label>Sélection des engrais </label><br />';
+foreach ($engraisList as $key => $engrais)
+{
+    $checked = "";
+    if ($engrais['active'] == "true")
+        $checked = "checked";
+    echo $engrais['name'] . ' : <input type="checkbox" id="valid_engrais_' . $engrais['id'] . '" ' . $checked . ' > ' ;
+}
+
+$plateformeList = irrigation\getPlateforme();
+foreach ($plateformeList as $key => $plateforme) 
+{
+    // Display name
+    echo '<h2>Plateforme : ' . $plateforme['name'] . ' </h2>';
+    
+    echo '<p>Paramètres de la plateforme : </p>';
+    echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th> <th>tempsPerco</th> <th>Temps Max Remplissage</th> <th>Prise dans LT</th></tr><tr>';
+    echo '<td><input type="text" id="ip_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['ip'] . '" > </td>';
+    echo '<td><input type="text" id="pompeName_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['pompeName'] . '" > </td>';
+    echo '<td><input type="text" id="pompePrise_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['pompePrise'] . '" > </td>';
+    $checked = "";
+    if ($plateforme['active'] == "true")
+        $checked = "checked";
+    echo '<td><input type="checkbox" id="active_plateforme_' . $plateforme['id'] . '" ' . $checked . ' > </td>';
+    echo '<td><input type="text" id="tempsPerco_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPerco'] . '" > </td>';
+    echo '<td><input type="text" id="tempsMaxRemp_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRemp'] . '" > </td>';
+    echo '<td><input type="text" id="priseDansLT_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseDansLT'] . '" > </td>';
+    echo '</tr></table>';
+
+    echo '<p>Paramètres des zones : </p>';
+    // Display parameters for each zone
+    echo '<table border="1" > <tr> <th>Zone</th> <th>prise</th> <th>Temps On</th> <th>Temps Off</th>';
+    echo '<th>Active</th> <th>Coef temp</th> </tr>';
+    $zoneList = irrigation\getZone($plateforme['idPlateforme']); 
+    foreach ($zoneList as $key => $zone)
+    {
+        echo '<tr>';
+        echo '<td><input type="text" id="name_zone_' . $zone['id'] . '" maxlength="20" size="10" value="' . $zone['name'] . '" > </td>';
+        echo '<td><input type="text" id="prise_zone_' . $zone['id'] . '" maxlength="20" size="10" value="' . $zone['prise'] . '" > </td>';
+        echo '<td><input type="text" id="tempsOn_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOn'] . '" > </td>';
+        echo '<td><input type="text" id="tempsOff_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOff'] . '" > </td>';
+        $checked = "";
+        if ($zone['active'] == "true")
+            $checked = "checked";
+        echo '<td><input type="checkbox" id="active_zone_' . $zone['id'] . '" ' . $checked . ' > </td>';
+        echo '<td><input type="text" id="coef_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['coef'] . '" > </td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+
+}
+
+?>
 
 
