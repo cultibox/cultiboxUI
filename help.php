@@ -19,6 +19,14 @@ require_once('main/libs/config.php');
 require_once('main/libs/db_get_common.php');
 require_once 'main/libs/utilfunc.php';
 
+// Load every plugins 
+foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+    $fileName = 'main/plugin/' . $plugin . '/lib_' . $plugin . '.php';
+    if (is_file($fileName)) 
+    {
+        require_once $fileName;
+    }
+}
 
 //Set lang:
 if((isset($_COOKIE['LANG']))&&(!empty($_COOKIE['LANG']))) {
@@ -69,14 +77,16 @@ $cost=get_configuration("SHOW_COST");
     <script type="text/javascript" src="/cultibox/main/libs/js/exporting.js?v=<?=@filemtime('main/libs/js/exporting.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery-ui-timepicker-addon.js?v=<?=@filemtime('main/libs/js/jquery-ui-timepicker-addon.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.colourPicker.js?v=<?=@filemtime('main/libs/js/jquery.colourPicker.js')?>"></script>
+    <script type="text/javascript" src="/cultibox/main/libs/js/cultibox.js?v=<?=@filemtime('main/libs/js/cultibox.js')?>"></script>
+    <script type="text/javascript" src="/cultibox/main/libs/js/cultibox-utils.js?v=<?=@filemtime('main/libs/js/cultibox-utils.js')?>"></script>
+    <script type="text/javascript" src="/cultibox/main/libs/js/fullcalendar.js?v=<?=@filemtime('main/libs/js/fullcalendar.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.blockUI.js?v=<?=@filemtime('main/libs/js/jquery.blockUI.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/scrollTo.js?v=<?=@filemtime('main/libs/js/scrollTo.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/fileDownload.js?v=<?=@filemtime('main/libs/js/fileDownload.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/jquery.ui.datepicker-<?php echo substr($_COOKIE['LANG'], 0 , 2); ?>.js?v=<?=@filemtime('main/libs/js/jquery.ui.datepicker-'.substr($_COOKIE['LANG'], 0 , 2).'.js')?>"></script>
     <script type="text/javascript" src="/cultibox/main/libs/js/fileUpload.js?v=<?=@filemtime('main/libs/js/fileUpload.js')?>"></script>
-    <script type="text/javascript" src="/cultibox/main/libs/js/r.js"></script>
-    
 </head>
+
 
 <body id="page" class="page">
     <div id="diff_conf" style="display:none">
@@ -147,13 +157,25 @@ $cost=get_configuration("SHOW_COST");
                             <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
                                     <li id="menu-cultipi" class="level1 item164"><a href="/cultibox/index.php?menu=cultipi" class="level1 href-cultipi" ><span><?php echo __('MENU_CULTIPI'); ?></span></a></li>
                             <?php } ?>
+                            
+                            <?php
+                                // If there are some plugins to show in menu, display it 
+                                foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+                                    
+                                    // Check if function exists
+                                    if (function_exists($plugin . '\addInMenu'))
+                                    {
+                                        call_user_func($plugin . '\addInMenu');                                        
+                                    }
+                                }
+                            ?>
                    </ul>
             </div>               
 
                 <div class="message" style="display:none" title="<?php echo __('MESSAGE_BOX'); ?>">
                     <br />
                     <div id="pop_up_information_container">
-                        <img src="/cultibox/main/libs/img/informations.png" alt="" />
+                        <img src="main/libs/img/informations.png" alt="" />
                         <label class="info_title"><?php echo __('INFORMATION'); ?>:</label>
                         <div class="info"  id="pop_up_information_part">
                             <ul>
@@ -162,7 +184,7 @@ $cost=get_configuration("SHOW_COST");
                         </div>
                     </div>
                     <div id="pop_up_error_container">
-                        <img src="/cultibox/main/libs/img/warning.png" alt="" />
+                        <img src="main/libs/img/warning.png" alt="" />
                         <label class="error_title"><?php  echo __('WARNING'); ?>:</label>
                         <div class="error" id="pop_up_error_part">
                             <ul>
@@ -244,5 +266,3 @@ $cost=get_configuration("SHOW_COST");
     </div>
 </body>
 </html>
-
-

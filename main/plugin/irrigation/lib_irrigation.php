@@ -310,6 +310,23 @@ function addJsToLoadMenu() {
 
 }
 
+// {{{ addInStartXMLCultiCore()
+// ROLE Add in menu
+// RET none
+function addInStartXMLCultiCore() {
+
+    $ret_array = array ( 
+        'name' => "serverIrrigation",
+        'waitAfterUS' => "100",
+        'port' => "6011",
+        'pathexe' => "tclsh",
+        'path' => "./serverIrrigation/serverIrrigation.tcl",
+        'xmlconf' => "./serverIrrigation/conf.xml",
+    );
+
+    return $ret_array;
+}
+
 // {{{ getPlateforme()
 // ROLE Retrieve sensor information in db with this name
 // IN $element : Type of element (sensor, plug, other)
