@@ -99,6 +99,18 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
             'path' => "./serverHisto/serverHisto.tcl",
             'xmlconf' => "./serverHisto/conf.xml",
         );
+        
+        // If there are some plugins to add in start.xml , add it
+        foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+            
+            // Check if function exists
+            if (function_exists($plugin . '\addInStartXMLCultiCore'))
+            {
+                // Add parameters
+                $paramListCultipiStart[] = call_user_func($plugin . '\addInStartXMLCultiCore');                                        
+            } 
+        }
+        
         create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart);
         
         // Server acq sensor
@@ -1968,6 +1980,10 @@ function check_sd_card($sd="") {
 // IN      $paramList       List of params
 // RET true if we can, false else
 function create_conf_XML($file, $paramList) {
+
+    // Check if directory exists
+    if(!is_dir(dirname($file)))
+        mkdir(dirname($file));
 
     // Open in write mode
     $fid = fopen($file,"w+");

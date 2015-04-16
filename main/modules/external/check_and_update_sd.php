@@ -12,6 +12,15 @@
         require_once('../../libs/debug.php');
     }
     
+    // Load every plugins 
+    foreach ($GLOBALS['PLUGIN'] as $plugin) { 
+        $fileName = '../../plugin/' . $plugin . '/lib_' . $plugin . '.php';
+        if (is_file($fileName)) 
+        {
+            require_once $fileName;
+        }
+    }
+    
     $sd_card = $_GET['sd_card'];
     $force_rtc_offset_value = false;
     if (isset($_GET['force_rtc_offset_value']))

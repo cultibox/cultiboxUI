@@ -162,8 +162,8 @@ $GLOBALS['MODE'] = "cultibox";
 
 // For cultipi : path to the conf (for windows : C:/cultibox/xampp/htdocs/cultibox)
 $GLOBALS['CULTIPI_CONF_PATH'] = "/etc/cultipi";
-
 $GLOBALS['CULTIPI_CONF_TEMP_PATH'] = $GLOBALS['CULTIPI_CONF_PATH'] . "/conf_tmp";
+$GLOBALS['CULTIPI_CONF_OUT_PATH']  = $GLOBALS['CULTIPI_CONF_PATH'] . "/01_defaultConf_RPi";
 
 // Maximal number of webcam plugged:
 $GLOBALS['MAX_WEBCAM'] = 4;
