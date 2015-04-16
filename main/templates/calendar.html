@@ -2,10 +2,23 @@
     // Include specific css
     loadCSS("main/libs/css/page_calendar.css");
 </script>
-
 <script>
-   $("[title]").tooltip({ position: { my: "left+15 center", at: "right center" } });
+   $("[title]").tooltip({ 
+        position: { my: "left+15 center", at: "right center" },
+        close: function (event, ui) {
+            ui.tooltip.hover(
+            function () {
+                $(this).stop(true).fadeTo(300, 1);
+            },    
+            function () {
+                $(this).fadeOut("300", function () {
+                    $(this).remove();
+                })
+            });
+        } 
+    });
 </script>
+
 <br />
 <style id='hideday'></style>
 <style id='hidetoday'></style>

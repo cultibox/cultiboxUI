@@ -1,4 +1,3 @@
-<div id="plugs_dialog" style="display:none">
     <div id="div_plug_tabs">
         <ul id="plug_tabs">
             <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
@@ -7,10 +6,8 @@
         </ul>
 
 <form action="/cultibox/index.php?menu=plugs" method="post" name="plugForm" id="plugForm">
-    <input type="hidden" id="submenu" name="submenu" value="<?php echo $submenu; ?>" />
     <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
         <div id="div_selected_plug<?php echo $i; ?>" style="<?php if($submenu != $i) echo 'display:none'; ?>">
-            <br />
             <div id="state_plug<?php echo $i; ?>">
                 <table class="table_width">
                     <tr>
@@ -370,30 +367,8 @@
                     </table>
                 </div>
             </div>
-            <br />
-            <hr />
-            <br />
         </div>
 
     <?php } ?>
-    <br />
-    <br />
     <input type="hidden" name="submit_plugs" id="submit_plugs" value="submit_plugs">
 </form>
-</div>
-
-
-<div id="warning_change_type_plug" style="display:none" title="<?php echo __('CONFIRMATION'); ?>">
-    <?php echo __('CONFIRMATION_CHANGEMENT_TYPE_PLUG'); ?>
-</div>
-
-<div class="popup_message" id="update_conf" title="" style="display:none">
-    <p><?php echo __('VALID_UPDATE_CONF'); ?></p>
-</div>
-
-
-<div class="popup_error" id="error_update_conf" title="" style="display:none">
-    <p><?php echo __('ERROR_UPDATE_CONF'); ?></p>
-</div>
-
-<script>$('#div_plug_tabs').tabs('select', <?php echo $submenu-1; ?>);</script>

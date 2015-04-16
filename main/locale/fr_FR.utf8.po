@@ -140,7 +140,7 @@ msgid "CONFIGURE_NB_PLUGS"
 msgstr "Nombre de prises de votre système"
 
 msgid "VALIDATION_CONF"
-msgstr "Enregistrer la configuration"
+msgstr "Enregistrer la nouvelle configuration"
 
 msgid "COLOR_BLUE"
 msgstr "Bleu"
@@ -1931,22 +1931,25 @@ msgid "CULTIPI_SOFT_VERSION"
 msgstr "Version des logiciels"
 
 msgid "CULTICONF_SOFT"
-msgstr "Logiciel Culticonf"
+msgstr "Culticonf"
 
 msgid "CULTIPI_SOFT"
-msgstr "Logiciel Cultipi"
+msgstr "Cultipi"
 
 msgid "CULTIBOX_SOFT"
-msgstr "Logiciel Cultibox"
+msgstr "Cultibox"
 
 msgid "CULTIRAZ_SOFT"
-msgstr "Logiciel CultiRAZ"
+msgstr "CultiRAZ"
 
 msgid "CULTITIME_SOFT"
-msgstr "Logiciel Cultitime"
+msgstr "Cultitime"
 
 msgid "CULTICAM_SOFT"
-msgstr "Logiciel Culticam"
+msgstr "Culticam"
+
+msgid "CULTIDOC_SOFT"
+msgstr "Cultidoc"
 
 msgid "CULTIPI_SERVICE"
 msgstr "Status du service Cultipi"
@@ -2171,7 +2174,7 @@ msgid "TOOLTIP_WIFI_IP"
 msgstr "L'adresse de votre module Wifi peut être personnalisée en rentrant une adresse ip au format XXX.XXX.XXX.XXX"
 
 msgid "SAVE_CONF"
-msgstr "Enregistrer la configuration"
+msgstr "Enregistrer la configuration réseau"
 
 msgid "EMPTY_NETWORK_CONFIG"
 msgstr "Aucune configuration réseau (filaire ou sans fil) n'a été activé. Vous devez activer une connexion réseau pour rendre votre module disponible."

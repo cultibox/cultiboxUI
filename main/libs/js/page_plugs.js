@@ -291,7 +291,7 @@ $(document).ready(function(){
                         }, {
                             text: CANCEL_button,
                                 click: function () {
-                                    $("#plug_type"+plug).val(plugs_infoJS[plug-1]['PLUG_TYPE]']);
+                                    $('#plug_type'+plug+' option[value="'+plugs_infoJS[plug-1]['PLUG_TYPE']+'"]').prop('selected', true);
                                     $( this ).dialog( "close" );
                                     return false;
                                 }
@@ -309,17 +309,33 @@ $(document).ready(function(){
     $("#plug_settings").click(function(e) {
         e.preventDefault();
         $('#div_plug_tabs').tabs('select', $("#selected_plug option:selected").val()-1);
-        var width=Math.round($(window).width()-($(window).width()*10/100));
+        var width=Math.round($(window).width()-($(window).width()*25/100));
         $("#plugs_dialog").dialog({
             resizable: true,
             width: width,
             modal: true,
             closeOnEscape: true,
+            position: ['center', 'top+15'],
             dialogClass: "tabs-dialog",
             buttons: [{
                 text: SAVE_button,
                 "id": "btnClose",
                 click: function () {
+                    $("#plugs_dialog").dialog('close');
+                    $.blockUI({
+                        message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                        centerY: 0,
+                        css: {
+                            top: '20%',
+                            border: 'none',
+                            padding: '5px',
+                            backgroundColor: 'grey',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: .9,
+                            color: '#fffff'
+                        }
+                    });
                     var checked=true;
                     var jump_plug=0;
 
@@ -510,6 +526,7 @@ $(document).ready(function(){
 
             }
         }
+        $.unblockUI();
 
         // Errors have been checked, we can continue
         if(checked) {
@@ -626,7 +643,7 @@ $(document).ready(function(){
                                     });
 
 
-                                    get_content("programs",getUrlVars("selected_plug="+$("#submenu").val()));
+                                    get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()));
                                 }
                             }]
                         });
@@ -643,7 +660,7 @@ $(document).ready(function(){
                                 text: CLOSE_button,
                                 click: function () {
                                     $( this ).dialog( "close" );    
-                                    get_content("programs",getUrlVars("selected_plug="+$("#submenu").val()));
+                                    get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()));
                                 }
                             }]
                         });
@@ -651,6 +668,7 @@ $(document).ready(function(){
                 }
             });
         } else {
+            $("#plugs_dialog").dialog();
             $('#div_plug_tabs').tabs('select', jump_plug);
         }
                 }
@@ -658,7 +676,8 @@ $(document).ready(function(){
                 text: CLOSE_button,
                 "id": "btnClose",
                 click: function () {
-                    $( this ).dialog( "close" );
+                    $(this).dialog('close');
+                    get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()));
                     return false;
                 }
             }],

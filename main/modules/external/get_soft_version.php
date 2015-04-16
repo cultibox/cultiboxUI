@@ -9,10 +9,11 @@
     exec("dpkg -s cultitime|grep Version|awk -F \"Version: \" '{print $2}'",$ret[3],$err);
     exec("dpkg -s culticonf|grep Version|awk -F \"Version: \" '{print $2}'",$ret[4],$err);
     exec("dpkg -s culticam|grep Version|awk -F \"Version: \" '{print $2}'",$ret[5],$err);
+    exec("dpkg -s cultidoc|grep Version|awk -F \"Version: \" '{print $2}'",$ret[6],$err);
     if(is_file("/VERSION")) {
-        exec("cat /VERSION",$ret[6],$err);
+        exec("cat /VERSION",$ret[7],$err);
     } else {
-        $ret[6]="000000";
+        $ret[7]="000000";
     }
 
     echo json_encode($ret);

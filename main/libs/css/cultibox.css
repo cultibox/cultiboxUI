@@ -232,7 +232,7 @@ td.log-manage-title {
 }
 
 td.plug-marge-td {
-   width: 10%;
+   width: 2%;
 }
 
 td.plug-marge-title {
@@ -709,7 +709,7 @@ a.logo img{
 .cultipi_menu_h1{
     font-size:13px;
     background:#CCC;
-    width:175px;
+    width:170px;
     font-weight:bold;
     padding:10px 5px 9px 5px;
     background:url("../../../main/libs/img/fond_cartouche.png") center center no-repeat;

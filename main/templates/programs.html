@@ -1,6 +1,20 @@
 <script>
-   $("[title]").tooltip({ position: { my: "left+15 center", at: "right center" } });
+   $("[title]").tooltip({ 
+        position: { my: "left+15 center", at: "right center" },
+        close: function (event, ui) {
+            ui.tooltip.hover(
+            function () {
+                $(this).stop(true).fadeTo(300, 1);
+            },    
+            function () {
+                $(this).fadeOut("300", function () {
+                    $(this).remove();
+                })
+            });
+        } 
+    });
 </script>
+
 <br />
 <!-- Head title befor program showing -->
 <div class="title_conf">
@@ -557,6 +571,23 @@
 
 <div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" /></div>
 
-
+<div id="plugs_dialog" style="display:none">
 <?php include('plugs.html'); ?>
+</div>
+
+<div id="warning_change_type_plug" style="display:none" title="<?php echo __('CONFIRMATION'); ?>">
+    <?php echo __('CONFIRMATION_CHANGEMENT_TYPE_PLUG'); ?>
+</div>
+
+<div class="popup_message" id="update_conf" title="" style="display:none">
+    <p><?php echo __('VALID_UPDATE_CONF'); ?></p>
+</div>
+
+
+<div class="popup_error" id="error_update_conf" title="" style="display:none">
+    <p><?php echo __('ERROR_UPDATE_CONF'); ?></p>
+</div>
+
+<script>$('#div_plug_tabs').tabs('select', <?php echo $submenu-1; ?>);</script>
+
 

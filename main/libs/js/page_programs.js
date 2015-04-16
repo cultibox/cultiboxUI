@@ -9,7 +9,7 @@
 ?>
 
 
-plugs_infoJS   = <?php echo json_encode($plugs_infos) ?>;
+var plugs_infoJS   = <?php echo json_encode($plugs_infos) ?>;
 highchart_plug = <?php echo $selected_plug; ?>;
 resume_plugs   = <?php echo json_encode($resume) ?>;
 resume_regul   = <?php echo json_encode($resume_regul) ?>;

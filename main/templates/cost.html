@@ -1,7 +1,19 @@
 <script>
-   $("[title]").tooltip({ position: { my: "left+15 center", at: "right center" } });
+   $("[title]").tooltip({ 
+        position: { my: "left+15 center", at: "right center" },
+        close: function (event, ui) {
+            ui.tooltip.hover(
+            function () {
+                $(this).stop(true).fadeTo(300, 1);
+            },    
+            function () {
+                $(this).fadeOut("300", function () {
+                    $(this).remove();
+                })
+            });
+        } 
+    });
 </script>
-
 <br />
 <label class="title_conf"><?php echo __('COST_PRICE_COMPUTE'); ?> <img src="main/libs/img/infos_title.png" alt="" title="<?php echo __('TOOLTIP_DEFINE_COST'); ?>" /></label>
 <br /><br />
