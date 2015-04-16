@@ -15,7 +15,6 @@ var dialog1=false;
 var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
 var start_day = <?php echo json_encode($startday); ?>;
-var msg_power="";
 
 // {{{ getType()
 // IN  input value: display the type of log: 0 for daily logs, 1 for monthly
@@ -1281,16 +1280,45 @@ $(document).ready(function() {
                          pop_up_remove("power_status");
                          pop_up_add_information(jQuery.parseJSON(data),"power_status","error");
 
-                         msg_power=jQuery.parseJSON(data);
                     } else {
                         pop_up_remove("power_status");
-                        msg_power="";
                     }
            });
         }
 
         // If checked
         if (cheBu.attr("checked") == "checked") {
+             $.ajax({
+             data:{ single_power: cheBu.val()},
+             sync: true,
+             url: 'main/modules/external/check_configuration_power.php'}).done(function(data) {
+                if(jQuery.parseJSON(data)=="1") {
+                    $("#select_curve").dialog('close');
+                    $("#error_power_logs").dialog({
+                        resizable: false,
+                        width: 550,
+                        closeOnEscape: false,
+                        dialogClass: "popup_error",
+                        modal: true,
+                        buttons: [{
+                            text: CLOSE_button,
+                            click: function () {
+                                $("#select_curve").dialog('open');
+                                $( this ).dialog("close"); return false;
+                            }
+                        },{
+                            text: SAVE_button,
+                            click: function () {
+                                $("#select_curve").dialog('open');
+                                $( this ).dialog("close"); return false;
+                            }
+                        }]
+                    });
+
+                } 
+            });
+           
+
 
             // Call logs_get_serie to get programm value
             $.blockUI({
@@ -1470,23 +1498,6 @@ $(document).ready(function() {
                 text: CLOSE_button,
                 "id": "btnClose_curve",
                 click: function () {
-                    if(msg_power!="") {
-                        $("#msg_power").empty();
-                        $("#msg_power").append(msg_power);
-                        $("#msg_power").dialog({
-                            resizable: false,
-                            width: 500,
-                            closeOnEscape: true,
-                            dialogClass: "popup_error",
-                            modal: true,
-                            buttons: [{
-                                text: CLOSE_button,
-                                click: function () {
-                                    $( this ).dialog("close"); return false;
-                                }
-                            }]
-                        });
-                    }
                     $( this ).dialog( "close" ); return false;
                 }
             }]

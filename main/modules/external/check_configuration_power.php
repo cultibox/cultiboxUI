@@ -29,6 +29,17 @@ if((isset($_GET['list_power']))&&(!empty($_GET['list_power']))) {
             $message=__('ERROR_POWER_PLUGS')." ".$tmp_number." ".__('UNCONFIGURED_POWER')." ".__('CONFIGURABLE_PAGE_POWER')." <a href='/cultibox/index.php?menu=plugs' class='note_link'>".__('HERE')."</a>";
         }
     }
+} else {
+  $message="1";
+  if((isset($_GET['single_power']))&&(!empty($_GET['single_power']))) {
+    $power=$_GET['single_power'];
+    $main_error=array();
+    if(!check_configuration_power($power,$main_error)) {
+        $message="1";
+    } else {
+        $message="0";       
+    }
+  }
 }
 echo json_encode("$message");
 

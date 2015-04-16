@@ -18,13 +18,13 @@
 <br />
 <!-- Head title befor program showing -->
 <div class="title_conf">
-    <?php echo __('VIEW_CURRENT_PROGRAM'); ?>
-    <select name="select_program_index_conf" id="select_program_index_conf">
+    <?php if(strcmp("$second_regul","True")==0) echo __('VIEW_CURRENT_PROGRAM'); ?>
+    <select name="select_program_index_conf" id="select_program_index_conf" <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
     <?php foreach ($index_info as $row) { ?>
         <option value="<?php echo $row['id']; ?>" <?php if($program_index_id==$row['id']) echo " selected"; ?>><?php echo $row['name']; ?></option>
     <?php } ?>
     </select>   
-    &nbsp;-&nbsp;<?php echo __('PLUG_MENU'); ?>
+    <?php if(strcmp("$second_regul","True")==0) { ?>&nbsp;-&nbsp;<?php } ?><?php echo __('PLUG_MENU'); ?>
     <select name="selected_plug" id="selected_plug_conf">
     <?php 
         for($i=0;$i<count($plugs_infos);$i++) { ?>
@@ -316,6 +316,8 @@
     <p><?php echo __('CONFIRM_SAME_PROGRAM'); ?></p>
 </div>
 
+
+
 <!-- Daily program management -->
 <div id="dialog-form-save-daily" title="<?php echo __('SAVE','html'); ?>" style="display:none">
     <form>
@@ -361,7 +363,7 @@
                     <?php for($i=1;$i<=$nb_plugs;$i++) { ?>
                         <input type="checkbox" name="reset_selected_plug" value="<?php echo $i; ?>" id="reset_selected_plug<?php echo $i; ?>"><?php echo $i; ?><?php if((($i%4)==0)&&($i<$nb_plugs)) { echo "<br />"; } ?>
                     <?php } ?>
-                     <select name="reset_set_program_index_id" id="reset_set_program_index_id">
+                     <select name="reset_set_program_index_id" id="reset_set_program_index_id" <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
                         <?php foreach ($index_info as $row) { ?>
                                 <option value="<?php echo $row['id']; ?>" <?php if($program_index_id==$row['id']) echo " selected"; ?>><?php echo $row['name']; ?></option>
                         <?php    } ?>
@@ -375,7 +377,7 @@
     <hr />
     <br />
     <table class="table_width">
-        <tr>
+        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
             <!-- Save daily programm -->
             <td class="program-td-management">
                 <?php echo __('PROGRAM_DAILY_SAVE'); ?>
@@ -389,7 +391,7 @@
                 <input type="submit" id="daily_save_button" name="daily_save_button" value="<?php echo __('SAVE_DIALOG_CALENDAR'); ?>">
             </td>
         </tr>
-        <tr>
+        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
             <!-- Delete daily programm -->
             <td>
                 <?php echo __('PROGRAM_DAILY_DELETE_SELECT'); ?>
@@ -469,7 +471,7 @@
             </td>
         </tr> 
           <!-- Export set of programs -->
-        <tr>
+        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
             <td>
                 <?php echo __('TITLE_EXPORT_SET_PROGRAM'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_EXPORT_SET_PROGRAM'); ?>" />
             </td>
@@ -515,7 +517,7 @@
             </td>
         </tr> 
          <!-- Import set of programs -->
-        <tr>
+        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
             <td>        
                 <br />
                 <?php echo __('TITLE_IMPORT_SET_PROGRAM'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_IMPORT_SET_PROGRAM'); ?>" />

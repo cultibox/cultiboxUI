@@ -234,6 +234,12 @@ msgstr "seconde(s)"
 
 
 # For the logs part:
+msgid "ERROR_POWER_EMPTY"
+msgstr "Puissance de la prise selectionnée non renseignée"
+
+msgid "EMPTY_POWER_DESC"
+msgstr "La puissance de l'équipement branché sur la prise selectionnée n'est pas renseignée. Afin d'afficher les courbes de puissance, il faut renseigner cette valeur"
+
 msgid "MANAGE_IMPORT_LOG_POWER_CSV"
 msgstr "Importer vos logs de puissance depuis un fichier"
 
@@ -1970,10 +1976,10 @@ msgid "SUCCESS_RESTART_SERVICE"
 msgstr "Redémarrage du service réalisé avec succés"
 
 msgid "DIR_CONF_UPDATE"
-msgstr "Votre configuration est à jour"
+msgstr "La configuration utilisée par le module concorde avec celle du logiciel"
 
 msgid "DIR_CONF_NOT_UPTODATE"
-msgstr "La configuration utilisée n'est pas à jour, cliquez ici pour mettre la configuration à jour: <button id='update_conf'>Mise à jour de la configuration</button>"
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous venez surêment de modifier votre configuration. Cliquez ici pour appliquer ces modifications dans le module: <button id='update_conf'>Mise à jour de la configuration</button>"
 
 msgid "WAIT_UPDATED_CONF"
 msgstr "Vérification de la configuration"
@@ -2046,7 +2052,7 @@ msgid "CLOSE_BUTTON"
 msgstr "Fermer"
 
 msgid "DIR_CONF_NOT_UPTODATE_POPUP"
-msgstr "La configuration utilisée n'est pas à jour, vous pouvez mettre à jour la configuration grâce au boutton dans la boîte de dialogue du logiciel."
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous venez surêment de modifier votre configuration. Vous pouvez mettre à jour la configuration utilisée grâce au boutton dans la boîte de dialogue du logiciel"
 
 msgid "DISABLE_POPUP"
 msgstr "Ne plus me prévenir et me laisser gérer la configuration dans la boîte de dialogue"

@@ -36,6 +36,36 @@ formatCard = function(hdd,pourcent) {
     });
 }
 
+check_cultipi_status = function() {
+    $.ajax({
+          beforeSend: function(jqXHR) {
+                $.timeout.push(jqXHR);
+        },
+        complete: function(jqXHR) {
+            var index = $.timeout.indexOf(jqXHR);
+            if (index > -1) {
+                $.timeout.splice(index, 1);
+            }
+        },
+        cache: false,
+        async: true,
+        url: "main/modules/external/services_status.php",
+        data: {action:"status_cultipi"}
+     }).done(function (data) {
+         var objJSON = jQuery.parseJSON(data);
+         if(objJSON=="0") {
+            $("#cultipi_on").show();
+            $("#cultipi_off").css('display','none');
+         } else {
+            $("#cultipi_off").show();
+            $("#cultipi_on").css('display','none');
+         }
+         $.timeout.push(setTimeout(function() {
+            check_cultipi_status();
+         },3000));
+     });
+}
+
 
 // {{{ getAlarm()
 // ROLE display or not the alarm part from the configuration menu
@@ -56,6 +86,8 @@ function getAlarm(i) {
 
 
 $(document).ready(function(){
+     check_cultipi_status();
+
      pop_up_remove("main_error");
      pop_up_remove("main_info");
 

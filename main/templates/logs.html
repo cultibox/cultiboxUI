@@ -790,10 +790,6 @@
 
 <div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" /></div>
 
-<div id="msg_power" title="" style="display: none;"></div>
-
-
-
 <div id="export_log_div" title="<?php echo __('MANAGE_EXPORT_LOG_CSV_BUTTON'); ?>" style="display:none">
     <table class="table_width">
         <tr>
@@ -879,4 +875,21 @@
 
 <div id="error_import_logs" title="<?php echo __('IMPORT_LOGS'); ?>" style="display:none">
     <p><?php echo __('ERROR_IMPORT_LOGS'); ?></p>
+</div>
+
+<div id="error_power_logs" title="<?php echo __('ERROR_POWER_EMPTY'); ?>" style="display:none">
+    <p><?php echo __('EMPTY_POWER_DESC'); ?>:</p>
+    <table class="table_width">
+        <tr>
+            <td></td>
+            <td>
+                <?php echo __('POWER_PLUG'); ?>:<img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_POWER'); ?>" />
+            </td>
+            <td>
+                <input type="text" size="4" maxlength="4" id="plug_power<?php echo $i; ?>" name="plug_power<?php echo $i; ?>" value="<?php echo $plug_power{$i}; ?>" onKeypress="return verifInt(event);">W
+            </td>
+            <td><div id="error_power_value<?php echo $i; ?>" class='error_field' style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_POWER_VALUE'); ?></div></td>
+        </tr>
+    </table>
+    <p class="p_center"><input type="submit" name="submit_power" value="<?php echo __('VALIDATION_PLUG_CONF'); ?>" id="submit_power"></p>
 </div>
