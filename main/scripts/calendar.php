@@ -8,6 +8,7 @@ $start_load = getmicrotime();
 $main_error=array();
 $main_info=array();
 $informations = Array(); //Aray containing data from the informations table or the log.txt file
+$second_regul=get_configuration("ADVANCED_REGUL_OPTIONS",$main_error);
 
 $calendar_start=getvar('calendar_startdate'); //Variable used when user add a grown calendar to a specific date
 if((!isset($calendar_start))||(empty($calendar_start))) {

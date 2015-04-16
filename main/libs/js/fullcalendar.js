@@ -28,7 +28,7 @@ var defaults = {
 	weekends: true,
 	weekNumbers: false,
 	weekNumberCalculation: 'iso',
-	weekNumberTitle: 'W',
+	weekNumberTitle: 'N°',
 	
 	// editing
 	//editable: false,

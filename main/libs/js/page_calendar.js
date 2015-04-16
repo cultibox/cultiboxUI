@@ -529,6 +529,7 @@ $(document).ready(function() {
         dragable: true,
         droppable: true,
         selectable: true,
+        weekNumbers: true,
         unselectable: true,
         theme: true,
         monthNames:["<?php echo __('MONTH01'); ?>","<?php echo __('MONTH02'); ?>","<?php echo __('MONTH03'); ?>","<?php echo __('MONTH04'); ?>","<?php echo __('MONTH05'); ?>","<?php echo __('MONTH06'); ?>","<?php echo __('MONTH07'); ?>","<?php echo __('MONTH08'); ?>","<?php echo __('MONTH09'); ?>","<?php echo __('MONTH10'); ?>","<?php echo __('MONTH11'); ?>","<?php echo __('MONTH12'); ?>"],

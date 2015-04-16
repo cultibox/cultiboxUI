@@ -294,6 +294,7 @@ $("#value_program").keypress(function(e) {
                 }
                 break;
             default:
+                <?php 
                 $regul       = getvar("plug_regul${nb}");
                 $regul_senss = getvar("plug_senss${nb}");
                 $regul_value = getvar("plug_regul_value${nb}");
@@ -301,6 +302,7 @@ $("#value_program").keypress(function(e) {
                 $regul_value = str_replace(' ','',$regul_value);
                 $second_tol  = getvar("plug_second_tolerance${nb}");
                 $second_tol  = str_replace(',','.',$second_tol);
+                ?>
                 break;
         }
 

@@ -286,6 +286,10 @@ Highcharts.setOptions({
 $(function () {
     var chart;
     $(document).ready(function() {
+        //COmpute cost page:
+        $('#cost').click(function() {
+            get_content("cost");
+        });
 
         // Call the fileupload widget and set some parameters:
         var upload_type="";
