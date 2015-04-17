@@ -1822,6 +1822,36 @@ msgstr "Programme courant"
 
 
 # For the Cultipi part 
+msgid "ERROR_IMAGE_SIZE"
+msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
+
+msgid "ERROR_IMAGE_TYPE"
+msgstr "Le type de fichier est limité aux fichiers images. Votre fichier ne semble pas être une image."
+
+msgid "ERROR_UPLOAD_IMAGE"
+msgstr "Erreur lors du chargement de votre image"
+
+msgid "ADD_SENSOR_IMAGE"
+msgstr "Ajouter l'image d'un capteur"
+
+msgid "ADD_PLUG_IMAGE"
+msgstr "Ajouter l'image d'un équipement"
+
+msgid "ADD_OTHER_IMAGE"
+msgstr "Ajouter l'image d'un autre élément"
+
+msgid "TOOLTIP_ADD_SENSOR_IMAGE"
+msgstr "L'image d'un capteur permet d'identifier les différents type de capteur : Température, Hygrométrie, Température de l'eau..."
+
+msgid "TOOLTIP_ADD_PLUG_IMAGE"
+msgstr "L'image d'un équipement permet d'identifier l'équipement branché sur une prise : Ventilateur, Chauffage, Humidificateur..."
+
+msgid "TOOLTIP_ADD_OTHER_IMAGE"
+msgstr "Les images 'autres' contiennent toutes les images permettant de modéliser votre espace: des plantes, des tentes de cultures, des serres...."
+
+msgid "TOOLTIP_MANAGE_IMAGES"
+msgstr "Ajouter vos propres images"
+
 msgid "EXPORT_CONF"
 msgstr "Exporter la configuration actuelle"
 
@@ -1979,7 +2009,7 @@ msgid "DIR_CONF_UPDATE"
 msgstr "La configuration utilisée par le module concorde avec celle du logiciel"
 
 msgid "DIR_CONF_NOT_UPTODATE"
-msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous venez surêment de modifier votre configuration. Cliquez ici pour appliquer ces modifications dans le module: <button id='update_conf'>Mise à jour de la configuration</button>"
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Cliquez ici pour synchroniser les configurations du logiciel et du module: <button id='update_conf'>Synchronisation des configurations</button>"
 
 msgid "WAIT_UPDATED_CONF"
 msgstr "Vérification de la configuration"
@@ -2052,7 +2082,7 @@ msgid "CLOSE_BUTTON"
 msgstr "Fermer"
 
 msgid "DIR_CONF_NOT_UPTODATE_POPUP"
-msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous venez surêment de modifier votre configuration. Vous pouvez mettre à jour la configuration utilisée grâce au boutton dans la boîte de dialogue du logiciel"
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous pouvez mettre à jour la configuration utilisée grâce au boutton dans la boîte de dialogue du logiciel"
 
 msgid "DISABLE_POPUP"
 msgstr "Ne plus me prévenir et me laisser gérer la configuration dans la boîte de dialogue"

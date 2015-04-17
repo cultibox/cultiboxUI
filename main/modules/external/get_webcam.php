@@ -4,7 +4,10 @@
 
     exec("ls -l /dev/video* 2>/dev/null",$output,$err);
     if(count($output)==0) {
-       echo json_encode("1");
+        for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) {
+            $return[$i]="0";
+        }
+        echo json_encode($return);
     } else {
         $return=array();
         $webcam="0";

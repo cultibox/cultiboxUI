@@ -22,12 +22,6 @@ if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) {
 }
 
 
-// By default the expanded menu is the user interface menu
-if((!isset($submenu))||(empty($submenu))) {
-    $submenu="synoptic_ui";
-}
-
-
 if((!isset($sd_card))||(empty($sd_card))) {
     setcookie("CHECK_SD", "False", time()+1800,"/",false,false);
 }
