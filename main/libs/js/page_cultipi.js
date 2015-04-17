@@ -14,6 +14,7 @@ var main_info = <?php echo json_encode($main_info); ?>;
 var nb_webcam = <?php echo json_encode($GLOBALS['MAX_WEBCAM']); ?>;
 var webcam_conf = <?php echo json_encode($webcam_conf); ?>;
 
+
 //To delete setTimeout et setInterval:
 $.webcam = [];
 $.webcam.abortAll = function() {
@@ -369,6 +370,127 @@ $(document).ready(function(){
             }]
         });
     });
+
+
+    // Add images for the synoptic:
+    $("#manage_images").click(function(e) {
+        e.preventDefault();
+        $("#add_images_syno").dialog({
+            resizable: false,
+            width: 500,
+            closeOnEscape: true,
+            dialogClass: "popup_message",
+            buttons: [{
+                text: CLOSE_button,
+                click: function () {
+                    $( this ).dialog( "close" ); return false;
+                }
+            }]
+        });
+    });
+
+     
+     var upload_dir="";
+     $('#import_image_other, #import_image_sensor, #import_image_plug').fileupload({
+            dataType: 'json',
+            url: 'main/modules/external/files.php',
+            add: function (e, data) {
+                $("#add_images_syno").dialog('close');
+                if($(this).attr('id')=='import_image_other') {
+                    upload_dir="images-synoptic-other";
+                } else if($(this).attr('id')=='import_image_plug') { 
+                    upload_dir="images-synoptic-plug";
+                } else {
+                    upload_dir="images-synoptic-sensor";
+                }
+
+
+                var acceptFileTypes = /^image\/(gif|jpe?g|png|bmp)$/i;
+                var uploadErrors = [];
+                if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                    uploadErrors.push("<?php echo __('ERROR_IMAGE_TYPE'); ?>");
+                }
+      
+                if(data.originalFiles[0]['size'] > 300000) {
+                    uploadErrors.push("<?php echo __('ERROR_IMAGE_SIZE'); ?>");
+                }
+
+                if(uploadErrors.length > 0) {
+                    $("#error_upload_image").html(uploadErrors.join("<br /><br />"));
+                    $("#error_upload_image").dialog({
+                        width: 700,
+                        modal: true,
+                        resizable: false,
+                        closeOnEscape: false,
+                        dialogClass: "popup_error",
+                        title: "<?php echo __('ERROR_UPLOAD_IMAGE'); ?>",
+                        buttons : [{
+                        text: CLOSE_button,
+                        click: function(){
+                            $(this).dialog("close");
+                            $("#add_images_syno").dialog('open');
+                            $("#error_upload_image").html("");
+                        }
+                    }]
+                    });
+
+                } else {
+                    $("#error_upload_image").html("");
+                    data.submit();
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_upload').css(
+                    'width',
+                    progress + '%'
+                );
+
+                $('#progress_purcent').html(
+                    progress + '%'
+                );
+
+                $("#progress_upload").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>",
+                    buttons : [{
+                        text: CANCEL_button,
+                        id: "cancelbtnid",
+                        click: function(){
+                            $(this).dialog("close");
+                        }   
+                    }]
+                });
+
+                
+                
+                if(progress==100) {
+                    $("#cancelbtnid").html('<span class="ui-button-text">'+CLOSE_button+'</span>');
+                }
+            },
+            done: function (e, data) {
+                e.preventDefault();
+
+                var name="";
+                $.each(data.result.files, function (index, file) {
+                    name=file.name;
+                });
+
+
+                $.ajax({
+                    cache: false,
+                    async: false,
+                    url: "main/modules/external/move_uploaded_images.php",
+                    data: {filename:name,upload_dir:upload_dir}
+                 });
+            }
+        });
+
+
 
     // Slider for zoom
     $("#syno_configure_element_scale").slider({

@@ -37,10 +37,17 @@
                        src="main/libs/img/webcam_icon.png"  
                        alt="webcam"  
                 />
+
+                <input type="image" id="manage_images" name="manage_images"
+                       title="<?php echo __('TOOLTIP_MANAGE_IMAGES'); ?>"
+                       src="main/libs/img/advancedsettings.png"  
+                       alt="settings"  
+                       width="22"
+                />
             </td>
             <td class="calendar-conf-marge"></td>
-            <td ><p class="pInline" ><?php echo __('SYNO_UPDATE_SENSOR_HOUR'); ?></p><p class="pInline" id="synoptic_updateSensorHour" ></p></td>
-            <td ><p class="pInline" ><?php echo __('SYNO_UPDATE_PLUG_HOUR'); ?></p><p class="pInline" id="synoptic_updatePlugHour" ></p></td>
+            <td ><p class="pInline p_center" ><?php echo __('SYNO_UPDATE_SENSOR_HOUR'); ?></p><p class="pInline p_center" id="synoptic_updateSensorHour" ></p></td>
+            <td ><p class="pInline p_center" ><?php echo __('SYNO_UPDATE_PLUG_HOUR'); ?></p><p class="pInline p_center" id="synoptic_updatePlugHour" ></p></td>
             <td ><p class="pInline" >
                 <input type="image" id="synoptic_updateCultipiStatus"
                        title="<?php echo __('SYNO_UPDATE_CULTIPI_STATUS_START'); ?>"
@@ -449,3 +456,31 @@
 
     <?php } ?>
 </div>
+
+<div id="add_images_syno" style="display:none" title="<?php echo __('TOOLTIP_MANAGE_IMAGES'); ?>">
+    <table class="table_width">
+        <tr>
+            <td><?php echo __('ADD_SENSOR_IMAGE'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_ADD_SENSOR_IMAGE'); ?>" /></td>
+            <td><input type="file" id="import_image_sensor" name="files[]"></td>
+        </tr>
+         <tr>
+            <td><?php echo __('ADD_PLUG_IMAGE'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_ADD_PLUG_IMAGE'); ?>" /></td>
+            <td><input type="file" id="import_image_plug" name="files[]"></td>
+        </tr>
+         <tr>
+            <td><?php echo __('ADD_OTHER_IMAGE'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_ADD_OTHER_IMAGE'); ?>" /></td>
+            <td><input type="file" id="import_image_other" name="files[]"></td>
+        </tr>
+</div>
+
+<div id="progress_upload">
+    <div id="progress_bar_upload" class="bar" style="width: 0%;"></div>
+    <p class="p_center" id="progress_purcent"> </p>
+</div>
+
+
+<div id="error_upload_image" style="dislay:none">
+
+</div>
+
+

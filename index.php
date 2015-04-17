@@ -137,7 +137,7 @@ check_database();
 
                                 <li class="translate"><a href="/cultibox/index.php?lang=de_DE" id="de_DE"><img src="/cultibox/main/libs/img/de.gif" alt="Übersetzen Sie die Software Deutsch (DE)" title="Übersetzen Sie die Software Deutsch (DE)" /></a></li>
                                 
-                                <li><a href="/cultibox/main/scripts/help.php" targer="_blank"><img src="/cultibox/main/libs/img/help.png" alt="<?php echo __('MENU_HELP'); ?>" title="<?php echo __('MENU_HELP'); ?>" /></a></li>
+                                <li><a href="/cultibox/main/scripts/help.php" target="_blank"><img src="/cultibox/main/libs/img/help.png" alt="<?php echo __('MENU_HELP'); ?>" title="<?php echo __('MENU_HELP'); ?>" /></a></li>
                             
                             </ul>
                         </div>
