@@ -78,6 +78,14 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         'path' => "./serverHisto/serverHisto.tcl",
         'xmlconf' => "./serverHisto/conf.xml",
     );
+    $paramListCultipiStart[] = array ( 
+        'name' => "serverCultibox",
+        'waitAfterUS' => "100",
+        'port' => "6013",
+        'pathexe' => "tclsh",
+        'path' => "./serverCultibox/serverCultibox.tcl",
+        'xmlconf' => "./serverCultibox/conf.xml",
+    );
     
     // If there are some plugins to add in start.xml , add it
     foreach ($GLOBALS['PLUGIN'] as $plugin) { 
