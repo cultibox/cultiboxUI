@@ -37,6 +37,8 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     if(!is_dir($sd_card . "/serverPlugUpdate"))     mkdir($sd_card . "/serverPlugUpdate");
     if(!is_dir($sd_card . "/serverPlugUpdate/prg")) mkdir($sd_card . "/serverPlugUpdate/prg");
     if(!is_dir($sd_card . "/serverPlugUpdate/plg")) mkdir($sd_card . "/serverPlugUpdate/plg");
+    if(!is_dir($sd_card . "/serverMail"))           mkdir($sd_card . "/serverMail");
+    if(!is_dir($sd_card . "/serverCultibox"))       mkdir($sd_card . "/serverCultibox");
     
     // Create cultipi conf.xml file
     $paramListCultipiConf[] = array (
@@ -85,6 +87,14 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         'pathexe' => "tclsh",
         'path' => "./serverCultibox/serverCultibox.tcl",
         'xmlconf' => "./serverCultibox/conf.xml",
+    );
+    $paramListCultipiStart[] = array ( 
+        'name' => "serverMail",
+        'waitAfterUS' => "100",
+        'port' => "6015",
+        'pathexe' => "tclsh",
+        'path' => "./serverMail/serverMail.tcl",
+        'xmlconf' => "./serverMail/conf.xml",
     );
     
     // If there are some plugins to add in start.xml , add it
@@ -231,7 +241,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     create_conf_XML($sd_card . "/serverHisto/conf.xml" , $paramListServerHisto);
     
     // Server log
-     $paramListServerLog[] = array (
+    $paramListServerLog[] = array (
         "name" => "logPath",
         "logfile" => "/var/log/cultipi"
     );
@@ -243,6 +253,28 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
 
     create_conf_XML($sd_card . "/serverLog/conf.xml" , $paramListServerLog);
 
+    // Create conf for mail
+    $paramListServerMail[] = array (
+        "name" => "verbose",
+        "level" => "info"
+    );
+    $paramListServerMail[] = array (
+        "name" => "serveurSMTP",
+        "level" => "smtp.gmail.com"
+    );
+    $paramListServerMail[] = array (
+        "name" => "port",
+        "level" => "587"
+    );
+    $paramListServerMail[] = array (
+        "name" => "username",
+        "level" => "hercule.poirot@gmail.com"
+    ); 
+    $paramListServerMail[] = array (
+        "name" => "hercule.poirot@gmail.com",
+        "level" => "motdepasse"
+    );
+    create_conf_XML($sd_card . "/serverMail/conf.xml" , $paramListServerMail);
     
     $program = "";
     $conf_uptodate = true;
