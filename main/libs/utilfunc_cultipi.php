@@ -248,11 +248,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         // Read from database program
         $program = create_program_from_database($main_error,$value['program_idx']);
 
-        if ($GLOBALS['MODE'] == "cultipi") {
-            $fileName = $sd_card . "/serverPlugUpdate/prg/" . "plu" . $value['plugv_filename'];
-        } else {
-            $fileName = "${sd_card}/cnf/prg/" . "plu" . $value['plugv_filename'];
-        }
+        $fileName = $sd_card . "/serverPlugUpdate/prg/" . "plu" . $value['plugv_filename'];
 
         if(!compare_program($program,$fileName)) {
             $conf_uptodate=false;
@@ -266,58 +262,24 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     //For plugv
     $program = create_program_from_database($main_error);
 
-    if ($GLOBALS['MODE'] == "cultipi") {
-        $fileName = $sd_card . "/serverPlugUpdate/prg/" . "plugv";
-    } else {
-        $fileName = "${sd_card}/cnf/prg/" . "plugv";
-    }
-    
-    if(!compare_program($program,$fileName)) {
-        $conf_uptodate=false;
+     $fileName = $sd_card . "/serverPlugUpdate/prg/" . "plugv";
 
-        if(!save_program_on_sd($fileName,$program)) {
-            $confsave_prog=false;
-        }
-    }
 
-    if(!$confsave_prog) {
+    if(!save_program_on_sd($fileName,$program)) {
         $main_error_tab[]=__('ERROR_WRITE_PROGRAM');
         return ERROR_WRITE_PROGRAM;
     }
 
-    if(!isset($GLOBALS['MODE']) || $GLOBALS['MODE'] != "cultipi") { 
-        $ret_firm=check_and_copy_firm($sd_card);
-        if(!$ret_firm) {
-            $main_error_tab[]=__('ERROR_COPY_FIRM'); 
-            return ERROR_COPY_FIRM;
-        } else if($ret_firm==1) {
-            $conf_uptodate=false;
-        }
-    }
-
-    if(!compare_pluga($sd_card)) {
-        $conf_uptodate=false;
-        if(!write_pluga($sd_card,$main_error)) {
-            $main_error_tab[]=__('ERROR_COPY_PLUGA');
-            return ERROR_COPY_PLUGA;
-        }
+    if(!write_pluga($sd_card,$main_error)) {
+        $main_error_tab[]=__('ERROR_COPY_PLUGA');
+        return ERROR_COPY_PLUGA;
     }
 
     $plugconf = create_plugconf_from_database($GLOBALS['NB_MAX_PLUG'],$main_error);
     if(count($plugconf)>0) {
-        if(!compare_plugconf($plugconf,$sd_card)) {
-            $conf_uptodate=false;
-            if(!write_plugconf($plugconf,$sd_card)) {
-                $main_error_tab[]=__('ERROR_COPY_PLUG_CONF');
-                return ERROR_COPY_PLUG_CONF;
-            }
-        }
-    }
-
-    if(!isset($GLOBALS['MODE']) || $GLOBALS['MODE'] != "cultipi") {
-        if(!check_and_copy_index($sd_card)) {
-            $main_error_tab[]=__('ERROR_COPY_INDEX');
-            return ERROR_COPY_INDEX;
+        if(!write_plugconf($plugconf,$sd_card)) {
+            $main_error_tab[]=__('ERROR_COPY_PLUG_CONF');
+            return ERROR_COPY_PLUG_CONF;
         }
     }
 
@@ -325,12 +287,9 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     calendar\read_event_from_db($data);
     $plgidx=create_plgidx($data);
     if(count($plgidx)>0) {
-        if(!compare_plgidx($plgidx,$sd_card)) {
-            $conf_uptodate=false;
-            if(!write_plgidx($plgidx,$sd_card)) {
-                $main_error_tab[]=__('ERROR_COPY_PLGIDX');
-                return ERROR_COPY_PLGIDX;
-            }
+        if(!write_plgidx($plgidx,$sd_card)) {
+            $main_error_tab[]=__('ERROR_COPY_PLGIDX');
+            return ERROR_COPY_PLGIDX;
         }
     } else {
         if(!check_and_copy_plgidx($sd_card)) {
@@ -350,146 +309,6 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     return 1; 
 }
 // }}}
-
-
-// {{{ compare_pluga()
-// ROLE compare pluga and data from databases to check if the file is up to date
-// IN   $sd_card      sd card path to save data
-// RET false is there is something to write, true else
-function compare_pluga($sd_card) {
-    $out  = array();
-    
-
-    $file = $sd_card . "/serverPlugUpdate/plg/pluga";
-
-    // Check if the file exists
-    if(is_file($file)) {
-        $nb=0;
-
-        $pluga = Array();
-        $nb_plug=get_configuration("NB_PLUGS",$out);
-        while(strlen($nb_plug)<2) {
-            $nb_plug = "0$nb_plug";
-        }
-
-         $pluga[] = $nb_plug;
-         for($i=0;$i<$nb_plug;$i++) {
-         
-            // Get power of the plug
-            $tmp_power_max = get_plug_conf("PLUG_POWER_MAX",$i+1,$out);
-            
-            // Get module of the plug
-            $tmp_MODULE = get_plug_conf("PLUG_MODULE",$i+1,$out);
-            if ($tmp_MODULE == "") 
-                $tmp_MODULE = "wireless";
-            
-            // Get module number of the plug
-            $tmp_NUM_MODULE = get_plug_conf("PLUG_NUM_MODULE",$i+1,$out);
-            if ($tmp_NUM_MODULE == "")
-                $tmp_NUM_MODULE = 1;
-
-            // Get module options of the plug
-            $tmp_MODULE_OPTIONS = get_plug_conf("PLUG_MODULE_OPTIONS",$i+1,$out);
-
-            // Get module output used
-            $tmp_MODULE_OUTPUT = get_plug_conf("PLUG_MODULE_OUTPUT",$i+1,$out);
-            if ($tmp_MODULE_OUTPUT == "") 
-                $tmp_MODULE_OUTPUT = 1;
-
-            // Create adress for this plug
-            $tmp_pluga = 0;
-            switch ($tmp_MODULE) {
-                case "wireless":
-                    if ($tmp_power_max == "3500") {
-                        $tmp_pluga = $GLOBALS['PLUGA_DEFAULT_3500W'][$i];
-                    } else {
-                        $tmp_pluga = $GLOBALS['PLUGA_DEFAULT'][$i];
-                    }
-                    break;
-                case "direct":
-                    // Direct plug case (Adresse 50 --> 58)
-                    $tmp_pluga = $tmp_MODULE_OUTPUT + 49;
-                    break;
-                case "mcp230xx":
-                    // MCP plug case 
-                    // Module 1 : (Adresse 60 --> 67)
-                    // Module 2 : (Adresse 70 --> 77)
-                    // Module 3 : (Adresse 80 --> 87)
-                    $tmp_pluga = 60 + 10 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
-                    break;
-                case "dimmer":
-                    // Dimmer plug case 
-                    // Module 1 : (Adresse 90 --> 93)
-                    // Module 2 : (Adresse 95 --> 98)
-                    // Module 3 : (Adresse 100 --> 103)
-                    $tmp_pluga = 90 + 5 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
-                    break;
-                case "network":
-                    $tmp_pluga = 1000 + 16 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
-                    break;
-                case "xmax":
-                    // xmax plug case 
-                    // Module 1 : (Adresse 105 --> 108)
-                    $tmp_pluga = 105 + $tmp_MODULE_OUTPUT - 1;
-                    break;                    
-            }
-
-            while(strlen($tmp_pluga)<3) {
-                $tmp_pluga = "0$tmp_pluga";
-            }
-
-            $pluga[] = $tmp_pluga;
-        }
-
-        $nbdata = count($pluga);
-
-        if(count($pluga)>0) {
-            $buffer_array=@file("$file");
-            foreach($buffer_array as $buffer) {
-                $buffer=trim($buffer);
-
-                if(!empty($buffer)) {
-                  if(strcmp($pluga[$nb],$buffer)!=0) {
-                     return false;
-                  }
-                  $nb=$nb+1;
-
-                } elseif($nb==$nbdata) {
-                  return true;
-                } else {
-                  return false;
-                }
-            }
-            return true;
-       }
-    }
-    return false;
-}
-// }}}
-
-
-// {{{ compare_plgidx()
-// ROLE compare plgidx and data from databases to check if the file is up to date
-// IN   $sd_card      sd card path to save data
-//      $ data        data to be compared to
-// RET false is there is something to write, true else
-function compare_plgidx($data,$sd_card) {
-
-    $file = $sd_card . "/serverPlugUpdate/prg/plgidx";
-
-
-    if(!is_file($file)) return false;
-
-    $plgidx=@file("$file");
-    if((count($data))!=(count($plgidx))) return false;
-
-    for($i=0;$i<count($data);$i++) {
-        if(strcmp(trim(html_entity_decode($data[$i])),trim(html_entity_decode($plgidx[$i])))!=0) return false;
-    }
-    return true;
-}
-// }}}
-
 
 // {{{ write_pluga()
 // ROLE write plug_a into the sd card
@@ -645,58 +464,6 @@ function write_plgidx($data,$sd_card) {
 // }}}
 
 
-// {{{ compare_plugconf()
-// ROLE compare plug's configuration with the database
-// IN   $data    array containing plugconf datas
-//      sd_card     path to the sd_card
-// OUT false is there is a difference, true else
-function compare_plugconf($data, $sd_card="") {
-
-    $path = $sd_card . "/serverPlugUpdate/plg/";
-
-
-   for($i=0;$i<count($data);$i++) {
-        $nb=$i+1;
-        if($nb<10) {
-            $file= $path . "plug0$nb";
-        } else {
-            $file= $path . "plug$nb";
-        }
-
-        if(!is_file($file)) return false;
-        $tmp=explode("\r\n",$data[$i]);
-        foreach($tmp as $dt) {
-           $new_tmp[]=trim($dt);
-        }
-
-        $tmp=$new_tmp;
-
-        $buffer=@file("$file");
-        $buffer=array_filter($buffer);
-
-        foreach($buffer as $bf) {
-           $new_buffer[]=trim($bf);
-        }
-
-        $buffer=$new_buffer;
-
-        if(count($buffer)!=count($tmp)) return false;
-
-        for($j=0;$j<count($buffer);$j++) {
-            if(strcmp($tmp[$j],$buffer[$j])!=0) {
-                    return false;
-            }
-        }
-
-        unset($tmp);
-        unset($buffer);
-   }
-   return true;
-}
-// }}}
-
-
-
 // {{{ check_and_copy_plgidx()
 // ROLE check if cnf/prg/plgidx exists
 // IN  $sd_card     the sd card pathname 
@@ -758,26 +525,6 @@ function check_and_copy_plgidx($sd_card="") {
 //     $id          the saved id from the database
 // RET false if the id file has to be updated, true else
 function check_and_copy_id($sd_card,$id="") {
-    if(strcmp("$id","")==0) return true;
-
-    if(is_file("$sd_card/cnf/id")) {
-        $id_file=file("$sd_card/cnf/id");
-        if(count($id_file)==1) {
-            $id_file=trim($id_file[0]);
-        } else {
-            $id_file=0;
-        }
-    } else {
-        $id_file=0;
-    }
-
-    if($id_file!=$id) {
-        while(strlen($id)<5) $id="0$id";
-        $handle=fopen("$sd_card/cnf/id",'w');
-        fwrite($handle,"$id");
-        fclose($handle);
-        return false;
-    }
     return true;
 }
 // }}}
@@ -788,43 +535,7 @@ function check_and_copy_id($sd_card,$id="") {
 // IN  $sd_card     the sd card pathname 
 // RET false if an error occured, true else
 function check_and_copy_index($sd_card) {
-    $path="";
-
-    if(is_file("tmp/logs/index")) {
-        $path="tmp/logs/index";
-    } else if(is_file("../tmp/logs/index")) {
-        $path="../tmp/logs/index";
-    } else if(is_file("../../tmp/logs/index")) {
-        $path="../../tmp/logs/index";
-    } else if(is_file("../../../tmp/logs/index")) {
-        $path="../../../tmp/logs/index";
-    }
-
-    if(!is_file("$sd_card/logs/index")) {
-        if(strcmp("$path","")!=0) {
-            if(!@copy("$path", "$sd_card/logs/index")) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-    } else {
-        if(strcmp("$path","")==0) {
-           return false;
-        } else {
-           if(filesize("$path")!=filesize("$sd_card/logs/index")) {
-               if(!@copy("$path", "$sd_card/logs/index")) {
-                   return false;
-                } else {
-                   return true;
-                }
-           } else {
-               return true;
-           }
-        }
-    }
+   return true;
 }
 // }}}
 
@@ -834,74 +545,6 @@ function check_and_copy_index($sd_card) {
 // IN  $sd_card     the sd card pathname 
 // RET false if an error occured, true else
 function clean_index_file($sd_card) {
-    $path="";
-
-    if(is_file("tmp/logs/index")) {
-        $path="tmp/logs/index";
-    } else if(is_file("../tmp/logs/index")) {
-        $path="../tmp/logs/index";
-    } else if(is_file("../../tmp/logs/index")) {
-        $path="../../tmp/logs/index";
-    } else if(is_file("../../../tmp/logs/index")) {
-        $path="../../../tmp/logs/index";
-    }
-
-    if(strcmp("$path","")==0) return false;
-    if(!is_dir("$sd_card/logs/")) return false;
-
-
-    if(!@copy("$path", "$sd_card/logs/index")) return false;
-    return true;
-}
-// }}}
-
-
-// {{{ find_informations()
-// ROLE find some informations from the log.txt file
-// IN    $ret       array to return containing informations
-//       $log_file  path to the log file
-// RET   none
-function find_informations($log_file,&$ret) {
-
-    // If file does not exists, return false
-    if(!file_exists($log_file)) 
-        return false;
-        
-    // Init return array
-    $ret["cbx_id"]      = "";
-    $ret["firm_version"]= "";
-    $ret["log"]         = "";
-
-    // Read the file
-    $buffer_array = file($log_file);
-    
-    // Foreach line
-    foreach($buffer_array as $buffer) {
-    
-        // Remove space before and after
-        $buffer=trim($buffer);
-
-        // If th line is empty, reurn
-        if($buffer == "") 
-            break;
-
-        // Init log with buffer
-        if(strcmp($ret["log"],"")==0) {
-            $ret["log"] = $buffer;
-        } else {
-            $ret["log"] = $ret["log"] . "#" . $buffer;
-        }
-
-        switch (substr($buffer,14,1)) {
-            case 'I':
-                $ret["cbx_id"] = substr($buffer,16,5);
-                break;
-            case 'V':
-                $ret["firm_version"] = substr($buffer,16,7); 
-                break;
-        }
-    }
-    
     return true;
 }
 // }}}
@@ -912,22 +555,7 @@ function find_informations($log_file,&$ret) {
 //  IN      $sd        the sd_card path to be checked
 // RET true if we can, false else
 function check_sd_card($sd="") {
-
-    // Check to open in write mode
-    if($f=@fopen("$sd/test.txt","w+")) {
-        // Close file
-        fclose($f);
-        
-        // Delete file
-        if(!@unlink("$sd/test.txt")) 
-            return false;
-        
-        // SD card is writable
-        return true;
-    } else {
-        // Not openable in write mode
-        return false;
-    }
+    return true;
 }
 // }}}
 

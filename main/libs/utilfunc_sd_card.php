@@ -29,40 +29,6 @@ function get_error_sd_card_update_message($id=0) {
 // }}}
 
 
-// {{{ sd_card_update_log_informations()
-// ROLE copy an empty file to a new file destination
-// IN $sd_card     destination path
-// RET true if the copy is errorless, false else
-function sd_card_update_log_informations ($sd_card="") {
-
-    if(empty($sd_card) || !isset($sd_card) || $sd_card == "") return ERROR_SD_NOT_FOUND;
-
-
-    // The informations part to send statistics to debug the cultibox: 
-    //      if the 'STATISTICS' variable into the configuration table from the database is set to 'True' informations will be send for debug
-    $informations["cbx_id"]="";
-    $informations["firm_version"]="";
-    $informations["log"]="";
-
-    
-    // Read log.txt file and clear it
-    find_informations("$sd_card/log.txt",$informations);
-    copy_template_file("empty_file_big.tpl", "$sd_card/log.txt");
-
-    // If informations are defined in log.txt copy them into database
-    if($informations["cbx_id"] != "")  
-        insert_informations("cbx_id",$informations["cbx_id"]);
-        
-    if($informations["firm_version"] != "") 
-        insert_informations("firm_version",$informations["firm_version"]);
-        
-    if($informations["log"] != "") 
-        insert_informations("log",$informations["log"]);
-
-    return 1;
-}
-
-
 // {{{ copy_template_file()
 // ROLE copy an empty file to a new file destination
 // IN  $name     name of the file to be copied
@@ -956,7 +922,5 @@ function check_and_copy_firm($sd_card) {
     return $copy;
 }
 // }}}
-
-
 
 ?>

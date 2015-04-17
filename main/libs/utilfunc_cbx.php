@@ -203,6 +203,39 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
 }
 // }}}
 
+// {{{ sd_card_update_log_informations()
+// ROLE copy an empty file to a new file destination
+// IN $sd_card     destination path
+// RET true if the copy is errorless, false else
+function sd_card_update_log_informations ($sd_card="") {
+
+    if(empty($sd_card) || !isset($sd_card) || $sd_card == "") return ERROR_SD_NOT_FOUND;
+
+
+    // The informations part to send statistics to debug the cultibox: 
+    //      if the 'STATISTICS' variable into the configuration table from the database is set to 'True' informations will be send for debug
+    $informations["cbx_id"]="";
+    $informations["firm_version"]="";
+    $informations["log"]="";
+
+    
+    // Read log.txt file and clear it
+    find_informations("$sd_card/log.txt",$informations);
+    copy_template_file("empty_file_big.tpl", "$sd_card/log.txt");
+
+    // If informations are defined in log.txt copy them into database
+    if($informations["cbx_id"] != "")  
+        insert_informations("cbx_id",$informations["cbx_id"]);
+        
+    if($informations["firm_version"] != "") 
+        insert_informations("firm_version",$informations["firm_version"]);
+        
+    if($informations["log"] != "") 
+        insert_informations("log",$informations["log"]);
+
+    return 1;
+}
+
 
 // {{{ compare_pluga()
 // ROLE compare pluga and data from databases to check if the file is up to date
@@ -801,48 +834,6 @@ function check_sd_card($sd="") {
         // Not openable in write mode
         return false;
     }
-}
-// }}}
-
-// {{{ create_conf_XML()
-// ROLE Used to creat a conf file
-// IN      $file        Path for the conf file
-// IN      $paramList       List of params
-// RET true if we can, false else
-function create_conf_XML($file, $paramList) {
-
-    // Check if directory exists
-    if(!is_dir(dirname($file)))
-        mkdir(dirname($file));
-
-    // Open in write mode
-    $fid = fopen($file,"w+");
-    
-    // Add header
-    fwrite($fid,'<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\r\n");
-    fwrite($fid,'<conf>'. "\r\n");
-    
-    // Foreach param to write, add it to the file
-    foreach ($paramList as $elemOfArray) {
-        
-        $str = "    <item ";
-        
-        foreach ($elemOfArray as $key => $value) {
-            $str .= $key . '="' . $value . '" ';
-        }
-        
-        $str .= "/>". "\r\n";
-    
-        fwrite($fid,$str);
-    }
-
-    // Add Footer
-    fwrite($fid,'</conf>'. "\r\n");
-    
-    // Close file
-    fclose($fid);
-    
-    return true;
 }
 // }}}
 
