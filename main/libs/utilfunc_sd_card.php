@@ -26,13 +26,6 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         return ERROR_SD_NOT_FOUND;
     }
 
-    // Alert user than an SD card was found
-    $main_info_tab[]=__('INFO_SD_CARD').": $sd_card";
-    
-    // Check if SD card can be writable
-    if(!check_sd_card($sd_card)) return ERROR_WRITE_SD;
-
-
     // Check and update path
     $logs = "$sd_card/logs";
     $cnf  = "$sd_card/cnf";
@@ -42,8 +35,14 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $recordfrequency = "1"; 
     $updatefrequency = "1"; 
 
-   
-    if(!isset($GLOBALS['MODE']) || $GLOBALS['MODE'] != "cultipi") { 
+    if(!isset($GLOBALS['MODE']) || $GLOBALS['MODE'] != "cultipi") {
+
+        // Alert user than an SD card was found
+        $main_info_tab[]=__('INFO_SD_CARD') . ": $sd_card";
+
+        // Check if SD card can be writable
+        if(!check_sd_card($sd_card)) return ERROR_WRITE_SD;
+        
         if(!is_dir($logs)) mkdir($logs);
         if(!is_dir($cnf)) mkdir($cnf);
         if(!is_dir($plg)) mkdir($plg);
@@ -51,6 +50,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         if(!is_dir($bin)) mkdir($bin);
     } else {
         // If we are in cultipi mode, create file systeme structure
+        if(!is_dir($sd_card))                           mkdir($sd_card);
         if(!is_dir($sd_card . "/cultiPi"))              mkdir($sd_card . "/cultiPi");
         if(!is_dir($sd_card . "/serverAcqSensor"))      mkdir($sd_card . "/serverAcqSensor");
         if(!is_dir($sd_card . "/serverHisto"))          mkdir($sd_card . "/serverHisto");
