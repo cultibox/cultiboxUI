@@ -56,6 +56,14 @@
                    alt="calendar"  
                    <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>
             />        
+
+            <!-- Button to add XML -->
+            <input type="image" id="import_xml" name="add_xml"
+                   title="<?php echo __('TOOLTIP_ADD_XML'); ?>"
+                   src="main/libs/img/upload.png"   
+                   alt="engrais"  
+                    <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>style="display:none"<?php } ?>
+            />
         </td>
         <td class="calendar_right">
             <input id="datepicker_calendar" name="datepicker_calendar" type="hidden" value="">
@@ -337,3 +345,18 @@
 <div id="empty_daily_program" style="display:none">
     <p><?php echo __('EMPTY_DAILY_PROGRAM'); ?></p>
 </div>
+
+
+<?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
+<input type="file" id="add_xml" name="files[]">
+
+<div id="progress_upload">
+    <div id="progress_bar_upload" class="bar" style="width: 0%;"></div>
+    <p class="p_center" id="progress_purcent"> </p>
+</div>
+
+<div id="error_upload_xml" style="dislay:none">
+
+</div>
+<?php } ?>
+
