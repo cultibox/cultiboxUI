@@ -277,7 +277,7 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png")
+                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg")
                             {
                                 echo '<option value="' . $file . '" >' . basename($file) . '</option>';
                             }
@@ -289,7 +289,7 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if ((pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif") 
+                            if ((pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg") 
                                 && strpos(basename($file), "_OFF"))
                             {
                                 // Create file name (remove extension and _ON)
@@ -304,7 +304,7 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png")
+                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg")
                             {
                                 echo '<option value="' . $file . '" >' . basename($file) . '</option>';
                             }
