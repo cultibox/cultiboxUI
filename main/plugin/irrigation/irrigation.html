@@ -72,7 +72,7 @@ foreach ($plateformeList as $key => $plateforme)
     echo '<p>Paramètres des zones : </p>';
     // Display parameters for each zone
     echo '<table border="1" > <tr> <th>Zone</th> <th>prise</th> <th>Temps On</th> <th>Temps Off</th>';
-    echo '<th>Active</th> <th>Coef temp</th> </tr>';
+    echo '<th>Active</th>  </tr>';
     $zoneList = irrigation\getZone($plateforme['idPlateforme']); 
     foreach ($zoneList as $key => $zone)
     {
@@ -85,7 +85,7 @@ foreach ($plateformeList as $key => $plateforme)
         if ($zone['active'] == "true")
             $checked = "checked";
         echo '<td><input type="checkbox" id="active_zone_' . $zone['id'] . '" ' . $checked . ' > </td>';
-        echo '<td><input type="text" id="coef_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['coef'] . '" > </td>';
+        //echo '<td><input type="text" id="coef_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['coef'] . '" > </td>';
         echo '</tr>';
     }
     echo '</table>';
