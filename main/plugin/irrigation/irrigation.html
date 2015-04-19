@@ -18,6 +18,12 @@
 
 // Les infos pour le local technique
 $localtechnique = irrigation\getLT();
+// If LT deosnot exist, load template
+if (!array_key_exists(0, $localtechnique)) {
+    irrigation\loadUserConfig();
+    $localtechnique = irrigation\getLT();
+}
+
 $engraisList = irrigation\getEngrais();
 echo '<h2>' . $localtechnique[0]['name'] . '</h2>';
 echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th></tr><tr>';
