@@ -1045,6 +1045,18 @@ msgstr "Heure d'extinction de l'équipement"
 
 
 #For the calendar part :
+msgid "TOOLTIP_ADD_XML"
+msgstr "Ajouter vos fichiers d'engrais"
+
+msgid "ERROR_XML_SIZE"
+msgstr "La taille du fichier d'engrais est limitée à 1Mo. Votre fichier dépasse cette taille."
+
+msgid "ERROR_XML_TYPE"
+msgstr "Le type de fichier d'engrais est limité aux fichiers XML. Votre fichier d'engrais ne semble pas être un XML."
+
+msgid "ERROR_UPLOAD_XML"
+msgstr "Erreur lors du chargement de votre programme d'engrais"
+
 msgid "DAY_DURATION"
 msgstr "jour"
 

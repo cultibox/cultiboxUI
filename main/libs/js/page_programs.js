@@ -121,13 +121,10 @@ $(document).ready(function(){
             buttons: [{
                  text: CLOSE_button,
                  click: function () {
-                       scrolltodiv("scrollto");
                        $( this ).dialog( "close" );
                  }}]
             });
-     } else if(apply) {
-        scrolltodiv("scrollto");
-     }
+     } 
 
      pop_up_remove("main_error");
      pop_up_remove("main_info");
@@ -160,7 +157,7 @@ $(document).ready(function(){
     });
 
     $("#select_program_index_conf").change(function() {
-        get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()+"&program_index_id="+$("#select_program_index_conf option:selected").val()));
+        get_content("programs",getUrlVars("selected_plug="+$("#selected_plug_conf option:selected").val()+"&program_index_id="+$("#select_program_index_conf option:selected").val()));
     });
 
     $("#reset_submit").click(function(e) {
@@ -515,6 +512,7 @@ $(document).ready(function(){
 
             if(checked) {
                 if((start==$('#start_time').val())&&(end==$('#end_time').val())&&(plug_selected==$('#selected_plug').val())&&($("input[id=ponctual]:checked").val()=="ponctuelle")) {
+                    $("#program_plug").dialog( "close" );
                     $("#same_dialog_program").dialog({
                         resizable: false,
                         height:200,
@@ -598,11 +596,13 @@ $(document).ready(function(){
                         }, {
                             text: CANCEL_button,
                             click: function () {
+                                $("#program_plug").dialog( "open" );
                                 $( this ).dialog( "close" ); return false;
                         }
                         }]
                     });
                 } else {
+                     $("#program_plug").dialog( "close" );
                      var data_array = {};
                         $("#actionprog :input").each(function() {
                         data_array[$(this).attr('name')]=$(this).val();
@@ -722,6 +722,47 @@ $(document).ready(function(){
                         $('#import_program').addClass("inputDisable");
                         return false;
                     }
+                }
+            }],
+        });
+    });
+
+
+
+    // Display and control plug's program
+    $("#program_plug_icon").click(function(e) {
+        e.preventDefault();
+        $("#program_plug").dialog({
+            resizable: true,
+            width: 800,
+            closeOnEscape: true,
+            dialogClass: "popup_message",
+            /*title: "<?php echo __('CONFIGURE_PROGRAM'); ?>",
+            open: function(event, ui) {
+                var title="<select name='selected_plug' id='selected_plug' style='position:absolute;top:3px;left:335px;'>";
+                for(i=0;i<nb_plugs;i++) { 
+                    title=title+"<option value="+plugs_infoJS[i]['id'];
+                    if(selected_plug==plugs_infoJS[i]['id']) {
+                       title=title+" selected"; 
+                    }
+
+                    title=title+">"+plugs_infoJS[i]['id']+" - "+plugs_infoJS[i]['PLUG_NAME']+"</option>";
+                    
+                }
+                title=title+"</select>";
+                $('.ui-dialog-titlebar').after(title);
+            },*/
+            buttons: [{
+                text: SAVE_button,
+                click: function () {
+                    $("#apply").trigger( "click" ); 
+                    return false;
+                }},{
+                text: CLOSE_button,
+                "id": "btnClose",
+                click: function () {
+                    $( this ).dialog( "close" );
+                    return false;
                 }
             }],
         });
@@ -1249,7 +1290,7 @@ $(document).ready(function() {
     });
     $.unblockUI();
 
-
+    //$('#selected_plug').live("change",function() {
     $('#selected_plug').change(function() {
         $("#error_value_program").css("display","none");
         $.each( chart.series, function() {
@@ -1396,18 +1437,6 @@ $(document).ready(function() {
         }
 
     });
-
-
-     /*   $('#datalabel').click(function() {
-        if (!$(this).is(':checked')) {
-            chart.xAxis[0].isDirty = true;
-            chart.redraw();
-        } else {
-                chart.xAxis[0].isDirty = false;
-                chart.redraw();
-        }
-     });
-        */
 
 
     $('#selected_plug_conf').change(function() {

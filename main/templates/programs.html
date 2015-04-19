@@ -38,7 +38,13 @@
     <tr>
         <td class="program-div-margin-param"></td>
         <td>
-            <!-- Button for param -->
+            <!-- Button for program -->
+            <input type="image" id="program_plug_icon" name="program_plug_icon" 
+                src="main/libs/img/clock.png" 
+                title="<?php echo __('TOOLTIP_PARAMETERS_PROGRAM'); ?>" 
+                alt="program"
+            />
+            <!-- Button for plug -->
             <input type="image" id="plug_settings" name="plug_settings" 
                 src="main/libs/img/plug_icon.png" 
                 title="<?php echo __('TOOLTIP_PARAMETERS_PLUGS'); ?>" 
@@ -49,7 +55,7 @@
             <input type="image" id="program_settings" name="program_settings" 
                 src="main/libs/img/advancedsettings.png" 
                 title="<?php echo __('TOOLTIP_PARAMETERS_PROGRAM'); ?>" 
-                alt="program"
+                alt="param"
             />
         </td>       
     </tr>
@@ -79,10 +85,9 @@
     </tr>
 </table>
 
-<br /><hr /><br />
-
+<div id="program_plug" style="display:none">
 <form action="/cultibox/index.php?menu=programs" method="post" name="actionprog" id="actionprog">
-    <p class="title_conf"><?php echo __('CONFIGURE_PROGRAM'); ?>
+    <p class="program_title_conf"><?php echo __('CONFIGURE_PROGRAM'); ?>
         <select name="selected_plug" id="selected_plug">
             <?php 
                 for($i=0;$i<count($plugs_infos);$i++) { ?>
@@ -92,7 +97,6 @@
 
         </select>
     </p>
-
     <table class="table_width">
         <tr>
             <td class="program-marge"></td>
@@ -301,16 +305,11 @@
             <td></td>
         </tr>
     </table>
+    <input type="submit" name="applyform" value="<?php echo __('APPLY_PROGRAM'); ?>" id="apply" style="display:none">
     <input type="hidden" name="apply" value="apply">
-    <table class="table_width">
-        <tr>
-            <td></td>
-            <td class="program-valid-right"><br /><input type="submit" class="delete" name="applyform" value="<?php echo __('APPLY_PROGRAM'); ?>" id="apply"></td>
-            <td></td>
-        </tr>
-    </table>
     <input type="hidden" name="program_index_id" value="<?php echo $program_index_id; ?>">
 </form>
+</div>
 
 <div id="same_dialog_program" title="<?php echo __('CONFIRMATION'); ?>" style="display:none">
     <p><?php echo __('CONFIRM_SAME_PROGRAM'); ?></p>
@@ -376,8 +375,10 @@
     <br />
     <hr />
     <br />
+   
+    <?php if(strcmp("$second_regul","True")==0) { ?> 
     <table class="table_width">
-        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
+        <tr>
             <!-- Save daily programm -->
             <td class="program-td-management">
                 <?php echo __('PROGRAM_DAILY_SAVE'); ?>
@@ -391,7 +392,7 @@
                 <input type="submit" id="daily_save_button" name="daily_save_button" value="<?php echo __('SAVE_DIALOG_CALENDAR'); ?>">
             </td>
         </tr>
-        <tr <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
+        <tr>
             <!-- Delete daily programm -->
             <td>
                 <?php echo __('PROGRAM_DAILY_DELETE_SELECT'); ?>
@@ -411,9 +412,11 @@
     <br />
     <hr />
     <br />
+    <?php } ?>
     <table class="table_width">
         <!-- Remove limit of 1000 changes in programm -->
-        <tr>
+        <tr <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) echo 'style="display:none"'; ?>
+>
             <td class="program-td-management">
                  <?php echo __('REMOVE_1000_CHANGE_LIMIT_SELECT'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_1000_CHANGE_LIMIT'); ?>" />
              </td>
@@ -427,7 +430,7 @@
          </tr>
          <tr>
              <!-- Remove limit of 5 minute in programm -->
-             <td>
+             <td class="program-td-management">
                  <?php echo __('REMOVE_5_MINUTE_LIMIT_SELECT'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_5MN_LIMIT'); ?>" />
              </td>
              <td>
@@ -460,12 +463,14 @@
                         } 
                     ?>
                     </select>
+                    <div id="export_part_daily" <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
                     <?php echo __('SELECTED_DAILY_PROGRAM'); ?>
                     <select name="export_program_index_id" id="export_program_index_id">
                         <?php foreach ($index_info as $row) { ?>
                              <option value="<?php echo $row['id']; ?>" <?php if($program_index_id==$row['id']) echo " selected"; ?>><?php echo $row['name']; ?></option>
                         <?php    } ?>
                     </select>
+                    </div>
                     <input type="submit" value="<?php echo __('EXPORT_PROGRAM'); ?>" name="export" id="export_program">
                 </form>
             </td>
@@ -505,12 +510,14 @@
                         }
                     ?>
                     </select> 
+                    <div id="import_part_daily" <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
                     <?php echo __('SELECTED_DAILY_PROGRAM'); ?>
                     <select name="import_program_index_id" id="import_program_index_id">
                         <?php foreach ($index_info as $row) { ?>
                             <option value="<?php echo $row['id']; ?>" <?php if($program_index_id==$row['id']) echo " selected"; ?>><?php echo $row['name']; ?></option>
                         <?php    } ?>
                     </select>
+                    </div>
                     <input id="fileupload" type="file" name="files[]"><label id="import_name_file" class="imported_file"></label>
                     <input type="submit" name="import" value="<?php echo __('SELECT_FILE_NAME'); ?>" id="import_program" class="inputDisable" disabled>
                 </form>

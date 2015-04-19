@@ -86,7 +86,7 @@
                     <?php if($selected_plug==1) { ?>
                         <img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_AVANCED_PLUG_WIZARD'); ?>" />
                     <?php } ?>
-                </td>
+                </td
                 <td></td>
             </tr>
             <tr>
@@ -94,7 +94,7 @@
                 <td><?php echo __('PLUG_MAX_POWER'); ?>:</td>
                 <td>
                     <?php if($selected_plug <= $GLOBALS['NB_MIN_PLUG']) { ?>
-                        <label class="readonly" id="plug_power_maximal<?php echo $i; ?>"><?php echo $plug_power_max; ?>W</label>
+                        <label class="readonly" id="plug_power_maximal"><?php echo $plug_power_max; ?>W</label>
                         <?php if($plug_power_max==3500) { ?>
                             <img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_MAX_POWER_PLUG_3500'); ?>" />
                         <?php } else { ?>

@@ -378,6 +378,7 @@ $(document).ready(function(){
         $("#add_images_syno").dialog({
             resizable: false,
             width: 500,
+            modal: true,
             closeOnEscape: true,
             dialogClass: "popup_message",
             buttons: [{
@@ -390,20 +391,20 @@ $(document).ready(function(){
     });
 
      
-     var upload_dir="";
+     var upload_dir="../../libs/img/";
+     var jqXHR;
      $('#import_image_other, #import_image_sensor, #import_image_plug').fileupload({
             dataType: 'json',
             url: 'main/modules/external/files.php',
             add: function (e, data) {
                 $("#add_images_syno").dialog('close');
                 if($(this).attr('id')=='import_image_other') {
-                    upload_dir="images-synoptic-other";
+                    upload_dir=upload_dir+"images-synoptic-other";
                 } else if($(this).attr('id')=='import_image_plug') { 
-                    upload_dir="images-synoptic-plug";
+                    upload_dir=upload_dir+"images-synoptic-plug";
                 } else {
-                    upload_dir="images-synoptic-sensor";
+                    upload_dir=upload_dir+"images-synoptic-sensor";
                 }
-
 
                 var acceptFileTypes = /^image\/(gif|jpe?g|png|bmp)$/i;
                 var uploadErrors = [];
@@ -436,7 +437,7 @@ $(document).ready(function(){
 
                 } else {
                     $("#error_upload_image").html("");
-                    data.submit();
+                    jqXHR = data.submit();
                 }
             },
             progressall: function (e, data) {
@@ -461,6 +462,7 @@ $(document).ready(function(){
                         text: CANCEL_button,
                         id: "cancelbtnid",
                         click: function(){
+                            jqXHR.abort();
                             $(this).dialog("close");
                         }   
                     }]
@@ -484,7 +486,7 @@ $(document).ready(function(){
                 $.ajax({
                     cache: false,
                     async: false,
-                    url: "main/modules/external/move_uploaded_images.php",
+                    url: "main/modules/external/move_uploaded_file.php",
                     data: {filename:name,upload_dir:upload_dir}
                  });
             }

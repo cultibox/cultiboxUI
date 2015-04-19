@@ -1515,5 +1515,105 @@ $(document).ready(function() {
     });
 });
 
+//To upload XML for the Cultipi:
+$(document).ready(function() {
+    $("#import_xml").click(function(e) {
+        e.preventDefault();
+        $('#add_xml').trigger('click');
+    });
+
+
+    var jqXHR;
+    var upload_dir="../../xml";
+
+    $('#add_xml').fileupload({
+            dataType: 'json',
+            url: 'main/modules/external/files.php',
+            add: function (e, data) {
+                var acceptFileTypes = /^text\/(xml)$/i;
+                var uploadErrors = [];
+                if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                    uploadErrors.push("<?php echo __('ERROR_XML_TYPE'); ?>");
+                }
+
+                if(data.originalFiles[0]['size'] > 1000000) {
+                    uploadErrors.push("<?php echo __('ERROR_XML_SIZE'); ?>");
+                }
+
+                if(uploadErrors.length > 0) {
+                    $("#error_upload_xml").html(uploadErrors.join("<br /><br />"));
+                    $("#error_upload_xml").dialog({
+                        width: 700,
+                        modal: true,
+                        resizable: false,
+                        closeOnEscape: false,
+                        dialogClass: "popup_error",
+                        title: "<?php echo __('ERROR_UPLOAD_XML'); ?>",
+                        buttons : [{
+                        text: CLOSE_button,
+                        click: function(){
+                            $(this).dialog("close");
+                            $("#error_upload_image").html("");
+                        }
+                    }]
+                    });
+
+                } else {
+                    $("#error_upload_xml").html("");
+                    jqXHR = data.submit();
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_upload').css(
+                    'width',
+                    progress + '%'
+                );
+
+                $('#progress_purcent').html(
+                    progress + '%'
+                );
+
+                $("#progress_upload").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>",
+                    buttons : [{
+                        text: CANCEL_button,
+                        id: "cancelbtnid",
+                        click: function(){
+                            jqXHR.abort();
+                            $(this).dialog("close");
+                            get_content("calendar");
+                        }
+                    }]
+                });
+                
+                   if(progress==100) {
+                    $("#cancelbtnid").html('<span class="ui-button-text">'+CLOSE_button+'</span>');
+                }
+            },
+            done: function (e, data) {
+                e.preventDefault();
+
+                var name="";
+                $.each(data.result.files, function (index, file) {
+                    name=file.name;
+                });
+
+
+                $.ajax({
+                    cache: false,
+                    async: false,
+                    url: "main/modules/external/move_uploaded_file.php",
+                    data: {filename:name,upload_dir:upload_dir}
+                });
+            }
+        });
+});
+
 
 </script>
