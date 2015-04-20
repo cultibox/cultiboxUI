@@ -100,6 +100,12 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "DL_WIFI_FIRM"
+msgstr "Télécharger le firmware du module Wifi"
+
+msgid "DL_CULTIBOX_FIRM"
+msgstr "Télécharger le firmware de la Cultibox"
+
 msgid "CONFIGURE_TITLE_CULTIBOX"
 msgstr "Configurer votre système Cultibox"
 

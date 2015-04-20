@@ -143,23 +143,34 @@ $(document).ready(function(){
 
             data.context = $('#import_conf').click(function (e) {
                 e.preventDefault();
-                $.blockUI({
-                message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                centerY: 0,
-                css: {
-                    top: '20%',
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: 'grey',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    opacity: .9,
-                    color: '#fffff'
-                },
-                onBlock: function() {
-                    data.submit();
-                } });
+                data.submit();
             });
+        },
+        progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_conf').css(
+                    'width',
+                    progress + '%'
+                );
+    
+                $('#progress_purcent').html(
+                    progress + '%'
+                );
+
+                $("#progress_conf").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>"
+                });
+
+                if(progress==100) {
+                    $('#progress_bar_conf').css('width','0%');
+                    $("#progress_conf").dialog('close');
+                    $('#progress_purcent').html();
+                }
         },
         done: function (e, data) {
             e.preventDefault();
@@ -229,6 +240,7 @@ $(document).ready(function(){
                                 buttons: [{
                                     text: CLOSE_button,
                                     click: function () {
+                                        get_content("configuration");
                                         $( this ).dialog( "close" ); return false;
                                     }
                                 }]
@@ -1680,6 +1692,19 @@ $(document).ready(function() {
               }
         });
       }
+    });
+
+
+
+
+    $('#dl_cultibox_firm').click(function(e) {
+       e.preventDefault();
+       $.fileDownload('main/templates/data/firm.hex');
+    });
+
+    $('#dl_wifi_firm').click(function(e) {
+       e.preventDefault();
+       $.fileDownload('main/templates/data/firm_wifi.hex');
     });
 });
 

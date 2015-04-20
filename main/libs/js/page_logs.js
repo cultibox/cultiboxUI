@@ -311,6 +311,10 @@ $(function () {
                     progress + '%'
                 );
 
+                 $('#progress_purcent').html(
+                    progress + '%'
+                );
+
                 $("#progress_csv").dialog({
                     width: 700,
                     modal: true,
@@ -323,6 +327,7 @@ $(function () {
                 if(progress==100) {
                     $('#progress_bar_csv').css('width','0%');
                     $("#progress_csv").dialog('close');
+                    $('#progress_purcent').html();
                 }
             },
             done: function (e, data) {

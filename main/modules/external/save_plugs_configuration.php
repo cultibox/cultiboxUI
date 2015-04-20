@@ -55,6 +55,7 @@ for($j = 1 ; $j <= $GLOBALS['NB_MAX_SENSOR_PLUG'] ; $j++) {
     }
 }
 
+
 if($sensor=="") {
     $sensor="1";
 }
@@ -77,7 +78,7 @@ $old_module_options = get_plug_conf("PLUG_MODULE_OPTIONS",$nb,$main_error);
 $old_module_output  = get_plug_conf("PLUG_MODULE_OUTPUT",$nb,$main_error);
 
 // Save the name of the plug
-if( !empty($name) && isset($name) && $old_name != $name) {
+if( !empty($name) && isset($name) && strcmp("$old_name","$name")!=0) {
     $name = mysql_escape_string($name);
     insert_plug_conf("PLUG_NAME",$nb,$name,$main_error);
 }
@@ -113,13 +114,13 @@ if(!empty($power_max) && isset($power_max) && $old_power_max != $power_max) {
 } 
 
 
-if(!empty($regul) && isset($regul) && $old_regul != $regul) {
+if(!empty($regul) && isset($regul) && strcmp("$old_regul","$regul")!=0) {
     insert_plug_conf("PLUG_REGUL",$nb,$regul,$main_error);
 }
 
 
 if($regul == "True") {
-    if(!empty($regul_senss) && isset($regul_senss) && $old_senss != $regul_senss) {
+    if(!empty($regul_senss) && isset($regul_senss) && strcmp("$old_senss","$regul_senss")!=0) {
         insert_plug_conf("PLUG_SENSS",$nb,$regul_senss,$main_error);
     }
 }
@@ -149,7 +150,7 @@ switch ($type) {
         break;
 }
 
-if(!empty($regul_senso) && isset($regul_senso) && $old_senso != $regul_senso) {
+if(!empty($regul_senso) && isset($regul_senso) && strcmp("$old_senso","$regul_senso")!=0) {
     insert_plug_conf("PLUG_SENSO",$nb,$regul_senso,$main_error);
 }
 
@@ -157,19 +158,20 @@ if(!empty($regul_value) && isset($regul_value) && $old_regul_value != $regul_val
     insert_plug_conf("PLUG_REGUL_VALUE",$nb,$regul_value,$main_error);
 }
 
-if(!empty($sensor) && isset($sensor) && $old_sensor != $sensor) {
-    insert_plug_conf("PLUG_REGUL_SENSOR",$nb,$sensor,$main_error);
+
+if((!empty($sensor)) && (isset($sensor)) && (strcmp("$old_sensor","$sensor")!=0)) {
+    insert_plug_conf("PLUG_REGUL_SENSOR",$nb,"$sensor",$main_error);
 }
 
 if($plug_count_sensor[$nb]>1) {
-    if(!empty($compute_method) && isset($compute_method) && $old_compute_method != $compute_method) {
+    if(!empty($compute_method) && isset($compute_method) && strcmp("$old_compute_method","$compute_method")!=0) {
         insert_plug_conf("PLUG_COMPUTE_METHOD",$nb,$compute_method,$main_error);
     }
 } else {
     insert_plug_conf("PLUG_COMPUTE_METHOD",$nb,"M",$main_error);
 }
 
-if(!empty($type) && isset($type) && $old_type != $type) {
+if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
     insert_plug_conf("PLUG_TYPE",$nb,$type,$main_error);
 
     //If second regulation is deactivated but the type of plug change, we also change default value for second regulation:
@@ -210,7 +212,7 @@ if(!empty($type) && isset($type) && $old_type != $type) {
 }
 
 // Save module
-if(!empty($module) && isset($module) && $old_module != $module) {
+if(!empty($module) && isset($module) && strcmp("$old_module","$module")!=0) {
     insert_plug_conf("PLUG_MODULE",$nb,$module,$main_error);
 }
 
@@ -220,12 +222,12 @@ if(!empty($num_module) && isset($num_module) && $old_num_module != $num_module) 
 }
 
 // Save options
-if(isset($module_options) && $old_module_options != $module_options) {
+if(isset($module_options) && strcmp("$old_module_options","$module_options")!=0) {
     insert_plug_conf("PLUG_MODULE_OPTIONS",$nb,$module_options,$main_error);
 }
 
 // Save options
-if(!empty($module_output) && isset($module_output) && $old_module_output != $module_output) {
+if(!empty($module_output) && isset($module_output) && strcmp("$old_module_output","$module_output")!=0) {
     insert_plug_conf("PLUG_MODULE_OUTPUT",$nb,$module_output,$main_error);
 }
 
