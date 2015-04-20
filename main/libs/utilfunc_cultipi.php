@@ -641,4 +641,16 @@ function create_conf_XML($file, $paramList) {
 }
 // }}}
 
+// {{{ write_calendar()
+// ROLE save calendar informations into the SD card
+// IN $sd_card         sd card location
+//    $data            data to write into the sd card (come from calendar\read_event_from_db )
+//    $out             error or warning messages
+//    $start           write calendar between two dates (ms format)
+//    $end             if start and end are not set: write full calendar (ms format)
+// RET false if an error occured, true else
+function write_calendar($sd_card,$data,&$out,$start="",$end="") {
+    return true;
+}
+
 ?>
