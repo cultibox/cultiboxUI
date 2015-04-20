@@ -516,9 +516,6 @@
         <td>
             <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
             <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
-            <img src='/cultibox/main/libs/img/service_on.png' alt='' title="<p class='p_center'><b><i><?php echo __('CULTIPI_SERVICE'); ?>:</i></b></p><?php echo __('SERVICE_ON'); ?>" id="cultipi_on" style="display:none">
-            <img src='/cultibox/main/libs/img/service_off.png' alt='' title="<p class='p_center'><b><i><?php echo __('CULTIPI_SERVICE'); ?>:</i></b></p><?php echo __('SERVICE_OFF'); ?>" id="cultipi_off">
-            <a href="" name="restart_service" id="restart_cultipi"><img src='/cultibox/main/libs/img/service_restart.png' alt='' title="<?php echo __('RESTART_SERVICE'); ?>" /></a>
         </td>
         <td>
             <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
@@ -556,15 +553,6 @@
 </div>
 
 
-<div id="error_restart_service" title="" style="display:none">
-    <p><?php echo __('ERROR_RESTART_SERVICE'); ?></p>
-</div>
-
-<div id="success_restart_service" title="" style="display:none">
-    <p><?php echo __('SUCCESS_RESTART_SERVICE'); ?></p>
-</div>
-
-
 <div id="error_save_password" title="" style="display:none">
     <p><?php echo __('ERROR_SAVE_PASSWORD'); ?></p>
 </div>
@@ -587,10 +575,6 @@
 
 <div id="success_restart_rpi" title="" style="display:none">
     <?php echo __('SUCCESS_RESTART_RPI'); ?>
-</div>
-
-<div id="confirm_restart_cultipi" title="<?php echo __('CONFIRM_RESTART_CULTIPI_TITLE'); ?>" style="display:none">
-    <?php echo __('CONFIRM_RESTART_CULTIPI'); ?>
 </div>
 
 <div id="dialog_change_password" title="<?php echo __('NEW_PASSWORD'); ?>" style="display:none">

@@ -41,7 +41,7 @@
             <!-- Button for program -->
             <input type="image" id="program_plug_icon" name="program_plug_icon" 
                 src="main/libs/img/clock.png" 
-                title="<?php echo __('TOOLTIP_PARAMETERS_PROGRAM'); ?>" 
+                title="<?php echo __('TOOLTIP_PROGRAM_PLUG'); ?>" 
                 alt="program"
             />
             <!-- Button for plug -->
@@ -65,13 +65,13 @@
 
 <table class="table_width">
     <tr>
-        <td class="program-div-margin"></td><td class="program-div"><div id="plug" style="width: 100%; height: 350px; margin: 0 auto"></div></td>
-        <td></td>
+        <td class="program-div-margin"></td>
+        <td class="program-div"></td>
+        <td><img src="main/libs/img/resume.png" alt="" id="resume_img" title="<?php echo $resume[$selected_plug].'<br />'.$resume_regul[$selected_plug]; ?>" /></td>
     </tr>
     <tr>
+        <td class="program-div-margin"></td><td class="program-div"><div id="plug" style="width: 100%; height: 350px; margin: 0 auto"></div></td>
         <td></td>
-        <td></td>
-        <td><img src="main/libs/img/resume.png" alt="" id="resume_img" title="<?php echo $resume[$selected_plug].'<br />'.$resume_regul[$selected_plug]; ?>" /></td>
     </tr>
     <tr>
         <td></td>

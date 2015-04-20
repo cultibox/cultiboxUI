@@ -1101,3 +1101,12 @@ p.p_date_creation {
 .tabs-dialog .ui-dialog-titlebar { display:none };
 
 
+td.cultipi_icon {
+    width: 30px;
+}
+
+td.cultipi_blank {
+    width: 15%;
+}
+
+

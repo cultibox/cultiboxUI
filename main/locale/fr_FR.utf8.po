@@ -729,6 +729,9 @@ msgid "PLUGS_MODULE_IP_ADRESS"
 msgstr "Adresse IP :"
 
 # For the programs part:
+msgid "TOOLTIP_PROGRAM_PLUG"
+msgstr "Programmer le comportement de vos prises"
+
 msgid "VIEW_CURRENT_PROGRAM"
 msgstr "Jeu de programme : "
 

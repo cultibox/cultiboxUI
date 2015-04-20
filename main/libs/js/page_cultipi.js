@@ -124,6 +124,112 @@ $(document).ready(function(){
         });
     }
 
+    
+    $("#restart_cultipi").click(function(e) {
+           e.preventDefault();
+           $("#confirm_restart_cultipi").dialog({
+                resizable: false,
+                height:150,
+                width: 500,
+                modal: true,
+                closeOnEscape: false,
+                dialogClass: "dialog_cultibox",
+                buttons: [{
+                    text: OK_button,
+                    click: function () {
+                        $( this ).dialog("close");
+
+                        $.blockUI({
+                            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                            centerY: 0,
+                            css: {
+                                top: '20%',
+                                border: 'none',
+                                padding: '5px',
+                                backgroundColor: 'grey',
+                                '-webkit-border-radius': '10px',
+                                '-moz-border-radius': '10px',
+                                opacity: .9,
+                                color: '#fffff'
+                            },
+                            onBlock: function() {
+                                 $.ajax({
+                                    cache: false,
+                                    async: true,
+                                    url: "main/modules/external/services_status.php",
+                                    data: {action:"restart_cultipi"},
+                                    success: function (data) {
+                                        var objJSON = jQuery.parseJSON(data);
+                                        if(objJSON=="0") {
+                                            $.ajax({
+                                                cache: false,
+                                                async: true,
+                                                url: "main/modules/external/services_status.php",
+                                                data: {action:"status_cultipi"}
+                                            }).done(function (data) {
+                                                $.unblockUI();
+
+                                                $("#success_restart_service").dialog({
+                                                    resizable: false,
+                                                    width: 400,
+                                                    closeOnEscape: true,
+                                                    modal: true,
+                                                    dialogClass: "popup_message",
+                                                    buttons: [{
+                                                        text: CLOSE_button,
+                                                        click: function () {
+                                                            $( this ).dialog( "close" ); return false;
+                                                        }
+                                                    }]
+                                                    });
+                                            });
+                                    } else {
+                                            $("#error_restart_service").dialog({
+                                                resizable: false,
+                                                width: 400,
+                                                closeOnEscape: true,
+                                                modal: true,
+                                                dialogClass: "popup_error",
+                                                buttons: [{
+                                                    text: CLOSE_button,
+                                                    click: function () {
+                                                        $( this ).dialog( "close" ); return false;
+                                                    }
+                                                }]
+                                            });
+                                            $.unblockUI();
+                                        }
+                                    }, error: function (data) {
+                                        $("#error_restart_service").dialog({
+                                            resizable: false,
+                                            width: 400,
+                                            closeOnEscape: true,
+                                            modal: true,
+                                            dialogClass: "popup_error",
+                                            buttons: [{
+                                                text: CLOSE_button,
+                                                click: function () {
+                                                    $( this ).dialog( "close" ); return false;
+                                            } }]
+                                        });
+                                        $.unblockUI();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }, {
+                text: CANCEL_button,
+                        click: function () {
+                            $( this ).dialog( "close" ); return false;
+                        }
+                }]
+        });
+    });
+
+
+
+
 
     $('a[id^="link_webcam"]').click(function(e) {
         e.preventDefault();
