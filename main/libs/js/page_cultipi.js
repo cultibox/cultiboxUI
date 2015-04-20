@@ -512,7 +512,7 @@ $(document).ready(function(){
                     upload_dir=upload_dir+"images-synoptic-sensor";
                 }
 
-                var acceptFileTypes = /^image\/(gif|jpe?g|png|bmp)$/i;
+                var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
                 var uploadErrors = [];
                 if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
                     uploadErrors.push("<?php echo __('ERROR_IMAGE_TYPE'); ?>");
