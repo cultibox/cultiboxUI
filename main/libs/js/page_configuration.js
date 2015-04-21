@@ -1558,7 +1558,7 @@ $(document).ready(function() {
 
                 var check_update=false;
                 if(checked) {
-                    var dataForm=$("#configform").serialize();
+                    var dataForm=$("#configform_network").serialize();
                     if($("#hex_password").attr('checked')) {
                         var hex="1";
                     } else {
