@@ -656,22 +656,6 @@ $(document).ready(function(){
     // Display and control user form for configuring item
     $('body').on('click', '.syno_conf_elem_button', function(e) {
         e.preventDefault();
-        
-        $.blockUI({
-            message: "",
-            centerY: 0,
-            css: {
-                top: '20%',
-                border: 'none',
-                padding: '5px',
-                backgroundColor: 'grey',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                opacity: .9,
-                color: '#fffff'
-            }
-        });
-    
 
         idOfElem = $(this).attr('id').split("_")[2];
         
@@ -689,7 +673,6 @@ $(document).ready(function(){
             success: function (data) {
             
                 if(data != "") {
-
                     syno_configure_element_object = jQuery.parseJSON(data);
 
                     // Parse if needed
@@ -729,6 +712,7 @@ $(document).ready(function(){
                     $("#syno_configure_element").dialog({
                         resizable: false,
                         width: 400,
+                        modal: true,
                         closeOnEscape: true,
                         dialogClass: "popup_message",
                         title:"Configurer " + elementTitle,
@@ -822,13 +806,10 @@ $(document).ready(function(){
                             }
                         }]
                     });
-                    
                 }
             }, error: function(data) {
-               $.unblockUI();
             }
         });
-
     });
     
     
