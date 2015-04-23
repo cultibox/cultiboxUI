@@ -3,7 +3,6 @@
 // ================= VARIABLES ================= //
 $plug_count_sensor=array();
 
-
 if(!isset($submit_plugs)) {
     $submit_plugs=getvar("submit_plugs");
 }
@@ -22,6 +21,7 @@ if(!isset($reccord)) {
 
 
 
+
 // By default the expanded menu is the plug1 menu
 if((!isset($submenu))||(empty($submenu))) {
     $submenu="1";
@@ -32,6 +32,18 @@ if((!isset($selected_plug))||(empty($selected_plug))) {
     $selected_plug="1";
 }
 
+
+$nb_plugs=get_configuration("NB_PLUGS",$main_error);
+
+if(!isset($second_regul)) {
+    $second_regul=get_configuration("ADVANCED_REGUL_OPTIONS",$main_error);
+}
+
+
+// Retrieve plug's informations from the database
+if(!isset($plugs_infos)) {
+    $plugs_infos=get_plugs_infos($nb_plugs,$main_error);
+}
 
 for($nb=1;$nb<=$nb_plugs;$nb++) {
    $plug_name{$nb}  =get_plug_conf("PLUG_NAME",$nb,$main_error);
@@ -86,6 +98,7 @@ if((isset($sd_card))&&(!empty($sd_card))) {
 }
 
 
+
 // Retrieve plug's informations from the database
 $status=get_canal_status($main_error);
 
@@ -99,5 +112,6 @@ if($GLOBALS['DEBUG_TRACE']) {
     echo "---------------------------------------<br />";
     memory_stat();
 }
+
 
 ?>
