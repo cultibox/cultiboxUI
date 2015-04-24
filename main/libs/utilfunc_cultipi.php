@@ -39,6 +39,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     if(!is_dir($sd_card . "/serverPlugUpdate/plg")) mkdir($sd_card . "/serverPlugUpdate/plg");
     if(!is_dir($sd_card . "/serverMail"))           mkdir($sd_card . "/serverMail");
     if(!is_dir($sd_card . "/serverCultibox"))       mkdir($sd_card . "/serverCultibox");
+    if(!is_dir($sd_card . "/serverSupervision"))    mkdir($sd_card . "/serverSupervision");
     
     // Create cultipi conf.xml file
     $paramListCultipiConf[] = array (
@@ -275,6 +276,13 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "level" => "motdepasse"
     );
     create_conf_XML($sd_card . "/serverMail/conf.xml" , $paramListServerMail);
+    
+    // Create conf for supervision
+    $paramListSupervision[] = array (
+        "name" => "verbose",
+        "level" => "info"
+    );
+    create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
     
     $program = "";
     $conf_uptodate = true;
