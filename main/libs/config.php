@@ -179,11 +179,13 @@ $GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] = 0;
 $GLOBALS['CULTIPI']['USE_DIRECT_READ'] = 0;
 
 // Trace level for cultipi 
-$GLOBALS['CULTIPI']['TRACE_LEVEL']['cultiPi']          = "warning";
-$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']  = "warning";
-$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverHisto']      = "warning";
-$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']        = "warning";
-$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate'] = "info";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['cultiPi']           = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']   = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverHisto']       = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']         = "warning";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate']  = "info";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']        = "info";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision'] = "info";
 
 // -------------------------------------------------- 
 

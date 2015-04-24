@@ -257,7 +257,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     // Create conf for mail
     $paramListServerMail[] = array (
         "name" => "verbose",
-        "level" => "info"
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']
     );
     $paramListServerMail[] = array (
         "name" => "serveurSMTP",
@@ -280,7 +280,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     // Create conf for supervision
     $paramListSupervision[] = array (
         "name" => "verbose",
-        "level" => "info"
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision']
     );
     create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
     
