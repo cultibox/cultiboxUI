@@ -260,7 +260,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']
     );
     $paramListServerMail[] = array (
-        "name" => "serveurSMTP",
+        "name" => "serverSMTP",
         "level" => "smtp.gmail.com"
     );
     $paramListServerMail[] = array (
@@ -272,7 +272,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "level" => "hercule.poirot@gmail.com"
     ); 
     $paramListServerMail[] = array (
-        "name" => "hercule.poirot@gmail.com",
+        "name" => "password",
         "level" => "motdepasse"
     );
     create_conf_XML($sd_card . "/serverMail/conf.xml" , $paramListServerMail);
