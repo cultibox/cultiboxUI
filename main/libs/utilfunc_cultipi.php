@@ -290,7 +290,36 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "name" => "verbose",
         "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision']
     );
+    $paramListSupervision[] = array (
+        "name" => "nbProcess",
+        "level" => 0
+    );    
     create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
+    
+    // For each process create an XML
+    /*
+    $paramListSupervisionProcess[] = array (
+        "name" => "action",
+        "level" => "checkPing"
+    );    
+    $paramListSupervisionProcess[] = array (
+        "name" => "nbIP",
+        "level" => "1"
+    );
+    $paramListSupervisionProcess[] = array (
+        "name" => "IP,0",
+        "level" => "8.8.8.8"
+    );
+    $paramListSupervisionProcess[] = array (
+        "name" => "timeMax",
+        "level" => "30"
+    ); 
+    $paramListSupervisionProcess[] = array (
+        "name" => "error,action",
+        "level" => "sendMail info@cultibox.fr"
+    );
+    create_conf_XML($sd_card . "/serverSupervision/process_0.xml" , $paramListSupervisionProcess);
+    */
     
     $program = "";
     $conf_uptodate = true;
