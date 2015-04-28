@@ -53,7 +53,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         'name' => "serverLog",
         'waitAfterUS' => "1000",
         'pathexe' => "tclsh",
-        'path' => "./serverLog/serveurLog.tcl",
+        'path' => "./serverLog/serverLog.tcl",
         'xmlconf' => "./serverLog/conf.xml",
     );
     $paramListCultipiStart[] = array ( 
