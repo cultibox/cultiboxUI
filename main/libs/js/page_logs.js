@@ -1293,38 +1293,6 @@ $(document).ready(function() {
 
         // If checked
         if (cheBu.attr("checked") == "checked") {
-             $.ajax({
-             data:{ single_power: cheBu.val()},
-             sync: true,
-             url: 'main/modules/external/check_configuration_power.php'}).done(function(data) {
-                if(jQuery.parseJSON(data)=="1") {
-                    $("#select_curve").dialog('close');
-                    $("#error_power_logs").dialog({
-                        resizable: false,
-                        width: 550,
-                        closeOnEscape: false,
-                        dialogClass: "popup_error",
-                        modal: true,
-                        buttons: [{
-                            text: CLOSE_button,
-                            click: function () {
-                                $("#select_curve").dialog('open');
-                                $( this ).dialog("close"); return false;
-                            }
-                        },{
-                            text: SAVE_button,
-                            click: function () {
-                                $("#select_curve").dialog('open');
-                                $( this ).dialog("close"); return false;
-                            }
-                        }]
-                    });
-
-                } 
-            });
-           
-
-
             // Call logs_get_serie to get programm value
             $.blockUI({
                 message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -1411,7 +1379,9 @@ $(document).ready(function() {
                                 load: function() {
                                      $.unblockUI();
                                      if(($(cheBu).attr("datatype")=="power")||($(cheBu).attr("datatype")=="program")) {
+                                        if(!$("#error_power_logs").hasClass('ui-dialog-content')||$("#error_power_logs").dialog("isOpen")!==true) {
                                           $("#select_curve").dialog("open");
+                                        }
                                       }
                                 }
                             },
@@ -1443,8 +1413,78 @@ $(document).ready(function() {
 
                         $.unblockUI();
 
+
+                        if($(cheBu).attr("datatype")=="power") {
+                          $.ajax({
+                            data:{ single_power: cheBu.val()},
+                            url: 'main/modules/external/check_configuration_power.php'}).done(function(data) {
+                            if(jQuery.parseJSON(data)=="1") {
+                                $("#select_curve").dialog('close');
+                                $("#error_power_value").css("display","none");
+                                $("#plug_power").val("");
+                                $("#error_power_logs").dialog({
+                                    resizable: false,
+                                    width: 550,
+                                    closeOnEscape: false,
+                                    dialogClass: "popup_error",
+                                    modal: true,
+                                    buttons: [{
+                                        text: CLOSE_button,
+                                        click: function () {
+                                            $("#select_curve").dialog('open');
+                                            $( this ).dialog("close"); return false;
+                                        }
+                                    },{
+                                        text: SAVE_button,
+                                        click: function () {
+                                            var checked=false;
+                                            if($("#plug_power").val()) {
+                                                //Check power value:
+                                                $.ajax({
+                                                    cache: false,
+                                                    async: false,
+                                                    url: "main/modules/external/check_value.php",
+                                                    data: {
+                                                        value:$("#plug_power").val(),
+                                                        type:'numeric'
+                                                    }
+                                                }).done(function(data) {
+                                                    if(data!=1) {
+                                                        $("#error_power_value").show(700);
+                                                    } else {
+                                                        checked=true;
+                                                    }
+                                                });
+                                            }
+
+                                            if(checked) {
+                                                $.ajax({
+                                                    cache: false,
+                                                    async: false,
+                                                    url: "main/modules/external/save_power_plug.php",
+                                                    data: {
+                                                        power:$("#plug_power").val(),
+                                                        number: cheBu.val()
+                                                    }
+                                                }).done(function () {
+                                                    $("#error_power_logs").dialog("close");
+                                                    chart.series[serieID.index].remove();
+                                                    $(cheBu).trigger("click");
+                                                    $("input[type=checkbox][id="+$(cheBu).attr('id')+"]").prop('checked', true);
+                                                });
+                                            }
+                                        }
+                                    }]
+                                });
+                            }
+                          });
+                        }
+
+
                         if(($(cheBu).attr("datatype")=="power")||($(cheBu).attr("datatype")=="program")) {
-                            $("#select_curve").dialog("open");
+                            if(!$("#error_power_logs").hasClass('ui-dialog-content')||$("#error_power_logs").dialog("isOpen")!==true) {
+                                $("#select_curve").dialog("open");
+                            }
                         }
                     });
                     updateTooltipMinMax();
@@ -1452,7 +1492,9 @@ $(document).ready(function() {
                 error: function() {
                     $.unblockUI();
                     if(($(cheBu).attr("datatype")=="power")||($(cheBu).attr("datatype")=="program")) {
-                        $("#select_curve").dialog("open");
+                        if(!$("#error_power_logs").hasClass('ui-dialog-content')||$("#error_power_logs").dialog("isOpen")!==true) {
+                            $("#select_curve").dialog("open");
+                        }
                     }
                     updateTooltipMinMax();
                 },
