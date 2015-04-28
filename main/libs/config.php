@@ -7,7 +7,7 @@
 date_default_timezone_set('UTC');
 
 // Default language:
-define('LANG_FALLBACK', 'en_GB');
+define('LANG_FALLBACK', 'fr_FR');
 
 //Default path:
 $GLOBALS['BASE_PATH'] = $_SERVER["DOCUMENT_ROOT"] . '/cultibox/';
