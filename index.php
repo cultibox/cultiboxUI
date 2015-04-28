@@ -114,6 +114,9 @@ check_database();
     <div id="sync_conf" style="display:none">
         <?php echo __('SYNC_CONF'); ?>
     </div>
+
+    <div id="diff_conf" title="<?php echo __('DIFF_CONF'); ?>" style="display:none">
+    </div>
     <div id="scrollto"></div>
     <div id="page-bg">
         <div>

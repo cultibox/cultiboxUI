@@ -462,9 +462,11 @@ $(document).ready(function() {
     });
 
 
-    //To update the configuration:
+    //To update the configuration or show diffs
     $('div.error').on('click', 'button', function(e) {
         e.preventDefault();
+        id=$(this).attr('id');
+
         // block user interface during checking and saving
         $.blockUI({
             message: SAVING+" <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -480,7 +482,32 @@ $(document).ready(function() {
                 color: '#fffff'
             },
             onBlock: function() {
-                $.ajax({
+                if(id=="show_diff_conf") {
+                    $("#diff_conf").html("");
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/diff_conf.php"
+                    }).done(function(data) {
+                        $.unblockUI();
+
+                        $("#diff_conf").html(data);
+                        $("#diff_conf").dialog({
+                            resizable: true,
+                            width: 650,
+                            closeOnEscape: false,
+                            modal: true,
+                            dialogClass: "popup_message",
+                            buttons: [{
+                                text: CLOSE_button,
+                                click: function () {
+                                    $( this ).dialog( "close" ); return false;
+                                }
+                            }]
+                        });
+                    });
+                } else {       
+                  $.ajax({
                     cache: false,
                     async: false,
                     url: "main/modules/external/sync_conf.php",
@@ -491,6 +518,8 @@ $(document).ready(function() {
                         pop_up_remove("check_conf_status");
 
                         if(json==0) {
+                            pop_up_remove("display_diff");
+                            pop_up_remove("check_conf_status");
                             pop_up_add_information(DIR_CONF_UPDATE,"check_conf_status","information");
                             $("#sync_conf").dialog({
                                 resizable: false,
@@ -515,7 +544,8 @@ $(document).ready(function() {
                     error: function(data) {
                         $.unblockUI();
                     }
-                });
+                  });
+                }
             }
         });
     });

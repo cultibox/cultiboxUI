@@ -2027,10 +2027,16 @@ msgid "SUCCESS_RESTART_SERVICE"
 msgstr "Redémarrage du service réalisé avec succés"
 
 msgid "DIR_CONF_UPDATE"
-msgstr "La configuration utilisée par le module concorde avec celle du logiciel"
+msgstr "Votre configuration est à jour"
 
 msgid "DIR_CONF_NOT_UPTODATE"
-msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Cliquez ici pour synchroniser les configurations du logiciel et du module: <button id='update_conf'>Synchronisation des configurations</button>"
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel: <p align='center'><button id='update_conf'>Synchroniser les configurations</button></p>"
+
+msgid "DISPLAY_DIFF"
+msgstr "Afficher les différences des configurations: <p align='center'><button id='show_diff_conf'>Afficher les différences</button></p>"
+
+msgid "DIFF_CONF"
+msgstr "Différences entre la configuration actuelle de votre module et la configuration du logiciel"
 
 msgid "WAIT_UPDATED_CONF"
 msgstr "Vérification de la configuration"
@@ -2103,7 +2109,7 @@ msgid "CLOSE_BUTTON"
 msgstr "Fermer"
 
 msgid "DIR_CONF_NOT_UPTODATE_POPUP"
-msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous pouvez mettre à jour la configuration utilisée grâce au boutton dans la boîte de dialogue du logiciel"
+msgstr "La configuration utilisée par votre module ne correspond plus à celle du logiciel. Vous pouvez mettre à jour la configuration utilisée grâce au bouton dans la boîte de dialogue du logiciel"
 
 msgid "DISABLE_POPUP"
 msgstr "Ne plus me prévenir et me laisser gérer la configuration dans la boîte de dialogue"
