@@ -80,7 +80,8 @@ function check_db() {
     $plateforme_col["limitDesamorcagePompe"]        = array ( 'Field' => "limitDesamorcagePompe", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
     $plateforme_col["tempsPerco"]    = array ( 'Field' => "tempsPerco", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["tempsMaxRemp"]  = array ( 'Field' => "tempsMaxRemp", 'Type' => "int(11)", "default_value" => 300, 'carac' => "NOT NULL");
-    $plateforme_col["priseDansLT"]    = array ( 'Field' => "priseDansLT", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["priseDansLT"]   = array ( 'Field' => "priseDansLT", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["tempsPercoNuit"] = array ( 'Field' => "tempsPercoNuit", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_plateforme';";
@@ -109,7 +110,8 @@ function check_db() {
             ."limitDesamorcagePompe varchar(5) NOT NULL DEFAULT 'true',"
             ."tempsPerco int(11) NOT NULL DEFAULT '0',"
             ."tempsMaxRemp int(11) NOT NULL DEFAULT '100',"
-            ."priseDansLT int(11) NOT NULL DEFAULT '0' );";
+            ."priseDansLT int(11) NOT NULL DEFAULT '0',"
+            ."tempsPercoNuit int(11) NOT NULL DEFAULT '0' );";
 
         // Create table
         try {
