@@ -159,6 +159,7 @@ $(document).ready(function(){
                         $("#logServerIrrigation").append(item+"<br />");
                     });
                 }
+                $("#logServerIrrigation").scrollTop($("#logServerIrrigation")[0].scrollHeight);
 
 
                 $.timeout.push(
