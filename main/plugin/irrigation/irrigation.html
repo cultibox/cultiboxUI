@@ -30,6 +30,10 @@ echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</t
 echo '<td><input type="text" id="ip_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="20" size="10" value="' . $localtechnique[0]['ip'] . '" > </td>';
 echo '<td><input type="text" id="pompeName_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="20" size="10" value="' . $localtechnique[0]['pompeName'] . '" > </td>';
 echo '<td><input type="text" id="pompePrise_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="4" size="4" value="' . $localtechnique[0]['pompePrise'] . '" > </td>';
+?>
+<div id="logServerIrrigation" style=" overflow:scroll;height:400 border:#000000 1px solid;">
+</div>
+<?php
 $checked = "";
 if ($localtechnique[0]['irriActive'] == "true")
     $checked = "checked";

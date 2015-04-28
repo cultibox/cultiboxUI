@@ -912,7 +912,9 @@ $(document).ready(function(){
                 cache: false,
                 async: true,
                 url: "main/modules/external/get_logs_cultipi.php",
-                data: {action:id},
+                data: {
+                    action:id
+                },
                 success: function (data) {
                     var objJSON = jQuery.parseJSON(data);
 
