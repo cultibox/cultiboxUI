@@ -461,10 +461,7 @@ $(document).ready(function() {
         get_content(url_vars['menu'],url_vars);
     });
 
-
-    //To update the configuration:
-    $('div.error').on('click', 'button', function(e) {
-        e.preventDefault();
+    function updateConfiguration () {
         // block user interface during checking and saving
         $.blockUI({
             message: SAVING+" <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -518,135 +515,147 @@ $(document).ready(function() {
                 });
             }
         });
+    }
+    
+    //To update the configuration:
+    $('div.error').on('click', 'button', function(e) {
+        e.preventDefault();
+        updateConfiguration();
     });
 
-     $.ajax({
+    
+    $.ajax({
         cache: false,
         url: "main/modules/external/position.php"
     }).done(function (data) {
 
-    if ( typeof data.split(',')[0] !== "undefined" && data.split(',')[0]) {
-        var x = parseInt(data.split(',')[0].replace("\"", ""));
-    } else {
-        var x = 15;
-    }
-
-    if ( typeof data.split(',')[1] !== "undefined" && data.split(',')[1]) {
-        var y = parseInt(data.split(',')[1].replace("\"", ""));
-    } else {
-        var y = 15;
-    }
-
-    if ( typeof data.split(',')[2] !== "undefined" && data.split(',')[2]) {
-        var wid = parseInt(data.split(',')[2].replace("\"", ""));
-    } else {
-        var wid = 325;
-    }
-
-    if ( typeof data.split(',')[3] !== "undefined" && data.split(',')[3]) {
-        reduced  = String(data.split(',')[3].replace("\"", ""));
-    } else {
-        reduced="False";
-    }
-
-
-    $( ".message" ).dialog({ width: wid, closeOnEscape: false, resizable: true, buttons: [
-        {
-            text: HIDE_button,
-            id: "button_hide" ,
-            click: function() {
-                //Action lors de l'enclenchement du bouton "Cacher" de la boîte de messages:
-
-                //Fermeture de la boîte de dialogue
-                $( this ).dialog( "close" );
-
-                //Mise a True de la variable de session TOOLTIP_MSG_BOX qui définit si on doit afficher ou non la boîte de message lorsqu'on change de page
-                $.ajax({
-                        cache: false,
-                        url: "main/modules/external/set_variable.php",
-                        data: {name:"tooltip_msg_box", value: "True", duration: 2592000}
-                });
-
-
-                //Affichage de l'oeil permettant de réafficher la boîte de message:
-                // On affiche l'oeil sur le bord exterieur gauche de l'interface. La position dépend de la résolution de l'écran.
-                // On récupère donc la taille de l'écran et la taille du div central de l'interface pour afficher l'oeil au bon endroit:
-                // position = 90*(taille de l'écran - taille du div central)/200
-                // taille de l'écran - taille du div central /2 ==> correspond à la taille de la marge à gauche (ou à droite) séparant le bord du div central
-                // on affiche donc l'oeil a 90% de la marge exterieure
-
-                var element_div_width=$("#maininner").width();
-                var element_body_width=$( window ).width();
-
-                if((element_body_width!="")&&(element_div_width!="")) {
-                    var dist=90*(element_body_width-element_div_width)/200;
-                    $("#tooltip_msg_box").css("padding-left",dist+"px");
-                }
-
-
-                //On l'oeil et son tooltip:
-                $("#eyes_msgbox").attr('title', title_msgbox);
-                $("#tooltip_msg_box").fadeIn("slow");
-            }
-        },
-        {
-            text: REDUCE_button,
-            id: "button_reduce" ,
-            click: function() {
-                if(reduced=="True") {
-                    $(this).dialog('option', 'height', 'auto');
-                    $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(REDUCE_button);
-                    var tmp_reduced="False";
-                } else {
-                    $(this).dialog('option', 'height', 10);
-                    $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(EXTEND_button);
-                    var tmp_reduced="True";
-                }
-                var tmp = $(".message").dialog( "option", "position" );
-                var width = $(".message").dialog( "option", "width" );
-
-                $.ajax({
-                cache: false,
-                url: "main/modules/external/position.php",
-                data: { POSITION_X: tmp[0], POSITION_Y: tmp[1], WIDTH: width, REDUCED: tmp_reduced }
-                });
-                reduced=tmp_reduced;
-        }}],
-        hide: "fold", dialogClass: "dialog_message", position: [x,y], dragStop: function( event, ui ) {
-
-        if(data!="") {
-            var tmp = $(".message").dialog( "option", "position" );
-            var width = $(".message").dialog( "option", "width" );
-            $.ajax({
-                cache: false,
-                url: "main/modules/external/position.php",
-                data: { POSITION_X: tmp[0], POSITION_Y: tmp[1], WIDTH: width, REDUCED: reduced }
-                });
+        if ( typeof data.split(',')[0] !== "undefined" && data.split(',')[0]) {
+            var x = parseInt(data.split(',')[0].replace("\"", ""));
+        } else {
+            var x = 15;
         }
-    },  
-      create: function( event, ui ) {
-            if(reduced=="True") {
-                $(this).dialog('option', 'height', 10);
-                $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(EXTEND_button);
-            }
-    },
-    resizeStop: function( event, ui ) {
-        if(data!="") {
-                var tmp = $(".message").dialog( "option", "position" );
-                var width = $(".message").dialog( "option", "width" );
 
-                $.ajax({
+        if ( typeof data.split(',')[1] !== "undefined" && data.split(',')[1]) {
+            var y = parseInt(data.split(',')[1].replace("\"", ""));
+        } else {
+            var y = 15;
+        }
+
+        if ( typeof data.split(',')[2] !== "undefined" && data.split(',')[2]) {
+            var wid = parseInt(data.split(',')[2].replace("\"", ""));
+        } else {
+            var wid = 325;
+        }
+
+        if ( typeof data.split(',')[3] !== "undefined" && data.split(',')[3]) {
+            reduced  = String(data.split(',')[3].replace("\"", ""));
+        } else {
+            reduced="False";
+        }
+
+
+        $( ".message" ).dialog({
+            width: wid,
+            closeOnEscape: false,
+            resizable: true,
+            buttons: [{
+                text: HIDE_button,
+                id: "button_hide" ,
+                click: function() {
+                    //Action lors de l'enclenchement du bouton "Cacher" de la boîte de messages:
+
+                    //Fermeture de la boîte de dialogue
+                    $( this ).dialog( "close" );
+
+                    //Mise a True de la variable de session TOOLTIP_MSG_BOX qui définit si on doit afficher ou non la boîte de message lorsqu'on change de page
+                    $.ajax({
+                            cache: false,
+                            url: "main/modules/external/set_variable.php",
+                            data: {name:"tooltip_msg_box", value: "True", duration: 2592000}
+                    });
+
+
+                    //Affichage de l'oeil permettant de réafficher la boîte de message:
+                    // On affiche l'oeil sur le bord exterieur gauche de l'interface. La position dépend de la résolution de l'écran.
+                    // On récupère donc la taille de l'écran et la taille du div central de l'interface pour afficher l'oeil au bon endroit:
+                    // position = 90*(taille de l'écran - taille du div central)/200
+                    // taille de l'écran - taille du div central /2 ==> correspond à la taille de la marge à gauche (ou à droite) séparant le bord du div central
+                    // on affiche donc l'oeil a 90% de la marge exterieure
+
+                    var element_div_width=$("#maininner").width();
+                    var element_body_width=$( window ).width();
+
+                    if((element_body_width!="")&&(element_div_width!="")) {
+                        var dist=90*(element_body_width-element_div_width)/200;
+                        $("#tooltip_msg_box").css("padding-left",dist+"px");
+                    }
+
+
+                    //On l'oeil et son tooltip:
+                    $("#eyes_msgbox").attr('title', title_msgbox);
+                    $("#tooltip_msg_box").fadeIn("slow");
+                }
+            },
+            {
+                text: REDUCE_button,
+                id: "button_reduce" ,
+                click: function() {
+                    if(reduced=="True") {
+                        $(this).dialog('option', 'height', 'auto');
+                        $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(REDUCE_button);
+                        var tmp_reduced="False";
+                    } else {
+                        $(this).dialog('option', 'height', 10);
+                        $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(EXTEND_button);
+                        var tmp_reduced="True";
+                    }
+                    var tmp = $(".message").dialog( "option", "position" );
+                    var width = $(".message").dialog( "option", "width" );
+
+                    $.ajax({
                     cache: false,
                     url: "main/modules/external/position.php",
-                    data: { WIDTH: width, POSITION_X: tmp[0], POSITION_Y: tmp[1],WIDTH: width, REDUCED: reduced }
-                });
+                    data: { POSITION_X: tmp[0], POSITION_Y: tmp[1], WIDTH: width, REDUCED: tmp_reduced }
+                    });
+                    reduced=tmp_reduced;
+            }}],
+            hide: "fold",
+            dialogClass: "dialog_message",
+            position: [x,y],
+            dragStop: function( event, ui ) {
+                if(data!="") {
+                    var tmp = $(".message").dialog( "option", "position" );
+                    var width = $(".message").dialog( "option", "width" );
+                    $.ajax({
+                        cache: false,
+                        url: "main/modules/external/position.php",
+                        data: { POSITION_X: tmp[0], POSITION_Y: tmp[1], WIDTH: width, REDUCED: reduced }
+                        });
+                }
+            },  
+            create: function( event, ui ) {
+                if(reduced=="True") {
+                    $(this).dialog('option', 'height', 10);
+                    $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(EXTEND_button);
+                }
+            },
+            resizeStop: function( event, ui ) {
+                if(data!="") {
+                    var tmp = $(".message").dialog( "option", "position" );
+                    var width = $(".message").dialog( "option", "width" );
 
-                reduced="False";
-                $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(REDUCE_button);
+                    $.ajax({
+                        cache: false,
+                        url: "main/modules/external/position.php",
+                        data: { WIDTH: width, POSITION_X: tmp[0], POSITION_Y: tmp[1],WIDTH: width, REDUCED: reduced }
+                    });
 
-       }
-    }  });
-                $(".message").dialog().parent().css('position', 'fixed');
+                    reduced="False";
+                    $(this).parent().find(".ui-dialog-buttonset .ui-button-text:eq(1)").text(REDUCE_button);
+               }
+            } 
+         });
+         $(".message").dialog().parent().css('position', 'fixed');
     });
 
 

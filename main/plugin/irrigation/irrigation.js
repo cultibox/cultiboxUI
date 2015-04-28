@@ -110,6 +110,17 @@ $(document).ready(function(){
                 action:"applyConf"
             }
         }).done(function (data) {
+            $.ajax({
+                cache: false,
+                async: false,
+                url: "main/modules/external/sync_conf.php",
+                success: function(data) {
+                    // Parse result
+                    var json = jQuery.parseJSON(data);
+                },
+                error: function(data) {
+                }
+            });
             $.unblockUI();
         });
     });    
