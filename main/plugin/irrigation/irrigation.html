@@ -99,8 +99,8 @@ foreach ($plateformeList as $key => $plateforme)
     echo '<h2>Plateforme : ' . $plateforme['name'] . ' </h2>';
     
     echo '<p>Paramètres de la plateforme : </p>';
-    echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th> <th>tempsPerco</th> <th>tempsPercoNuit</th>';
-    echo '<th>Temps Max Remplissage</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
+    echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th> <th>Temps Perco</th> <th>Temps Perco Nuit</th>';
+    echo '<th>Temps Max Remplissage</th> <th>Temps Max Remplissage Nuit</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
     echo '<td><input type="text" id="ip_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['ip'] . '" > </td>';
     echo '<td><input type="text" id="pompeName_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['pompeName'] . '" > </td>';
     echo '<td><input type="text" id="pompePrise_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['pompePrise'] . '" > </td>';
@@ -111,6 +111,7 @@ foreach ($plateformeList as $key => $plateforme)
     echo '<td><input type="text" id="tempsPerco_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPerco'] . '" > </td>';
     echo '<td><input type="text" id="tempsPercoNuit_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPercoNuit'] . '" > </td>';
     echo '<td><input type="text" id="tempsMaxRemp_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRemp'] . '" > </td>';
+    echo '<td><input type="text" id="tempsMaxRempNuit_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRempNuit'] . '" > </td>';
     echo '<td><input type="text" id="priseDansLT_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseDansLT'] . '" > </td>';
     $checked = "";
     if ($plateforme['limitDesamorcagePompe'] == "true")
@@ -127,7 +128,7 @@ foreach ($plateformeList as $key => $plateforme)
     {
         echo '<tr>';
         echo '<td><input type="text" id="name_zone_' . $zone['id'] . '" maxlength="20" size="10" value="' . $zone['name'] . '" > </td>';
-        echo '<td><input type="text" id="prise_zone_' . $zone['id'] . '" maxlength="20" size="10" value="' . $zone['prise'] . '" > </td>';
+        echo '<td><input type="text" id="prise_zone_' . $zone['id'] . '" maxlength="3" size="2" value="' . $zone['prise'] . '" > </td>';
         echo '<td><input type="text" id="tempsOn_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOn'] . '" > </td>';
         echo '<td><input type="text" id="tempsOff_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOff'] . '" > </td>';
         echo '<td><input type="text" id="tempsOnNuit_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOnNuit'] . '" > </td>';
