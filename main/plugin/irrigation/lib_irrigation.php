@@ -326,7 +326,6 @@ function addInStartXMLCultiCore() {
     $ret_array = array ( 
         'name' => "serverIrrigation",
         'waitAfterUS' => "100",
-        'port' => "6011",
         'pathexe' => "tclsh",
         'path' => "./serverIrrigation/serverIrrigation.tcl",
         'xmlconf' => "./serverIrrigation/conf.xml",

@@ -36,7 +36,7 @@ $GLOBALS['PLUGIN_irrigation']['localtechnique'] = array(
 
 $GLOBALS['PLUGIN_irrigation']['plateforme'][0] = array(
     'nom' => "montmartre",
-    'ip' => '192.168.0.55',
+    'ip' => '192.168.0.50',
     "active" => "true",
     'limitDesamorcagePompe'  => "false",
     'tempsPerco' => '300',
@@ -108,7 +108,7 @@ $GLOBALS['PLUGIN_irrigation']['plateforme'][1] = array(
 
 $GLOBALS['PLUGIN_irrigation']['plateforme'][2] = array(
     'nom' => "centrale",
-    'ip' => '192.168.0.50',
+    'ip' => '192.168.0.55',
     "active" => "false",
     'limitDesamorcagePompe'  => "false",
     'tempsPerco' => '300',
