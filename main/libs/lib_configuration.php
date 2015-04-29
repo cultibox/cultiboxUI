@@ -36,7 +36,11 @@ function check_db() {
     $conf_index_col["REMOVE_5_MINUTE_LIMIT"] = array ( 'Field' => "REMOVE_5_MINUTE_LIMIT", 'Type' => "varchar(5)", 'default_value' => "False",'carac' => "NOT NULL");
     $conf_index_col["DEFAULT_LANG"]         = array ( 'Field' => "DEFAULT_LANG", 'Type' => "varchar(5)", 'default_value' => "fr_FR",'carac' => "NOT NULL");
     $conf_index_col["ENABLE_LED"]           = array ( 'Field' => "ENABLE_LED", 'Type' => "varchar(4)", 'default_value' => "0001",'carac' => "NOT NULL");
-
+    $conf_index_col["EMAIL_ADRESS"]         = array ( 'Field' => "EMAIL_ADRESS", 'Type' => "varchar(40)", 'default_value' => "hercule.poirot@yopmail.com",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_PASSWORD"]       = array ( 'Field' => "EMAIL_PASSWORD", 'Type' => "varchar(40)", 'default_value' => "password",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_PROVIDER"]       = array ( 'Field' => "EMAIL_PROVIDER", 'Type' => "varchar(20)", 'default_value' => "other",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(20)", 'default_value' => "smtp.yopmail.com",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_PORT"]           = array ( 'Field' => "EMAIL_PORT", 'Type' => "int(11)", 'default_value' => 587,'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'configuration';";
@@ -82,8 +86,13 @@ function check_db() {
             ."REMOVE_1000_CHANGE_LIMIT VARCHAR(5) NOT NULL DEFAULT 'False',"
             ."REMOVE_5_MINUTE_LIMIT VARCHAR(5) NOT NULL DEFAULT 'False',"
             ."DEFAULT_LANG VARCHAR(5) NOT NULL DEFAULT 'fr_FR',"
-            ."ENABLE_LED varchar(4) NOT NULL DEFAULT '0001');";
-        
+            ."ENABLE_LED varchar(4) NOT NULL DEFAULT '0001',"
+            ."EMAIL_ADRESS varchar(40) NOT NULL DEFAULT 'hercule.poirot@yopmail.com',"
+            ."EMAIL_PASSWORD varchar(40) NOT NULL DEFAULT 'password',"
+            ."EMAIL_PROVIDER varchar(20) NOT NULL DEFAULT 'other',"
+            ."EMAIL_SMTP varchar(20) NOT NULL DEFAULT 'test.yopmail.com',"
+            ."EMAIL_PORT int(11) NOT NULL DEFAULT '587');";
+            
         // Create table
         try {
             $sth = $db->prepare($sql);
@@ -131,6 +140,154 @@ function getConfElem($elem) {
     return $res;
 }
 
+
+function getEmailProvider() {
+    
+    $ret_arr = array(
+        '9_Telecom' => array(
+             'name' => '9 Telecom',
+             'smtp' => 'smtp.neuf.fr',
+             'port' => '587'),
+        'Alice' => array(
+             'name' => 'Alice',
+             'smtp' => 'smtp.aliceadsl.fr',
+             'port' => '587'),
+        'AOL' => array(
+             'name' => 'AOL',
+             'smtp' => 'smtp.aol.com',
+             'port' => '587'),
+        'AT&T' => array(
+             'name' => 'AT&T',
+             'smtp' => 'outbound.att.net',
+             'port' => '587'),
+        'Bluewin' => array(
+             'name' => 'Bluewin',
+             'smtp' => 'smtpauths.bluewin.ch',
+             'port' => '587'),
+        'Bouygtel' => array(
+             'name' => 'Bouygtel',
+             'smtp' => 'smtp.bouygtel.fr',
+             'port' => '587'),
+        'Club_Internet' => array(
+             'name' => 'Club Internet',
+             'smtp' => 'mail.club-internet.fr',
+             'port' => '587'),
+        'Free' => array(
+             'name' => 'Free',
+             'smtp' => 'smtp.free.fr',
+             'port' => '587'),
+        'Gmail' => array(
+             'name' => 'Gmail',
+             'smtp' => 'smtp.gmail.com',
+             'port' => '587'),
+        'IFra' => array(
+             'name' => 'IFra',
+             'smtp' => 'smtp.ifrance.fr',
+             'port' => '587'),
+        'Hotmail' => array(
+             'name' => 'Hotmail',
+             'smtp' => 'smtp.live.com',
+             'port' => '587'),
+        'LaPoste' => array(
+             'name' => 'LaPoste',
+             'smtp' => 'smtp.laposte.fr',
+             'port' => '587'),
+        'NetCourrier' => array(
+             'name' => 'NetCourrier',
+             'smtp' => 'smtp.netcourrier.com',
+             'port' => '587'),
+        'O2' => array(
+             'name' => 'O2',
+             'smtp' => 'smtp.o2.com',
+             'port' => '587'),
+        'Orange' => array(
+             'name' => 'Orange',
+             'smtp' => 'smtp.orange.fr',
+             'port' => '587'),
+        'Hotmail' => array(
+             'name' => 'Hotmail',
+             'smtp' => 'smtp.live.com',
+             'port' => '587'),
+        'Sympatico' => array(
+             'name' => 'Sympatico',
+             'smtp' => 'smtphm.sympatico.ca',
+             'port' => '587'),
+        'Tiscali' => array(
+             'name' => 'Tiscali',
+             'smtp' => 'smtp.tiscali.fr',
+             'port' => '587'),
+        'Verizon' => array(
+             'name' => 'Verizon',
+             'smtp' => 'outgoing.verizon.net',
+             'port' => '587'),
+        'Voila' => array(
+             'name' => 'Voila',
+             'smtp' => 'smtp.voila.fr',
+             'port' => '587'),
+        'Wanadoo' => array(
+             'name' => 'Wanadoo',
+             'smtp' => 'smtp.wanadoo.fr',
+             'port' => '587'),
+        'Yahoo' => array(
+             'name' => 'Yahoo',
+             'smtp' => 'mail.yahoo.com',
+             'port' => '587'),
+        'Other' => array(
+             'name' => 'Autre',
+             'smtp' => 'other',
+             'port' => '')
+    );
+    
+    return $ret_arr;
+
 }
 
+function getEmailUserConf() {
+    
+    // Open connection to dabase
+    $db = \db_priv_pdo_start();
+    
+    $sql = "SELECT EMAIL_ADRESS,EMAIL_PASSWORD,EMAIL_PROVIDER,EMAIL_SMTP,EMAIL_PORT FROM configuration;";
+    
+    try {
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $row = $sth->fetch();
+    } catch(\PDOException $e) {
+        $ret = $e->getMessage();
+        print_r($ret);
+    }
+    
+    return $row;
+}
+
+
+function saveEmailUserConf($param) {
+    
+    // Open connection to dabase
+    $db = \db_priv_pdo_start();
+    
+    $str = "";
+    foreach($param As $key => $value)
+    {
+        if ($str != "")
+            $str = $str . " , ";
+        
+        $str = $str . "${key}='${value}'";
+        
+    }
+        
+    $sql = "UPDATE configuration SET ${str} ;";
+    
+    try {
+        $sth = $db->prepare($sql);
+        $sth->execute();
+    } catch(\PDOException $e) {
+        $ret = $e->getMessage();
+        print_r($ret);
+    }
+
+}
+
+}
 ?>

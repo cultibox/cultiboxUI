@@ -1708,6 +1708,37 @@ $(document).ready(function() {
        e.preventDefault();
        $.fileDownload('main/templates/data/firm_wifi.hex');
     });
+    
+    $('#save_email_conf').click(function(e) {
+        $.blockUI({ message: '' });
+        $.ajax({
+            async: true,
+            url: "main/modules/external/save_configuration.php",
+            data: {
+                parttosave:"email",
+                EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
+                EMAIL_SMTP:$('#EMAIL_SMTP').val(),
+                EMAIL_PORT:$('#EMAIL_PORT').val(),
+                EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
+            }
+        }).done(function (data) {
+            $.unblockUI();
+        })
+    }); 
+
+    $( "#EMAIL_PROVIDER" ).change(function() {
+        selectvalue = $(this).val();
+        if (selectvalue == "other") {
+            $('#EMAIL_SMTP').prop('disabled', false);
+        } else {
+            $('#EMAIL_SMTP').prop('disabled', true);
+            $('#EMAIL_SMTP').val(selectvalue);
+        }
+
+    });
+    
+    
 });
 
 </script>
