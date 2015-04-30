@@ -1840,9 +1840,6 @@ msgstr "Les images 'autres' contiennent toutes les images permettant de modélis
 msgid "TOOLTIP_MANAGE_IMAGES"
 msgstr "Ajouter vos propres images"
 
-msgid "EXPORT_CONF"
-msgstr "Exporter la configuration actuelle"
-
 msgid "CULTIPI_CONFIRM_UPDATE"
 msgstr "Updates verfügbar sind, würden Sie sie setzen?"
 
