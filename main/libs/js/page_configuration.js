@@ -342,7 +342,7 @@ $(document).ready(function(){
                 varToUpdate = $( this ).attr('name');
 
 
-                if(varToUpdate.trim() != "") {
+                if(varToUpdate.trim() != "" && typeof varToUpdate != "undefined") {
                     $.ajax({
                         type: "GET",
                         cache: false,
