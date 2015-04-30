@@ -158,7 +158,7 @@ $.ajax({
                 $("#tooltip_msg_box").fadeOut("slow");
                 $(".message").dialog("open");
                 
-                 $("#diff_conf").dialog({
+                $("#diff_conf").dialog({
                      resizable: false,
                      width: 550,
                      modal: true,

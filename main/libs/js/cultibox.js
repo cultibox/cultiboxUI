@@ -521,7 +521,7 @@ $(document).ready(function() {
 
 
     function showDiff() {
-        $("#diff_conf").html("");
+        $("#diff_conf_list").html("");
         // block user interface during checking and saving
         $.blockUI({
             message: SAVING+" <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -544,8 +544,8 @@ $(document).ready(function() {
                 }).done(function(data) {
                     $.unblockUI();
 
-                    $("#diff_conf").html(data);
-                    $("#diff_conf").dialog({
+                    $("#diff_conf_list").html(data);
+                    $("#diff_conf_list").dialog({
                         resizable: true,
                         width: 650,
                         closeOnEscape: false,
@@ -554,7 +554,7 @@ $(document).ready(function() {
                         buttons: [{
                             text: CLOSE_button,
                             click: function () {
-                                $( this ).dialog( "close" ); return false;
+                                 $("#diff_conf_list").dialog('destroy'); return false;
                             }
                         }]
                     });
