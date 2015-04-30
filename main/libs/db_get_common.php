@@ -2220,44 +2220,6 @@ function check_configuration_power($id=0) {
 // }}}
 
 
-// {{{ get_notes()
-// ROLE get welcome's notes depending the lang
-// IN $out      error or warning message
-//    $res      return array containing data
-//    $lang     lang of the current note to search
-// RET none 
-function get_notes(&$res,$lang="fr_FR",&$out) {
-
-    $sql = "SELECT * from notes WHERE lang LIKE '{$lang}' ORDER by id;";
-
-    $db=db_priv_pdo_start();
-    try {
-        $sth=$db->prepare("$sql");
-        $sth->execute();
-        $res=$sth->fetchAll(PDO::FETCH_ASSOC);
-    } catch(PDOException $e) {
-        $ret=$e->getMessage();
-    }
-    $db=null;
-
-    if((isset($ret))&&(!empty($ret))) {
-        if($GLOBALS['DEBUG_TRACE']) {
-            $out[]=__('ERROR_DELETE_SQL').$ret;
-        } else {
-            $out[]=__('ERROR_DELETE_SQL');
-        }
-    }
-
-    for($i=0;$i<count($res);$i++) {
-        $res[$i]['title']=htmlentities($res[$i]['title'], ENT_NOQUOTES, "UTF-8");
-        $res[$i]['title']=htmlspecialchars_decode($res[$i]['title']);
-        $res[$i]['desc']=htmlentities($res[$i]['desc'], ENT_NOQUOTES, "UTF-8");
-        $res[$i]['desc']=htmlspecialchars_decode($res[$i]['desc']);
-    }
-}
-// }}}
-
-
 // {{{ get_plug_regul_sensor()
 // ROLE get plug sensors
 // IN $out      error or warning message

@@ -6,9 +6,6 @@
 msgid "LANG"
 msgstr "fr_FR"
 
-msgid "MENU_WELCOME"
-msgstr "Bienvenue"
-
 msgid "MENU_CONF"
 msgstr "Configuration"
 
@@ -17,9 +14,6 @@ msgstr "Logs"
 
 msgid "MENU_PROGS"
 msgstr "Prises"
-
-msgid "MENU_COST"
-msgstr "Coût"
 
 msgid "MENU_CAL"
 msgstr "Calendrier"
@@ -35,6 +29,7 @@ msgstr "En direct"
 
 msgid "MENU_WEBCAM"
 msgstr "Webcam"
+
 
 #For the welcome part
 msgid "DOCUMENTATION"
@@ -96,7 +91,6 @@ msgstr "Javascript est désactivé! Vous ne pourrez pas utiliser le logiciel et 
 
 msgid "WELCOME_SYNOP"
 msgstr "Page du résumé de l'état de votre espace de culture"
-
 
 
 # For the configuration part:
@@ -192,12 +186,6 @@ msgstr "Valeur du seuil de déclenchement de l'alarme"
 
 msgid "CONFIGURE_ENABLE_LED"
 msgstr "Activer le rétro-éclairage de l'écran"
-
-msgid "CONFIGURE_SELECT_SENSORS"
-msgstr "Type du capteur"
-
-msgid "CONFIGURE_SELECT_NB_SENSORS"
-msgstr "Nombre de capteur"
 
 msgid "CHECK_STATISTICS"
 msgstr "Envoi d'informations pour aider le développement"
@@ -386,12 +374,6 @@ msgstr "Afficher les informations pour le mois précédent"
 
 msgid "NEXT_BUTTON_MONTH"
 msgstr "Afficher les informations pour le mois suivant"
-
-msgid "PRECISION_GRAPH_DAY"
-msgstr "Les logs sont affichés avec une précision maximale d'un point toutes les minutes"
-
-msgid "PRECISION_GRAPH_MONTH"
-msgstr "Les logs sont affichés avec une précision maximale d'un point toutes les vingt minutes"
 
 msgid "SELECT_SENSOR_NB"
 msgstr "Afficher les valeurs pour"
@@ -593,9 +575,6 @@ msgstr "Exporter les logs du (AAAA-MM-JJ)"
 
 
 # For the plugs part:
-msgid "PLUG"
-msgstr "Configurer vos prises"
-
 msgid "PLUG_MENU"
 msgstr "Prise"
 
@@ -644,9 +623,6 @@ msgstr "Intracteur"
 msgid "PLUG_CO2"
 msgstr "CO²"
 
-msgid "VALIDATION_PLUG_CONF"
-msgstr "Enregistrer la configuration"
-
 msgid "POWER_PLUG"
 msgstr "Puissance consommée par l'élément (en Watt)"
 
@@ -680,9 +656,6 @@ msgstr "dessus du seuil"
 msgid "PLUG_MAX_POWER"
 msgstr "Type de prise (puissance maximale)"
 
-msgid "SAVE_AND_CONFIGURE_PROGRAM"
-msgstr "Sauvegarder les changements et configurer le programme de la prise"
-
 msgid "CONFIGURE_REGUL_TOLERANCE"
 msgstr "Tolérance de la régulation secondaire"
 
@@ -695,8 +668,6 @@ msgstr "Minimum"
 msgid "MAXIMUM"
 msgstr "Maximum"
 
-msgid "JUMPTO_WIZARD"
-msgstr "Utiliser l'assistant pour configurer cette prise"
 
 msgid "DIMMER"
 msgstr "Variateur"
@@ -733,6 +704,7 @@ msgstr "Numéro module :"
 
 msgid "PLUGS_MODULE_IP_ADRESS"
 msgstr "Adresse IP :"
+
 
 # For the programs part:
 msgid "TOOLTIP_PROGRAM_PLUG"
@@ -912,8 +884,6 @@ msgstr "régulation"
 msgid "CONFIRM_SAME_PROGRAM"
 msgstr "Les heures du programme rentrées sont les mêmes que le précédent programme. Ceci modifiera votre ancien programme, voulez-vous appliquer ce programme tout de même?"
 
-msgid "JUMPTO_PLUG"
-msgstr "Configurer la prise associée à ce programme"
 
 msgid "ERROR_MAX_PROGRAM"
 msgstr "Le nombre maximal de changement d'état pour les prises (limité à 999 pour toutes les prises confondues) a été atteint. La dernière action de vos programmes se déroulera à :"
@@ -968,7 +938,6 @@ msgstr "Exporter un jeu de programmes"
 
 msgid "TITLE_IMPORT_SET_PROGRAM"
 msgstr "Importer un jeu de programmes"
-
 
 
 # For the export module highchart part :
@@ -1915,9 +1884,6 @@ msgstr "Erreur lors du changement de mot de passe, l'ancien mot de passe sera co
 msgid "SAVED_PASSWORD"
 msgstr "Mot de passe changé avec succés"
 
-msgid "CULTIPI_SYNOPTIC"
-msgstr "Synoptique"
-
 msgid "CULTIPI_NETWORK_CONF"
 msgstr "Configuration réseau"
 
@@ -2008,17 +1974,8 @@ msgstr "Culticam"
 msgid "CULTIDOC_SOFT"
 msgstr "Cultidoc"
 
-msgid "CULTIPI_SERVICE"
-msgstr "Status du service Cultipi"
-
 msgid "RESTART_SERVICE"
 msgstr "Cliquez sur l'image pour redémarrer le service"
-
-msgid "SERVICE_ON"
-msgstr "Service en marche"
-
-msgid "SERVICE_OFF"
-msgstr "Service arrêté ou dans un état inconnu"
 
 msgid "ERROR_RESTART_SERVICE"
 msgstr "Erreur lors du red&marrage du service"
@@ -2100,8 +2057,6 @@ msgstr "Résolution"
 msgid "TITLE_WEBCAM"
 msgstr "Nom de la webcam"
 
-msgid "TIME_CREATION_IMG"
-msgstr "Image capturée à"
 
 
 #For the js part:

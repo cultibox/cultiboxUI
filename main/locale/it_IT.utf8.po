@@ -6,23 +6,14 @@
 msgid "LANG"
 msgstr "it"
 
-msgid "MENU_WELCOME"
-msgstr "Benvenuto"
-
 msgid "MENU_CONF"
 msgstr "Configurazione"
 
 msgid "MENU_LOGS"
 msgstr "Logs"
 
-msgid "MENU_PLUGS"
-msgstr "Preso"
-
 msgid "MENU_PROGS"
 msgstr "Programmi"
-
-msgid "MENU_COST"
-msgstr "Costo"
 
 msgid "MENU_CAL"
 msgstr "Calendario"
@@ -41,6 +32,36 @@ msgstr "Webcam"
 
 
 #For the welcome part
+msgid "DOCUMENTATION"
+msgstr "Documentation"
+
+msgid "DOCUMENTATION_LINK"
+msgstr "La version la plus à jour de l'aide est disponible à l'adresse suivante:"
+
+msgid "QUESTIONS"
+msgstr "Des questions?"
+
+msgid "QUESTIONS_CONTENT"
+msgstr "Si l'aide ne suffit pas pour répondre à une de vos questions, envoyez-nous un mail à l'adresse suivante :"
+
+msgid "ACCESSOIRE"
+msgstr "Accessoires"
+
+msgid "ACCESSOIRE_CONTENT"
+msgstr "Vous pouvez compléter votre pack en achetant des capteurs supplémentaires, des prises ou encore d'autres accessoires en vous rendant sur le site :"
+
+msgid "RECYCLAGE"
+msgstr "Recyclage"
+
+msgid "RECYCLAGE_CONTENT"
+msgstr "Chez Cultibox nous retraitons tous les éléments de nos produits. L'emballage peut être recyclé et la Cultibox contient une pile lithium qui ne doit pas être jetée à la poubelle. Pour un recyclage optimal, renvoyez-nous la Cultibox et vous serez récompensé."
+
+msgid "WARANTLY"
+msgstr "Garantie"
+
+msgid "WARANTLY_CONTENT"
+msgstr "La Cultibox ainsi que ses accessoires sont garantis deux ans. Nous assurons la garantie en direct, sans intermédiaire. Pour nous contacter :"
+
 msgid "WELCOME_TITLE"
 msgstr "Benvenuti al Cultibox configurazione software"
 
@@ -49,12 +70,6 @@ msgstr "Lo sapevi?"
 
 msgid "WELCOME_MESSAGE"
 msgstr "Questo software vi permetterà di manipolare facilmente Cultibox di configurare, visualizzare i dati registrati o accesso a determinate funzioni come il calcolo del costo dell'energia elettrica o la creazione di una cultura di calendario."
-
-msgid "WELCOME_TUTO"
-msgstr "<b> Nota: </b> per chi ha la versione precedente del Cultibox (<b> Green Box </b>), sarà assolutamente"
-
-msgid "WELCOME_REQUIEREMENT"
-msgstr "<ul class='list_class'> <li> rimuovere le vecchie spine che non sono più compatibili e collegare quelli di Cultibox </li> <li> scollegare il Green Box, che può causare interferenze con Cultibox </li> </ul>"
 
 msgid "WELCOME_FOLLOW_LINK"
 msgstr "Fare clic sul pulsante Avanti per avviare l'installazione guidata e iniziare a gestire il tuo Cultibox"
@@ -79,6 +94,12 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "DL_WIFI_FIRM"
+msgstr "Télécharger le firmware du module Wifi"
+
+msgid "DL_CULTIBOX_FIRM"
+msgstr "Télécharger le firmware de la Cultibox"
+
 msgid "CONFIGURE_TITLE_CULTIBOX"
 msgstr "Configurare il sistema Cultibox"
 
@@ -166,12 +187,6 @@ msgstr "Valore soglia per l'attivazione dell'allarme"
 msgid "CONFIGURE_ENABLE_LED"
 msgstr "Attivare l'illuminazione dello schermo"
 
-msgid "CONFIGURE_SELECT_SENSORS"
-msgstr "Type du capteur"
-
-msgid "CONFIGURE_SELECT_NB_SENSORS"
-msgstr "Nombre de capteur"
-
 msgid "CHECK_STATISTICS"
 msgstr "L'invio di informazioni per aiutare a sviluppare"
 
@@ -211,11 +226,33 @@ msgstr "Spostamento del clock interno"
 msgid "RTC_OFFSET_UNITY"
 msgstr "secondo (s)"
 
-msgid "SHOW_WEBCAM"
-msgstr "Mostrare il menu Webcam"
 
 
 # For the logs part:
+msgid "ERROR_POWER_EMPTY"
+msgstr "Puissance de la prise selectionnée non renseignée"
+
+msgid "EMPTY_POWER_DESC"
+msgstr "La puissance de l'équipement branché sur la prise selectionnée n'est pas renseignée. Afin d'afficher les courbes de puissance, il faut renseigner cette valeur"
+
+msgid "MANAGE_IMPORT_LOG_POWER_CSV"
+msgstr "Importer vos logs de puissance depuis un fichier"
+
+msgid "MANAGE_IMPORT_LOG_CSV"
+msgstr "Importer vos logs depuis un fichier"
+
+msgid "SUCCESS_IMPORT_LOGS"
+msgstr "Données des capteurs importées avec succés depuis un fichier"
+
+msgid "ERROR_IMPORT_LOGS"
+msgstr "Erreur lors de l'import des données des capteurs depuis un fichier"
+
+msgid "IMPORT_LOGS"
+msgstr "Import des données des capteurs"
+
+msgid "PROGRESS_CSV"
+msgstr "Progréssion de la récupération du fichier"
+
 msgid "HISTO_GRAPH"
 msgstr "Grafici sul clima"
 
@@ -338,12 +375,6 @@ msgstr "Visualizzazione delle informazioni per il mese precedente"
 
 msgid "NEXT_BUTTON_MONTH"
 msgstr "Visualizza le informazioni per il mese successivo"
-
-msgid "PRECISION_GRAPH_DAY"
-msgstr "I registri vengono visualizzati con la massima precisione di un punto ogni minuto"
-
-msgid "PRECISION_GRAPH_MONTH"
-msgstr "I registri vengono visualizzati con la massima precisione di un punto ogni venti minuti"
 
 msgid "SELECT_SENSOR_NB"
 msgstr "Mostra valori di"
@@ -545,9 +576,6 @@ msgstr "I registri di esportazione (AAAA-MM-DD)"
 
 
 # For the plugs part:
-msgid "PLUG"
-msgstr "Configurare il fermo"
-
 msgid "PLUG_MENU"
 msgstr "Presa"
 
@@ -596,9 +624,6 @@ msgstr "Intracteur"
 msgid "PLUG_CO2"
 msgstr "CO²"
 
-msgid "VALIDATION_PLUG_CONF"
-msgstr "Salva configurazione"
-
 msgid "POWER_PLUG"
 msgstr "Potenza assorbita dall'elemento (in Watt)"
 
@@ -632,9 +657,6 @@ msgstr "sopra della soglia"
 msgid "PLUG_MAX_POWER"
 msgstr "Tipo di spina (capacità massima)"
 
-msgid "SAVE_AND_CONFIGURE_PROGRAM"
-msgstr "Salvare le modifiche e configurare la decisione programma"
-
 msgid "CONFIGURE_REGUL_TOLERANCE"
 msgstr "Tolleranza di regolazione secondaria"
 
@@ -646,9 +668,6 @@ msgstr "Minimo"
 
 msgid "MAXIMUM"
 msgstr "Massimo"
-
-msgid "JUMPTO_WIZARD"
-msgstr "Utilizzare la procedura guidata per configurare questa decisione"
 
 msgid "DIMMER"
 msgstr "Oscuratore"
@@ -686,7 +705,11 @@ msgstr "Numéro module :"
 msgid "PLUGS_MODULE_IP_ADRESS"
 msgstr "Adresse IP :"
 
+
 # For the programs part:
+msgid "TOOLTIP_PROGRAM_PLUG"
+msgstr "Programmer le comportement de vos prises"
+
 msgid "VIEW_CURRENT_PROGRAM"
 msgstr "Programma di gioco : "
 
@@ -861,8 +884,6 @@ msgstr "regolamento"
 msgid "CONFIRM_SAME_PROGRAM"
 msgstr "Ore di programmazione vengono restituiti lo stesso del programma precedente. Questo cambierà il vostro vecchio programma, vuoi applicare questo programma comunque?"
 
-msgid "JUMPTO_PLUG"         
-msgstr "Configurare il supporto associato a questo programma"
 
 msgid "ERROR_MAX_PROGRAM"
 msgstr "È stato raggiunto il numero massimo di cambiamento di stato per la decisione (limitato a 999 per tutte le dosi combinate). L'ultima azione dei vostri programmi si svolgerà presso:"
@@ -1003,6 +1024,18 @@ msgstr "Smettere delle attrezzature"
 
 
 #For the calendar part:
+msgid "TOOLTIP_ADD_XML"
+msgstr "Ajouter vos fichiers d'engrais"
+
+msgid "ERROR_XML_SIZE"
+msgstr "La taille du fichier d'engrais est limitée à 1Mo. Votre fichier dépasse cette taille."
+
+msgid "ERROR_XML_TYPE"
+msgstr "Le type de fichier d'engrais est limité aux fichiers XML. Votre fichier d'engrais ne semble pas être un XML."
+
+msgid "ERROR_UPLOAD_XML"
+msgstr "Erreur lors du chargement de votre programme d'engrais"
+
 msgid "DAY_DURATION"
 msgstr "giorno"
 
@@ -1200,6 +1233,9 @@ msgstr "Nessun programma giornaliero non è stato ancora definito. È possibile 
 
 
 # For the cost part:
+msgid "START_COMPUTE"
+msgstr "Lancer le calcul du coût"
+
 msgid "SELECT_START_DAY"
 msgstr "Giorno di partenza (YYYY-MM-DD)"
 
@@ -1653,6 +1689,12 @@ msgstr "Assicurarsi di aver letto l'aiuto prima di abilitare questa opzione. Non
 msgid "TOOLTIP_CONFIG_LOG_SEARCH"
 msgstr "Quando si caricano le pagine di log, il software salva i registri sensori e alimentazione per gli ultimi 31 giorni. Questa funzione permette di caricare i registri più vecchi a seconda del numero di mesi necessari"
 
+msgid "TOOLTIP_IMPORT_LOG_CSV"
+msgstr "Importer vos informations de logs depuis un fichier au format CSV"
+
+msgid "TOOLTIP_IMPORT_LOG_POWER_CSV"
+msgstr "Importer vos informations de logs de puissance depuis un fichier au format CSV"
+
 msgid "TOOLTIP_EXPORT_LOG_CSV"
 msgstr "Esportare il registro dati in un file in formato CSV"
 
@@ -1706,6 +1748,9 @@ msgstr "<b>Calendario avanzato Opzioni:</b> supporto di visualizzazione file XML
 
 msgid "TOOLTIP_PARAMETERS_PROGRAM"
 msgstr "<b>Opzioni avancées programmi des:</b> export import ou d'un programma, remise uno zero des programmi, ajout Soppressione delle imprese ou"
+
+msgid "TOOLTIP_PARAMETERS_PLUGS"
+msgstr "<b>Options avancées des prises:</b> nom des prises, tolérance, régulation..."
 
 msgid "TOOLTIP_PARAMETERS_LOGS"
 msgstr "<b>Opzioni di Curves:</b> impostare le curve di colore"
@@ -1767,6 +1812,39 @@ msgstr "Programma corrente"
 
 
 # For the Cultipi part:
+msgid "ERROR_IMAGE_SIZE"
+msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
+
+msgid "ERROR_IMAGE_TYPE"
+msgstr "Le type de fichier est limité aux fichiers images. Votre fichier ne semble pas être une image."
+
+msgid "ERROR_UPLOAD_IMAGE"
+msgstr "Erreur lors du chargement de votre image"
+
+msgid "ADD_SENSOR_IMAGE"
+msgstr "Ajouter l'image d'un capteur"
+
+msgid "ADD_PLUG_IMAGE"
+msgstr "Ajouter l'image d'un équipement"
+
+msgid "ADD_OTHER_IMAGE"
+msgstr "Ajouter l'image d'un autre élément"
+
+msgid "TOOLTIP_ADD_SENSOR_IMAGE"
+msgstr "L'image d'un capteur permet d'identifier les différents type de capteur : Température, Hygrométrie, Température de l'eau..."
+
+msgid "TOOLTIP_ADD_PLUG_IMAGE"
+msgstr "L'image d'un équipement permet d'identifier l'équipement branché sur une prise : Ventilateur, Chauffage, Humidificateur..."
+
+msgid "TOOLTIP_ADD_OTHER_IMAGE"
+msgstr "Les images 'autres' contiennent toutes les images permettant de modéliser votre espace: des plantes, des tentes de cultures, des serres...."
+
+msgid "TOOLTIP_MANAGE_IMAGES"
+msgstr "Ajouter vos propres images"
+
+msgid "EXPORT_CONF"
+msgstr "Exporter la configuration actuelle"
+
 msgid "CULTIPI_CONFIRM_UPDATE"
 msgstr "Gli aggiornamenti sono disponibili, sarebbe li metti?"
 
@@ -1809,8 +1887,6 @@ msgstr "Il cambiamento della password Errore, la vecchia password verrà mantenu
 msgid "SAVED_PASSWORD"
 msgstr "Password modificata correttamente"
 
-msgid "CULTIPI_SYNOPTIC"
-msgstr "sinottica"
 
 msgid "CULTIPI_NETWORK_CONF"
 msgstr "Configurazione della rete"
@@ -1878,11 +1954,7 @@ msgstr "Log di errore"
 msgid "RESTART_SERVICE"
 msgstr "Clicca l'immagine per riavviare il servizio"
 
-msgid "SERVICE_ON"
-msgstr "marcia Service"
 
-msgid "SERVICE_OFF"
-msgstr "Servizio fermo o in uno stato sconosciuto"
 
 msgid "ERROR_RESTART_SERVICE"
 msgstr "Errore del servizio red & startup"
@@ -1895,6 +1967,12 @@ msgstr "La configurazione è aggiornato"
 
 msgid "DIR_CONF_NOT_UPTODATE"
 msgstr "La configurazione utilizzata non è aggiornata, clicca qui per aggiornare la configurazione: <button id='update_conf'>Aggiorna configurazione</button>"
+
+msgid "DISPLAY_DIFF"
+msgstr "Afficher les différences des configurations: <p align='center'><button id='show_diff_conf'>Afficher les différences</button></p>"
+
+msgid "DIFF_CONF"
+msgstr "Différences entre la configuration actuelle de votre module et la configuration du logiciel"
 
 msgid "WAIT_UPDATED_CONF"
 msgstr "Verifica della configurazione"
@@ -1914,6 +1992,9 @@ msgstr "Versione dell'immagine"
 msgid "CULTIPI_SOFT_VERSION"
 msgstr "Software Version"
 
+msgid "CULTIDOC_SOFT"
+msgstr "Cultidoc"
+
 msgid "CULTICONF_SOFT"
 msgstr "Software Culticonf"
 
@@ -1932,8 +2013,6 @@ msgstr "Software Cultitime"
 msgid "CULTICAM_SOFT"
 msgstr "Software Culticam"
 
-msgid "CULTIPI_SERVICE"
-msgstr "Stato servizio Cultipi"
 
 msgid "SYNO_UPDATE_PLUG_HOUR"
 msgstr "Ultimo aggiornamento presi : "
@@ -1985,8 +2064,6 @@ msgstr "Risoluzione"
 msgid "TITLE_WEBCAM"
 msgstr "Attualmente catturata dall'immagine Webcam"
 
-msgid "TIME_CREATION_IMG"
-msgstr "Immagine catturata"
 
 
 #For the js part:
@@ -2000,9 +2077,12 @@ msgid "DISABLE_POPUP"
 msgstr "Non avvisarmi e fammi gestire la configurazione nella finestra di dialogo"
 
 
-#For the cultinet part:
+#For the Cultinet part:
 msgid "GATEWAY"
 msgstr "Ingresso"
+
+msgid "HEX_PASSWORD"
+msgstr "Hexadécimal"
 
 msgid "NETWORK_AVAILABLE"
 msgstr "L'unità è ora redémarer. Sarà di nuovo disponibile in pochi secondi."
