@@ -256,28 +256,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     create_conf_XML($sd_card . "/serverLog/conf.xml" , $paramListServerLog);
 
     // Create conf for mail
-    $emailUserConf = configuration\getEmailUserConf();
-    $paramListServerMail[] = array (
-        "name" => "verbose",
-        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']
-    );
-    $paramListServerMail[] = array (
-        "name" => "serverSMTP",
-        "level" => $emailUserConf['EMAIL_SMTP']
-    );
-    $paramListServerMail[] = array (
-        "name" => "port",
-        "level" => $emailUserConf['EMAIL_PORT']
-    );
-    $paramListServerMail[] = array (
-        "name" => "username",
-        "level" => $emailUserConf['EMAIL_ADRESS']
-    ); 
-    $paramListServerMail[] = array (
-        "name" => "password",
-        "level" => $emailUserConf['EMAIL_PASSWORD']
-    );
-    create_conf_XML($sd_card . "/serverMail/conf.xml" , $paramListServerMail);
+    // Made when user save it conf
     
     // Create conf for supervision
     $paramListSupervision[] = array (
