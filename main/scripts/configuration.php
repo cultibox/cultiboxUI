@@ -114,9 +114,6 @@ else
 }
 
 
-if(strpos("$wifi_ssid","cultipi_")===0) $wifi_ssid="";
-
-
 //Compute time loading for debug option
 $end_load = getmicrotime();
 

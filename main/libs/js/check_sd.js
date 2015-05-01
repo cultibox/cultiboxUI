@@ -130,10 +130,15 @@ $.ajax({
     success: function(data, textStatus, jqXHR) {
         // Parse result
         var json = jQuery.parseJSON(data);
+
+        pop_up_remove("display_diff");
+        pop_up_remove("check_conf_status");
+        
         if(json==0) {
              pop_up_add_information("<?php echo __('DIR_CONF_UPDATE'); ?>","check_conf_status","information");
         } else {
             pop_up_add_information("<?php echo __('DIR_CONF_NOT_UPTODATE'); ?>","check_conf_status","error");
+            pop_up_add_information("<?php echo __('DISPLAY_DIFF'); ?>","display_diff","error");
 
             <?php
              
@@ -153,7 +158,7 @@ $.ajax({
                 $("#tooltip_msg_box").fadeOut("slow");
                 $(".message").dialog("open");
                 
-                 $("#diff_conf").dialog({
+                $("#diff_conf").dialog({
                      resizable: false,
                      width: 550,
                      modal: true,

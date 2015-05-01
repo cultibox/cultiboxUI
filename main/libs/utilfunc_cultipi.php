@@ -39,6 +39,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     if(!is_dir($sd_card . "/serverPlugUpdate/plg")) mkdir($sd_card . "/serverPlugUpdate/plg");
     if(!is_dir($sd_card . "/serverMail"))           mkdir($sd_card . "/serverMail");
     if(!is_dir($sd_card . "/serverCultibox"))       mkdir($sd_card . "/serverCultibox");
+    if(!is_dir($sd_card . "/serverSupervision"))    mkdir($sd_card . "/serverSupervision");
     
     // Create cultipi conf.xml file
     $paramListCultipiConf[] = array (
@@ -51,15 +52,13 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $paramListCultipiStart[] = array ( 
         'name' => "serverLog",
         'waitAfterUS' => "1000",
-        'port' => "6003",
         'pathexe' => "tclsh",
-        'path' => "./serverLog/serveurLog.tcl",
+        'path' => "./serverLog/serverLog.tcl",
         'xmlconf' => "./serverLog/conf.xml",
     );
     $paramListCultipiStart[] = array ( 
         'name' => "serverAcqSensor",
         'waitAfterUS' => "100",
-        'port' => "6006",
         'pathexe' => "tclsh",
         'path' => "./serverAcqSensor/serverAcqSensor.tcl",
         'xmlconf' => "./serverAcqSensor/conf.xml",
@@ -67,7 +66,6 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $paramListCultipiStart[] = array ( 
         'name' => "serverPlugUpdate",
         'waitAfterUS' => "100",
-        'port' => "6004",
         'pathexe' => "tclsh",
         'path' => "./serverPlugUpdate/serverPlugUpdate.tcl",
         'xmlconf' => "./serverPlugUpdate/conf.xml",
@@ -75,7 +73,6 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $paramListCultipiStart[] = array ( 
         'name' => "serverHisto",
         'waitAfterUS' => "100",
-        'port' => "6009",
         'pathexe' => "tclsh",
         'path' => "./serverHisto/serverHisto.tcl",
         'xmlconf' => "./serverHisto/conf.xml",
@@ -83,7 +80,6 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $paramListCultipiStart[] = array ( 
         'name' => "serverCultibox",
         'waitAfterUS' => "100",
-        'port' => "6013",
         'pathexe' => "tclsh",
         'path' => "./serverCultibox/serverCultibox.tcl",
         'xmlconf' => "./serverCultibox/conf.xml",
@@ -91,11 +87,17 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     $paramListCultipiStart[] = array ( 
         'name' => "serverMail",
         'waitAfterUS' => "100",
-        'port' => "6015",
         'pathexe' => "tclsh",
         'path' => "./serverMail/serverMail.tcl",
         'xmlconf' => "./serverMail/conf.xml",
     );
+    $paramListCultipiStart[] = array ( 
+        'name' => "serverSupervision",
+        'waitAfterUS' => "100",
+        'pathexe' => "tclsh",
+        'path' => "./serverSupervision/serverSupervision.tcl",
+        'xmlconf' => "./serverSupervision/conf.xml",
+    );    
     
     // If there are some plugins to add in start.xml , add it
     foreach ($GLOBALS['PLUGIN'] as $plugin) { 
@@ -254,27 +256,64 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     create_conf_XML($sd_card . "/serverLog/conf.xml" , $paramListServerLog);
 
     // Create conf for mail
+    $emailUserConf = configuration\getEmailUserConf();
     $paramListServerMail[] = array (
         "name" => "verbose",
-        "level" => "info"
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']
     );
     $paramListServerMail[] = array (
-        "name" => "serveurSMTP",
-        "level" => "smtp.gmail.com"
+        "name" => "serverSMTP",
+        "level" => $emailUserConf['EMAIL_SMTP']
     );
     $paramListServerMail[] = array (
         "name" => "port",
-        "level" => "587"
+        "level" => $emailUserConf['EMAIL_PORT']
     );
     $paramListServerMail[] = array (
         "name" => "username",
-        "level" => "hercule.poirot@gmail.com"
+        "level" => $emailUserConf['EMAIL_ADRESS']
     ); 
     $paramListServerMail[] = array (
-        "name" => "hercule.poirot@gmail.com",
-        "level" => "motdepasse"
+        "name" => "password",
+        "level" => $emailUserConf['EMAIL_PASSWORD']
     );
     create_conf_XML($sd_card . "/serverMail/conf.xml" , $paramListServerMail);
+    
+    // Create conf for supervision
+    $paramListSupervision[] = array (
+        "name" => "verbose",
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision']
+    );
+    $paramListSupervision[] = array (
+        "name" => "nbProcess",
+        "level" => 0
+    );    
+    create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
+    
+    // For each process create an XML
+    /*
+    $paramListSupervisionProcess[] = array (
+        "name" => "action",
+        "level" => "checkPing"
+    );    
+    $paramListSupervisionProcess[] = array (
+        "name" => "nbIP",
+        "level" => "1"
+    );
+    $paramListSupervisionProcess[] = array (
+        "name" => "IP,0",
+        "level" => "8.8.8.8"
+    );
+    $paramListSupervisionProcess[] = array (
+        "name" => "timeMax",
+        "level" => "30"
+    ); 
+    $paramListSupervisionProcess[] = array (
+        "name" => "error,action",
+        "level" => "sendMail info@cultibox.fr"
+    );
+    create_conf_XML($sd_card . "/serverSupervision/process_0.xml" , $paramListSupervisionProcess);
+    */
     
     $program = "";
     $conf_uptodate = true;

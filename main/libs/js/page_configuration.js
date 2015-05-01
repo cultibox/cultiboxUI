@@ -36,37 +36,6 @@ formatCard = function(hdd,pourcent) {
     });
 }
 
-check_cultipi_status = function() {
-    $.ajax({
-          beforeSend: function(jqXHR) {
-                $.timeout.push(jqXHR);
-        },
-        complete: function(jqXHR) {
-            var index = $.timeout.indexOf(jqXHR);
-            if (index > -1) {
-                $.timeout.splice(index, 1);
-            }
-        },
-        cache: false,
-        async: true,
-        url: "main/modules/external/services_status.php",
-        data: {action:"status_cultipi"}
-     }).done(function (data) {
-         var objJSON = jQuery.parseJSON(data);
-         if(objJSON=="0") {
-            $("#cultipi_on").show();
-            $("#cultipi_off").css('display','none');
-         } else {
-            $("#cultipi_off").show();
-            $("#cultipi_on").css('display','none');
-         }
-         $.timeout.push(setTimeout(function() {
-            check_cultipi_status();
-         },3000));
-     });
-}
-
-
 // {{{ getAlarm()
 // ROLE display or not the alarm part from the configuration menu
 // IN  input value: display or not 
@@ -86,8 +55,6 @@ function getAlarm(i) {
 
 
 $(document).ready(function(){
-     check_cultipi_status();
-
      pop_up_remove("main_error");
      pop_up_remove("main_info");
 
@@ -176,23 +143,34 @@ $(document).ready(function(){
 
             data.context = $('#import_conf').click(function (e) {
                 e.preventDefault();
-                $.blockUI({
-                message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                centerY: 0,
-                css: {
-                    top: '20%',
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: 'grey',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    opacity: .9,
-                    color: '#fffff'
-                },
-                onBlock: function() {
-                    data.submit();
-                } });
+                data.submit();
             });
+        },
+        progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_conf').css(
+                    'width',
+                    progress + '%'
+                );
+    
+                $('#progress_purcent').html(
+                    progress + '%'
+                );
+
+                $("#progress_conf").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>"
+                });
+
+                if(progress==100) {
+                    $('#progress_bar_conf').css('width','0%');
+                    $("#progress_conf").dialog('close');
+                    $('#progress_purcent').html();
+                }
         },
         done: function (e, data) {
             e.preventDefault();
@@ -262,6 +240,7 @@ $(document).ready(function(){
                                 buttons: [{
                                     text: CLOSE_button,
                                     click: function () {
+                                        get_content("configuration");
                                         $( this ).dialog( "close" ); return false;
                                     }
                                 }]
@@ -363,7 +342,7 @@ $(document).ready(function(){
                 varToUpdate = $( this ).attr('name');
 
 
-                if(varToUpdate.trim() != "") {
+                if(varToUpdate.trim() != "" && typeof varToUpdate != "undefined") {
                     $.ajax({
                         type: "GET",
                         cache: false,
@@ -933,7 +912,9 @@ $(document).ready(function(){
                 cache: false,
                 async: true,
                 url: "main/modules/external/get_logs_cultipi.php",
-                data: {action:id},
+                data: {
+                    action:id
+                },
                 success: function (data) {
                     var objJSON = jQuery.parseJSON(data);
 
@@ -1195,118 +1176,6 @@ $(document).ready(function(){
                     }
                 }]
          });
-    });
-
-
-
-    $("#restart_cultipi").click(function(e) {
-           e.preventDefault();
-           $("#confirm_restart_cultipi").dialog({
-                resizable: false,
-                height:150,
-                width: 500,
-                modal: true,
-                closeOnEscape: false,
-                dialogClass: "dialog_cultibox",
-                buttons: [{
-                    text: OK_button,
-                    click: function () {
-                        $( this ).dialog("close");
-
-                        $.blockUI({
-                            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                            centerY: 0,
-                            css: {
-                                top: '20%',
-                                border: 'none',
-                                padding: '5px',
-                                backgroundColor: 'grey',
-                                '-webkit-border-radius': '10px',
-                                '-moz-border-radius': '10px',
-                                opacity: .9,
-                                color: '#fffff'
-                            },
-                            onBlock: function() {
-                                $.ajax({
-                                    cache: false,
-                                    async: true,
-                                    url: "main/modules/external/services_status.php",
-                                    data: {action:"restart_cultipi"},
-                                    success: function (data) {
-                                        var objJSON = jQuery.parseJSON(data);
-                                        if(objJSON=="0") {
-                                            $.ajax({
-                                                cache: false,
-                                                async: true,
-                                                url: "main/modules/external/services_status.php",
-                                                data: {action:"status_cultipi"}
-                                            }).done(function (data) {
-                                                var objJSON = jQuery.parseJSON(data);
-                                                if(objJSON=="0") {
-                                                    $("#cultipi_on").show();
-                                                    $("#cultipi_off").css('display','none');
-                                                } else {
-                                                    $("#cultipi_off").show();
-                                                    $("#cultipi_on").css('display','none');
-                                                }
-                                                $.unblockUI();
-
-                                                $("#success_restart_service").dialog({
-                                                    resizable: false,
-                                                    width: 400,
-                                                    closeOnEscape: true,
-                                                    modal: true,
-                                                    dialogClass: "popup_message",
-                                                    buttons: [{
-                                                        text: CLOSE_button,
-                                                        click: function () {
-                                                            $( this ).dialog( "close" ); return false;
-                                                        }
-                                                    }]
-                                                    });
-                                            });
-                                        } else {
-                                            $("#error_restart_service").dialog({
-                                                resizable: false,
-                                                width: 400,
-                                                closeOnEscape: true,
-                                                modal: true,
-                                                dialogClass: "popup_error",
-                                                buttons: [{
-                                                    text: CLOSE_button,
-                                                    click: function () {
-                                                        $( this ).dialog( "close" ); return false;
-                                                    }
-                                                }]
-                                            });
-                                            $.unblockUI();
-                                        }
-                                    }, error: function (data) {
-                                        $("#error_restart_service").dialog({
-                                            resizable: false,
-                                            width: 400,
-                                            closeOnEscape: true,
-                                            modal: true,
-                                            dialogClass: "popup_error",
-                                            buttons: [{
-                                                text: CLOSE_button,
-                                                click: function () {
-                                                    $( this ).dialog( "close" ); return false;
-                                            } }]
-                                        });
-                                        $.unblockUI();
-                                    }
-                                });
-                            }
-                        });
-                    }
-                }, {
-                    text: CANCEL_button,
-                        click: function () {
-                            $( this ).dialog( "close" ); return false;
-                        }
-                }]
-        });
     });
 });
 
@@ -1691,7 +1560,7 @@ $(document).ready(function() {
 
                 var check_update=false;
                 if(checked) {
-                    var dataForm=$("#configform").serialize();
+                    var dataForm=$("#configform_network").serialize();
                     if($("#hex_password").attr('checked')) {
                         var hex="1";
                     } else {
@@ -1826,6 +1695,50 @@ $(document).ready(function() {
         });
       }
     });
+
+
+
+
+    $('#dl_cultibox_firm').click(function(e) {
+       e.preventDefault();
+       $.fileDownload('main/templates/data/firm.hex');
+    });
+
+    $('#dl_wifi_firm').click(function(e) {
+       e.preventDefault();
+       $.fileDownload('main/templates/data/firm_wifi.hex');
+    });
+    
+    $('#save_email_conf').click(function(e) {
+        $.blockUI({ message: '' });
+        $.ajax({
+            async: true,
+            url: "main/modules/external/save_configuration.php",
+            data: {
+                parttosave:"email",
+                EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
+                EMAIL_SMTP:$('#EMAIL_SMTP').val(),
+                EMAIL_PORT:$('#EMAIL_PORT').val(),
+                EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
+            }
+        }).done(function (data) {
+            $.unblockUI();
+        })
+    }); 
+
+    $( "#EMAIL_PROVIDER" ).change(function() {
+        selectvalue = $(this).val();
+        if (selectvalue == "other") {
+            $('#EMAIL_SMTP').prop('disabled', false);
+        } else {
+            $('#EMAIL_SMTP').prop('disabled', true);
+            $('#EMAIL_SMTP').val(selectvalue);
+        }
+
+    });
+    
+    
 });
 
 </script>

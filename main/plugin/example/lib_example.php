@@ -23,13 +23,6 @@ function addInMenu() {
 // RET none
 function addJsToLoadMenu() {
 
-    echo '  $(document).ready(function() {';
-    echo '    $(".href-example").click(function(e) {';
-    echo '        e.preventDefault();';
-    echo '        get_content("example",get_array);';
-    echo '    });';
-    echo '  });';
-
 }
 
 // {{{ addInStartXMLCultiCore()

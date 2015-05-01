@@ -1,6 +1,6 @@
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+15 center", at: "right center" },
+        position: { my: "left+25 center-40", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -25,26 +25,35 @@
     <table class="table_width">
         <tr>
             <td class="calendar-conf-marge"></td> 
-            <td class="calendar-title">
+            <td class="cultipi_icon">
                 <!-- Button to add a element -->
                 <input type="image" id="syno_add_element" name="syno_add_element"
                        title="<?php echo __('CULTIPI_SYNO_ADD_ELEMENT'); ?>"
                        src="main/libs/img/db_add.png"  
                        alt="calendar"  
                 />        
+            </td><td class="cultipi_icon">
                 <input type="image" id="syno_webcam" name="syno_webcam"
                        title="<?php echo __('TOOLTIP_WEBCAM'); ?>"
                        src="main/libs/img/webcam_icon.png"  
                        alt="webcam"  
                 />
-
+            <td class="cultipi_icon">
                 <input type="image" id="manage_images" name="manage_images"
                        title="<?php echo __('TOOLTIP_MANAGE_IMAGES'); ?>"
                        src="main/libs/img/upload.png"  
                        alt="settings"  
                        width="22"
                 />
+            <td class="cultipi_icon">
+                <input type="image" id="restart_cultipi" name="restart_cultipi"  
+                       src='/cultibox/main/libs/img/service_restart.png' 
+                       alt='restart' 
+                       title="<?php echo __('RESTART_SERVICE'); ?>"
+                        width="24"
+                 />
             </td>
+            <td class="cultipi_blank"></td>
             <td class="calendar-conf-marge"></td>
             <td ><p class="pInline p_center" ><?php echo __('SYNO_UPDATE_SENSOR_HOUR'); ?></p><p class="pInline p_center" id="synoptic_updateSensorHour" ></p></td>
             <td ><p class="pInline p_center" ><?php echo __('SYNO_UPDATE_PLUG_HOUR'); ?></p><p class="pInline p_center" id="synoptic_updatePlugHour" ></p></td>
@@ -480,7 +489,19 @@
 
 
 <div id="error_upload_image" style="dislay:none">
-
 </div>
+
+<div id="confirm_restart_cultipi" title="<?php echo __('CONFIRM_RESTART_CULTIPI_TITLE'); ?>" style="display:none">
+    <?php echo __('CONFIRM_RESTART_CULTIPI'); ?>
+</div>
+
+<div id="error_restart_service" title="" style="display:none">
+    <p><?php echo __('ERROR_RESTART_SERVICE'); ?></p>
+</div>
+
+<div id="success_restart_service" title="" style="display:none">
+    <p><?php echo __('SUCCESS_RESTART_SERVICE'); ?></p>
+</div>
+
 
 

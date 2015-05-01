@@ -110,9 +110,73 @@ $(document).ready(function(){
                 action:"applyConf"
             }
         }).done(function (data) {
+            $.ajax({
+                cache: false,
+                async: false,
+                url: "main/modules/external/sync_conf.php",
+                success: function(data) {
+                    // Parse result
+                    var json = jQuery.parseJSON(data);
+                },
+                error: function(data) {
+                }
+            });
             $.unblockUI();
         });
-    });    
+    });
+    
+    // Load logs
+    // Loop for updating
+    function updatelogsServerLog() {
+    
+        $.ajax({
+            beforeSend: function(jqXHR) {
+                $.xhrPool.push(jqXHR);
+            },
+            complete: function(jqXHR) {
+                var index = $.xhrPool.indexOf(jqXHR);
+                if (index > -1) {
+                    $.xhrPool.splice(index, 1);
+                }
+            },
+            cache: false,
+            async: true,
+            url: "main/modules/external/get_logs_cultipi.php",
+            data: {
+                action:"logs_server",
+                nbLine:20,
+                server:"serverIrrigation"
+            },
+            success: function (data) {
+                
+                var objJSON = jQuery.parseJSON(data);
+                
+                // Remove previous logs
+                $("#logServerIrrigation").empty();
+                
+                if(objJSON[0].length>0) {
+                    $.each(objJSON[0], function(i, item) {
+                        $("#logServerIrrigation").append(item+"<br />");
+                    });
+                }
+                $("#logServerIrrigation").scrollTop($("#logServerIrrigation")[0].scrollHeight);
+
+
+                $.timeout.push(
+                    setTimeout(updatelogsServerLog, 3000)
+                );
+            },error: function (data) {
+                $.timeout.push(
+                    setTimeout(updatelogsServerLog, 3000)
+                );
+            }
+        });
+    }
+
+    // Call the function the first time
+    $.timeout.push(
+        setTimeout(updatelogsServerLog, 3000)
+    );
 
 });
 

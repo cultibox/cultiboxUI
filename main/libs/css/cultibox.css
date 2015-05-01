@@ -867,7 +867,7 @@ td.conf-alarm-field {
 .ui-tooltip {
        font-size:13px;
        font-family:Calibri;
-       background: #696455;
+       background: #000000;
        border-radius:20px;  
        padding: 5px;
        color: #ffffff;
@@ -1099,5 +1099,14 @@ p.p_date_creation {
 
 .tabs-dialog .ui-dialog .ui-dialog-content, .ui-tabs { padding:0; }
 .tabs-dialog .ui-dialog-titlebar { display:none };
+
+
+td.cultipi_icon {
+    width: 30px;
+}
+
+td.cultipi_blank {
+    width: 15%;
+}
 
 

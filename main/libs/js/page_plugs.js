@@ -1,6 +1,7 @@
 var sensors  = <?php echo json_encode($GLOBALS['NB_MAX_SENSOR_PLUG']); ?>;
 var nb_plugs = <?php echo json_encode($nb_plugs); ?>;
 var plug_alert_change= {};
+var second_regul = <?php echo json_encode($second_regul); ?>;
 
 // {{{ getTolerance()
 // ROLE display the tolerance informations or not
@@ -292,6 +293,8 @@ $(document).ready(function(){
                             text: CANCEL_button,
                                 click: function () {
                                     $('#plug_type'+plug+' option[value="'+plugs_infoJS[plug-1]['PLUG_TYPE']+'"]').prop('selected', true);
+                                    getTolerance($('#plug_type'+plug).val(),plug,second_regul);
+                                    getRegul($('#plug_type'+plug).val(),plug);
                                     $( this ).dialog( "close" );
                                     return false;
                                 }
@@ -677,10 +680,45 @@ $(document).ready(function(){
                 "id": "btnClose",
                 click: function () {
                     $(this).dialog('close');
-                    get_content("programs",getUrlVars("selected_plug="+$("#selected_plug option:selected").val()));
+                    $.blockUI({
+                        message: LOADING+" <img src=\"main/libs/img/waiting_small.gif\" />",
+                        centerY: 0,
+                        css: {
+                            top: '20%',
+                            border: 'none',
+                            padding: '5px',
+                            backgroundColor: 'grey',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: .9,
+                            color: '#fffff'
+                        },
+                        onBlock: function() {
+                            $.ajax({
+                                cache: false,
+                                async: false,
+                                url: "main/modules/external/get_plugs_content.php",
+                            }).done(function(data) {
+                                $('#div_plug_tabs').tabs('destroy');
+                                $("#plugs_dialog").html(data);
+                                console.log($('#div_plug_tabs'));
+                                $('#div_plug_tabs').tabs();
+                                <?php
+                                    for($i=1;$i<=$nb_plugs;$i++) {
+                                        echo "getTolerance('" . $plug_type{$i} . "'," . $i . ",'" . $second_regul . "');";
+                                    }
+
+                                    for($i=1;$i<=$nb_plugs;$i++) {
+                                        echo "getRegul('" . $plug_regul{$i} . "'," . $i . ");";
+                                    }
+                                ?>
+                                $.unblockUI();
+                            });
+                        }
+                    });
                     return false;
                 }
-            }],
+            }]
         });
     });
 });

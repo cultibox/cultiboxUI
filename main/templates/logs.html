@@ -1,6 +1,6 @@
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+15 center", at: "right center" },
+        position: { my: "left+25 center-40", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -14,7 +14,6 @@
         } 
     });
 </script>
-
 <br />
 <label class="title_conf"><?php echo __('SELECT_LOG_TITLE'); ?></label>
 
@@ -865,6 +864,7 @@
 
 <div id="progress_csv">
     <div id="progress_bar_csv" class="bar" style="width: 0%;"></div>
+    <p class="p_center" id="progress_purcent"></p>
 </div>
 
 
@@ -886,10 +886,9 @@
                 <?php echo __('POWER_PLUG'); ?>:<img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_POWER'); ?>" />
             </td>
             <td>
-                <input type="text" size="4" maxlength="4" id="plug_power<?php echo $i; ?>" name="plug_power<?php echo $i; ?>" value="<?php echo $plug_power{$i}; ?>" onKeypress="return verifInt(event);">W
+                <input type="text" size="4" maxlength="4" id="plug_power" name="plug_power" value="" onKeypress="return verifInt(event);">W
             </td>
-            <td><div id="error_power_value<?php echo $i; ?>" class='error_field' style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_POWER_VALUE'); ?></div></td>
+            <td><div id="error_power_value" class='error_field' style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_POWER_VALUE'); ?></div></td>
         </tr>
     </table>
-    <p class="p_center"><input type="submit" name="submit_power" value="<?php echo __('VALIDATION_PLUG_CONF'); ?>" id="submit_power"></p>
 </div>
