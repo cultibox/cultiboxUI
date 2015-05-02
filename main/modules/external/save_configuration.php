@@ -20,15 +20,19 @@ $EMAIL_PASSWORD = getvar("EMAIL_PASSWORD");
 switch ($parttosave) 
 {
     case "email":
-    
+
         $toSave = array(
             "EMAIL_PROVIDER" => $EMAIL_PROVIDER,
             "EMAIL_SMTP"     => $EMAIL_SMTP,
             "EMAIL_PORT" => $EMAIL_PORT,
-            "EMAIL_ADRESS" => $EMAIL_ADRESS,
-            "EMAIL_PASSWORD" => $EMAIL_PASSWORD
-        );
-        
+            "EMAIL_ADRESS" => $EMAIL_ADRESS
+        ); 
+    
+        // User set a new password
+        if (trim($EMAIL_PASSWORD,"*") != "") {
+            $toSave["EMAIL_PASSWORD"] = $EMAIL_PASSWORD;
+        }
+
         // Save configuration in DB
         configuration\saveEmailUserConf($toSave);
         
