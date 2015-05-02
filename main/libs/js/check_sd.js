@@ -166,6 +166,7 @@ $.ajax({
                      dialogClass: "popup_error",
                      buttons: [{
                          text: "<?php echo __('CLOSE_BUTTON','js'); ?>",
+                         id: "close-diff-conf",
                          click: function () {
                             if($("#disable_popup").is(':checked')) {
                                  $.ajax({
