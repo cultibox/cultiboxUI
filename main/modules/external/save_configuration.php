@@ -4,6 +4,8 @@ require_once('../../libs/config.php');
 require_once('../../libs/utilfunc.php');
 require_once('../../libs/db_get_common.php');
 require_once('../../libs/db_set_common.php');
+require_once('../../libs/utilfunc_sd_card.php');
+
 
 $main_error=array();
 
@@ -26,8 +28,13 @@ switch ($parttosave)
             "EMAIL_ADRESS" => $EMAIL_ADRESS,
             "EMAIL_PASSWORD" => $EMAIL_PASSWORD
         );
-
+        
+        // Save configuration in DB
         configuration\saveEmailUserConf($toSave);
+        
+        // Write it in XML
+        configuration\serverEmail_createXMLConf();
+        
         break;
     default:
         break;

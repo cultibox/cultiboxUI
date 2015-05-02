@@ -38,8 +38,8 @@ function check_db() {
     $conf_index_col["ENABLE_LED"]           = array ( 'Field' => "ENABLE_LED", 'Type' => "varchar(4)", 'default_value' => "0001",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_ADRESS"]         = array ( 'Field' => "EMAIL_ADRESS", 'Type' => "varchar(40)", 'default_value' => "hercule.poirot@yopmail.com",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_PASSWORD"]       = array ( 'Field' => "EMAIL_PASSWORD", 'Type' => "varchar(40)", 'default_value' => "password",'carac' => "NOT NULL");
-    $conf_index_col["EMAIL_PROVIDER"]       = array ( 'Field' => "EMAIL_PROVIDER", 'Type' => "varchar(20)", 'default_value' => "other",'carac' => "NOT NULL");
-    $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(20)", 'default_value' => "smtp.yopmail.com",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_PROVIDER"]       = array ( 'Field' => "EMAIL_PROVIDER", 'Type' => "varchar(40)", 'default_value' => "other",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(40)", 'default_value' => "smtp.yopmail.com",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_PORT"]           = array ( 'Field' => "EMAIL_PORT", 'Type' => "int(11)", 'default_value' => 587,'carac' => "NOT NULL");
 
     // Check if table configuration exists
@@ -89,8 +89,8 @@ function check_db() {
             ."ENABLE_LED varchar(4) NOT NULL DEFAULT '0001',"
             ."EMAIL_ADRESS varchar(40) NOT NULL DEFAULT 'hercule.poirot@yopmail.com',"
             ."EMAIL_PASSWORD varchar(40) NOT NULL DEFAULT 'password',"
-            ."EMAIL_PROVIDER varchar(20) NOT NULL DEFAULT 'other',"
-            ."EMAIL_SMTP varchar(20) NOT NULL DEFAULT 'test.yopmail.com',"
+            ."EMAIL_PROVIDER varchar(40) NOT NULL DEFAULT 'other',"
+            ."EMAIL_SMTP varchar(40) NOT NULL DEFAULT 'test.yopmail.com',"
             ."EMAIL_PORT int(11) NOT NULL DEFAULT '587');";
             
         // Create table
@@ -287,6 +287,35 @@ function saveEmailUserConf($param) {
         print_r($ret);
     }
 
+}
+
+function serverEmail_createXMLConf () {
+    
+    // retrieve user params
+    $emailUserConf = getEmailUserConf();
+    
+    $paramListServerMail[] = array (
+        "name" => "verbose",
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']
+    );
+    $paramListServerMail[] = array (
+        "name" => "serverSMTP",
+        "level" => $emailUserConf['EMAIL_SMTP']
+    );
+    $paramListServerMail[] = array (
+        "name" => "port",
+        "level" => $emailUserConf['EMAIL_PORT']
+    );
+    $paramListServerMail[] = array (
+        "name" => "username",
+        "level" => $emailUserConf['EMAIL_ADRESS']
+    ); 
+    $paramListServerMail[] = array (
+        "name" => "password",
+        "level" => $emailUserConf['EMAIL_PASSWORD']
+    );
+    \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
+    
 }
 
 }

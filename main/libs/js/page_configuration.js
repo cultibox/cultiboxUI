@@ -1701,12 +1701,12 @@ $(document).ready(function() {
 
     $('#dl_cultibox_firm').click(function(e) {
        e.preventDefault();
-       $.fileDownload('main/templates/data/firm.hex');
+       $.fileDownload('main/templates/data/cultibox_firmware/firm.hex');
     });
 
     $('#dl_wifi_firm').click(function(e) {
        e.preventDefault();
-       $.fileDownload('main/templates/data/firm_wifi.hex');
+       $.fileDownload('main/templates/data/cultibox_firmware_wifi/firm.hex');
     });
     
     $('#save_email_conf').click(function(e) {
