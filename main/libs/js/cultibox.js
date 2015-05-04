@@ -540,7 +540,7 @@ $(document).ready(function() {
                 $.ajax({
                     cache: false,
                     async: false,
-                    url: "main/modules/external/compare_conf.php"
+                    url: "main/modules/external/compare_conf.php",
                     data: {show: 1}
                 }).done(function(data) {
                     $.unblockUI();

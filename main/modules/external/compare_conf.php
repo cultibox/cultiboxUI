@@ -9,7 +9,6 @@
     $tmp_conf       = $GLOBALS['CULTIPI_CONF_TEMP_PATH'];
     $current_conf   = $GLOBALS['CULTIPI_CONF_PATH'] . "/01_defaultConf_RPi";
 
-    if((isset($_GET['show']))&&(!empty($_GET['show']))) {
     $typicalError["serverAcqSensor"]    = "des capteurs" ;
     $typicalError["cultiPi"]            = "générale du pilotage" ;
     $typicalError["serverCultibox"]     = "de l'affichage dans la Cultibox" ;
@@ -50,13 +49,7 @@
             }
         }
     }
-}
 
-        echo nl2br($diff);
-    } else {
-        exec("diff -rw $current_conf $tmp_conf",$ret,$err);
-        echo json_encode($err);
-    }
-
+    echo json_encode($err);
 
 ?>
