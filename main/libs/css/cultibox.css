@@ -867,7 +867,7 @@ td.conf-alarm-field {
 .ui-tooltip {
        font-size:13px;
        font-family:Calibri;
-       background: #000000;
+       background: #696455;
        border-radius:20px;  
        padding: 5px;
        color: #ffffff;
@@ -1076,6 +1076,10 @@ input[type='file'] {
     width: 90%;
 }
 
+td.marge-resume {
+    width: 80%
+}
+
 
 td.password-title {
     width: 31%;
@@ -1102,8 +1106,21 @@ p.p_date_creation {
 
 
 td.cultipi_icon {
-    width: 30px;
+    width: 40px;
 }
+
+td.icon_menu {
+    width: 6%;
+}
+
+td.icon_menu2 {
+    width: 5%;
+}
+
+td.icon_menu3 {
+    width: 4%;
+}
+
 
 td.cultipi_blank {
     width: 15%;

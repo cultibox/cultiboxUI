@@ -541,6 +541,7 @@ $(document).ready(function() {
                     cache: false,
                     async: false,
                     url: "main/modules/external/compare_conf.php"
+                    data: {show: 1}
                 }).done(function(data) {
                     $.unblockUI();
                     var objJSON = jQuery.parseJSON(data);
@@ -554,7 +555,7 @@ $(document).ready(function() {
                     $("#diff_conf_list").html(toDisplay);
                     $("#diff_conf_list").dialog({
                         resizable: true,
-                        width: 650,
+                        width: 750,
                         closeOnEscape: false,
                         modal: true,
                         dialogClass: "popup_message",

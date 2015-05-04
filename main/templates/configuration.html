@@ -1,6 +1,6 @@
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+25 center-40", at: "right+15 center-10" },
+        position: { my: "left+20 center-30", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -58,6 +58,21 @@
 <br />
 
 <div id="div_user_interface" style="display:none">
+      <table class="table_width">
+        <tr>
+            <td class="calendar-conf-marge"></td>
+            <td class="icon_menu">
+        <a href="" id="export_conf"><img src='/cultibox/main/libs/img/dl_conf.png' alt='' title="<b><?php echo __('EXPORT_CONF'); ?> : </b><?php echo __('TOOLTIP_EXPORT_CONF'); ?>"></a>
+            </td>
+            <td class="icon_menu">
+                <a href="" id="import_conf"><img src='/cultibox/main/libs/img/up_conf.png' alt='' title="<b><?php echo __('IMPORT_CONF_CULTIPI'); ?> : </b><?php echo __('TOOLTIP_IMPORT_CONF'); ?>"></a><input id="confupload" type="file" name="files[]" style="display:none">
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <hr class="hr_cultipi" />
+    <br />
+
     <table class="conf-table">
        <tr>
             <td class="conf-marge"></td>
@@ -96,32 +111,6 @@
                     <option value="True" <?php if(strcmp("$advanced_regul","True")==0) echo "selected"; ?>><?php echo __('YES'); ?></option>
                     <option value="False" <?php if(strcmp("$advanced_regul","False")==0) echo "selected"; ?>><?php echo __('NO'); ?></option>
                 </select>
-            </td>
-            <td></td>
-        </tr>
-    </table>
-    <br /><br />
-    <hr class="hr_cultipi" />
-    <br /><br />
-    <table class="conf-table">
-       <tr>
-             <td class="conf-marge"></td>
-             <td class="conf-marge-td"><?php echo __('IMPORT_CONF_CULTIPI'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_IMPORT_CONF'); ?>" /><label id="import_conf_name" class="imported_file"></label></td>
-            <td>
-                <input id="confupload" type="file" name="files[]">
-                <button name="import" value="<?php echo __('SELECT_FILE_NAME'); ?>" id="import_conf" class="inputDisable" disabled>
-                    <?php  echo __('SELECT_FILE_NAME'); ?>
-                </button><br />
-            </td>
-            <td></td>
-       </tr>
-        <tr>
-            <td></td>
-            <td><?php echo __('EXPORT_CONF'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_EXPORT_CONF'); ?>" /></td>
-            <td>
-                <button name="export" value="<?php echo __('EXPORT_PROGRAM'); ?>" id="export_conf">
-                    <?php  echo __('EXPORT_PROGRAM'); ?>
-                </button>
             </td>
             <td></td>
         </tr>
@@ -317,6 +306,22 @@
     <p><?php echo __('ERROR_IMPORT_CONF'); ?></p>
 </div>
 
+<div id="import_conf_div" style="display:none">
+    <table class="conf-table">
+       <tr>
+             <td class="conf-marge"></td>
+             <td class="conf-marge-td"><?php echo __('IMPORT_CONF_CULTIPI'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_IMPORT_CONF'); ?>" /><label id="import_conf_name" class="imported_file"></label></td>
+            <td>
+                <input id="confupload" type="file" name="files[]">
+                <button name="import" value="<?php echo __('SELECT_FILE_NAME'); ?>" id="import_conf" class="inputDisable" disabled>
+                    <?php  echo __('SELECT_FILE_NAME'); ?>
+                </button><br />
+            </td>
+            <td></td>
+       </tr>
+    </table>
+</div>
+
 <div id="preparing-file-modal" title="" style="display: none;"><?php echo __('PREPARING_EXPORT'); ?><img src="main/libs/img/waiting_small.gif" alt="" /></div>
 
 
@@ -326,10 +331,15 @@
     <!-- Top button -->
     <table class="table_width">
         <tr>
-            <td class="conf-marge-cultipi"></td>
-            <td>
+            <td class="calendar-conf-marge"></td>
+            <td class="icon_menu">
                 <a href="" id="reset_network_img"><img src='/cultibox/main/libs/img/service_restart.png' alt='' title="<?php echo __('RESET_NETWORK_CONF'); ?>"></a>
+            </td>
+            <td class="icon_menu">
                 <a href="" id="dl-bonjour"><img src='/cultibox/main/libs/img/download-bonjour.png' alt='' title="<?php echo __('CULTIPI_DL_BONJOUR'); ?>"></a>
+            </td>
+            <td class="icon_menu">
+                <a href="" id="mail-config"><img src='/cultibox/main/libs/img/mail_icon.png' alt='' title="<?php echo __('MAIL_CONFIG'); ?>"></a>
             </td>
             <td></td>
         </tr>
@@ -433,7 +443,7 @@
                    </tr>
                           <tr>
                         <td></td>
-                        <td><?php echo __('CONFIGURE_WIFI_PASSWORD'); ?>:</td>
+                        <td><?php echo __('CONFIGURE_WIFI_PASSWORD'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_PASSWORD'); ?>" /></td>
                         <td>
                             <input  type="password" size="15" 
                                     name="wifi_password" id="wifi_password" value="" <?php if(strcmp("$wifi_key_type","NONE")==0) { echo 'disabled'; } ?> />
@@ -493,103 +503,59 @@
             <input type="submit" id="submit_conf_network" name="submit_conf_network" value="<?php echo __('SAVE_CONF'); ?>">
         </p>
     </form>
-    
-    <label class="title_conf">Mail</label>
-    <?php
-        $providerArr = configuration\getEmailProvider();
-        $emailUserConf = configuration\getEmailUserConf();
-    ?>
-    <table class="table_width">
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Fournisseur mail :</label></td>
-            <td>
-                <select name="" id="EMAIL_PROVIDER">
-                    <?php
-                        foreach ($providerArr as $providerInfos)
-                        {
-                            $selected = "";
-                            if($providerInfos['smtp'] == $emailUserConf['EMAIL_SMTP'])
-                                $selected = "selected";
-
-                            echo '<option value="' . $providerInfos['smtp'] . '" ' . $selected . ' > ' . $providerInfos['name'] . ' </option>';
-                        }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Serveur smtp :</label></td>
-            <td>
-                <?php
-                    $disabled = 'disabled = "disabled"';
-                    if ($providerInfos['smtp'] == "other")
-                        $disabled = "";
-                    echo '<input  type="text" size="40" id="EMAIL_SMTP" value="' . $emailUserConf['EMAIL_SMTP'] . '" ' . $disabled . '/>';
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Port :</label></td>
-            <td>
-                <input  type="text" size="5" id="EMAIL_PORT" value="<?php echo $emailUserConf['EMAIL_PORT']; ?>" />
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Adresse email :</label></td>
-            <td>
-                <input  type="text" size="40" id="EMAIL_ADRESS" value="<?php echo $emailUserConf['EMAIL_ADRESS']; ?>" />
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Mot de passe :</label></td>
-            <td>
-                <input  type="text" size="40" id="EMAIL_PASSWORD" value="**********" />
-            </td>
-        </tr>
-    </table>
-    <p class="p_center">
-        <button type="button" id="save_email_conf" >Sauvegarder</button> 
-    </p>
-    
-    
-<br />
 </div>
 
 <!-- Admin -->
 <div id="div_admin_ui" style="display:none">
-    <table class="table_width">
-        <tr>
-            <td class="conf-marge-cultipi"></td>
-            <td>
-                <a href="" id="logs_httpd" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-http.png' alt='' title="<?php echo __('CULTIPI_LOGS_HTTPD'); ?>"></a>
-                <a href="" id="dl_logs_httpd" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-http.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_HTTPD'); ?>"></a>
-            </td>
-            <td>
-                <a href="" id="logs_mysql" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_LOGS_MYSQL'); ?>"></a>
-                <a href="" id="dl_logs_mysql" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_MYSQL'); ?>"></a>
-            </td>   
-            <td>
-                <a href="" id="logs_service" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-service.png' alt='' title="<?php echo __('CULTIPI_LOGS_SERVICE'); ?>"></a>
-                <a href="" id="dl_logs_service" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-service.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SERVICE'); ?>"></a>
-            </td>
-            <td>
-                <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
-                <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
-            </td>
-            <td>
-                <a href="" id="dl_cultibox_firm" name="dl_cultibox_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
-                <a href="" id="dl_wifi_firm" name="dl_wifi_firm"><img src='/cultibox/main/libs/img/wifi.png' alt='' title="<?php echo __('DL_WIFI_FIRM'); ?>"></a>
-                <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
-                <a href="" name="restart_rpi" id="restart_rpi"><img src='/cultibox/main/libs/img/rpi_restart.png' alt='' title="<?php echo __('RPI_RESTART'); ?>" /></a>
-                <a href="" name="update_rpi" id="update_rpi"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="<?php echo __('TOOLTIP_UPDATE_RPI'); ?>" /></a>
-            <td></td>
-        </tr>
-    </table>
+<table class="table_width">
+    <tr>
+        <td class="calendar-conf-marge"></td>
+        <td class="icon_menu2">
+            <a href="" id="logs_httpd" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-http.png' alt='' title="<?php echo __('CULTIPI_LOGS_HTTPD'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" id="dl_logs_httpd" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-http.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_HTTPD'); ?>"></a>
+        </td>
+        <td></td>
+        <td class="icon_menu2">
+            <a href="" id="logs_mysql" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_LOGS_MYSQL'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" id="dl_logs_mysql" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_MYSQL'); ?>"></a>
+        </td>   
+        <td></td>
+        <td class="icon_menu2">
+            <a href="" id="logs_service" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-service.png' alt='' title="<?php echo __('CULTIPI_LOGS_SERVICE'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" id="dl_logs_service" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-service.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SERVICE'); ?>"></a>
+        </td>
+        <td></td>
+        <td class="icon_menu2">
+            <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
+        </td>
+        <td></td>
+        <td class="icon_menu2">
+            <a href="" id="dl_cultibox_firm" name="dl_cultibox_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" id="dl_wifi_firm" name="dl_wifi_firm"><img src='/cultibox/main/libs/img/wifi.png' alt='' title="<?php echo __('DL_WIFI_FIRM'); ?>"></a>
+        </td>
+        <td class="icon_menu2">
+            <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
+        </td>
+        <td class="icon_menu2">
+            <a href="" name="restart_rpi" id="restart_rpi"><img src='/cultibox/main/libs/img/rpi_restart.png' alt='' title="<?php echo __('RPI_RESTART'); ?>" /></a>
+        </td>
+        <td class="icon_menu2">
+            <a href="" name="update_rpi" id="update_rpi"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="<?php echo __('TOOLTIP_UPDATE_RPI'); ?>" /></a>
+        </td>
+        <td></td>
+    </tr>
+</table>
 
     <br />
     <hr class="hr_cultipi" />
@@ -714,6 +680,72 @@
     <div id="progress_bar_conf" class="bar" style="width: 0%;"></div>
     <p class="p_center" id="progress_purcent"></p>
 </div>
+
+<div id="mail-config-div" title="<?php echo __('MAIL'); ?>" style="display:none">
+    <?php
+        $providerArr = configuration\getEmailProvider();
+        $emailUserConf = configuration\getEmailUserConf();
+    ?>
+    <table class="table_width">
+        <tr>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Fournisseur mail :</label></td>
+            <td>
+                <select name="" id="EMAIL_PROVIDER">
+                    <?php
+                        foreach ($providerArr as $providerInfos)
+                        {
+                            $selected = "";
+                            if($providerInfos['smtp'] == $emailUserConf['EMAIL_SMTP'])
+                                $selected = "selected";
+
+                            echo '<option value="' . $providerInfos['smtp'] . '" ' . $selected . ' > ' . $providerInfos['name'] . ' </option>';
+                        }
+                    ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Serveur smtp :</label></td>
+            <td>
+                <?php
+                    $disabled = 'disabled = "disabled"';
+                    if ($providerInfos['smtp'] == "other")
+                        $disabled = "";
+                    echo '<input  type="text" size="40" id="EMAIL_SMTP" value="' . $emailUserConf['EMAIL_SMTP'] . '" ' . $disabled . '/>';
+                ?>
+            </td>
+        </tr>
+          <tr>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Port :</label></td>
+            <td>
+                <input  type="text" size="5" id="EMAIL_PORT" value="<?php echo $emailUserConf['EMAIL_PORT']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Adresse email :</label></td>
+            <td>
+                <input  type="text" size="40" id="EMAIL_ADRESS" value="<?php echo $emailUserConf['EMAIL_ADRESS']; ?>" />
+            </td>
+        </tr>
+        <tr>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Mot de passe :</label></td>
+            <td>
+                <input  type="text" size="40" id="EMAIL_PASSWORD" value="<?php echo $emailUserConf['EMAIL_PASSWORD']; ?>" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="success_save_mail" title="" style="display:none">
+    <p><?php echo __('SUCCESS_SAVE_MAIL'); ?></p>
+</div>
+
+
 
 
 <script>expand("<?php echo $submenu; ?>");</script>

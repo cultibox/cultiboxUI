@@ -94,6 +94,15 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "SUCCESS_SAVE_MAIL"
+msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
+
+msgid "MAIL"
+msgstr "Configuration de l'envoi des mails"
+
+msgid "MAIL_CONFIG"
+msgstr "Configurer le serveur de mail pour l'envoie des alertes"
+
 msgid "DL_WIFI_FIRM"
 msgstr "Télécharger le firmware du module Wifi"
 
@@ -2075,6 +2084,9 @@ msgstr "Non avvisarmi e fammi gestire la configurazione nella finestra di dialog
 
 
 #For the Cultinet part:
+msgid "TOOLTIP_PASSWORD"
+msgstr "Un mot de passe déja configuré ne sera pas affiché pour des raisons de sécurité. Aucun mot de passe n'est stocké dans le logiciel."
+
 msgid "GATEWAY"
 msgstr "Ingresso"
 

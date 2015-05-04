@@ -1,6 +1,6 @@
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+25 center-40", at: "right+15 center-10" },
+        position: { my: "left+20 center-30", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -20,8 +20,8 @@
 <!-- Display buttons -->
 <table class="table_width">
     <tr>
-        <td class="log-div-margin-param"></td>
-        <td>
+        <td class="calendar-conf-marge"></td>
+            <td class="icon_menu2">
             <!-- Button to change parameters-->
             <input type="image" id="button_parameters" 
                 name="button_parameters"
@@ -29,6 +29,8 @@
                 src="main/libs/img/advancedsettings.png" 
                 alt="parameters"
             />
+            </td>
+            <td class="icon_menu2">
             <!-- Button to view curve to select-->
             <input type="image" id="curve_select_button"
                 name="curve_select_button"
@@ -36,6 +38,8 @@
                 src="main/libs/img/text-x-log.png"
                 alt="parameters"
             />
+            </td>
+            <td class="icon_menu2">
             <!-- Button to manage database-->
             <input type="image" id="database_management_button"
                 name="database_management_button"
@@ -43,12 +47,16 @@
                 src="main/libs/img/database.png" 
                 alt="parameters"
             />
+            </td>
+            <td class="icon_menu2">
             <input type="image" id="cost"
                 name="cost"
                 title="<?php echo __('COST_PRICE_COMPUTE'); ?>"
                 src="main/libs/img/cost.png" 
                 alt="cost"
             />
+            </td>
+            <td></td>
     </tr>
 </table>
 <br />

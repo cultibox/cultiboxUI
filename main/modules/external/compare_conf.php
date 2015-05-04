@@ -2,16 +2,18 @@
 
     require_once('../../libs/config.php');
 
+
     $ret = array();
     $err = "";
 
     $tmp_conf       = $GLOBALS['CULTIPI_CONF_TEMP_PATH'];
     $current_conf   = $GLOBALS['CULTIPI_CONF_PATH'] . "/01_defaultConf_RPi";
 
+    if((isset($_GET['show']))&&(!empty($_GET['show']))) {
     $typicalError["serverAcqSensor"]    = "des capteurs" ;
-    $typicalError["cultiPi"]            = "gÃ©nÃ©rale du pilotage" ;
+    $typicalError["cultiPi"]            = "générale du pilotage" ;
     $typicalError["serverCultibox"]     = "de l'affichage dans la Cultibox" ;
-    $typicalError["serverHisto"]        = "de la sauvegarde en base de donnÃ©e" ;
+    $typicalError["serverHisto"]        = "de la sauvegarde en base de donnée" ;
     $typicalError["serverIrrigation"]   = "de l'irrigation" ;
     $typicalError["serverLog"]          = "de l'enregistrement du fichier de suivi" ;
     $typicalError["serverMail"]         = "des mails" ;
@@ -44,11 +46,17 @@
             
             // If there are some diff 
             if (trim($errTemp) != 0) {
-                $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'est pas Ã  jour.");
+                $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.");
             }
         }
     }
+}
 
-    echo json_encode($err);
+        echo nl2br($diff);
+    } else {
+        exec("diff -rw $current_conf $tmp_conf",$ret,$err);
+        echo json_encode($err);
+    }
+
 
 ?>

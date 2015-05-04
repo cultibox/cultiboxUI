@@ -123,7 +123,12 @@ $(document).ready(function(){
         closeText: "<?php echo __('TIMEPICKER_CLOSE') ;?>"
     });
 
-    
+   
+    $("#import_conf").click(function(e) {
+        e.preventDefault();
+        $('#confupload').trigger('click'); 
+    });
+
     // Call the fileupload widget and set some parameters
      $('#confupload').fileupload({
         dataType: 'json',
@@ -134,17 +139,7 @@ $(document).ready(function(){
                 name=file.name;
             });
 
-            $('#import_conf_name').text(name);
-            $('#import_conf').val("<?php echo __('IMPORT_PROGRAM'); ?>");
-            $('#import_conf').text("<?php echo __('IMPORT_PROGRAM'); ?>");
-            $('#import_conf').removeClass("inputDisable");
-            $('#import_conf').attr('disabled', false);
-
-
-            data.context = $('#import_conf').click(function (e) {
-                e.preventDefault();
-                data.submit();
-            });
+            data.submit();
         },
         progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -1708,25 +1703,79 @@ $(document).ready(function() {
        e.preventDefault();
        $.fileDownload('main/templates/data/cultibox_firmware_wifi/firm.hex');
     });
-    
-    $('#save_email_conf').click(function(e) {
-        $.blockUI({ message: '' });
-        $.ajax({
-            async: true,
-            url: "main/modules/external/save_configuration.php",
-            data: {
-                parttosave:"email",
-                EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
-                EMAIL_SMTP:$('#EMAIL_SMTP').val(),
-                EMAIL_PORT:$('#EMAIL_PORT').val(),
-                EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
-                EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
-            }
-        }).done(function (data) {
-            $.unblockUI();
-        })
-    }); 
 
+
+    //Initial HTML:
+    var htmlMail = $("#mail-config-div").html();
+
+    $('#mail-config').click(function(e) {
+       e.preventDefault();
+       $("#mail-config-div").dialog({
+        width: 700,
+        modal: true,
+        resizable: false,
+        closeOnEscape: false,
+        dialogClass: "popup_message",
+        buttons: [{
+           text: SAVE_button,
+           click: function () {
+               $(this).dialog("close");
+               $.blockUI({
+                message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                centerY: 0,
+                css: {
+                    top: '20%',
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: 'grey',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .9,
+                    color: '#fffff'
+                },
+               onBlock: function() {
+                 $.ajax({
+                    async: true,
+                    url: "main/modules/external/save_configuration.php",
+                    data: {
+                        parttosave:"email",
+                        EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
+                        EMAIL_SMTP:$('#EMAIL_SMTP').val(),
+                        EMAIL_PORT:$('#EMAIL_PORT').val(),
+                        EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                        EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
+                    }
+                 }).done(function (data) {
+                    $.unblockUI();
+                    $("#success_save_mail").dialog({
+                        resizable: false,
+                        width: 500,
+                        modal: true,
+                        closeOnEscape: true,
+                        dialogClass: "popup_message",
+                        buttons: [{
+                             text: CLOSE_button,
+                             click: function () {
+                                  return false;
+                             }
+                         }]
+                     });
+                 });
+               }});
+               return false;
+           }}, {
+            text: CLOSE_button,
+           click: function () {
+               $("#mail-config-div").dialog("destroy");
+               $("#mail-config-div").html(htmlMail);
+               console.log(htmlMail);
+               return false;
+           }
+        }]
+       });
+    });
+
+    
     $( "#EMAIL_PROVIDER" ).change(function() {
         selectvalue = $(this).val();
         if (selectvalue == "other") {

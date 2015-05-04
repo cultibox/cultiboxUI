@@ -309,6 +309,7 @@ $(document).ready(function(){
     $('#div_plug_tabs').tabs();
     // Display and control user form for settings
 
+    var htmlPlug=$("#plugs_dialog").html();
     $("#plug_settings").click(function(e) {
         e.preventDefault();
         $('#div_plug_tabs').tabs('select', $("#selected_plug option:selected").val()-1);
@@ -694,26 +695,20 @@ $(document).ready(function(){
                             color: '#fffff'
                         },
                         onBlock: function() {
-                            $.ajax({
-                                cache: false,
-                                async: false,
-                                url: "main/modules/external/get_plugs_content.php",
-                            }).done(function(data) {
-                                $('#div_plug_tabs').tabs('destroy');
-                                $("#plugs_dialog").html(data);
-                                console.log($('#div_plug_tabs'));
-                                $('#div_plug_tabs').tabs();
-                                <?php
-                                    for($i=1;$i<=$nb_plugs;$i++) {
-                                        echo "getTolerance('" . $plug_type{$i} . "'," . $i . ",'" . $second_regul . "');";
-                                    }
+                            var data=htmlPlug
+                            $('#div_plug_tabs').tabs('destroy');
+                            $("#plugs_dialog").html(data);
+                            $('#div_plug_tabs').tabs();
+                            <?php
+                                for($i=1;$i<=$nb_plugs;$i++) {
+                                   echo "getTolerance('" . $plug_type{$i} . "'," . $i . ",'" . $second_regul . "');";
+                                }
 
-                                    for($i=1;$i<=$nb_plugs;$i++) {
-                                        echo "getRegul('" . $plug_regul{$i} . "'," . $i . ");";
-                                    }
-                                ?>
-                                $.unblockUI();
-                            });
+                                for($i=1;$i<=$nb_plugs;$i++) {
+                                    echo "getRegul('" . $plug_regul{$i} . "'," . $i . ");";
+                                }
+                            ?>
+                            $.unblockUI();
                         }
                     });
                     return false;
