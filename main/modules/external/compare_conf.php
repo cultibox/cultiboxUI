@@ -4,7 +4,7 @@
 
 
     $ret = array();
-    $err = "";
+    $err = array();
 
     $tmp_conf       = $GLOBALS['CULTIPI_CONF_TEMP_PATH'];
     $current_conf   = $GLOBALS['CULTIPI_CONF_PATH'] . "/01_defaultConf_RPi";
@@ -26,15 +26,16 @@
     //   - Check if each dir exists
     //      - Foreach file compare it
     $filesAndDirsInConfTemp = array_diff(scandir($tmp_conf), array('..', '.'));
-    
+
     foreach ($filesAndDirsInConfTemp As $fileAndDirInConfTemp)
     {
         $fileTempName = $tmp_conf     . "/" . $fileAndDirInConfTemp;
         $fileConfName = $current_conf . "/" . $fileAndDirInConfTemp;
+
         
         // Check if this dir exists in 01_defaultConf_RPi
         if (!is_dir($fileConfName)) {
-            $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.");
+            $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
         }
         else 
         {
@@ -45,7 +46,7 @@
             
             // If there are some diff 
             if (trim($errTemp) != 0) {
-                $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.");
+                $err[] = htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1");
             }
         }
     }
