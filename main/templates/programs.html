@@ -1,6 +1,6 @@
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+25 center-40", at: "right+15 center-10" },
+        position: { my: "left+20 center-30", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -36,21 +36,26 @@
 <!-- Menu button -->
 <table class="table_width">
     <tr>
-        <td class="program-div-margin-param"></td>
-        <td>
+        <td class="calendar-conf-marge"></td>
+        <td class="icon_menu2">
             <!-- Button for program -->
             <input type="image" id="program_plug_icon" name="program_plug_icon" 
                 src="main/libs/img/clock.png" 
                 title="<?php echo __('TOOLTIP_PROGRAM_PLUG'); ?>" 
                 alt="program"
+                width="28"
             />
+        </td>
+        <td class="icon_menu2">
             <!-- Button for plug -->
             <input type="image" id="plug_settings" name="plug_settings" 
                 src="main/libs/img/plug_icon.png" 
                 title="<?php echo __('TOOLTIP_PARAMETERS_PLUGS'); ?>" 
                 alt="plug"
+                height="36"
             />
-
+        </td>
+        <td class="icon_menu2">
             <!-- Button for param -->
             <input type="image" id="program_settings" name="program_settings" 
                 src="main/libs/img/advancedsettings.png" 
@@ -58,17 +63,15 @@
                 alt="param"
             />
         </td>       
+        <td class="marge-resume"></td>
+        <td><img src="main/libs/img/resume.png" alt="" id="resume_img" title="<?php echo $resume[$selected_plug].'<br />'.$resume_regul[$selected_plug]; ?>" /></td>
+        <td></td>
     </tr>
 </table>
 
 
 
 <table class="table_width">
-    <tr>
-        <td class="program-div-margin"></td>
-        <td class="program-div"></td>
-        <td><img src="main/libs/img/resume.png" alt="" id="resume_img" title="<?php echo $resume[$selected_plug].'<br />'.$resume_regul[$selected_plug]; ?>" /></td>
-    </tr>
     <tr>
         <td class="program-div-margin"></td><td class="program-div"><div id="plug" style="width: 100%; height: 350px; margin: 0 auto"></div></td>
         <td></td>

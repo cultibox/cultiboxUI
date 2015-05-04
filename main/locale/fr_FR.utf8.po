@@ -94,6 +94,15 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "SUCCESS_SAVE_MAIL"
+msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
+
+msgid "MAIL"
+msgstr "Configuration de l'envoi des mails"
+
+msgid "MAIL_CONFIG"
+msgstr "Configurer le serveur de mail pour l'envoie des alertes"
+
 msgid "DL_WIFI_FIRM"
 msgstr "Télécharger le firmware du module Wifi"
 
@@ -1617,10 +1626,10 @@ msgid "TOOLTIP_WEBCAM"
 msgstr "Cliquez sur l'image pour afficher les webcams connectées"
 
 msgid "TOOLTIP_IMPORT_CONF"
-msgstr "Cette fonctionnalité permet d'importer la configuration d'un logiciel Cultibox précédement exportée. Les données des capteurs et des puissances doivent être importées depuis l'onglet 'Logs'"
+msgstr "cette fonctionnalité permet d'importer la configuration d'un logiciel Cultibox précédement exportée. Les données des capteurs et des puissances doivent être importées depuis l'onglet 'Logs'"
 
 msgid "TOOLTIP_EXPORT_CONF"
-msgstr "Cette fonctionnalité permet d'exporter la configuration du logiciel. Les données des capteurs et des puissances doivent être exportées depuis l'onglet 'Logs'"
+msgstr "cette fonctionnalité permet d'exporter la configuration du logiciel. Les données des capteurs et des puissances doivent être exportées depuis l'onglet 'Logs'"
 
 msgid "TOOLTIP_CHANGE_PWD"
 msgstr "Cette fonctionnalité permet de changer le mot de passe demandé lors de la connexion au logiciel"
@@ -2071,6 +2080,9 @@ msgstr "Ne plus me prévenir et me laisser gérer la configuration dans la boît
 
 
 # For the Cultinet part:
+msgid "TOOLTIP_PASSWORD"
+msgstr "Un mot de passe déja configuré ne sera pas affiché pour des raisons de sécurité. Aucun mot de passe n'est stocké dans le logiciel."
+
 msgid "GATEWAY"
 msgstr "Passerelle"
 

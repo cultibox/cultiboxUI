@@ -4,7 +4,7 @@
 </script>
 <script>
    $("[title]").tooltip({ 
-        position: { my: "left+25 center-40", at: "right+15 center-10" },
+        position: { my: "left+20 center-30", at: "right+15 center-10" },
         close: function (event, ui) {
             ui.tooltip.hover(
             function () {
@@ -27,43 +27,52 @@
 <!-- Display buttons -->
 <table class="table_width">
     <tr>
-        <td class="calendar-conf-marge"></td> 
-        <td class="calendar-title">
+        <td class="calendar-conf-marge"></td>
+        <td class="icon_menu2">
             <!-- Button to change parameters -->
             <input type="image" id="calendar_xml_selection" name="calendar_xml_selection" 
                 src="main/libs/img/advancedsettings.png" 
                 title="<?php echo __('TOOLTIP_PARAMETERS_CALENDAR'); ?>" 
                 alt="calendar"
             />
-
+        </td>
+        <td class="icon_menu2">
             <!-- Button to delete all event -->
             <input type="image" id="reset_calendar" name="reset_calendar" class="delete" 
                    title="<?php echo __('TOOLTIP_RESET_CALENDAR'); ?>"
                    src="main/libs/img/button_cancel.png"  
                     alt="calendar"
             />
+        </td>
+        <td class="icon_menu2">
             <!-- Button to view engrais planification-->
             <input type="image" id="nutrient_planification" name="nutrient_planification"
                    title="<?php echo __('TOOLTIP_CREATE_CALENDAR_PROGRAM'); ?>"
                    src="main/libs/img/cal.png"  
                     alt="calendar"
             />
+        </td>
+        <td class="icon_menu2">
             <!-- Button to add daily program -->
             <input type="image" id="daily_program" name="daily_program"
                    title="<?php echo __('TOOLTIP_CREATE_CALENDAR_DAILY_PROGRAM'); ?>"
-                   src="main/libs/img/db_add.png"   
+                   src="main/libs/img/add_big.png"   
                    alt="calendar"  
+                   width="34"
                    <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>
             />        
-
+        </td>
+        <td class="icon_menu2">
             <!-- Button to add XML -->
             <input type="image" id="import_xml" name="add_xml"
                    title="<?php echo __('TOOLTIP_ADD_XML'); ?>"
-                   src="main/libs/img/upload.png"   
+                   src="main/libs/img/upload_big.png"   
                    alt="engrais"  
+                   width="28"
                     <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>style="display:none"<?php } ?>
             />
         </td>
+        <td></td>
         <td class="calendar_right">
             <input id="datepicker_calendar" name="datepicker_calendar" type="hidden" value="">
         </td>
