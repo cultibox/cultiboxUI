@@ -636,11 +636,25 @@ function get_plug_power ($plug, $dateStart, $dateEnd, $day="day")
             $serie[(string)(1000 * ($realTimeInS))] = floor($row['record'] / 9990 * $plugPower);
             
             $lastTimeInS = $realTimeInS;
+            $lastDate=$realDate;
             $oldRecord=$row['record'];
         }
-        
     }
 
+
+    //To display current day we have to add a point:
+    $today = date("Y-m-d");
+    $realStart=date ("Y-m-d", $dateStart);
+    $realDate = "$today ".date("H:i:s");
+    if((strcmp($dateStart,$dateEnd)==0)&&(strcmp($realStart,$today)==0)) {
+            if($oldRecord!=0) {
+                date_default_timezone_set('Europe/Paris');
+                $realTimeInS = strtotime($realDate);
+                date_default_timezone_set('UTC');
+
+                $serie[(string)(1000 * ($realTimeInS))] = floor($oldRecord / 9990 * $plugPower);
+            }
+    }
     return $serie ;
 }
 // }}}
