@@ -566,6 +566,7 @@ $(document).ready(function(){
                             dialogClass: "popup_message",
                             buttons: [{
                                 text: CLOSE_button,
+                                id: "close-update-conf",
                                 click: function () { 
                                     $( this ).dialog( "close" ); 
 
