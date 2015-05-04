@@ -94,8 +94,14 @@ msgstr "Seite Zusammenfassung des Status des Rauminhaltes"
 
 
 # For the configuration part:
+msgid "CONF_SUPERVISION"
+msgstr "Configuration de la supervision"
+
+msgid "SUCCESS_SAVE_SUPERVISION"
+msgstr "Configuration de la supervision sauvegardée avec succès"
+
 msgid "SUCCESS_SAVE_MAIL"
-msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
+msgstr "Configuration pour l'envoi des mails sauvegardée avec succès"
 
 msgid "MAIL"
 msgstr "Configuration de l'envoi des mails"

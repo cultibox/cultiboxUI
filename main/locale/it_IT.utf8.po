@@ -94,6 +94,12 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "CONF_SUPERVISION"
+msgstr "Configuration de la supervision"
+
+msgid "SUCCESS_SAVE_SUPERVISION"
+msgstr "Configuration de la supervision sauvegardée avec succès"
+
 msgid "SUCCESS_SAVE_MAIL"
 msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
 

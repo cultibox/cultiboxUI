@@ -68,7 +68,7 @@ $(document).ready(function(){
             pop_up_add_information(entry,"main_info","information");
     });
 
-      if(sd_card=="") {
+    if(sd_card=="") {
         $.ajax({
             cache: false,
             async: false,
@@ -77,35 +77,35 @@ $(document).ready(function(){
         });
     }
 
-
+    // Only for cultipi
     <?php if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) { ?>
-    $.ajax({
-          cache: false,
-          async: true,
-          url: "main/modules/external/get_soft_version.php"
-    }).done(function (data) {
-         var objJSON = jQuery.parseJSON(data);
-        
-        var version="<p class='p_center'><b><i><?php echo __('CULTIPI_SOFT_VERSION'); ?>:</i></b></p><br /><?php echo __('CULTIPI_SOFT'); ?>:  <b>"+objJSON[0]+"</b><br /><?php echo __('CULTIBOX_SOFT'); ?>:  <b>"+objJSON[1]+"</b><br /><?php echo __('CULTIRAZ_SOFT'); ?>:  <b>"+objJSON[2]+"</b><br /><?php echo __('CULTITIME_SOFT'); ?>:  <b>"+objJSON[3]+"</b><br /><?php echo __('CULTICONF_SOFT'); ?>:  <b>"+objJSON[4]+"</b><br /><?php echo __('CULTICAM_SOFT'); ?>:  <b>"+objJSON[5]+"</b><br /><?php echo __('CULTIDOC_SOFT'); ?>:  <b>"+objJSON[6]+"</b><br /><?php echo __('CULTIPI_IMAGE_VERSION'); ?>:  <b>"+objJSON[7]+"</b>";
+        $.ajax({
+              cache: false,
+              async: true,
+              url: "main/modules/external/get_soft_version.php"
+        }).done(function (data) {
+             var objJSON = jQuery.parseJSON(data);
+            
+            var version="<p class='p_center'><b><i><?php echo __('CULTIPI_SOFT_VERSION'); ?>:</i></b></p><br /><?php echo __('CULTIPI_SOFT'); ?>:  <b>"+objJSON[0]+"</b><br /><?php echo __('CULTIBOX_SOFT'); ?>:  <b>"+objJSON[1]+"</b><br /><?php echo __('CULTIRAZ_SOFT'); ?>:  <b>"+objJSON[2]+"</b><br /><?php echo __('CULTITIME_SOFT'); ?>:  <b>"+objJSON[3]+"</b><br /><?php echo __('CULTICONF_SOFT'); ?>:  <b>"+objJSON[4]+"</b><br /><?php echo __('CULTICAM_SOFT'); ?>:  <b>"+objJSON[5]+"</b><br /><?php echo __('CULTIDOC_SOFT'); ?>:  <b>"+objJSON[6]+"</b><br /><?php echo __('CULTIPI_IMAGE_VERSION'); ?>:  <b>"+objJSON[7]+"</b>";
 
-        $('#version_soft').attr('title', version);
-    });
+            $('#version_soft').attr('title', version);
+        });
 
-    $.ajax({
-         cache: false,
-         async: true,
-         url: "main/modules/external/scan_network.php"
-    }).done(function (data) {
-         $("#wifi_essid_list").empty();
-         $("#wifi_essid_list").append("<p><?php echo __('WIFI_SCAN_SUBTITLE'); ?></p>");
-         $.each($.parseJSON(data),function(index,value) {
-             var checked="";
-             if($("#wifi_ssid").val()==value) {
-                 checked="checked";
-             }
-             $("#wifi_essid_list").append('<b>'+value+' : </b><input type="radio" name="wifi_essid" value="'+value+'" '+checked+' /><br />');
-         });
-    });
+        $.ajax({
+             cache: false,
+             async: true,
+             url: "main/modules/external/scan_network.php"
+        }).done(function (data) {
+             $("#wifi_essid_list").empty();
+             $("#wifi_essid_list").append("<p><?php echo __('WIFI_SCAN_SUBTITLE'); ?></p>");
+             $.each($.parseJSON(data),function(index,value) {
+                 var checked="";
+                 if($("#wifi_ssid").val()==value) {
+                     checked="checked";
+                 }
+                 $("#wifi_essid_list").append('<b>'+value+' : </b><input type="radio" name="wifi_essid" value="'+value+'" '+checked+' /><br />');
+             });
+        });
     <?php } ?>
 
     $('#reset_minmax').timepicker({
