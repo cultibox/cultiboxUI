@@ -120,12 +120,12 @@ $.ajax({
     async: true,
     beforeSend: function(jqXHR) {
                 $.xhrPool.push(jqXHR);
-        },
-        complete: function(jqXHR) {
-            var index = $.xhrPool.indexOf(jqXHR);
-            if (index > -1) {
-                $.xhrPool.splice(index, 1);
-            }
+    },
+    complete: function(jqXHR) {
+        var index = $.xhrPool.indexOf(jqXHR);
+        if (index > -1) {
+            $.xhrPool.splice(index, 1);
+        }
     },
     success: function(data, textStatus, jqXHR) {
         // Parse result
@@ -134,7 +134,7 @@ $.ajax({
         pop_up_remove("display_diff");
         pop_up_remove("check_conf_status");
         
-        if(json==0) {
+        if(json == "") {
              pop_up_add_information("<?php echo __('DIR_CONF_UPDATE'); ?>","check_conf_status","information");
         } else {
             pop_up_add_information("<?php echo __('DIR_CONF_NOT_UPTODATE'); ?>","check_conf_status","error");

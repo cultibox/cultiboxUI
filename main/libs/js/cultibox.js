@@ -540,11 +540,18 @@ $(document).ready(function() {
                 $.ajax({
                     cache: false,
                     async: false,
-                    url: "main/modules/external/diff_conf.php"
+                    url: "main/modules/external/compare_conf.php"
                 }).done(function(data) {
                     $.unblockUI();
-
-                    $("#diff_conf_list").html(data);
+                    var objJSON = jQuery.parseJSON(data);
+                    
+                    toDisplay = "<ul>";
+                    $.each( objJSON, function( key, value ) {
+                        toDisplay = toDisplay + "<li>" + value + "</li>"
+                    });
+                    toDisplay = toDisplay + "</ul>"
+                        
+                    $("#diff_conf_list").html(toDisplay);
                     $("#diff_conf_list").dialog({
                         resizable: true,
                         width: 650,
