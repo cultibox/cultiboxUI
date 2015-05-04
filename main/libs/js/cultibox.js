@@ -544,8 +544,15 @@ $(document).ready(function() {
                     data: {show: 1}
                 }).done(function(data) {
                     $.unblockUI();
-
-                    $("#diff_conf_list").html(data);
+                    var objJSON = jQuery.parseJSON(data);
+                    
+                    toDisplay = "<ul>";
+                    $.each( objJSON, function( key, value ) {
+                        toDisplay = toDisplay + "<li>" + value + "</li>"
+                    });
+                    toDisplay = toDisplay + "</ul>"
+                        
+                    $("#diff_conf_list").html(toDisplay);
                     $("#diff_conf_list").dialog({
                         resizable: true,
                         width: 750,

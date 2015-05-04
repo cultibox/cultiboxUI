@@ -1111,18 +1111,15 @@ $(document).ready(function(){
                 }
 
                 // Call again !
-                $.timeout.push(
-                    setTimeout(updateSensors, 3000)
-                );
+                updatePlugs();
                 
             }, error: function(data) {
                 // Call again !
-                $.timeout.push(
-                    setTimeout(updateSensors, 3000)
-                );
+                updatePlugs();
             }
         });
     }
+
     // Call the function the first time
     $.timeout.push(
         setTimeout(updateSensors, 3000)
@@ -1188,23 +1185,15 @@ $(document).ready(function(){
                 }
 
                 // Call again !
-                $.timeout.push(
-                    setTimeout(updatePlugs, 2000)
-                );
+                updateCultipiStatus();
             }, error: function(data) {
                 
                 // Call again !
-                $.timeout.push(
-                    setTimeout(updatePlugs, 2000)
-                );
+                updateCultipiStatus();
             }
         });
     }
-    // Call the function the first time
-    $.timeout.push(
-        setTimeout(updatePlugs, 2000)
-    );
-    
+
     // Loop for updating plugs
     function updateCultipiStatus() {
         
@@ -1257,23 +1246,19 @@ $(document).ready(function(){
                 
                 // Call again !
                 $.timeout.push(
-                    setTimeout(updateCultipiStatus, 5000)
+                    setTimeout(updateSensors, 2000)
                 );
                 
             }, error: function(data) {
                 
                 // Call again !
                 $.timeout.push(
-                    setTimeout(updateCultipiStatus, 5000)
+                    setTimeout(updateSensors, 2000)
                 );
                 
             }
         });
     }
-    // Call the function the first time
-    $.timeout.push(
-        setTimeout(updateCultipiStatus, 5000)
-    );
 });
 </script>
 

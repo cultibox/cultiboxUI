@@ -557,22 +557,29 @@
     </tr>
 </table>
 
-<br />
-<hr class="hr_cultipi" />
-<br />
-<br />
-<p class="title_conf"><?php echo __('MGT_ACCESS'); ?></p>
-<br />
-<table class="table_width">
-<tr>
-    <td class="conf-marge-cultipi"></td>
-    <td class="conf-field-service"><?php echo __('CHANGE_PASSWORD'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_CHANGE_PWD'); ?>" /></td>
-    <td><button id="change_password" name="change_password"><?php echo __('NEW_PASSWORD'); ?></button>
-    </td>
-    <td></td>
-</tr>
-</table>
-
+    <br />
+    <hr class="hr_cultipi" />
+    <br />
+    <br />
+    <p class="title_conf"><?php echo __('MGT_ACCESS'); ?></p>
+    <br />
+    <table class="table_width">
+        <tr>
+            <td class="conf-marge-cultipi"></td>
+            <td class="conf-field-service"><?php echo __('CHANGE_PASSWORD'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_CHANGE_PWD'); ?>" /></td>
+            <td><button id="change_password" name="change_password"><?php echo __('NEW_PASSWORD'); ?></button>
+            </td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+    
+    <p class="title_conf">Supervision</p>
+    
+    <p class="p_center">
+        <button type="button" id="save_supervision_conf" >Sauvegarder</button> 
+    </p>
+    
 </div>
 
 
@@ -728,7 +735,7 @@
             <td class="conf-marge"></td>
             <td class="conf-title"><label class="subsub_title">Mot de passe :</label></td>
             <td>
-                <input  type="text" size="40" id="EMAIL_PASSWORD" value="<?php echo $emailUserConf['EMAIL_PASSWORD']; ?>" />
+                <input  type="text" size="40" id="EMAIL_PASSWORD" value="*****" />
             </td>
         </tr>
     </table>
