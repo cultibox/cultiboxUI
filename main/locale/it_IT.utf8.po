@@ -1821,6 +1821,24 @@ msgstr "Programma corrente"
 
 
 # For the Cultipi part:
+msgid "DIFF_CONF_SERVERACQSENSOR"
+msgstr "des capteurs"
+
+msgid "DIFF_CONF_CULTIPI"
+msgstr "générale du pilotage"
+
+msgid "DIFF_CONF_SERVERIRRIGATION"
+msgstr "de l'irrigation"
+
+msgid "DIFF_CONF_SERVERMAIL"
+msgstr "des mails"
+
+msgid "DIFF_CONF_SERVERPLUGUPDATE"
+msgstr "du pilotage des prises"
+
+msgid "DIFF_CONF_SERVERSUPERVISION"
+msgstr "de la supervision"
+
 msgid "ERROR_IMAGE_SIZE"
 msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
 

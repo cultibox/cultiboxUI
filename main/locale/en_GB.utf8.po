@@ -1817,7 +1817,25 @@ msgstr "Current"
 msgid "CURRENT_PROG_COMMENT"
 msgstr "Current program"
 
-#For the Cultipi part:
+# For the Cultipi part
+msgid "DIFF_CONF_SERVERACQSENSOR"
+msgstr "of sensors acquisition"
+
+msgid "DIFF_CONF_CULTIPI"
+msgstr "General of Steering"
+
+msgid "DIFF_CONF_SERVERIRRIGATION"
+msgstr "of irrigation driving"
+
+msgid "DIFF_CONF_SERVERMAIL"
+msgstr "of mail sending"
+
+msgid "DIFF_CONF_SERVERPLUGUPDATE"
+msgstr "du pilotage des prises"
+
+msgid "DIFF_CONF_SERVERSUPERVISION"
+msgstr "de la supervision"
+
 msgid "ERROR_IMAGE_SIZE"
 msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
 
