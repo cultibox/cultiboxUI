@@ -579,7 +579,7 @@ function check_and_update_column_db ($tableName, $officialColumn) {
         }
         
     }
-    
+
     // Add column not present
     foreach ($colToAdd as $col)
     {

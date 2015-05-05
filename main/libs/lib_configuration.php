@@ -118,8 +118,11 @@ function check_db() {
     $db=null;
     
 }
+// }}}
 
-// Function used to get sensor list
+// {{{ getConfElem()
+// ROLE Return every element of the configuration
+// RET Return list of configuration
 function getConfElem($elem) {
 
         // Check if table configuration exists
@@ -139,8 +142,11 @@ function getConfElem($elem) {
 
     return $res;
 }
+// }}}
 
-
+// {{{ getEmailProvider()
+// ROLE Return list of providers
+// RET Return list of providers
 function getEmailProvider() {
     
     $ret_arr = array(
@@ -241,7 +247,11 @@ function getEmailProvider() {
     return $ret_arr;
 
 }
+// }}}
 
+// {{{ getEmailUserConf()
+// ROLE Retrieve emil user configuration
+// RET Email user configuration
 function getEmailUserConf() {
     
     // Open connection to dabase
@@ -260,8 +270,11 @@ function getEmailUserConf() {
     
     return $row;
 }
+// }}}
 
-
+// {{{ saveEmailUserConf()
+// ROLE Save user email configuration
+// RET
 function saveEmailUserConf($param) {
     
     // Open connection to dabase
@@ -288,7 +301,11 @@ function saveEmailUserConf($param) {
     }
 
 }
+// }}}
 
+// {{{ serverEmail_createXMLConf()
+// ROLE Create mail configuration XML
+// RET
 function serverEmail_createXMLConf () {
     
     // retrieve user params
@@ -317,6 +334,7 @@ function serverEmail_createXMLConf () {
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
     
 }
+// }}}
 
 }
 ?>
