@@ -137,6 +137,7 @@ $(document).ready(function(){
                 dialogClass: "popup_message",
                 open: function( event, ui ) {
                     $('#btnUpImg').attr("disabled", true);
+                    $("#btnUpImg").css("color", "white");
                 },
                 buttons: [{
                     text: CLOSE_button,
@@ -244,6 +245,7 @@ $(document).ready(function(){
         },
         done: function (e, data) {
             e.preventDefault();
+            $("#upload_image_plug").dialog('open');
 
             var name="";
             $.each(data.result.files, function (index, file) {
@@ -257,9 +259,9 @@ $(document).ready(function(){
             }
 
             if(($("#label_on_img").html()!="") && ($("#label_off_img").html()!="")) {
-                $("#upload_image_plug").dialog('open');
                 $('#btnUpImg').attr("disabled", false);
-            }
+                $("#btnUpImg").css("color", "black");
+            } 
         }
     });
 
