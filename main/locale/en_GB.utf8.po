@@ -1818,6 +1818,18 @@ msgid "CURRENT_PROG_COMMENT"
 msgstr "Current program"
 
 #For the Cultipi part:
+msgid "UPLOAD_PLUG_IMG"
+msgstr "Afin d'utiliser vos propres images pour les équipements des prises, il vous faudra ajouter une image lorsque la prise est en état de marche et une lorsqu'elle est à l'arrêt"
+
+msgid "UPLOAD_ON_IMG"
+msgstr "Image lorsque l'équipement est en marche"
+
+msgid "UPLOAD_OFF_IMG"
+msgstr "Image lorsque l'équipement est à l'arrêt"
+
+msgid "CHOOSE_IMG_PLUG_SYNO"
+msgstr "Importer les images des prises"
+
 msgid "ERROR_IMAGE_SIZE"
 msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
 

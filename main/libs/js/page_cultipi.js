@@ -13,6 +13,8 @@ var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
 var nb_webcam = <?php echo json_encode($GLOBALS['MAX_WEBCAM']); ?>;
 var webcam_conf = <?php echo json_encode($webcam_conf); ?>;
+var upload_dir="../../libs/img/";
+var jqXHR;
 
 
 //To delete setTimeout et setInterval:
@@ -124,7 +126,143 @@ $(document).ready(function(){
         });
     }
 
-    
+    $("#import_image_plug").click(function(e) {
+           e.preventDefault()
+           $("#add_images_syno").dialog('close');
+           $("#upload_image_plug").dialog({
+                resizable: false,
+                width: 700,
+                modal: true,
+                closeOnEscape: false,
+                dialogClass: "popup_message",
+                open: function( event, ui ) {
+                    $('#btnUpImg').attr("disabled", true);
+                },
+                buttons: [{
+                    text: CLOSE_button,
+                    click: function () {
+                        $( this ).dialog("close");
+                        $("#add_images_syno").dialog('open');
+                        $("#upload_image_plug").dialog('close');
+                        $("#label_on_img").html("");
+                        $("#label_off_img").html("");
+                        return false;
+                    }
+                }, {
+                    text: SAVE_button,
+                    id: "btnUpImg",
+                    click: function () {
+                        $(this).dialog("close");
+                        $("#upload_image_plug").dialog('close');
+                        upload_dir=upload_dir+"images-synoptic-plug";
+                        $.ajax({
+                            cache: false,
+                            async: false,
+                            url: "main/modules/external/move_uploaded_file.php",
+                            data: {filename:$("#label_on_img").html()+"===="+$("#label_off_img").html(),upload_dir:upload_dir,type:"plug"}
+                        }).done(function(data) {
+                            get_content("cultipi");
+                        });
+                        return false;
+                    }
+                }]
+           });
+    });
+
+    var cheBu;
+    $('#upload_on_file, #upload_off_file').fileupload({
+        dataType: 'json',
+        url: 'main/modules/external/files.php',
+        add: function (e, data) {            
+            $("#upload_image_plug").dialog('close');
+            cheBu=$(this);
+            var name="";
+            $.each(data.files, function (index, file) {
+                name=file.name;
+            });
+
+            var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+            var uploadErrors = [];
+            if(data.originalFiles[0]['type'].length && !acceptFileTypes.test(data.originalFiles[0]['type'])) {
+                uploadErrors.push("<?php echo __('ERROR_IMAGE_TYPE'); ?>");
+            }
+
+            if(data.originalFiles[0]['size'] > 300000) {
+                uploadErrors.push("<?php echo __('ERROR_IMAGE_SIZE'); ?>");
+            }
+
+            if(uploadErrors.length > 0) {
+                $("#error_upload_image").html(uploadErrors.join("<br /><br />"));
+                    $("#error_upload_image").dialog({
+                        width: 700,
+                        modal: true,
+                        resizable: false,
+                        closeOnEscape: false,
+                        dialogClass: "popup_error",
+                        title: "<?php echo __('ERROR_UPLOAD_IMAGE'); ?>",
+                        buttons : [{
+                        text: CLOSE_button,
+                        click: function(){
+                            $(this).dialog("close");
+                            $("#upload_image_plug").dialog('open');
+                            $("#error_upload_image").html("");
+                        }
+                    }]
+                 });
+            } else {
+                $('#progress_bar_upload_img').css('width', '0%');
+                $('#progress_purcent_img').html("0%");
+                $("#error_upload_image").html("");
+                jqXHR = data.submit();
+            }
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress_bar_upload_img').css(
+                'width',
+                progress + '%'
+            );
+
+            $('#progress_purcent_img').html(
+                progress + '%'
+            );
+
+            $("#progress_upload_img").dialog({
+                width: 700,
+                modal: true,
+                resizable: false,
+                closeOnEscape: false,
+                dialogClass: "popup_message",
+                title: "<?php echo __('PROGRESS_CSV'); ?>"
+            });
+
+
+
+            if(progress==100) {
+                $("#progress_upload_img").dialog('close');
+            }
+        },
+        done: function (e, data) {
+            e.preventDefault();
+
+            var name="";
+            $.each(data.result.files, function (index, file) {
+                name=file.name;
+            });
+
+            if(cheBu.attr('id')=="upload_on_file") {
+                $("#label_on_img").html(name);
+            } else {
+                $("#label_off_img").html(name);
+            }
+
+            if(($("#label_on_img").html()!="") && ($("#label_off_img").html()!="")) {
+                $("#upload_image_plug").dialog('open');
+                $('#btnUpImg').attr("disabled", false);
+            }
+        }
+    });
+
     $("#restart_cultipi").click(function(e) {
            e.preventDefault();
            $("#confirm_restart_cultipi").dialog({
@@ -483,31 +621,27 @@ $(document).ready(function(){
         e.preventDefault();
         $("#add_images_syno").dialog({
             resizable: false,
-            width: 500,
+            width: 600,
             modal: true,
             closeOnEscape: true,
             dialogClass: "popup_message",
             buttons: [{
                 text: CLOSE_button,
                 click: function () {
-                    $( this ).dialog( "close" ); return false;
+                    $("#add_images_syno").dialog('destroy'); return false;
                 }
             }]
         });
     });
 
      
-     var upload_dir="../../libs/img/";
-     var jqXHR;
-     $('#import_image_other, #import_image_sensor, #import_image_plug').fileupload({
+     $('#import_image_other, #import_image_sensor').fileupload({
             dataType: 'json',
             url: 'main/modules/external/files.php',
             add: function (e, data) {
                 $("#add_images_syno").dialog('close');
                 if($(this).attr('id')=='import_image_other') {
                     upload_dir=upload_dir+"images-synoptic-other";
-                } else if($(this).attr('id')=='import_image_plug') { 
-                    upload_dir=upload_dir+"images-synoptic-plug";
                 } else {
                     upload_dir=upload_dir+"images-synoptic-sensor";
                 }
@@ -594,6 +728,8 @@ $(document).ready(function(){
                     async: false,
                     url: "main/modules/external/move_uploaded_file.php",
                     data: {filename:name,upload_dir:upload_dir}
+                 }).done(function(data) {
+                    get_content("cultipi");
                  });
             }
         });
