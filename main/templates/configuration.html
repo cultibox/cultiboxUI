@@ -342,7 +342,7 @@
                 <a href="" id="mail-config"><img src='/cultibox/main/libs/img/mail_icon.png' alt='' title="<?php echo __('MAIL_CONFIG'); ?>"></a>
             </td>
             <td class="icon_menu">
-                <a href="" id="supervision-config"><img src='/cultibox/main/libs/img/supervision.png' alt='' title="<?php echo __('CONF_SUPERVISION'); ?>"></a>
+                <a href="" id="supervision_config"><img src='/cultibox/main/libs/img/supervision.png' alt='' title="<?php echo __('CONF_SUPERVISION'); ?>"></a>
             </td>
             <td>
             </td>
@@ -677,7 +677,7 @@
     <p class="p_center" id="progress_purcent"></p>
 </div>
 
-<div id="mail-config-div" title="<?php echo __('MAIL'); ?>" style="display:none">
+<div id="mail_config_div" title="<?php echo __('MAIL'); ?>" style="display:none">
     <?php
         // Read list of providers
         $providerArr = configuration\getEmailProvider();
@@ -744,60 +744,36 @@
     <p><?php echo __('SUCCESS_SAVE_MAIL'); ?></p>
 </div>
 
-<div id="supervision-config-div" title="<?php echo __('SUPERVISION'); ?>" style="display:none">
+<div id="supervision_config_div" title="<?php echo __('SUPERVISION'); ?>" style="display:none">
     <table class="table_width">
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Fournisseur mail :</label></td>
-            <td>
-                <select name="" id="EMAIL_PROVIDER">
-                    <?php
-                        // Add an option for each provider
-                        foreach ($providerArr as $providerInfos)
-                        {
-                            $selected = "";
-                            if($providerInfos['smtp'] == $emailUserConf['EMAIL_SMTP'])
-                                $selected = "selected";
+        <?php
+            // Retrieve information about supervision 
+            $supervisionElements = array();
+            $supervisionElements = cultipi\getSupervisionElem();
+            
+            // Foreach element of supervision, add it
+            foreach ($supervisionElements as $supervisionElement)
+            {
+                echo '<tr>';
+                echo '  <td class="conf-marge"></td>';
 
-                            echo '<option value="' . $providerInfos['smtp'] . '" ' . $selected . ' > ' . $providerInfos['name'] . ' </option>';
-                        }
-                    ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Serveur smtp :</label></td>
-            <td>
-                <?php
-                    $disabled = 'disabled = "disabled"';
-                    if ($providerInfos['smtp'] == "other")
-                        $disabled = "";
-                    echo '<input  type="text" size="40" id="EMAIL_SMTP" value="' . $emailUserConf['EMAIL_SMTP'] . '" ' . $disabled . '/>';
-                ?>
-            </td>
-        </tr>
-          <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Port :</label></td>
-            <td>
-                <input  type="text" size="5" id="EMAIL_PORT" value="<?php echo $emailUserConf['EMAIL_PORT']; ?>" />
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Adresse email :</label></td>
-            <td>
-                <input  type="text" size="40" id="EMAIL_ADRESS" value="<?php echo $emailUserConf['EMAIL_ADRESS']; ?>" />
-            </td>
-        </tr>
-        <tr>
-            <td class="conf-marge"></td>
-            <td class="conf-title"><label class="subsub_title">Mot de passe :</label></td>
-            <td>
-                <input  type="text" size="40" id="EMAIL_PASSWORD" value="*****" />
-            </td>
-        </tr>
+                // Display name 
+                echo '  <td class="conf-title"><label class="subsub_title">' . __('CONF_SUPERVISION_' . strtoupper ($supervisionElement["action"]) . '_LABEL') . '</label></td>';
+
+                // In function of action 
+                switch ($supervisionElement["action"])
+                {
+                    case "checkPing" :
+                        break;
+                    case "periodicMail" :
+                        break;
+                    default :
+                        break;
+                }
+
+                echo '</tr>';
+            }
+        ?> 
     </table>
 </div>
 
