@@ -94,6 +94,21 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "CONF_SUPERVISION"
+msgstr "Configuration de la supervision"
+
+msgid "SUCCESS_SAVE_SUPERVISION"
+msgstr "Configuration de la supervision sauvegardée avec succès"
+
+msgid "CONF_SUPERVISION_CHECKPING_LABEL"
+msgstr "Vérification du ping : "
+
+msgid "CONF_SUPERVISION_CHECKPING_IP"
+msgstr "Adresse IP : "
+
+msgid "CONF_SUPERVISION_CHECKPING_ACTION"
+msgstr "Action si erreur : "
+
 msgid "SUCCESS_SAVE_MAIL"
 msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
 
@@ -1832,6 +1847,24 @@ msgstr "Image lorsque l'équipement est à l'arrêt"
 
 msgid "CHOOSE_IMG_PLUG_SYNO"
 msgstr "Importer les images des prises"
+
+msgid "DIFF_CONF_SERVERACQSENSOR"
+msgstr "des capteurs"
+
+msgid "DIFF_CONF_CULTIPI"
+msgstr "générale du pilotage"
+
+msgid "DIFF_CONF_SERVERIRRIGATION"
+msgstr "de l'irrigation"
+
+msgid "DIFF_CONF_SERVERMAIL"
+msgstr "des mails"
+
+msgid "DIFF_CONF_SERVERPLUGUPDATE"
+msgstr "du pilotage des prises"
+
+msgid "DIFF_CONF_SERVERSUPERVISION"
+msgstr "de la supervision"
 
 msgid "ERROR_IMAGE_SIZE"
 msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."

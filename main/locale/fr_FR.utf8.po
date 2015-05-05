@@ -94,8 +94,23 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "CONF_SUPERVISION"
+msgstr "Configuration de la supervision"
+
+msgid "SUCCESS_SAVE_SUPERVISION"
+msgstr "Configuration de la supervision sauvegardée avec succès"
+
+msgid "CONF_SUPERVISION_CHECKPING_LABEL"
+msgstr "Vérification du ping : "
+
+msgid "CONF_SUPERVISION_CHECKPING_IP"
+msgstr "Adresse IP : "
+
+msgid "CONF_SUPERVISION_CHECKPING_ACTION"
+msgstr "Action si erreur : "
+
 msgid "SUCCESS_SAVE_MAIL"
-msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
+msgstr "Configuration pour l'envoi des mails sauvegardée avec succès"
 
 msgid "MAIL"
 msgstr "Configuration de l'envoi des mails"
@@ -1237,7 +1252,7 @@ msgid "PARAMETERS_CALENDAR_TITLE"
 msgstr "Options avancées du calendrier"
 
 msgid "EMPTY_DAILY_PROGRAM"
-msgstr "Aucun programme journalier n'a encore été défini. Vous pouvez créer des programmes journaliers à partir des options avançées l'onglet programme."
+msgstr "Aucun programme journalier n'a encore été défini. Vous pouvez créer des programmes journaliers à partir des options avancées l'onglet programme."
 
 
 # For the cost part:
@@ -1626,7 +1641,7 @@ msgid "TOOLTIP_WEBCAM"
 msgstr "Cliquez sur l'image pour afficher les webcams connectées"
 
 msgid "TOOLTIP_IMPORT_CONF"
-msgstr "cette fonctionnalité permet d'importer la configuration d'un logiciel Cultibox précédement exportée. Les données des capteurs et des puissances doivent être importées depuis l'onglet 'Logs'"
+msgstr "cette fonctionnalité permet d'importer la configuration d'un logiciel Cultibox précédemment exportée. Les données des capteurs et des puissances doivent être importées depuis l'onglet 'Logs'"
 
 msgid "TOOLTIP_EXPORT_CONF"
 msgstr "cette fonctionnalité permet d'exporter la configuration du logiciel. Les données des capteurs et des puissances doivent être exportées depuis l'onglet 'Logs'"
@@ -1692,7 +1707,7 @@ msgid "TOOLTIP_REGUL_SENSOR"
 msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
 
 msgid "TOOLTIP_SECOND_REGUL_ENABLE"
-msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Une fois activée, cette option vous permet d'accèder au mode expert qui comprend de nouvelles fonctionnalités: régulation secondaire, programmes journaliers... Pour plus d'information, se reporter à la documentation"
+msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Une fois activée, cette option vous permet d'accéder au mode expert qui comprend de nouvelles fonctionnalités: régulation secondaire, programmes journaliers... Pour plus d'information, se reporter à la documentation"
 
 msgid "TOOLTIP_CONFIG_LOG_SEARCH"
 msgstr "Lorsque vous chargez la page des logs, le logiciel enregistre vos logs des capteurs et de puissance pour les 31 derniers jours. Cette fonctionnalité vous permet de charger des logs plus anciens en fonction du nombre de mois souhaité"
@@ -1743,7 +1758,7 @@ msgid "TOOLTIP_REGUL_COMPUTE_METHOD"
 msgstr "Cette valeur n'est modifiable que si vous avez autorisé la modification des options de régulation dans l'onglet configuration. Vous pouvez choisir comment est calculée la valeur utilisée pour effectuer la régulation"
 
 msgid "TOOLTIP_RESET_CALENDAR"
-msgstr "<b>Suppréssion des annotations du calendrier:</b> supprime toutes les annotations du calendrier enregistrées manuellement, ceci comprend les engrais de croissance possiblement ajoutés mais ne comprend pas les calendriers externes du type calendrier lunaire"  
+msgstr "<b>Suppression des annotations du calendrier:</b> supprime toutes les annotations du calendrier enregistrées manuellement, ceci comprend les engrais de croissance possiblement ajoutés mais ne comprend pas les calendriers externes du type calendrier lunaire"  
 
 msgid "TOOLTIP_MANAGE_XML"
 msgstr "Permet de gérer facilement l'affichage des calendriers externes tel que les calendriers lunaires en sélectionnant les fichiers à afficher et ceux à cacher"
@@ -1755,7 +1770,7 @@ msgid "TOOLTIP_PARAMETERS_CALENDAR"
 msgstr "<b>Options avancées du calendrier:</b> gestion de l'affichage des fichiers XML externes (comme les calendriers lunaires) et de leurs enregistrements sur la carte SD"
 
 msgid "TOOLTIP_PARAMETERS_PROGRAM"
-msgstr "<b>Options avancées des programmes:</b> export ou import d'un programme, remise à zéro des programmes, ajout ou suppréssion de prises"
+msgstr "<b>Options avancées des programmes:</b> export ou import d'un programme, remise à zéro des programmes, ajout ou suppression de prises"
 
 msgid "TOOLTIP_PARAMETERS_PLUGS"
 msgstr "<b>Options avancées des prises:</b> nom des prises, tolérance, régulation..."
@@ -1833,6 +1848,24 @@ msgstr "Image lorsque l'équipement est à l'arrêt"
 msgid "CHOOSE_IMG_PLUG_SYNO"
 msgstr "Importer les images des prises"
 
+msgid "DIFF_CONF_SERVERACQSENSOR"
+msgstr "des capteurs"
+
+msgid "DIFF_CONF_CULTIPI"
+msgstr "générale du pilotage"
+
+msgid "DIFF_CONF_SERVERIRRIGATION"
+msgstr "de l'irrigation"
+
+msgid "DIFF_CONF_SERVERMAIL"
+msgstr "des mails"
+
+msgid "DIFF_CONF_SERVERPLUGUPDATE"
+msgstr "du pilotage des prises"
+
+msgid "DIFF_CONF_SERVERSUPERVISION"
+msgstr "de la supervision"
+
 msgid "ERROR_IMAGE_SIZE"
 msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
 
@@ -1888,7 +1921,7 @@ msgid "CONFIRM_RESTART_CULTIPI"
 msgstr "Voulez-vous redémarrer le service Cultipi?"
 
 msgid "SUCCESS_RESTART_RPI"
-msgstr "Le module a été redémarré avec succés, il sera de nouveau disponible dans quelques secondes."
+msgstr "Le module a été redémarré avec succès, il sera de nouveau disponible dans quelques secondes."
 
 msgid "CONFIRM_RESTART_RPI_TITLE"
 msgstr "Redémarrage du Cultipi"
@@ -1903,7 +1936,7 @@ msgid "ERROR_SAVE_PASSWORD"
 msgstr "Erreur lors du changement de mot de passe, l'ancien mot de passe sera conservé"
 
 msgid "SAVED_PASSWORD"
-msgstr "Mot de passe changé avec succés"
+msgstr "Mot de passe changé avec succès"
 
 msgid "CULTIPI_NETWORK_CONF"
 msgstr "Configuration réseau"
@@ -2002,7 +2035,7 @@ msgid "ERROR_RESTART_SERVICE"
 msgstr "Erreur lors du red&marrage du service"
 
 msgid "SUCCESS_RESTART_SERVICE"
-msgstr "Redémarrage du service réalisé avec succés"
+msgstr "Redémarrage du service réalisé avec succès"
 
 msgid "DIR_CONF_UPDATE"
 msgstr "Votre configuration est à jour"
@@ -2041,7 +2074,7 @@ msgid "IMPORT_CONF"
 msgstr "Import de la configuration"
 
 msgid "SUCCESS_IMPORT_CONF"
-msgstr "Configuration importée avec succèes"
+msgstr "Configuration importée avec succès"
 
 msgid "ERROR_IMPORT_CONF"
 msgstr "Erreur lors de l'import de votre configuration"
@@ -2102,16 +2135,16 @@ msgid "HEX_PASSWORD"
 msgstr "Hexadécimal"
 
 msgid "NETWORK_AVAILABLE"
-msgstr "Votre module est en train de redémarer. Il sera de nouveau disponible dans quelques secondes."
+msgstr "Votre module est en train de redémarrer. Il sera de nouveau disponible dans quelques secondes."
 
 msgid "RESET_NETWORK_CONF"
-msgstr "Cliquez sur l'image pour remettre le réseau dans sa configration d'origine"
+msgstr "Cliquez sur l'image pour remettre le réseau dans sa configuration d'origine"
 
 msgid "CULTIPI_DL_BONJOUR"
 msgstr "Cliquez sur l'image pour télécharger l'installateur du service 'Bonjour'"
 
 msgid "CONFIRM_RESET_NETWORK"
-msgstr "Cette action aura pour effet de remettre le réseau en mode usine, toute la configuration que vous avez réalisé concernant le réseau sera perdu et le module retrouvera sa configration d'origine. Êtes-vous certain de vouloir continuer?"
+msgstr "Cette action aura pour effet de remettre le réseau en mode usine, toute la configuration que vous avez réalisé concernant le réseau sera perdu et le module retrouvera sa configuration d'origine. Êtes-vous certain de vouloir continuer?"
 
 msgid "CONFIGURE_TITLE_CULTIBOX_NET"
 msgstr "Configuration du réseau"
@@ -2189,10 +2222,10 @@ msgid "ERROR_WIFI_IP_MASK"
 msgstr "Erreur dans le format du masque réseau: XXX.XXX.XXX.XXX"
 
 msgid "TOOLTIP_IP_ADDR"
-msgstr "L'adresse du module doit être de la forme XXX.XXX.XXX.XXX<br /><br /><i>Example: 192.168.0.15</i>"
+msgstr "L'adresse du module doit être de la forme XXX.XXX.XXX.XXX<br /><br /><i>Exemple: 192.168.0.15</i>"
 
 msgid "TOOLTIP_MASK_ADDR"
-msgstr "Le masque du réseau doit être de la forme XXX.XXX.XXX.XXX<br /><br /><i>Example: 255.255.255.0</i>"
+msgstr "Le masque du réseau doit être de la forme XXX.XXX.XXX.XXX<br /><br /><i>Exemple: 255.255.255.0</i>"
 
 msgid "ERROR_WIFI_IP"
 msgstr "Erreur dans le format de l'adresse IP: XXX.XXX.XXX.XXX"
@@ -2228,13 +2261,13 @@ msgid "WIFI_ESSID_SCAN_TITLE"
 msgstr "Sélection d'un réseau Wifi"
 
 msgid "WIFI_SCAN_SUBTITLE"
-msgstr "Les réseaux Wifi suivant ont été détécté et sont disponibles pour connecter votre module:"
+msgstr "Les réseaux Wifi suivant ont été détectés et sont disponibles pour connecter votre module:"
 
 msgid "ERROR_NET_FILE_CREATION"
 msgstr "Une erreur est survenue lors de la création des fichiers de configuration du réseau"
 
 msgid "AVAILABLE_MODULE_SET"
-msgstr "Votre module est maintenant connecté sur le(s) réseau(x) configuré(s). Vous pouvez vous reconnecter à votre réseau et accèder au module Cultipi à l'adresse suivante dans votre navigateur favori: <p class='p_center'><a class='note_link' href='http://cultipi.local/cultibox/' target='_blank'>http://cultipi.local/cultibox/</a></p>"
+msgstr "Votre module est maintenant connecté sur le(s) réseau(x) configuré(s). Vous pouvez vous reconnecter à votre réseau et accéder au module Cultipi à l'adresse suivante dans votre navigateur favori: <p class='p_center'><a class='note_link' href='http://cultipi.local/cultibox/' target='_blank'>http://cultipi.local/cultibox/</a></p>"
 
 msgid "RESTORED_CONF"
 msgstr "Une erreur est survenue lors de la mise en place de votre configuration réseau. La configuration précédente a été restauré"

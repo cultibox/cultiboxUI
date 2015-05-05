@@ -341,7 +341,11 @@
             <td class="icon_menu">
                 <a href="" id="mail-config"><img src='/cultibox/main/libs/img/mail_icon.png' alt='' title="<?php echo __('MAIL_CONFIG'); ?>"></a>
             </td>
-            <td></td>
+            <td class="icon_menu">
+                <a href="" id="supervision_config"><img src='/cultibox/main/libs/img/supervision.png' alt='' title="<?php echo __('CONF_SUPERVISION'); ?>"></a>
+            </td>
+            <td>
+            </td>
         </tr>
     </table>
     <br />
@@ -507,55 +511,55 @@
 
 <!-- Admin -->
 <div id="div_admin_ui" style="display:none">
-<table class="table_width">
-    <tr>
-        <td class="calendar-conf-marge"></td>
-        <td class="icon_menu2">
-            <a href="" id="logs_httpd" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-http.png' alt='' title="<?php echo __('CULTIPI_LOGS_HTTPD'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" id="dl_logs_httpd" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-http.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_HTTPD'); ?>"></a>
-        </td>
-        <td></td>
-        <td class="icon_menu2">
-            <a href="" id="logs_mysql" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_LOGS_MYSQL'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" id="dl_logs_mysql" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_MYSQL'); ?>"></a>
-        </td>   
-        <td></td>
-        <td class="icon_menu2">
-            <a href="" id="logs_service" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-service.png' alt='' title="<?php echo __('CULTIPI_LOGS_SERVICE'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" id="dl_logs_service" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-service.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SERVICE'); ?>"></a>
-        </td>
-        <td></td>
-        <td class="icon_menu2">
-            <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
-        </td>
-        <td></td>
-        <td class="icon_menu2">
-            <a href="" id="dl_cultibox_firm" name="dl_cultibox_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" id="dl_wifi_firm" name="dl_wifi_firm"><img src='/cultibox/main/libs/img/wifi.png' alt='' title="<?php echo __('DL_WIFI_FIRM'); ?>"></a>
-        </td>
-        <td class="icon_menu2">
-            <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
-        </td>
-        <td class="icon_menu2">
-            <a href="" name="restart_rpi" id="restart_rpi"><img src='/cultibox/main/libs/img/rpi_restart.png' alt='' title="<?php echo __('RPI_RESTART'); ?>" /></a>
-        </td>
-        <td class="icon_menu2">
-            <a href="" name="update_rpi" id="update_rpi"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="<?php echo __('TOOLTIP_UPDATE_RPI'); ?>" /></a>
-        </td>
-        <td></td>
-    </tr>
-</table>
+    <table class="table_width">
+        <tr>
+            <td class="calendar-conf-marge"></td>
+            <td class="icon_menu2">
+                <a href="" id="logs_httpd" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-http.png' alt='' title="<?php echo __('CULTIPI_LOGS_HTTPD'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_logs_httpd" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-http.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_HTTPD'); ?>"></a>
+            </td>
+            <td></td>
+            <td class="icon_menu2">
+                <a href="" id="logs_mysql" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_LOGS_MYSQL'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_logs_mysql" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_MYSQL'); ?>"></a>
+            </td>   
+            <td></td>
+            <td class="icon_menu2">
+                <a href="" id="logs_service" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-service.png' alt='' title="<?php echo __('CULTIPI_LOGS_SERVICE'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_logs_service" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-service.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SERVICE'); ?>"></a>
+            </td>
+            <td></td>
+            <td class="icon_menu2">
+                <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
+            </td>
+            <td></td>
+            <td class="icon_menu2">
+                <a href="" id="dl_cultibox_firm" name="dl_cultibox_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_wifi_firm" name="dl_wifi_firm"><img src='/cultibox/main/libs/img/wifi.png' alt='' title="<?php echo __('DL_WIFI_FIRM'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
+            </td>
+            <td class="icon_menu2">
+                <a href="" name="restart_rpi" id="restart_rpi"><img src='/cultibox/main/libs/img/rpi_restart.png' alt='' title="<?php echo __('RPI_RESTART'); ?>" /></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" name="update_rpi" id="update_rpi"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="<?php echo __('TOOLTIP_UPDATE_RPI'); ?>" /></a>
+            </td>
+            <td></td>
+        </tr>
+    </table>
 
     <br />
     <hr class="hr_cultipi" />
@@ -572,14 +576,6 @@
             <td></td>
         </tr>
     </table>
-    <br />
-    
-    <p class="title_conf">Supervision</p>
-    
-    <p class="p_center">
-        <button type="button" id="save_supervision_conf" >Sauvegarder</button> 
-    </p>
-    
 </div>
 
 
@@ -681,9 +677,11 @@
     <p class="p_center" id="progress_purcent"></p>
 </div>
 
-<div id="mail-config-div" title="<?php echo __('MAIL'); ?>" style="display:none">
+<div id="mail_config_div" title="<?php echo __('MAIL'); ?>" style="display:none">
     <?php
+        // Read list of providers
         $providerArr = configuration\getEmailProvider();
+        // Read user information from database
         $emailUserConf = configuration\getEmailUserConf();
     ?>
     <table class="table_width">
@@ -693,6 +691,7 @@
             <td>
                 <select name="" id="EMAIL_PROVIDER">
                     <?php
+                        // Add an option for each provider
                         foreach ($providerArr as $providerInfos)
                         {
                             $selected = "";
@@ -745,6 +744,42 @@
     <p><?php echo __('SUCCESS_SAVE_MAIL'); ?></p>
 </div>
 
+<div id="supervision_config_div" title="<?php echo __('CONF_SUPERVISION'); ?>" style="display:none">
+    <table class="table_width">
+        <?php
+            // Retrieve information about supervision 
+            $supervisionElements = array();
+            $supervisionElements = cultipi\getSupervisionElem();
+            
+            // Foreach element of supervision, add it
+            foreach ($supervisionElements as $supervisionElement)
+            {
+                echo '<tr>';
+                echo '  <td class="conf-marge"></td>';
+
+                // Display name 
+                echo '  <td class="conf-title"><label class="subsub_title">' . __('CONF_SUPERVISION_' . strtoupper ($supervisionElement["action"]) . '_LABEL') . '</label></td>';
+
+                // In function of action 
+                switch ($supervisionElement["action"])
+                {
+                    case "checkPing" :
+                        break;
+                    case "periodicMail" :
+                        break;
+                    default :
+                        break;
+                }
+
+                echo '</tr>';
+            }
+        ?> 
+    </table>
+</div>
+
+<div id="success_save_supervision" title="" style="display:none">
+    <p><?php echo __('SUCCESS_SAVE_MAIL'); ?></p>
+</div>
 
 
 

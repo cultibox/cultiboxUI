@@ -64,6 +64,62 @@ function check_db() {
         check_and_update_column_db ("synoptic", $synoptic_col);
     }
     
+    // Database for supervision
+    
+   // Define columns of the synoptic table
+    $supervision_col = array();
+    $supervision_col["id"]            = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => "NOT NULL AUTO_INCREMENT");
+    $supervision_col["action"]        = array ( 'Field' => "action", 'Type' => "VARCHAR(20)", "default_value" => "NA", 'carac' => "NOT NULL");
+    $supervision_col["param1name"]    = array ( 'Field' => "param1name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param1value"]   = array ( 'Field' => "param1value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param2name"]    = array ( 'Field' => "param2name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param2value"]   = array ( 'Field' => "param2value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param3name"]    = array ( 'Field' => "param3name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param3value"]   = array ( 'Field' => "param3value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param4name"]    = array ( 'Field' => "param4name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param4value"]   = array ( 'Field' => "param4value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    
+    // Check if table configuration exists
+    $sql = "SHOW TABLES FROM cultibox LIKE 'supervision';";
+
+    try {
+        $sth=$db->prepare($sql);
+        $sth->execute();
+        $res = $sth->fetchAll(\PDO::FETCH_ASSOC);
+    } catch(\PDOException $e) {
+        $ret=$e->getMessage();
+    }
+    // If table exists, return
+    if ($res == null)
+    {
+        
+        // Buil MySQL command to create table
+        $sql = "CREATE TABLE supervision ("
+            ."id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+            ."action varchar(10) NOT NULL DEFAULT 'NA',"
+            ."param1name  varchar(20) NOT NULL DEFAULT '',"
+            ."param1value varchar(60) NOT NULL DEFAULT '',"
+            ."param2name  varchar(20) NOT NULL DEFAULT '',"
+            ."param2value varchar(60) NOT NULL DEFAULT '',"
+            ."param3name  varchar(20) NOT NULL DEFAULT '',"
+            ."param3value varchar(60) NOT NULL DEFAULT '',"
+            ."param4name  varchar(20) NOT NULL DEFAULT '',"
+            ."param4value varchar(60) NOT NULL DEFAULT '');";
+
+        // Create table
+        try {
+            $sth = $db->prepare($sql);
+            $sth->execute();
+        } catch(\PDOException $e) {
+            $ret = $e->getMessage();
+            print_r($ret);
+        }
+        
+    } else {
+        // Check column
+        check_and_update_column_db ("supervision", $supervision_col);
+    }
+    
     $db = null;
 }
 
@@ -124,9 +180,12 @@ function getSynopticDBElemByID ($id) {
 // {{{ addElementInSynoptic()
 // ROLE Add an element in db
 // IN $element : Name of the element
-// IN $plugIndex : Plug index
-// IN $sensorIndex : Sensor index
+// IN $indexElem : Index of the element
 // IN $image : Image name
+// IN $x : X Position
+// IN $y : Y Position
+// IN $z : Z info
+// IN $scale : Scale info
 // RET 0
 function addElementInSynoptic($element, $indexElem, $image, $x=0, $y="", $z=100, $scale = 100) {
     
@@ -224,6 +283,9 @@ function deleteElementInSynoptic($id) {
 }
 // }}}
 
+// {{{ getSensorOfSynoptic()
+// ROLE Retrieve sensor information of the synoptic
+// RET All informatons about sensor
 function getSensorOfSynoptic () {
 
     $ret_array = array();
@@ -283,7 +345,11 @@ function getSensorOfSynoptic () {
 
     return $ret_array;
 }
+// }}}
 
+// {{{ getPlugOfSynoptic()
+// ROLE Retrieve plug information of the synoptic
+// RET All informatons about plugs
 function getPlugOfSynoptic () {
 
     $ret_array = array();
@@ -351,11 +417,11 @@ function getPlugOfSynoptic () {
 
     return $ret_array;
 }
+// }}}
 
 // {{{ getSensorSynoptic()
 // ROLE Retrieve sensor information in db
-// IN $indexElem : Number of sensor
-// RET id of the line added
+// RET Sensors informations
 function getOtherOfSynoptic () {
 
 
@@ -520,7 +586,9 @@ function getPlugLiveValue($number) {
 
 // {{{ updatePosition()
 // ROLE Update position of an element
-// IN $name :
+// IN $elem : Element to change
+// IN $x : New X info
+// IN $y : New Y info
 // RET id of the line added
 function updatePosition($elem,$x,$y) {
 
@@ -544,10 +612,14 @@ function updatePosition($elem,$x,$y) {
 }
 // }}}
 
-// {{{ updatePosition()
-// ROLE Update position of an element
-// IN $name :
-// RET id of the line added
+// {{{ updateZScaleImageRotation()
+// ROLE Update informations of an element
+// IN $elem : Element to change
+// IN $z : New Z info
+// IN $scale : New scale info
+// IN $image : New image info
+// IN $rotation : New rotation info
+// RET Return of the SQL command
 function updateZScaleImageRotation($elem,$z,$scale,$image,$rotation) {
 
     // Update position conf
@@ -571,9 +643,9 @@ function updateZScaleImageRotation($elem,$z,$scale,$image,$rotation) {
 // {{{ forcePlug()
 // ROLE Force a plug
 // IN $number : Index of plug
-// IN $value : Value to force
 // IN $time : Time to force
-// RET NA
+// IN $value : Value to force
+// RET empty
 function forcePlug($number,$time,$value) {
 
     $ret = "";
@@ -649,7 +721,7 @@ function getCultiPiStatus() {
 // }}}
 
 // {{{ get_webcam_conf()
-// ROLE Create webcam conf
+// ROLE Retrieve webcam conf
 // RET Web cam conf
 function get_webcam_conf() {
         $return=array();
@@ -732,6 +804,31 @@ function get_webcam_conf() {
         
         return $return;
   }
+// }}}
+
+// {{{ getSupervisionElem()
+// ROLE Retrieve supervision elements
+// RET Every information about supervision in DB
+function getSupervisionElem () {
+
+
+    // Check if table configuration exists
+    $sql = "SELECT * FROM supervision ;";
+    
+    $db = \db_priv_pdo_start("root");
+    
+    $res = array();
+    
+    try {
+        $sth=$db->prepare($sql);
+        $sth->execute();
+        $res = $sth->fetchAll(\PDO::FETCH_ASSOC);
+    } catch(\PDOException $e) {
+        $ret=$e->getMessage();
+    }
+
+    return $res;
+}
 // }}}
 
 }
