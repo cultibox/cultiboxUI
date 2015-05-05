@@ -64,6 +64,62 @@ function check_db() {
         check_and_update_column_db ("synoptic", $synoptic_col);
     }
     
+    // Database for supervision
+    
+   // Define columns of the synoptic table
+    $supervision_col = array();
+    $supervision_col["id"]            = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => "NOT NULL AUTO_INCREMENT");
+    $supervision_col["action"]        = array ( 'Field' => "action", 'Type' => "VARCHAR(20)", "default_value" => "NA", 'carac' => "NOT NULL");
+    $supervision_col["param1name"]    = array ( 'Field' => "param1name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param1value"]   = array ( 'Field' => "param1value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param2name"]    = array ( 'Field' => "param2name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param2value"]   = array ( 'Field' => "param2value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param3name"]    = array ( 'Field' => "param3name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param3value"]   = array ( 'Field' => "param3value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param4name"]    = array ( 'Field' => "param4name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["param4value"]   = array ( 'Field' => "param4value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    
+    // Check if table configuration exists
+    $sql = "SHOW TABLES FROM cultibox LIKE 'supervision';";
+
+    try {
+        $sth=$db->prepare($sql);
+        $sth->execute();
+        $res = $sth->fetchAll(\PDO::FETCH_ASSOC);
+    } catch(\PDOException $e) {
+        $ret=$e->getMessage();
+    }
+    // If table exists, return
+    if ($res == null)
+    {
+        
+        // Buil MySQL command to create table
+        $sql = "CREATE TABLE supervision ("
+            ."id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
+            ."action varchar(10) NOT NULL DEFAULT 'NA',"
+            ."param1name  varchar(20) NOT NULL DEFAULT '',"
+            ."param1value varchar(60) NOT NULL DEFAULT '',"
+            ."param2name  varchar(20) NOT NULL DEFAULT '',"
+            ."param2value varchar(60) NOT NULL DEFAULT '',"
+            ."param3name  varchar(20) NOT NULL DEFAULT '',"
+            ."param3value varchar(60) NOT NULL DEFAULT '',"
+            ."param4name  varchar(20) NOT NULL DEFAULT '',"
+            ."param4value varchar(60) NOT NULL DEFAULT '');";
+
+        // Create table
+        try {
+            $sth = $db->prepare($sql);
+            $sth->execute();
+        } catch(\PDOException $e) {
+            $ret = $e->getMessage();
+            print_r($ret);
+        }
+        
+    } else {
+        // Check column
+        check_and_update_column_db ("supervision", $supervision_col);
+    }
+    
     $db = null;
 }
 
