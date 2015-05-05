@@ -629,7 +629,21 @@ $(document).ready(function(){
             data: {path:$("#selected_hdd").val()}
          }).done(function (data) {
             if(data=="0") {
-                $("#locked_sd_card").dialog({ width: 550, resizable: false, closeOnEscape: false, buttons: [{ text: CLOSE_button, click: function() { $( this ).dialog( "close" ); get_content("configuration",getUrlVars("submenu=card_interface")); } }], hide: "fold", modal: true,  dialogClass: "popup_error"  });
+                $("#locked_sd_card").dialog({
+                    width: 550,
+                    resizable: false,
+                    closeOnEscape: false,
+                    buttons: [{ 
+                        text: CLOSE_button,
+                        click: function() {
+                            $( this ).dialog( "close" );
+                            get_content("configuration",getUrlVars("submenu=card_interface"));
+                        }
+                    }],
+                    hide: "fold",
+                    modal: true,
+                    dialogClass: "popup_error"
+                });
             } else {
                 $("#format_dialog_sd").dialog({
                     resizable: false,
@@ -1090,8 +1104,8 @@ $(document).ready(function(){
                                                 cache: false,
                                                 url: "main/modules/external/upgrade_rpi.php",
                                                 async: false
-                                        }).done(function (data) {
-                                            $.unblockUI();
+                                            }).done(function (data) {
+                                                $.unblockUI();
                                                 $("#cultipi_updated").dialog({
                                                     resizable: false,
                                                     height:150,
@@ -1107,7 +1121,7 @@ $(document).ready(function(){
                                                         }
                                                     }]
                                                 });
-                                        });
+                                            });
                                         }
                                     });
                                 }}, {
@@ -1712,73 +1726,73 @@ $(document).ready(function() {
     var htmlMail = $("#mail_config_div").html();
 
     $('#mail-config').click(function(e) {
-       e.preventDefault();
-       $("#mail_config_div").dialog({
-        width: 700,
-        modal: true,
-        resizable: false,
-        closeOnEscape: false,
-        dialogClass: "popup_message",
-        buttons: [{
-           text: SAVE_button,
-           click: function () {
-               $(this).dialog("close");
-               $.blockUI({
-                message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                centerY: 0,
-                css: {
-                    top: '20%',
-                    border: 'none',
-                    padding: '5px',
-                    backgroundColor: 'grey',
-                    '-webkit-border-radius': '10px',
-                    '-moz-border-radius': '10px',
-                    opacity: .9,
-                    color: '#fffff'
-                },
-               onBlock: function() {
-                 $.ajax({
-                    async: true,
-                    url: "main/modules/external/save_configuration.php",
-                    data: {
-                        parttosave:"email",
-                        EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
-                        EMAIL_SMTP:$('#EMAIL_SMTP').val(),
-                        EMAIL_PORT:$('#EMAIL_PORT').val(),
-                        EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
-                        EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
-                    }
-                 }).done(function (data) {
-                    $.unblockUI();
-                    $("#success_save_mail").dialog({
-                        resizable: false,
-                        width: 500,
-                        modal: true,
-                        closeOnEscape: true,
-                        dialogClass: "popup_message",
-                        buttons: [{
-                             text: CLOSE_button,
-                             click: function () {
-                                  return false;
-                             }
-                         }]
-                     });
-                 });
-               }});
-               return false;
-           }}, {
-            text: CLOSE_button,
-           click: function () {
-               $("#mail_config_div").dialog("destroy");
-               $("#mail_config_div").html(htmlMail);
-               console.log(htmlMail);
-               return false;
-           }
-        }]
-       });
+        e.preventDefault();
+        $("#mail_config_div").dialog({
+            width: 700,
+            modal: true,
+            resizable: false,
+            closeOnEscape: false,
+            dialogClass: "popup_message",
+            buttons: [{
+                text: SAVE_button,
+                click: function () {
+                    $(this).dialog("close");
+                    $.blockUI({
+                        message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                        centerY: 0,
+                        css: {
+                            top: '20%',
+                            border: 'none',
+                            padding: '5px',
+                            backgroundColor: 'grey',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: .9,
+                            color: '#fffff'
+                        },
+                        onBlock: function() {
+                            $.ajax({
+                                async: true,
+                                url: "main/modules/external/save_configuration.php",
+                                data: {
+                                    parttosave:"email",
+                                    EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
+                                    EMAIL_SMTP:$('#EMAIL_SMTP').val(),
+                                    EMAIL_PORT:$('#EMAIL_PORT').val(),
+                                    EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                                    EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
+                                }
+                            }).done(function (data) {
+                                $.unblockUI();
+                                $("#success_save_mail").dialog({
+                                    resizable: false,
+                                    width: 500,
+                                    modal: true,
+                                    closeOnEscape: true,
+                                    dialogClass: "popup_message",
+                                    buttons: [{
+                                         text: CLOSE_button,
+                                         click: function () {
+                                              return false;
+                                         }
+                                     }]
+                                 });
+                            });
+                        }
+                    });
+                    return false;
+                }
+            }, {
+                text: CLOSE_button,
+                click: function () {
+                    $("#mail_config_div").dialog("destroy");
+                    $("#mail_config_div").html(htmlMail);
+                    return false;
+                }
+            }]
+        });
     });
 
-    
     $( "#EMAIL_PROVIDER" ).change(function() {
         selectvalue = $(this).val();
         if (selectvalue == "other") {
@@ -1798,6 +1812,7 @@ $(document).ready(function() {
 
     $('#supervision_config').click(function(e) {
         e.preventDefault();
+        alert("sdfsdf");
         $("#supervision_config_div").dialog({
             width: 700,
             modal: true,
@@ -1805,61 +1820,20 @@ $(document).ready(function() {
             closeOnEscape: false,
             dialogClass: "popup_message",
             buttons: [{
-               text: SAVE_button,
-               click: function () {
-                   $(this).dialog("close");
-                   $.blockUI({
-                    message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                    centerY: 0,
-                    css: {
-                        top: '20%',
-                        border: 'none',
-                        padding: '5px',
-                        backgroundColor: 'grey',
-                        '-webkit-border-radius': '10px',
-                        '-moz-border-radius': '10px',
-                        opacity: .9,
-                        color: '#fffff'
-                    },
-                   onBlock: function() {
-                     $.ajax({
-                        async: true,
-                        url: "main/modules/external/save_configuration.php",
-                        data: {
-                            parttosave:"supervision",
-                            EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
-                            EMAIL_SMTP:$('#EMAIL_SMTP').val(),
-                            EMAIL_PORT:$('#EMAIL_PORT').val(),
-                            EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
-                            EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
-                        }
-                     }).done(function (data) {
-                        $.unblockUI();
-                        $("#success_save_mail").dialog({
-                            resizable: false,
-                            width: 500,
-                            modal: true,
-                            closeOnEscape: true,
-                            dialogClass: "popup_message",
-                            buttons: [{
-                                 text: CLOSE_button,
-                                 click: function () {
-                                      return false;
-                                 }
-                             }]
-                         });
-                     });
-                   }});
-                   return false;
-               }}, {
-               text: CLOSE_button,
-               click: function () {
-                   $("#supervision_config_div").dialog("destroy");
-                   $("#supervision_config_div").html(htmlSupervision);
-                   return false;
-               }
+                text: SAVE_button,
+                click: function () {
+                    $(this).dialog("close");
+                    return false;
+                }
+            }, {
+                text: CLOSE_button,
+                click: function () {
+                    $(this).dialog("close");
+                    $("#supervision_config_div").html(htmlSupervision);
+                    return false;
+                }
             }]
-       });
+        });
     });
 
     
