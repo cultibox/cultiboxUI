@@ -180,9 +180,12 @@ function getSynopticDBElemByID ($id) {
 // {{{ addElementInSynoptic()
 // ROLE Add an element in db
 // IN $element : Name of the element
-// IN $plugIndex : Plug index
-// IN $sensorIndex : Sensor index
+// IN $indexElem : Index of the element
 // IN $image : Image name
+// IN $x : X Position
+// IN $y : Y Position
+// IN $z : Z info
+// IN $scale : Scale info
 // RET 0
 function addElementInSynoptic($element, $indexElem, $image, $x=0, $y="", $z=100, $scale = 100) {
     
@@ -280,6 +283,9 @@ function deleteElementInSynoptic($id) {
 }
 // }}}
 
+// {{{ getSensorOfSynoptic()
+// ROLE Retrieve sensor information of the synoptic
+// RET All informatons about sensor
 function getSensorOfSynoptic () {
 
     $ret_array = array();
@@ -339,7 +345,11 @@ function getSensorOfSynoptic () {
 
     return $ret_array;
 }
+// }}}
 
+// {{{ getPlugOfSynoptic()
+// ROLE Retrieve plug information of the synoptic
+// RET All informatons about plugs
 function getPlugOfSynoptic () {
 
     $ret_array = array();
@@ -407,11 +417,11 @@ function getPlugOfSynoptic () {
 
     return $ret_array;
 }
+// }}}
 
 // {{{ getSensorSynoptic()
 // ROLE Retrieve sensor information in db
-// IN $indexElem : Number of sensor
-// RET id of the line added
+// RET Sensors informations
 function getOtherOfSynoptic () {
 
 
@@ -576,7 +586,9 @@ function getPlugLiveValue($number) {
 
 // {{{ updatePosition()
 // ROLE Update position of an element
-// IN $name :
+// IN $elem : Element to change
+// IN $x : New X info
+// IN $y : New Y info
 // RET id of the line added
 function updatePosition($elem,$x,$y) {
 
@@ -600,10 +612,14 @@ function updatePosition($elem,$x,$y) {
 }
 // }}}
 
-// {{{ updatePosition()
-// ROLE Update position of an element
-// IN $name :
-// RET id of the line added
+// {{{ updateZScaleImageRotation()
+// ROLE Update informations of an element
+// IN $elem : Element to change
+// IN $z : New Z info
+// IN $scale : New scale info
+// IN $image : New image info
+// IN $rotation : New rotation info
+// RET Return of the SQL command
 function updateZScaleImageRotation($elem,$z,$scale,$image,$rotation) {
 
     // Update position conf
@@ -627,9 +643,9 @@ function updateZScaleImageRotation($elem,$z,$scale,$image,$rotation) {
 // {{{ forcePlug()
 // ROLE Force a plug
 // IN $number : Index of plug
-// IN $value : Value to force
 // IN $time : Time to force
-// RET NA
+// IN $value : Value to force
+// RET empty
 function forcePlug($number,$time,$value) {
 
     $ret = "";
@@ -705,7 +721,7 @@ function getCultiPiStatus() {
 // }}}
 
 // {{{ get_webcam_conf()
-// ROLE Create webcam conf
+// ROLE Retrieve webcam conf
 // RET Web cam conf
 function get_webcam_conf() {
         $return=array();
@@ -788,6 +804,31 @@ function get_webcam_conf() {
         
         return $return;
   }
+// }}}
+
+// {{{ getSupervisionElem()
+// ROLE Retrieve supervision elements
+// RET Every information about supervision in DB
+function getSupervisionElem () {
+
+
+    // Check if table configuration exists
+    $sql = "SELECT * FROM supervision ;";
+    
+    $db = \db_priv_pdo_start("root");
+    
+    $res = array();
+    
+    try {
+        $sth=$db->prepare($sql);
+        $sth->execute();
+        $res = $sth->fetchAll(\PDO::FETCH_ASSOC);
+    } catch(\PDOException $e) {
+        $ret=$e->getMessage();
+    }
+
+    return $res;
+}
 // }}}
 
 }
