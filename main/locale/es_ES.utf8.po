@@ -100,6 +100,15 @@ msgstr "Configuration de la supervision"
 msgid "SUCCESS_SAVE_SUPERVISION"
 msgstr "Configuration de la supervision sauvegardée avec succès"
 
+msgid "CONF_SUPERVISION_CHECKPING_LABEL"
+msgstr "Vérification du ping : "
+
+msgid "CONF_SUPERVISION_CHECKPING_IP"
+msgstr "Adresse IP : "
+
+msgid "CONF_SUPERVISION_CHECKPING_ACTION"
+msgstr "Action si erreur : "
+
 msgid "SUCCESS_SAVE_MAIL"
 msgstr "Configuration pour l'envoi des mails sauvegardée avec succés"
 
