@@ -94,6 +94,15 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "DL_FIRM_CULTIBOX"
+msgstr "Une fois le firmware téléchargé, veuillez le copier à la racine de la carte SD de la Cultibox"
+
+msgid "DL_FIRM_WIFI"
+msgstr "Les utilisateurs expérimentés peuvent revenir à l'ancien mode de fonctionnement de la Cultibox en téléchargeant le firmware ci-dessous"
+
+msgid "DL_BUTTON_CULTIBOX"
+msgstr "Télécharger le firmware"
+
 msgid "CONF_SUPERVISION"
 msgstr "Configuration de la supervision"
 

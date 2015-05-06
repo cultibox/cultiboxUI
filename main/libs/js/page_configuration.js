@@ -1709,6 +1709,24 @@ $(document).ready(function() {
 
 
 
+     $('#dl_firm').click(function(e) {
+       e.preventDefault();
+       $("#dl_firm_div").dialog({
+            resizable: false,
+            width: 700,
+            modal: true,
+            closeOnEscape: true,
+            dialogClass: "popup_message",
+            buttons: [{
+               text: CLOSE_button,
+               click: function () {
+                 $( this ).dialog( "close" );
+                 return false;
+               }
+            }]
+       });
+    });
+
     $('#dl_cultibox_firm').click(function(e) {
        e.preventDefault();
        $.fileDownload('main/templates/data/cultibox_firmware/firm.hex');
@@ -1718,7 +1736,7 @@ $(document).ready(function() {
        e.preventDefault();
        $.fileDownload('main/templates/data/cultibox_firmware_wifi/firm.hex');
     });
-
+    
     
     // Send mail section
     
@@ -1812,7 +1830,6 @@ $(document).ready(function() {
 
     $('#supervision_config').click(function(e) {
         e.preventDefault();
-        alert("sdfsdf");
         $("#supervision_config_div").dialog({
             width: 700,
             modal: true,
