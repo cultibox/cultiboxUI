@@ -332,10 +332,11 @@ $(document).ready(function(){
 
         if(checked) {
             var check_update=true;
-            $("select").each(function() {
+
+            
+            $("#div_user_interface").find('select').each(function() {
                 newValue    = $( this ).find(":selected").val();
                 varToUpdate = $( this ).attr('name');
-
 
                 if(varToUpdate.trim() != "" && typeof varToUpdate != "undefined") {
                     $.ajax({
@@ -1707,9 +1708,7 @@ $(document).ready(function() {
     });
 
 
-
-
-     $('#dl_firm').click(function(e) {
+    $('#dl_firm').click(function(e) {
        e.preventDefault();
        $("#dl_firm_div").dialog({
             resizable: false,
@@ -1736,7 +1735,7 @@ $(document).ready(function() {
        e.preventDefault();
        $.fileDownload('main/templates/data/cultibox_firmware_wifi/firm.hex');
     });
-    
+
     
     // Send mail section
     
