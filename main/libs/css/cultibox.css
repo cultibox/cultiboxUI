@@ -876,7 +876,7 @@ td.conf-alarm-field {
        padding: 6px;
        padding-left: 12px;
        padding-right: 12px;
-       width: 20%;
+       max-width: 23%;
        z-index: 10000; 
 }
 
