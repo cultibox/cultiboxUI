@@ -8,16 +8,41 @@
 </div>
 
 <h2>Action </h2>
-<button type="button" id="reload" >Recharger le modèle</button> 
+<!--<button type="button" id="reload" >Recharger le modèle</button> -->
 <button type="button" id="save" >Sauvegarder</button> 
 <button type="button" id="applyConf" >Appliquer les valeurs sauvegardées</button> 
 
 <div id="logServerIrrigation" style=" overflow:scroll;height:100px;border:#000000 1px solid;">
 </div>
 
+<?php
+    // Retrieve informations from database
+    $plateformeList = irrigation\getPlateforme();
+?>
+
+<!--Header buton to select zone -->
+<table class="table_width">
+    <tr>    
+        <td class="conf-menu-marge"></td>
+        <td class="center_menu" >
+            <button id="div_localtechnique_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_localtechnique').show();return false;">Local Technique</button>
+        </td>
+        <?php
+            foreach ($plateformeList as $key => $plateforme) 
+            {
+        ?>
+                <td class="center_menu" >
+                    <button id="div_plateforme_<?php echo $plateforme['id']; ?>_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_plateforme_<?php echo $plateforme['id']; ?>').show();return false;"><?php echo $plateforme['name']; ?></button>
+                </td>
+        <?php
+            }
+        ?>
+        <td class="conf-menu-marge"></td>
+    </tr>
+</table> 
+
 <!-- Display every parameters for plateform-->
 <?php 
-
 
 // Les infos pour le local technique
 $localtechnique = irrigation\getLT();
@@ -28,6 +53,7 @@ if (!array_key_exists(0, $localtechnique)) {
 }
 
 $engraisList = irrigation\getEngrais();
+echo '<div id="div_localtechnique" name="div_plateforme" >';
 echo '<h2>' . $localtechnique[0]['name'] . '</h2>';
 echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th></tr><tr>';
 echo '<td><input type="text" id="ip_localtechnique_' . $localtechnique[0]['id'] . '" maxlength="20" size="10" value="' . $localtechnique[0]['ip'] . '" > </td>';
@@ -48,16 +74,20 @@ foreach ($engraisList as $key => $engrais)
         $checked = "checked";
     echo $engrais['name'] . ' : <input type="checkbox" id="valid_engrais_' . $engrais['id'] . '" ' . $checked . ' > ' ;
 }
+echo '</div>';
 
 $plateformeList = irrigation\getPlateforme();
 foreach ($plateformeList as $key => $plateforme) 
 {
+    echo '<div id="div_plateforme_' . $plateforme['id'] . '" name="div_plateforme" style="display:none" >';
     // Display name
     echo '<h2>Plateforme : ' . $plateforme['name'] . ' </h2>';
     
+    echo '<p>Action: </p>';
+    //echo '<button id="div_plateforme_' . $plateforme['id'] . '_but_fill">Remplir la cuve</button>';
+
     echo '<p>Paramètres de la plateforme : </p>';
-    echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th> <th>Temps Perco</th> <th>Temps Perco Nuit</th>';
-    echo '<th>Temps Max Remplissage</th> <th>Temps Max Remplissage Nuit</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
+    echo '<table border="1" > <tr> <th>ip</th> <th>Pompe Nom</th> <th>Pompe Prise</th> <th>active</th> <th>Temps Perco Matin</th><th>Temps Perco Apres Midi</th><th>Temps Perco Nuit</th></tr>';
     echo '<td><input type="text" id="ip_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['ip'] . '" > </td>';
     echo '<td><input type="text" id="pompeName_plateforme_' . $plateforme['id'] . '" maxlength="20" size="10" value="' . $plateforme['pompeName'] . '" > </td>';
     echo '<td><input type="text" id="pompePrise_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['pompePrise'] . '" > </td>';
@@ -66,8 +96,14 @@ foreach ($plateformeList as $key => $plateforme)
         $checked = "checked";
     echo '<td><input type="checkbox" id="active_plateforme_' . $plateforme['id'] . '" ' . $checked . ' > </td>';
     echo '<td><input type="text" id="tempsPerco_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPerco'] . '" > </td>';
+    echo '<td><input type="text" id="tempsPercoApresMidi_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPercoApresMidi'] . '" > </td>';
     echo '<td><input type="text" id="tempsPercoNuit_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsPercoNuit'] . '" > </td>';
+    echo '</tr></table>';
+    
+    // Second table
+    echo '<table border="1" > <tr> <th>Temps Max Remplissage</th> <th>Temps Max Remplissage Apres Midi</th> <th>Temps Max Remplissage Nuit</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
     echo '<td><input type="text" id="tempsMaxRemp_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRemp'] . '" > </td>';
+    echo '<td><input type="text" id="tempsMaxRempApresMidi_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRempApresMidi'] . '" > </td>';
     echo '<td><input type="text" id="tempsMaxRempNuit_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRempNuit'] . '" > </td>';
     echo '<td><input type="text" id="priseDansLT_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseDansLT'] . '" > </td>';
     $checked = "";
@@ -78,7 +114,7 @@ foreach ($plateformeList as $key => $plateforme)
 
     echo '<p>Paramètres des zones : </p>';
     // Display parameters for each zone
-    echo '<table border="1" > <tr> <th>Zone</th> <th>prise</th> <th>Temps On Jour</th> <th>Temps Off Jour</th><th>Temps On Nuit</th> <th>Temps Off Nuit</th>';
+    echo '<table border="1" > <tr> <th>Zone</th> <th>prise</th> <th>Temps On Matin</th> <th>Temps Off Matin</th><th>Temps On Apres Midi</th> <th>Temps Off Apres Midi</th><th>Temps On Nuit</th> <th>Temps Off Nuit</th>';
     echo '<th>Active</th> </tr>'; #<th>Coef temp</th> </tr>';
     $zoneList = irrigation\getZone($plateforme['idPlateforme']); 
     foreach ($zoneList as $key => $zone)
@@ -88,8 +124,11 @@ foreach ($plateformeList as $key => $plateforme)
         echo '<td><input type="text" id="prise_zone_' . $zone['id'] . '" maxlength="3" size="2" value="' . $zone['prise'] . '" > </td>';
         echo '<td><input type="text" id="tempsOn_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOn'] . '" > </td>';
         echo '<td><input type="text" id="tempsOff_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOff'] . '" > </td>';
+        echo '<td><input type="text" id="tempsOnApresMidi_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOnApresMidi'] . '" > </td>';
+        echo '<td><input type="text" id="tempsOffApresMidi_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOffApresMidi'] . '" > </td>';
         echo '<td><input type="text" id="tempsOnNuit_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOnNuit'] . '" > </td>';
         echo '<td><input type="text" id="tempsOffNuit_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['tempsOffNuit'] . '" > </td>';
+        
         $checked = "";
         if ($zone['active'] == "true")
             $checked = "checked";
@@ -98,6 +137,7 @@ foreach ($plateformeList as $key => $plateforme)
         echo '</tr>';
     }
     echo '</table>';
+    echo '</div>';
 
 }
 
