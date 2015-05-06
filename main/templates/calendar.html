@@ -52,24 +52,22 @@
                     alt="calendar"
             />
         </td>
-        <td class="icon_menu2">
+        <td class="icon_menu2" <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>>
             <!-- Button to add daily program -->
             <input type="image" id="daily_program" name="daily_program"
                    title="<?php echo __('TOOLTIP_CREATE_CALENDAR_DAILY_PROGRAM'); ?>"
                    src="main/libs/img/add_big.png"   
                    alt="calendar"  
                    width="34"
-                   <?php if(strcmp("$second_regul","True")!=0) { ?>style="display:none"<?php } ?>
             />        
         </td>
-        <td class="icon_menu2">
+        <td class="icon_menu2" <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>style="display:none"<?php } ?>>
             <!-- Button to add XML -->
             <input type="image" id="import_xml" name="add_xml"
                    title="<?php echo __('TOOLTIP_ADD_XML'); ?>"
                    src="main/libs/img/upload_big.png"   
                    alt="engrais"  
                    width="28"
-                    <?php if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) { ?>style="display:none"<?php } ?>
             />
         </td>
         <td></td>
