@@ -21,25 +21,18 @@
 ?>
 
 <!--Header buton to select zone -->
-<table class="table_width">
-    <tr>    
-        <td class="conf-menu-marge"></td>
-        <td class="center_menu" >
-            <button id="div_localtechnique_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_localtechnique').show();return false;">Local Technique</button>
-        </td>
-        <?php
-            foreach ($plateformeList as $key => $plateforme) 
-            {
-        ?>
-                <td class="center_menu" >
-                    <button id="div_plateforme_<?php echo $plateforme['id']; ?>_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_plateforme_<?php echo $plateforme['id']; ?>').show();return false;"><?php echo $plateforme['name']; ?></button>
-                </td>
-        <?php
-            }
-        ?>
-        <td class="conf-menu-marge"></td>
-    </tr>
-</table> 
+<div>
+    <button id="div_localtechnique_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_localtechnique').show();return false;">Local Technique</button>
+
+<?php
+    foreach ($plateformeList as $key => $plateforme) 
+    {
+?>
+        <button id="div_plateforme_<?php echo $plateforme['id']; ?>_show" class="cultipi_menu_h1" onclick="$('div[name=div_plateforme]').hide();$('#div_plateforme_<?php echo $plateforme['id']; ?>').show();return false;"><?php echo $plateforme['name']; ?></button>
+<?php
+    }
+?>
+</div> 
 
 <!-- Display every parameters for plateform-->
 <?php 
