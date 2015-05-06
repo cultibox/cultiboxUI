@@ -957,6 +957,7 @@ $(document).ready(function(){
                         dialogClass: "popup_message",
                         buttons: [{
                             text: CLOSE_button,
+                            id: "btnCloseLogs",
                             click: function () {
                                 $(this).scrollTop(0);
                                 $(this).dialog('close'); 
@@ -1127,6 +1128,7 @@ $(document).ready(function(){
                                     });
                                 }}, {
                                 text: CLOSE_button,
+                                id: "btnCloseUp",
                                 click: function () {
                                     $( this ).dialog("close");
                                 }
@@ -1718,6 +1720,7 @@ $(document).ready(function() {
             dialogClass: "popup_message",
             buttons: [{
                text: CLOSE_button,
+               id: "btnCloseFirm",
                click: function () {
                  $( this ).dialog( "close" );
                  return false;

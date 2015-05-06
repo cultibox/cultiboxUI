@@ -21,22 +21,22 @@
     
     switch ($action) {
         case "logs_mysql" :
-            exec("sudo tail -n " . $nbLine . "/var/log/mysql/mysql.log 2>/dev/null",$ret[0],$err);
-            exec("sudo tail -n " . $nbLine . "/var/log/mysql/mysql.err 2>/dev/null",$ret[1],$err);
+            exec("sudo tail -n " . $nbLine . " /var/log/mysql/mysql.log 2>/dev/null",$ret[0],$err);
+            exec("sudo tail -n " . $nbLine . " /var/log/mysql/mysql.err 2>/dev/null",$ret[1],$err);
             break;
 
         case "logs_httpd" :
             $ret[0]="";
-            exec("sudo tail -n " . $nbLine . "/var/log/lighttpd/error.log 2>/dev/null",$ret[1],$err);
+            exec("sudo tail -n " . $nbLine . " /var/log/lighttpd/error.log 2>/dev/null",$ret[1],$err);
             break;
 
         case "logs_cultipi":
-            exec("sudo tail -n " . $nbLine . "/var/log/cultipi/cultipi.log 2>/dev/null",$ret[0],$err);
+            exec("sudo tail -n " . $nbLine . " /var/log/cultipi/cultipi.log 2>/dev/null",$ret[0],$err);
             $ret[1]="";
             break;
 
         case "logs_service":
-            exec("sudo tail -n " . $nbLine . "/var/log/cultipi/cultipi-service.log 2>/dev/null",$ret[0],$err);
+            exec("sudo tail -n " . $nbLine . " /var/log/cultipi/cultipi-service.log 2>/dev/null",$ret[0],$err);
             $ret[1]="";
             break;
 
