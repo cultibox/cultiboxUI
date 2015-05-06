@@ -68,16 +68,12 @@ function check_db() {
     
    // Define columns of the synoptic table
     $supervision_col = array();
-    $supervision_col["id"]            = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => "NOT NULL AUTO_INCREMENT");
-    $supervision_col["action"]        = array ( 'Field' => "action", 'Type' => "VARCHAR(20)", "default_value" => "NA", 'carac' => "NOT NULL");
-    $supervision_col["param1name"]    = array ( 'Field' => "param1name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param1value"]   = array ( 'Field' => "param1value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param2name"]    = array ( 'Field' => "param2name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param2value"]   = array ( 'Field' => "param2value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param3name"]    = array ( 'Field' => "param3name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param3value"]   = array ( 'Field' => "param3value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param4name"]    = array ( 'Field' => "param4name",  'Type' => "VARCHAR(20)", "default_value" => "", 'carac' => "NOT NULL");
-    $supervision_col["param4value"]   = array ( 'Field' => "param4value", 'Type' => "VARCHAR(60)", "default_value" => "", 'carac' => "NOT NULL");
+    $supervision_col["id"]                  = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => "NOT NULL AUTO_INCREMENT");
+    $supervision_col["checkPing_en"]        = array ( 'Field' => "checkPing_en", 'Type' => "VARCHAR(3)", "default_value" => "off", 'carac' => "NOT NULL");
+    $supervision_col["checkPing_action"]    = array ( 'Field' => "checkPing_action",  'Type' => "VARCHAR(8)", "default_value" => "sendMail", 'carac' => "NOT NULL");
+    $supervision_col["checkPing_adress"]    = array ( 'Field' => "checkPing_adress", 'Type' => "VARCHAR(100)", "default_value" => "8.8.8.8", 'carac' => "NOT NULL");
+    $supervision_col["dailyReport_en"]      = array ( 'Field' => "dailyReport_en",  'Type' => "VARCHAR(3)", "default_value" => "off", 'carac' => "NOT NULL");
+    $supervision_col["monthlyReport_en"]    = array ( 'Field' => "monthlyReport_en",  'Type' => "VARCHAR(3)", "default_value" => "off", 'carac' => "NOT NULL");
     
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'supervision';";
@@ -96,21 +92,28 @@ function check_db() {
         // Buil MySQL command to create table
         $sql = "CREATE TABLE supervision ("
             ."id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-            ."action varchar(10) NOT NULL DEFAULT 'NA',"
-            ."param1name  varchar(20) NOT NULL DEFAULT '',"
-            ."param1value varchar(60) NOT NULL DEFAULT '',"
-            ."param2name  varchar(20) NOT NULL DEFAULT '',"
-            ."param2value varchar(60) NOT NULL DEFAULT '',"
-            ."param3name  varchar(20) NOT NULL DEFAULT '',"
-            ."param3value varchar(60) NOT NULL DEFAULT '',"
-            ."param4name  varchar(20) NOT NULL DEFAULT '',"
-            ."param4value varchar(60) NOT NULL DEFAULT '');";
+            ."checkPing_en varchar(3) NOT NULL DEFAULT 'off',"
+            ."checkPing_action  varchar(8) NOT NULL DEFAULT 'sendMail',"
+            ."checkPing_adress varchar(100) NOT NULL DEFAULT '8.8.8.8',"
+            ."dailyReport_en  varchar(3) NOT NULL DEFAULT 'off',"
+            ."monthlyReport_en varchar(3) NOT NULL DEFAULT 'off');";
 
         // Create table
         try {
             $sth = $db->prepare($sql);
             $sth->execute();
         } catch(\PDOException $e) {
+            $ret = $e->getMessage();
+            print_r($ret);
+        }
+        
+         $sql = "INSERT INTO supervision (id, checkPing_en, checkPing_action, checkPing_adress, dailyReport_en, monthlyReport_en)"
+            . "VALUES (1, 'off', 'sendMail', '8.8.8.8', 'off', 'off');";
+        // Insert row:
+        try {
+            $sth = $db->prepare($sql);
+            $sth->execute();
+        } catch(PDOException $e) {
             $ret = $e->getMessage();
             print_r($ret);
         }
@@ -809,7 +812,7 @@ function get_webcam_conf() {
 // {{{ getSupervisionElem()
 // ROLE Retrieve supervision elements
 // RET Every information about supervision in DB
-function getSupervisionElem () {
+function getSupervisionUserConf () {
 
 
     // Check if table configuration exists
@@ -822,12 +825,121 @@ function getSupervisionElem () {
     try {
         $sth=$db->prepare($sql);
         $sth->execute();
-        $res = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $res = $sth->fetch(\PDO::FETCH_ASSOC);
     } catch(\PDOException $e) {
         $ret=$e->getMessage();
     }
 
     return $res;
+}
+// }}}
+
+// {{{ saveSupervisionUserConf()
+// ROLE Save user supervision configuration
+// RET
+function saveSupervisionUserConf($param) {
+    
+    // Open connection to dabase
+    $db = \db_priv_pdo_start();
+    
+    $str = "";
+    foreach($param As $key => $value)
+    {
+        if ($str != "")
+            $str = $str . " , ";
+        
+        $str = $str . "${key}='${value}'";
+        
+    }
+        
+    $sql = "UPDATE supervision SET ${str} ;";
+    
+    try {
+        $sth = $db->prepare($sql);
+        $sth->execute();
+    } catch(\PDOException $e) {
+        $ret = $e->getMessage();
+        print_r($ret);
+    }
+
+}
+// }}}
+
+// {{{ serverSupervision_createXMLConf()
+// ROLE Create supervision configuration XML
+// RET
+function serverSupervision_createXMLConf () {
+    
+    // retrieve user params
+    $supervisionUserConf = getSupervisionUserConf();
+    $mailUserConf = \configuration\getEmailUserConf();
+    
+    $processIndex = 0 ;
+    
+    if (strcmp($supervisionUserConf["checkPing_en"],"on") == 0) 
+    {
+        $tempProcess = array();
+        $tempProcess[] = array (
+            "name" => "action",
+            "value" => "checkPing"
+        );
+        $tempProcess[] = array (
+            "name" => "nbIP",
+            "value" => "1"
+        );        
+        $tempProcess[] = array (
+            "name" => "IP,0",
+            "value" => $supervisionUserConf['checkPing_adress']
+        );
+        $tempProcess[] = array (
+            "name" => "timeMax",
+            "value" => "60"
+        );
+        $tempProcess[] = array (
+            "name" => "error,action",
+            "value" => $supervisionUserConf['checkPing_action'] . " " . $mailUserConf["EMAIL_ADRESS"]
+        );
+        
+        \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverSupervision/process_" . $processIndex . ".xml" , $tempProcess);
+        
+        $processIndex ++ ;
+    }
+
+    if (strcmp($supervisionUserConf["dailyReport_en"],"on") == 0) 
+    {
+        $tempProcess = array();
+        $tempProcess[] = array (
+            "name" => "action",
+            "value" => "dailyReport"
+        );
+        \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverSupervision/process_" . $processIndex . ".xml" , $tempProcess);
+        
+        $processIndex ++ ;
+    }
+    
+    if (strcmp($supervisionUserConf["monthlyReport_en"],"on") == 0) 
+    {
+        $tempProcess = array();
+        $tempProcess[] = array (
+            "name" => "action",
+            "value" => "monthlyReport"
+        );
+        \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverSupervision/process_" . $processIndex . ".xml" , $tempProcess);
+        
+        $processIndex ++ ;
+    }
+    
+    $supervisionConf[] = array (
+        "name" => "verbose",
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision']
+    );
+    $supervisionConf[] = array (
+        "name" => "nbProcess",
+        "level" => $processIndex
+    );
+    \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverSupervision/conf.xml" , $supervisionConf);
+    
+    
 }
 // }}}
 

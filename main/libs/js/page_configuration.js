@@ -1791,7 +1791,8 @@ $(document).ready(function() {
                                     buttons: [{
                                          text: CLOSE_button,
                                          click: function () {
-                                              return false;
+                                            $( this ).dialog( "close" );
+                                            return false;
                                          }
                                      }]
                                  });
@@ -1831,7 +1832,7 @@ $(document).ready(function() {
     $('#supervision_config').click(function(e) {
         e.preventDefault();
         $("#supervision_config_div").dialog({
-            width: 700,
+            width: 900,
             modal: true,
             resizable: false,
             closeOnEscape: false,
@@ -1840,6 +1841,64 @@ $(document).ready(function() {
                 text: SAVE_button,
                 click: function () {
                     $(this).dialog("close");
+                    
+                    supervision_checkPing_en = "off";
+                    if( $('#supervision_checkPing_en').is(':checked') ){
+                        supervision_checkPing_en = "on";
+                    }
+                    supervision_dailyReport_en = "off";
+                    if( $('#supervision_dailyReport_en').is(':checked') ){
+                        supervision_dailyReport_en = "on";
+                    }
+                    supervision_monthlyReport_en = "off";
+                    if( $('#supervision_monthlyReport_en').is(':checked') ){
+                        supervision_monthlyReport_en = "on";
+                    }
+                    
+                    $.blockUI({
+                        message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                        centerY: 0,
+                        css: {
+                            top: '20%',
+                            border: 'none',
+                            padding: '5px',
+                            backgroundColor: 'grey',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: .9,
+                            color: '#fffff'
+                        },
+                        onBlock: function() {
+                            $.ajax({
+                                async: true,
+                                url: "main/modules/external/save_configuration.php",
+                                data: {
+                                    parttosave:"supervision",
+                                    checkPing_en:supervision_checkPing_en,
+                                    checkPing_adress:$('#supervision_checkPing_adress').val(),
+                                    checkPing_action:$('#supervision_checkPing_action').val(),
+                                    dailyReport_en:supervision_dailyReport_en,
+                                    monthlyReport_en:supervision_monthlyReport_en
+                                }
+                            }).done(function (data) {
+                                $.unblockUI();
+                                $("#success_save_supervision").dialog({
+                                    resizable: false,
+                                    width: 500,
+                                    modal: true,
+                                    closeOnEscape: true,
+                                    dialogClass: "popup_message",
+                                    buttons: [{
+                                         text: CLOSE_button,
+                                         click: function () {
+                                            $( this ).dialog( "close" );
+                                            return false;
+                                         }
+                                     }]
+                                 });
+                            });
+                        }
+                    });
                     return false;
                 }
             }, {
@@ -1851,9 +1910,7 @@ $(document).ready(function() {
                 }
             }]
         });
-    });
-
-    
+    }); 
 });
 
 </script>

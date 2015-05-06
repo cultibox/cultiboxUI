@@ -342,7 +342,7 @@
                 <a href="" id="mail-config"><img src='/cultibox/main/libs/img/mail_icon.png' alt='' title="<?php echo __('MAIL_CONFIG'); ?>"></a>
             </td>
             <td class="icon_menu">
-                <a href="" id="supervision_config"><img src='/cultibox/main/libs/img/supervision.png' alt='' title="<?php echo __('CONF_SUPERVISION'); ?>"></a>
+                <a href="" id="supervision_config"><img src='/cultibox/main/libs/img/supervision.png' id="supervision_config" alt='' title="<?php echo __('CONF_SUPERVISION'); ?>"></a>
             </td>
             <td>
             </td>
@@ -746,36 +746,54 @@
         <?php
             // Retrieve information about supervision 
             $supervisionElements = array();
-            $supervisionElements = cultipi\getSupervisionElem();
-            
-            // Foreach element of supervision, add it
-            foreach ($supervisionElements as $supervisionElement)
-            {
-                echo '<tr>';
-                echo '  <td class="conf-marge"></td>';
-
-                // Display name 
-                echo '  <td class="conf-title"><label class="subsub_title">' . __('CONF_SUPERVISION_' . strtoupper ($supervisionElement["action"]) . '_LABEL') . '</label></td>';
-
-                // In function of action 
-                switch ($supervisionElement["action"])
-                {
-                    case "checkPing" :
-                        break;
-                    case "periodicMail" :
-                        break;
-                    default :
-                        break;
-                }
-
-                echo '</tr>';
-            }
-        ?> 
+            $supervisionElements = cultipi\getSupervisionUserConf();
+        ?>
+        <tr>
+             <?php
+                $en = "";
+                if (strcmp($supervisionElements["checkPing_en"],"on") == 0)
+                    $en = "checked";
+                    
+             ?>
+            <td><label>Vérification ping :</label></td>
+            <td>Activée : <input type="checkbox" id="supervision_checkPing_en" value="on" <?php echo $en;?>></td>
+            <td><label>Adresse : </label></td>
+            <td><input  type="text" size="40" id="supervision_checkPing_adress" value="<?php echo $supervisionElements['checkPing_adress']; ?>" /></td>
+            <td><label>Action : </label></td>
+            <td>
+                <select id="supervision_checkPing_action">
+                    <option value="reboot" <?php if (strcmp($supervisionElements["checkPing_action"],"reboot") == 0) echo "selected"; ?> > Reboot </option>
+                    <option value="sendMail" <?php if (strcmp($supervisionElements["checkPing_action"],"sendMail") == 0) echo "selected"; ?> > Envoi Mail </option>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+             <?php
+                $en = "";
+                if (strcmp($supervisionElements["dailyReport_en"],"on") == 0)
+                    $en = "checked";
+                    
+             ?>
+            <td><label>Rapport journalier :</label></td>
+            <td>Activée : <input type="checkbox" id="supervision_dailyReport_en" value="on" <?php echo $en;?>></td>
+        </tr>
+        
+        <tr>
+             <?php
+                $en = "";
+                if (strcmp($supervisionElements["monthlyReport_en"],"on") == 0)
+                    $en = "checked";
+                    
+             ?>
+            <td><label>Rapport journalier :</label></td>
+            <td>Activée : <input type="checkbox" id="supervision_monthlyReport_en" value="on" <?php echo $en;?>></td>
+        </tr>
     </table>
 </div>
 
 <div id="success_save_supervision" title="" style="display:none">
-    <p><?php echo __('SUCCESS_SAVE_MAIL'); ?></p>
+    <p><?php echo __('SUCCESS_SAVE_SUPERVISION'); ?></p>
 </div>
 
 
