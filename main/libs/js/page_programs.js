@@ -140,9 +140,7 @@ $(document).ready(function(){
     });
 
 
-     pop_up_add_information("<?php echo __('WIZARD_ENABLE_FUNCTION'); ?>: <a href='/cultibox/index.php?menu=wizard' class='href-wizard-msgbox'><img src='main/libs/img/wizard.png' alt='<?php echo __('WIZARD'); ?>' title='' id='wizard' /></a>", "jumpto_wizard", "information");
-
-     if(sd_card=="") {
+    if(sd_card=="") {
         $.ajax({
             cache: false,
             async: false,
@@ -151,9 +149,9 @@ $(document).ready(function(){
         });
     }
 
-    $("#wizard").click(function(e) {
+    $("#jumpto_wizard").click(function(e) {
         e.preventDefault();
-        get_content("wizard",getUrlVars("selected_plug=1"));
+        get_content("wizard",getUrlVars("selected_plug="+$("#selected_plug_conf option:selected").val()));
     });
 
     $("#select_program_index_conf").change(function() {

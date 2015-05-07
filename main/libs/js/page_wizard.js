@@ -33,20 +33,20 @@ $(document).ready(function(){
     });
 
 
-     pop_up_add_information("<?php echo __('WIZARD_DISABLE_FUNCTION'); ?>: <a href='/cultibox/index.php?menu=programs' class='href-wizard-msgbox'><img src='main/libs/img/wizard.png' alt='<?php echo __('CLASSIC'); ?>' title='' id='classic' /></a>", "jumpto_classic", "information");
-
    //Event fire when clicking the wizard button:
    $("#next").click(function(e) {
         e.preventDefault(); 
-        step=step+1;
+        if(($("input[name=plug_power_max]:checked").val()!="VARIO")||(typeof($("#dimmer_canal option:selected").val())!="undefined")) {
+            $("#error_canal_status").css("display","none");
+            step=step+1;
 
-        var chk_plg=false; 
-        if(selected_plug==nb_plugs) chk_plg=true;
-        expand_wizard(step,chk_plg,selected_plug);
+            var chk_plg=false; 
+            if(selected_plug==nb_plugs) chk_plg=true;
+            expand_wizard(step,chk_plg,selected_plug);
 
-        plug_type=$("#plug_type option:selected").val();
-        if(selected_plug>1) {
-            switch (plug_type) {
+            plug_type=$("#plug_type option:selected").val();
+            if(selected_plug>1) {
+                switch (plug_type) {
                 case "ventilator" :
                 case "heating" :
                 case "extractor" :
@@ -74,6 +74,7 @@ $(document).ready(function(){
                     $('#value_prog_div').append('<input type="hidden" name="value_program" id="value_program" value="99.9" />');
                     $("#label_unity").text("");
                     break;
+                }
             }
         }
     });
@@ -97,9 +98,15 @@ $(document).ready(function(){
 
     $('input[name=plug_power_max]').change(function() {
         if($("input[name=plug_power_max]:checked").val()=="VARIO") {
+            if(($("input[name=plug_power_max]:checked").val()=="VARIO")&&(typeof($("#dimmer_canal option:selected").val())=="undefined")) {
+                $("#error_canal_status").show(700);
+            }
             $("#select_canal_dimmer").show();
         } else {
             $("#select_canal_dimmer").css("display","none");
+            if(($("input[name=plug_power_max]:checked").val()!="VARIO")||(typeof($("#dimmer_canal option:selected").val())!="undefined")) {
+                $("#error_canal_status").css('display','none');
+            } 
         }
 
     });

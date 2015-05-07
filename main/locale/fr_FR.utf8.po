@@ -1006,6 +1006,9 @@ msgstr "et"
 
 
 # For the wizard part :
+msgid "ERROR_CANAL_STATUS"
+msgstr "Plus aucun canal n'est disponible pour le variateur"
+
 msgid "WIZARD_FIRST_USE"
 msgstr "Bienvenue dans l'interface de configuration et d'utilisation de votre Cultibox. L'assistant va vous permettre facilement de configurer les programmes associés à vos prises, de configurer le type de prise et leur comportement. Cliquer sur le bouton <b>suivant</b> pour lancer l'assistant. Vous pouvez passer cette étape et configurer manuellement vos prises en cliquant sur le bouton <b>Fermer l'assistant</b>"
 
@@ -1618,7 +1621,7 @@ msgid "VALID_AUTO_LOAD_LOG"
 msgstr "Fichiers de logs des 31 derniers jours enregistrés avec succès"
 
 msgid "WIZARD_ENABLE_FUNCTION"
-msgstr "Vous pouvez utiliser l'assistant pour configurer les prises et leur programme en cliquant ici"
+msgstr "<b>Assistant: </b>vous pouvez utiliser l'assistant pour configurer les prises et leurs programmes"
 
 msgid "WIZARD_DISABLE_FUNCTION"
 msgstr "Vous pouvez utiliser l'interface de configuration classique en cliquant ici"
