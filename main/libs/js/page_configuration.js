@@ -1771,6 +1771,11 @@ $(document).ready(function() {
                             color: '#fffff'
                         },
                         onBlock: function() {
+                            EMAIL_USE_SSL = "false";
+                            if( $('#EMAIL_USE_SSL').is(':checked') ){
+                                EMAIL_USE_SSL = "true";
+                            }
+                            
                             $.ajax({
                                 async: true,
                                 url: "main/modules/external/save_configuration.php",
@@ -1780,7 +1785,8 @@ $(document).ready(function() {
                                     EMAIL_SMTP:$('#EMAIL_SMTP').val(),
                                     EMAIL_PORT:$('#EMAIL_PORT').val(),
                                     EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
-                                    EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val()
+                                    EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val(),
+                                    EMAIL_USE_SSL:EMAIL_USE_SSL
                                 }
                             }).done(function (data) {
                                 $.unblockUI();

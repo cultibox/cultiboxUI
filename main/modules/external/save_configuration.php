@@ -22,7 +22,8 @@ switch ($parttosave)
             "EMAIL_PROVIDER" => getvar("EMAIL_PROVIDER"),
             "EMAIL_SMTP"     => getvar("EMAIL_SMTP"),
             "EMAIL_PORT"     => getvar("EMAIL_PORT"),
-            "EMAIL_ADRESS"   => getvar("EMAIL_ADRESS")
+            "EMAIL_ADRESS"   => getvar("EMAIL_ADRESS"),
+            "EMAIL_USE_SSL"   => getvar("EMAIL_USE_SSL")
         ); 
     
         // User set a new password

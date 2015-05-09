@@ -41,6 +41,7 @@ function check_db() {
     $conf_index_col["EMAIL_PROVIDER"]       = array ( 'Field' => "EMAIL_PROVIDER", 'Type' => "varchar(40)", 'default_value' => "other",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(40)", 'default_value' => "smtp.yopmail.com",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_PORT"]           = array ( 'Field' => "EMAIL_PORT", 'Type' => "int(11)", 'default_value' => 587,'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_USE_SSL"]        = array ( 'Field' => "EMAIL_USE_SSL", 'Type' => "varchar(5)", 'default_value' => 'true','carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'configuration';";
@@ -91,7 +92,8 @@ function check_db() {
             ."EMAIL_PASSWORD varchar(40) NOT NULL DEFAULT 'password',"
             ."EMAIL_PROVIDER varchar(40) NOT NULL DEFAULT 'other',"
             ."EMAIL_SMTP varchar(40) NOT NULL DEFAULT 'test.yopmail.com',"
-            ."EMAIL_PORT int(11) NOT NULL DEFAULT '587');";
+            ."EMAIL_PORT int(11) NOT NULL DEFAULT '587',"
+            ."EMAIL_USE_SSL varchar(5) NOT NULL DEFAULT 'true');";
             
         // Create table
         try {
@@ -257,7 +259,7 @@ function getEmailUserConf() {
     // Open connection to dabase
     $db = \db_priv_pdo_start();
     
-    $sql = "SELECT EMAIL_ADRESS,EMAIL_PASSWORD,EMAIL_PROVIDER,EMAIL_SMTP,EMAIL_PORT FROM configuration;";
+    $sql = "SELECT EMAIL_ADRESS,EMAIL_PASSWORD,EMAIL_PROVIDER,EMAIL_SMTP,EMAIL_PORT,EMAIL_USE_SSL FROM configuration;";
     
     try {
         $sth = $db->prepare($sql);
@@ -330,6 +332,10 @@ function serverEmail_createXMLConf () {
     $paramListServerMail[] = array (
         "name" => "password",
         "level" => $emailUserConf['EMAIL_PASSWORD']
+    );
+    $paramListServerMail[] = array (
+        "name" => "useSSL",
+        "level" => $emailUserConf['EMAIL_USE_SSL']
     );
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
     

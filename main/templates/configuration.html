@@ -713,7 +713,7 @@
                 ?>
             </td>
         </tr>
-          <tr>
+        <tr>
             <td class="conf-marge"></td>
             <td class="conf-title"><label class="subsub_title">Port :</label></td>
             <td>
@@ -733,6 +733,16 @@
             <td>
                 <input  type="text" size="40" id="EMAIL_PASSWORD" value="*****" />
             </td>
+        </tr>
+        <tr>
+             <?php
+                $en = "";
+                if (strcmp($emailUserConf['EMAIL_USE_SSL'],"true") == 0)
+                    $en = "checked";
+             ?>
+            <td class="conf-marge"></td>
+            <td class="conf-title"><label class="subsub_title">Utilisation SSL :</label></td>
+            <td>Activée : <input type="checkbox" id="EMAIL_USE_SSL" value="true" <?php echo $en;?>></td>
         </tr>
     </table>
 </div>
