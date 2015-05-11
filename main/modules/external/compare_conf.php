@@ -40,12 +40,12 @@
         // serverCultibox
         switch ($fileAndDirInConfTemp) 
         {
-            case serverAcqSensor :
-            case cultiPi :
-            case serverIrrigation :
-            case serverMail :
-            case serverPlugUpdate :
-            case serverSupervision :
+            case "serverAcqSensor" :
+            case "cultiPi" :
+            case "serverIrrigation" :
+            case "serverMail" :
+            case "serverPlugUpdate" :
+            case "serverSupervision" :
                 // Check if this dir exists in 01_defaultConf_RPi
                 if (!is_dir($fileConfName)) {
                     $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
