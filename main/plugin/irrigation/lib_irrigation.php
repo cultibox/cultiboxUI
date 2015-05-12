@@ -146,8 +146,11 @@ function check_db() {
     $lt_col["ip"]            = array ( 'Field' => "ip", 'Type' => "VARCHAR(16)", "default_value" => "1", 'carac' => "NOT NULL");
     $lt_col["pompeName"]     = array ( 'Field' => "pompeName", 'Type' => "VARCHAR(20)", "default_value" => 'pompe', 'carac' => "NOT NULL");
     $lt_col["pompePrise"]    = array ( 'Field' => "pompePrise", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
-    $lt_col["irriActive"]        = array ( 'Field' => "irriActive", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
-
+    $lt_col["irriActive"]    = array ( 'Field' => "irriActive", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
+    $lt_col["timeMatinStarter"] = array ( 'Field' => "timeMatinStarter", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $lt_col["timeApresStarter"] = array ( 'Field' => "timeApresStarter", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $lt_col["timeNuitStarter"] = array ( 'Field' => "timeNuitStarter", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_lt';";
 
@@ -170,7 +173,10 @@ function check_db() {
             ."ip VARCHAR(16) NOT NULL DEFAULT '1',"
             ."pompeName varchar(20) NOT NULL DEFAULT 'pompe',"
             ."pompePrise int(11) NOT NULL DEFAULT '1',"
-            ."irriActive varchar(5) NOT NULL DEFAULT 'true');";
+            ."irriActive varchar(5) NOT NULL DEFAULT 'true',"
+            ."timeMatinStarter int(11) NOT NULL DEFAULT '0',"
+            ."timeApresStarter int(11) NOT NULL DEFAULT '0',"
+            ."timeNuitStarter int(11) NOT NULL DEFAULT '0');";
 
         // Create table
         try {
@@ -194,6 +200,12 @@ function check_db() {
     $engrais_col["prise"]         = array ( 'Field' => "prise", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $engrais_col["active"]        = array ( 'Field' => "active", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
     $engrais_col["engraisId"]     = array ( 'Field' => "engraisId", 'Type' => "int(11)", "default_value" => 1, 'carac' => "NOT NULL");
+    $engrais_col["useMatinStarter"] = array ( 'Field' => "useMatinStarter", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
+    $engrais_col["useMatinNormal"] = array ( 'Field' => "useMatinNormal", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
+    $engrais_col["useApresStarter"] = array ( 'Field' => "useApresStarter", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
+    $engrais_col["useApresNormal"] = array ( 'Field' => "useApresNormal", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
+    $engrais_col["useNuitStarter"] = array ( 'Field' => "useNuitStarter", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
+    $engrais_col["useNuitNormal"] = array ( 'Field' => "useNuitNormal", 'Type' => "VARCHAR(5)", "default_value" => 'false', 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_engrais';";
@@ -216,7 +228,13 @@ function check_db() {
             ."name varchar(20) NOT NULL DEFAULT 'engrais',"
             ."prise int(11) NOT NULL DEFAULT '1',"
             ."active varchar(5) NOT NULL DEFAULT 'true',"
-            ."engraisId int(11) NOT NULL DEFAULT '1');";
+            ."engraisId int(11) NOT NULL DEFAULT '1',"
+            ."useMatinStarter varchar(5) NOT NULL DEFAULT 'false',"
+            ."useMatinNormal varchar(5) NOT NULL DEFAULT 'false',"
+            ."useApresStarter varchar(5) NOT NULL DEFAULT 'false',"
+            ."useApresNormal varchar(5) NOT NULL DEFAULT 'false',"
+            ."useNuitStarter varchar(5) NOT NULL DEFAULT 'false',"
+            ."useNuitNormal varchar(5) NOT NULL DEFAULT 'false')";
 
         // Create table
         try {

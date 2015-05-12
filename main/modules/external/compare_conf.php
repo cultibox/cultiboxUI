@@ -38,26 +38,33 @@
         // serverLog
         // serverHisto
         // serverCultibox
-        if (strcmp($fileAndDirInConfTemp,"serverLog") != 0 &&
-            strcmp($fileAndDirInConfTemp,"serverHisto") != 0 && 
-            strcmp($fileAndDirInConfTemp,"serverCultibox") != 0)
+        switch ($fileAndDirInConfTemp) 
         {
-            // Check if this dir exists in 01_defaultConf_RPi
-            if (!is_dir($fileConfName)) {
-                $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
-            }
-            else 
-            {
-                // Compare the tow directories
-                $errTemp = "";
-                $ret = "";
-                exec("diff -rw $fileTempName $fileConfName",$ret,$errTemp);
-                
-                // If there are some diff 
-                if (trim($errTemp) != 0) {
-                    $err[] = htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1");
+            case "serverAcqSensor" :
+            case "cultiPi" :
+            case "serverIrrigation" :
+            case "serverMail" :
+            case "serverPlugUpdate" :
+            case "serverSupervision" :
+                // Check if this dir exists in 01_defaultConf_RPi
+                if (!is_dir($fileConfName)) {
+                    $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
                 }
-            }
+                else 
+                {
+                    // Compare the tow directories
+                    $errTemp = "";
+                    $ret = "";
+                    exec("diff -rw $fileTempName $fileConfName",$ret,$errTemp);
+                    
+                    // If there are some diff 
+                    if (trim($errTemp) != 0) {
+                        $err[] = htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1");
+                    }
+                }
+                break;
+            default :
+                break;
         }
     }
 
