@@ -174,7 +174,7 @@ foreach ($plateformeList as $key => $plateforme)
     echo '</tr></table>';
     
     // Second table
-    echo '<table border="1" > <tr> <th>Temps Max Remplissage</th> <th>Temps Max Remplissage Apres Midi</th> <th>Temps Max Remplissage Nuit</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
+    echo '<table border="1" > <tr> <th>Temps Max Remplissage Matin</th> <th>Temps Max Remplissage Apres Midi</th> <th>Temps Max Remplissage Nuit</th> <th>Prise dans LT</th> <th>Activer anti desarmocage pompe</th></tr><tr>';
     echo '<td><input type="text" id="tempsMaxRemp_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRemp'] . '" > </td>';
     echo '<td><input type="text" id="tempsMaxRempApresMidi_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRempApresMidi'] . '" > </td>';
     echo '<td><input type="text" id="tempsMaxRempNuit_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsMaxRempNuit'] . '" > </td>';
