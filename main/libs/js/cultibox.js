@@ -15,6 +15,7 @@ var LOADING="";
 var NEXT_button="";
 var PREVIOUS_button="";
 var COMPUTE_button="";
+var diffVal=[];
 
 
 var lang="";
@@ -545,12 +546,14 @@ $(document).ready(function() {
                 }).done(function(data) {
                     $.unblockUI();
                     var objJSON = jQuery.parseJSON(data);
-                    
-                    toDisplay = "<ul>";
+                   
+                     
+                    toDisplay = "<ul class='list_diff'>";
                     $.each( objJSON, function( key, value ) {
-                        toDisplay = toDisplay + "<li>" + value + "</li>"
+                        toDisplay = toDisplay + "<li><a href class='note_link' name='details_diff' target='"+key+"'>" + value['base'] + "</a></li>"
+                        diffVal[key]=value['diff'];
                     });
-                    toDisplay = toDisplay + "</ul>"
+                    toDisplay = toDisplay + "</ul><div id='details_diff' style='diplay:none'></div>";
                         
                     $("#diff_conf_list").html(toDisplay);
                     $("#diff_conf_list").dialog({
@@ -570,6 +573,12 @@ $(document).ready(function() {
              }
         });
     }
+
+
+    $("a[name='details_diff']").live('click',function(e) {
+        e.preventDefault();
+        $("#details_diff").html(diffVal[$(this).attr('target')]);
+    });
     
     //To update the configuration:
     $('div.error').on('click', 'button', function(e) {

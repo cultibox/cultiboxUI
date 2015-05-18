@@ -55,11 +55,23 @@
                     // Compare the tow directories
                     $errTemp = "";
                     $ret = "";
-                    exec("diff -rw $fileTempName $fileConfName",$ret,$errTemp);
+                    exec("diff -urw $fileTempName $fileConfName",$ret,$errTemp);
+                    $srch = array("<", "/etc/cultipi/","diff -urw");
+                    $rep = array("&lt;", "","");
                     
                     // If there are some diff 
                     if (trim($errTemp) != 0) {
-                        $err[] = htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1");
+                        $details="<br /><br />";
+                        foreach ($ret as $det) {
+                            if(strpos($det,"@@")!==false) $det="";
+                            $details = $details.str_replace($srch,$rep,$det).'<br />';
+                        }
+                        $details=$details."<br />";
+
+                        $err[] = array(
+                            'base' => htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1"),
+                            'diff' => "$details"
+                        );
                     }
                 }
                 break;
