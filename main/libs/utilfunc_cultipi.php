@@ -266,7 +266,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     );
     $paramListSupervision[] = array (
         "name" => "nbProcess",
-        "level" => 0
+        "value" => 0
     );    
     create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
     
