@@ -17,7 +17,7 @@
 
     // For each directories, defin a text for en user
     $typicalError["serverAcqSensor"]    = __('DIFF_CONF_SERVERACQSENSOR') ;
-    $typicalError["cultiPi"]            = __('DIFF_CONF_CULTIPI') ;
+    $typicalError["cultiPi"]            = __('DIFF_CONF_CULTIPI','js') ;
     $typicalError["serverIrrigation"]   = __('DIFF_CONF_SERVERIRRIGATION') ;
     $typicalError["serverMail"]         = __('DIFF_CONF_SERVERMAIL') ;
     $typicalError["serverPlugUpdate"]   = __('DIFF_CONF_SERVERPLUGUPDATE') ;
@@ -48,14 +48,17 @@
             case "serverSupervision" :
                 // Check if this dir exists in 01_defaultConf_RPi
                 if (!is_dir($fileConfName)) {
-                    $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
+                    $err[] = array(
+                        'base' => htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1"),
+                        'diff' => ""
+                    );
                 }
                 else 
                 {
                     // Compare the tow directories
                     $errTemp = "";
                     $ret = "";
-                    exec("diff -urw $fileTempName $fileConfName",$ret,$errTemp);
+                    exec("diff -urw $fileConfName $fileTempName",$ret,$errTemp);
                     $srch = array("<", "/etc/cultipi/","diff -urw");
                     $rep = array("&lt;", "","");
                     
