@@ -58,9 +58,10 @@ input.button_log {
     z-index: 20000;
 }
 
-.div_code
-{
-    width: 95%;
+.div_code {
+    background:#F8F8FF;
+    border-radius: 12px;
+    padding-left: 15px;
 }
 
 .precision_infos{

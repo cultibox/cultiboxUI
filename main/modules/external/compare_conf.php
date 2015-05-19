@@ -46,6 +46,12 @@
             case "serverMail" :
             case "serverPlugUpdate" :
             case "serverSupervision" :
+              exec("/bin/grep $fileAndDirInConfTemp ".$GLOBALS['CULTIPI_CONF_TEMP_PATH']."/cultiPi/start.xml 2>/dev/null",$ret,$code);
+              $proceed=true;
+
+              if((strcmp("$fileAndDirInConfTemp","cultiPi")!=0)&&(count($ret)<=0)) $proceed=false;
+
+              if($proceed) {
                 // Check if this dir exists in 01_defaultConf_RPi
                 if (!is_dir($fileConfName)) {
                     $err[] = array(
@@ -77,7 +83,8 @@
                         );
                     }
                 }
-                break;
+              }
+              break;
             default :
                 break;
         }
