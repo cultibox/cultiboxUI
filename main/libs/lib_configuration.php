@@ -36,10 +36,10 @@ function check_db() {
     $conf_index_col["REMOVE_5_MINUTE_LIMIT"] = array ( 'Field' => "REMOVE_5_MINUTE_LIMIT", 'Type' => "varchar(5)", 'default_value' => "False",'carac' => "NOT NULL");
     $conf_index_col["DEFAULT_LANG"]         = array ( 'Field' => "DEFAULT_LANG", 'Type' => "varchar(5)", 'default_value' => "fr_FR",'carac' => "NOT NULL");
     $conf_index_col["ENABLE_LED"]           = array ( 'Field' => "ENABLE_LED", 'Type' => "varchar(4)", 'default_value' => "0001",'carac' => "NOT NULL");
-    $conf_index_col["EMAIL_ADRESS"]         = array ( 'Field' => "EMAIL_ADRESS", 'Type' => "varchar(40)", 'default_value' => "hercule.poirot@yopmail.com",'carac' => "NOT NULL");
-    $conf_index_col["EMAIL_PASSWORD"]       = array ( 'Field' => "EMAIL_PASSWORD", 'Type' => "varchar(40)", 'default_value' => "password",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_ADRESS"]         = array ( 'Field' => "EMAIL_ADRESS", 'Type' => "varchar(40)", 'default_value' => "hercule.poirot@gmail.com",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_PASSWORD"]       = array ( 'Field' => "EMAIL_PASSWORD", 'Type' => "varchar(40)", 'default_value' => "motdepasse",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_PROVIDER"]       = array ( 'Field' => "EMAIL_PROVIDER", 'Type' => "varchar(40)", 'default_value' => "other",'carac' => "NOT NULL");
-    $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(40)", 'default_value' => "smtp.yopmail.com",'carac' => "NOT NULL");
+    $conf_index_col["EMAIL_SMTP"]           = array ( 'Field' => "EMAIL_SMTP", 'Type' => "varchar(40)", 'default_value' => "smtp.gmail.com",'carac' => "NOT NULL");
     $conf_index_col["EMAIL_PORT"]           = array ( 'Field' => "EMAIL_PORT", 'Type' => "int(11)", 'default_value' => 587,'carac' => "NOT NULL");
     $conf_index_col["EMAIL_USE_SSL"]        = array ( 'Field' => "EMAIL_USE_SSL", 'Type' => "varchar(5)", 'default_value' => 'true','carac' => "NOT NULL");
 
@@ -88,10 +88,10 @@ function check_db() {
             ."REMOVE_5_MINUTE_LIMIT VARCHAR(5) NOT NULL DEFAULT 'False',"
             ."DEFAULT_LANG VARCHAR(5) NOT NULL DEFAULT 'fr_FR',"
             ."ENABLE_LED varchar(4) NOT NULL DEFAULT '0001',"
-            ."EMAIL_ADRESS varchar(40) NOT NULL DEFAULT 'hercule.poirot@yopmail.com',"
-            ."EMAIL_PASSWORD varchar(40) NOT NULL DEFAULT 'password',"
+            ."EMAIL_ADRESS varchar(40) NOT NULL DEFAULT 'hercule.poirot@gmail.com',"
+            ."EMAIL_PASSWORD varchar(40) NOT NULL DEFAULT 'motdepasse',"
             ."EMAIL_PROVIDER varchar(40) NOT NULL DEFAULT 'other',"
-            ."EMAIL_SMTP varchar(40) NOT NULL DEFAULT 'test.yopmail.com',"
+            ."EMAIL_SMTP varchar(40) NOT NULL DEFAULT 'smtp.gmail.com',"
             ."EMAIL_PORT int(11) NOT NULL DEFAULT '587',"
             ."EMAIL_USE_SSL varchar(5) NOT NULL DEFAULT 'true');";
             

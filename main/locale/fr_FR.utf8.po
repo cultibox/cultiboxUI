@@ -1867,7 +1867,7 @@ msgid "DIFF_CONF_SERVERACQSENSOR"
 msgstr "des capteurs"
 
 msgid "DIFF_CONF_CULTIPI"
-msgstr "générale du pilotage"
+msgstr "du pilotage du CultiPi"
 
 msgid "DIFF_CONF_SERVERIRRIGATION"
 msgstr "de l'irrigation"

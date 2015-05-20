@@ -58,9 +58,10 @@ input.button_log {
     z-index: 20000;
 }
 
-.div_code
-{
-    width: 95%;
+.div_code {
+    background:#F8F8FF;
+    border-radius: 12px;
+    padding-left: 15px;
 }
 
 .precision_infos{
@@ -1124,6 +1125,12 @@ td.icon_menu3 {
 
 td.cultipi_blank {
     width: 15%;
+}
+
+
+.list_diff {
+    margin-left: 2%;
+    list-style-type: none;
 }
 
 

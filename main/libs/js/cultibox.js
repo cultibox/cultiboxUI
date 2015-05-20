@@ -15,6 +15,7 @@ var LOADING="";
 var NEXT_button="";
 var PREVIOUS_button="";
 var COMPUTE_button="";
+var diffVal=[];
 
 
 var lang="";
@@ -540,17 +541,18 @@ $(document).ready(function() {
                 $.ajax({
                     cache: false,
                     async: false,
-                    url: "main/modules/external/compare_conf.php",
-                    data: {show: 1}
+                    url: "main/modules/external/compare_conf.php"
                 }).done(function(data) {
                     $.unblockUI();
                     var objJSON = jQuery.parseJSON(data);
-                    
-                    toDisplay = "<ul>";
+                   
+                     
+                    toDisplay = "<ul class='list_diff'>";
                     $.each( objJSON, function( key, value ) {
-                        toDisplay = toDisplay + "<li>" + value + "</li>"
+                        toDisplay = toDisplay + "<li><a href class='note_link' name='details_diff_link' target='"+key+"'>" + value['base'] + "</a><div name='details_diff' id='details_diff_"+key+"' class='div_code' style='diplay:none'></div></li>"
+                        diffVal[key]=value['diff'];
                     });
-                    toDisplay = toDisplay + "</ul>"
+                    toDisplay = toDisplay + "</ul>";
                         
                     $("#diff_conf_list").html(toDisplay);
                     $("#diff_conf_list").dialog({
@@ -570,6 +572,23 @@ $(document).ready(function() {
              }
         });
     }
+
+
+    $("a[name='details_diff_link']").live('click',function(e) {
+        e.preventDefault();
+        var show=false;;
+        if($("#details_diff_"+$(this).attr('target')).css('display')=="none") {
+            show=true;
+        }
+
+        $("div[name='details_diff']").html();
+        $("div[name='details_diff']").css('display','none');
+
+        if(show) {
+            $("#details_diff_"+$(this).attr('target')).html(diffVal[$(this).attr('target')]);
+            $("#details_diff_"+$(this).attr('target')).show();
+        }
+    });
     
     //To update the configuration:
     $('div.error').on('click', 'button', function(e) {

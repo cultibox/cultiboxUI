@@ -111,7 +111,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         } 
     }
     
-    create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart);
+    create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart,"starts");
     
     // Server acq sensor
     $paramListserverAcqSensor[] = array (
@@ -266,7 +266,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     );
     $paramListSupervision[] = array (
         "name" => "nbProcess",
-        "level" => 0
+        "value" => 0
     );    
     create_conf_XML($sd_card . "/serverSupervision/conf.xml" , $paramListSupervision);
     
@@ -304,6 +304,10 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "level" => "6"
     );
     create_conf_XML($sd_card . "/serverCultibox/conf.xml" , $paramListCultibox);
+
+
+    configuration\serverEmail_createXMLConf();
+
     
     $program = "";
     $conf_uptodate = true;
@@ -632,8 +636,9 @@ function check_sd_card($sd="") {
 // ROLE Used to creat a conf file
 // IN      $file        Path for the conf file
 // IN      $paramList       List of params
+// IN      $tag         tag for start and end of the configuration
 // RET true if we can, false else
-function create_conf_XML($file, $paramList) {
+function create_conf_XML($file, $paramList,$tag="conf") {
 
     // Check if directory exists
     if(!is_dir(dirname($file)))
@@ -644,7 +649,7 @@ function create_conf_XML($file, $paramList) {
     
     // Add header
     fwrite($fid,'<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>' . "\r\n");
-    fwrite($fid,'<conf>'. "\r\n");
+    fwrite($fid,"<${tag}>". "\r\n");
     
     // Foreach param to write, add it to the file
     foreach ($paramList as $elemOfArray) {
@@ -661,7 +666,7 @@ function create_conf_XML($file, $paramList) {
     }
 
     // Add Footer
-    fwrite($fid,'</conf>'. "\r\n");
+    fwrite($fid,"</${tag}>". "\r\n");
     
     // Close file
     fclose($fid);

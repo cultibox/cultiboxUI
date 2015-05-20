@@ -17,7 +17,7 @@
 
     // For each directories, defin a text for en user
     $typicalError["serverAcqSensor"]    = __('DIFF_CONF_SERVERACQSENSOR') ;
-    $typicalError["cultiPi"]            = __('DIFF_CONF_CULTIPI') ;
+    $typicalError["cultiPi"]            = __('DIFF_CONF_CULTIPI','js') ;
     $typicalError["serverIrrigation"]   = __('DIFF_CONF_SERVERIRRIGATION') ;
     $typicalError["serverMail"]         = __('DIFF_CONF_SERVERMAIL') ;
     $typicalError["serverPlugUpdate"]   = __('DIFF_CONF_SERVERPLUGUPDATE') ;
@@ -46,23 +46,45 @@
             case "serverMail" :
             case "serverPlugUpdate" :
             case "serverSupervision" :
+              exec("/bin/grep $fileAndDirInConfTemp ".$GLOBALS['CULTIPI_CONF_TEMP_PATH']."/cultiPi/start.xml 2>/dev/null",$ret,$code);
+              $proceed=true;
+
+              if((strcmp("$fileAndDirInConfTemp","cultiPi")!=0)&&(count($ret)<=0)) $proceed=false;
+
+              if($proceed) {
                 // Check if this dir exists in 01_defaultConf_RPi
                 if (!is_dir($fileConfName)) {
-                    $err[] = htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1");
+                    $err[] = array(
+                        'base' => htmlentities("La configuration " . $typicalError[$fileAndDirInConfTemp] . " n'existe pas.",ENT_HTML5,"ISO-8859-1"),
+                        'diff' => ""
+                    );
                 }
                 else 
                 {
                     // Compare the tow directories
                     $errTemp = "";
                     $ret = "";
-                    exec("diff -rw $fileTempName $fileConfName",$ret,$errTemp);
+                    exec("diff -urw $fileConfName $fileTempName",$ret,$errTemp);
+                    $srch = array("<", "/etc/cultipi/","diff -urw");
+                    $rep = array("&lt;", "","");
                     
                     // If there are some diff 
                     if (trim($errTemp) != 0) {
-                        $err[] = htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1");
+                        $details="<br /><br />";
+                        foreach ($ret as $det) {
+                            if(strpos($det,"@@")!==false) $det="";
+                            $details = $details.str_replace($srch,$rep,$det).'<br />';
+                        }
+                        $details=$details."<br />";
+
+                        $err[] = array(
+                            'base' => htmlentities("La configuration ".$typicalError[$fileAndDirInConfTemp] . " n'est pas à jour.",ENT_HTML5,"ISO-8859-1"),
+                            'diff' => "$details"
+                        );
                     }
                 }
-                break;
+              }
+              break;
             default :
                 break;
         }
