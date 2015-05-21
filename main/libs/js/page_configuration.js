@@ -123,7 +123,26 @@ $(document).ready(function(){
         closeText: "<?php echo __('TIMEPICKER_CLOSE') ;?>"
     });
 
-   
+ 
+    //Manage http or https procotol: 
+    if(window.location.protocol=="http") {
+        $("#conf_https").show();
+        $("#conf_http").css('display','none');
+    } else {
+        $("#conf_http").show();
+        $("#conf_https").css('display','none');
+    }
+
+    $("#conf_https").click(function(e) {
+        e.preventDefault();
+    });
+
+
+    $("#cong_http").click(function(e) {
+        e.preventDefault();
+    });
+
+
     $("#import_conf").click(function(e) {
         e.preventDefault();
         $('#confupload').trigger('click'); 

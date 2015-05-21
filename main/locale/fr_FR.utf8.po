@@ -94,11 +94,17 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "ENABLE_HTTPS"
+msgstr "Activer la connexion sécurisée de l'interface"
+
+msgid "DISABLE_HTTPS"
+msgstr "Désactiver la connexion sécurisée de l'interface"
+
 msgid "DL_FIRM_CULTIBOX"
-msgstr "Une fois le firmware téléchargé, veuillez le copier à la racine de la carte SD de la Cultibox"
+msgstr "<b>Si vous posséder le module Cultipi Wifi, afin de l'activer, veuillez copier le fichier téléchargé (firm.hex) à la racine de la carte SD de la Cultibox :</b>"
 
 msgid "DL_FIRM_WIFI"
-msgstr "Les utilisateurs expérimentés peuvent revenir à l'ancien mode de fonctionnement de la Cultibox en téléchargeant le firmware ci-dessous"
+msgstr "<b>Les utilisateurs expérimentés peuvent revenir à l'ancien mode de fonctionnement de la Cultibox en téléchargeant le firmware ci-dessous :</b>"
 
 msgid "DL_BUTTON_CULTIBOX"
 msgstr "Télécharger le firmware"
@@ -131,7 +137,7 @@ msgid "DL_WIFI_FIRM"
 msgstr "Télécharger le firmware du module Wifi"
 
 msgid "DL_CULTIBOX_FIRM"
-msgstr "Télécharger le firmware de la Cultibox"
+msgstr "Mise à niveau de la cultibox vers le module Wifi"
 
 msgid "CONFIGURE_TITLE_CULTIBOX"
 msgstr "Configurer votre système Cultibox"
