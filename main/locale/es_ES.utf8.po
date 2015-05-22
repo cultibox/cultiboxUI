@@ -94,6 +94,24 @@ msgstr "Resumen de una página sobre el estado de tu cuarto de cultivo"
 
 
 # For the configuration part:
+msgid "CONFIRM_RESTART_HTTP"
+msgstr "Voulez-vous appliquer la nouvelle configuration de connexion au module?"
+
+msgid "CONFIRM_RESTART_HTTP_TITLE"
+msgstr "Appliquer la nouvelle configuration"
+
+msgid "SUCCESS_RESTART_HTTP"
+msgstr "La nouvelle configuration a bien été appliqué et le module sera de nouveau disponible dans quelques secondes."
+
+msgid "ERROR_RESTART_HTTP"
+msgstr "Une erreur est survenue lors de la sauvegarde de votre nouvelle configuration."
+
+msgid "ENABLE_HTTPS"
+msgstr "Activer la connexion sécurisée de l'interface"
+
+msgid "DISABLE_HTTPS"
+msgstr "Désactiver la connexion sécurisée de l'interface"
+
 msgid "DL_FIRM_CULTIBOX"
 msgstr "Une fois le firmware téléchargé, veuillez le copier à la racine de la carte SD de la Cultibox"
 
@@ -1005,6 +1023,9 @@ msgstr "y"
 
 
 # For the wizard part:
+msgid "ERROR_CANAL_STATUS"
+msgstr "Plus aucun canal n'est disponible pour le variateur"
+
 msgid "WIZARD_FIRST_USE"
 msgstr "Bienvenido en la interfaz de configuración y de uso de vuestra Cultibox. El asistente de configuración permite fácilmente configurar los programas asociados a los enchufes, configurar el tipo de enchufe y su acción. Apretar el botón <b>siguiente</b> para arrancar el asistente. Se puede omitir esa etapa y configurar manualmente los enchufes apretando el botón <b>Cerrar el asistente </b>"
 

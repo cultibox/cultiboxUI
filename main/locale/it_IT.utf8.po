@@ -94,6 +94,24 @@ msgstr "Pagina di sintesi dello stato della grow room"
 
 
 # For the configuration part:
+msgid "CONFIRM_RESTART_HTTP"
+msgstr "Voulez-vous appliquer la nouvelle configuration de connexion au module?"
+
+msgid "CONFIRM_RESTART_HTTP_TITLE"
+msgstr "Appliquer la nouvelle configuration"
+
+msgid "SUCCESS_RESTART_HTTP"
+msgstr "La nouvelle configuration a bien été appliqué et le module sera de nouveau disponible dans quelques secondes."
+
+msgid "ERROR_RESTART_HTTP"
+msgstr "Une erreur est survenue lors de la sauvegarde de votre nouvelle configuration."
+
+msgid "ENABLE_HTTPS"
+msgstr "Activer la connexion sécurisée de l'interface"
+
+msgid "DISABLE_HTTPS"
+msgstr "Désactiver la connexion sécurisée de l'interface"
+
 msgid "DL_FIRM_CULTIBOX"
 msgstr "Une fois le firmware téléchargé, veuillez le copier à la racine de la carte SD de la Cultibox"
 
@@ -1007,6 +1025,9 @@ msgstr "e"
 
 
 # For the wizard part:
+msgid "ERROR_CANAL_STATUS"
+msgstr "Plus aucun canal n'est disponible pour le variateur"
+
 msgid "WIZARD_FIRST_USE"
 msgstr "Benvenuti alla configurazione dell'interfaccia e l'uso della Cultibox. La procedura guidata vi permetterà di configurare facilmente i programmi connessi con i vostri scatti, configurare il tipo e il comportamento spina. Fare clic sul pulsante accanto per avviare la procedura guidata. È possibile saltare questo passaggio e configurare manualmente il pescato facendo clic sul pulsante Chiudi <b> guidata </b>"
 

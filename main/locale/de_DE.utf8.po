@@ -94,6 +94,24 @@ msgstr "Seite Zusammenfassung des Status des Rauminhaltes"
 
 
 # For the configuration part:
+msgid "CONFIRM_RESTART_HTTP"
+msgstr "Voulez-vous appliquer la nouvelle configuration de connexion au module?"
+
+msgid "CONFIRM_RESTART_HTTP_TITLE"
+msgstr "Appliquer la nouvelle configuration"
+
+msgid "SUCCESS_RESTART_HTTP"
+msgstr "La nouvelle configuration a bien été appliqué et le module sera de nouveau disponible dans quelques secondes."
+
+msgid "ERROR_RESTART_HTTP"
+msgstr "Une erreur est survenue lors de la sauvegarde de votre nouvelle configuration."
+
+msgid "ENABLE_HTTPS"
+msgstr "Activer la connexion sécurisée de l'interface"
+
+msgid "DISABLE_HTTPS"
+msgstr "Désactiver la connexion sécurisée de l'interface"
+
 msgid "DL_FIRM_CULTIBOX"
 msgstr "Une fois le firmware téléchargé, veuillez le copier à la racine de la carte SD de la Cultibox"
 
@@ -1005,6 +1023,9 @@ msgstr "und"
 
 
 # For the wizard part:
+msgid "ERROR_CANAL_STATUS"
+msgstr "Plus aucun canal n'est disponible pour le variateur"
+
 msgid "WIZARD_FIRST_USE"
 msgstr "Willkommen auf der Interface-Konfiguration und Nutzung Ihrer Cultibox. Der Assistent ermöglicht die einfache Konfiguration der Programme mit Einstellungen verbunden ist, konfigurieren Sie den Stecker Typ und Verhalten. Klicken Sie auf die Schaltfläche neben <b> </b>, um den Assistenten zu starten. Sie können diesen Schritt überspringen und manuell konfigurieren Ihren Fang durch Klicken auf die Schaltfläche Schließen <b> Wizard </b>"
 
