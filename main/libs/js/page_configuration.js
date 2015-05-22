@@ -54,6 +54,96 @@ function getAlarm(i) {
 //}}}
 
 
+// {{{ manageHttp()
+// ROLE enable or disable https access
+// IN  action: http or https
+function manageHttp(action) {
+    $("#confirm_restart_http").dialog({
+        resizable: false,
+        height:150,
+        width: 500,
+        modal: true,
+        closeOnEscape: false,
+        dialogClass: "dialog_cultibox",
+        buttons: [{
+            text: OK_button,
+            click: function () {
+                $( this ).dialog("close");
+                $.blockUI({
+                message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                centerY: 0,
+                css: {
+                    top: '20%',
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: 'grey',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .9,
+                    color: '#fffff'
+                },
+                onBlock: function() {
+                    $.ajax({
+                        cache: false,
+                        url: "main/modules/external/manage_https.php",
+                        async: false,
+                        data: {action:action},
+                        success: function (data) {
+                          $.unblockUI();
+                          $("#success_restart_http").dialog({
+                            resizable: false,
+                            width: 500,
+                            modal: true,
+                            closeOnEscape: false,
+                            dialogClass: "popup_message",
+                            buttons: [{
+                                text: OK_button,
+                                click: function () {
+                                    $( this ).dialog("close");
+    
+                                     if (window.location.protocol == "http:") {
+                                        var restOfUrl = window.location.href.substr(5);
+                                        window.location = "https:" + restOfUrl;
+                                     } else {
+                                        var restOfUrl = window.location.href.substr(6);
+                                        window.location = "http:" + restOfUrl;
+                                     }
+                                     return false;
+                                }
+                            }]
+                          });
+                        },
+                        error : function(data) {
+                          $.unblockUI();
+                          $("#error_restart_http").dialog({
+                            resizable: false,
+                            width: 500,
+                            modal: true,
+                            closeOnEscape: false,
+                            dialogClass: "popup_error",
+                            buttons: [{
+                                text: CLOSE_button,
+                                click: function () {
+                                    $( this ).dialog("close");
+                                    window.location = "/cultibox";
+                                    return false;
+                                }
+                            }]
+                          });
+                        }
+                    });
+                } });
+            }
+         }, {
+            text: CANCEL_button,
+            click: function () {
+                $( this ).dialog( "close" ); return false;
+            }
+         }]
+    });
+}
+
+
 $(document).ready(function(){
      pop_up_remove("main_error");
      pop_up_remove("main_info");
@@ -125,7 +215,7 @@ $(document).ready(function(){
 
  
     //Manage http or https procotol: 
-    if(window.location.protocol=="http") {
+    if(window.location.protocol=="http:") {
         $("#conf_https").show();
         $("#conf_http").css('display','none');
     } else {
@@ -133,13 +223,15 @@ $(document).ready(function(){
         $("#conf_https").css('display','none');
     }
 
-    $("#conf_https").click(function(e) {
+    $("#conf_http").click(function(e) {
         e.preventDefault();
+        manageHttp("http");
     });
 
 
-    $("#cong_http").click(function(e) {
+    $("#conf_https").click(function(e) {
         e.preventDefault();
+        manageHttp("https");
     });
 
 

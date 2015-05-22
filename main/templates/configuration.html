@@ -546,8 +546,8 @@
                 <a href="" id="dl_firm" name="dl_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
             </td>
             <td class="icon_menu2">
-                <input type="image" src='/cultibox/main/libs/img/lock.png' id="conf_http" alt='' title="<?php echo __('ENABLE_HTTPS'); ?>" style="display:none" />        
-                <input type="image" src='/cultibox/main/libs/img/unlock.png' id="conf_https"alt='' title="<?php echo __('DISABLE_HTTPS'); ?>" style="display:none" />
+                <input type="image" src='/cultibox/main/libs/img/lock.png' id="conf_https" alt='' title="<?php echo __('ENABLE_HTTPS'); ?>" style="display:none" />        
+                <input type="image" src='/cultibox/main/libs/img/unlock.png' id="conf_http"alt='' title="<?php echo __('DISABLE_HTTPS'); ?>" style="display:none" />
             </td>
             <td class="icon_menu2">
                 <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
@@ -601,12 +601,24 @@
     <?php echo __('CONFIRM_RESTART_RPI'); ?>
 </div>
 
+<div id="confirm_restart_http" title="<?php echo __('CONFIRM_RESTART_HTTP_TITLE'); ?>" style="display:none">
+    <?php echo __('CONFIRM_RESTART_HTTP'); ?>
+</div>
+
 <div id="network_available" title="" style="display:none">
     <?php echo __('NETWORK_AVAILABLE'); ?>
 </div>
 
 <div id="confirm_reset_network" title="" style="display:none">
     <?php echo __('CONFIRM_RESET_NETWORK'); ?>
+</div>
+
+<div id="success_restart_http" title="" style="display:none">
+    <?php echo __('SUCCESS_RESTART_HTTP'); ?>
+</div>
+
+<div id="error_restart_http" title="" style="display:none">
+    <?php echo __('ERROR_RESTART_HTTP'); ?>
 </div>
 
 <div id="success_restart_rpi" title="" style="display:none">
