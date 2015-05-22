@@ -27,7 +27,7 @@ switch ($parttosave)
         ); 
     
         // User set a new password
-        if (trim($EMAIL_PASSWORD,"*") != "") {
+        if(strcmp("$EMAIL_PASSWORD","")!="") {
             $toSave["EMAIL_PASSWORD"] = $EMAIL_PASSWORD;
         }
 
