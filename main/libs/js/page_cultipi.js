@@ -188,7 +188,7 @@ $(document).ready(function(){
                 uploadErrors.push("<?php echo __('ERROR_IMAGE_TYPE'); ?>");
             }
 
-            if(data.originalFiles[0]['size'] > 300000) {
+            if(data.originalFiles[0]['size'] > 500000) {
                 uploadErrors.push("<?php echo __('ERROR_IMAGE_SIZE'); ?>");
             }
 
@@ -654,7 +654,7 @@ $(document).ready(function(){
                     uploadErrors.push("<?php echo __('ERROR_IMAGE_TYPE'); ?>");
                 }
       
-                if(data.originalFiles[0]['size'] > 300000) {
+                if(data.originalFiles[0]['size'] > 500000) {
                     uploadErrors.push("<?php echo __('ERROR_IMAGE_SIZE'); ?>");
                 }
 

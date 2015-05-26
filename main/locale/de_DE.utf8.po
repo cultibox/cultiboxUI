@@ -1901,7 +1901,7 @@ msgid "DIFF_CONF_SERVERSUPERVISION"
 msgstr "de la supervision"
 
 msgid "ERROR_IMAGE_SIZE"
-msgstr "La taille du fichier image est limitée à 300ko. Votre image dépasse cette taille."
+msgstr "La taille du fichier image est limitée à 500ko. Votre image dépasse cette taille."
 
 msgid "ERROR_IMAGE_TYPE"
 msgstr "Le type de fichier est limité aux fichiers images. Votre fichier ne semble pas être une image."
@@ -1919,13 +1919,13 @@ msgid "ADD_OTHER_IMAGE"
 msgstr "Ajouter l'image d'un autre élément"
 
 msgid "TOOLTIP_ADD_SENSOR_IMAGE"
-msgstr "L'image d'un capteur permet d'identifier les différents type de capteur : Température, Hygrométrie, Température de l'eau..."
+msgstr "L'image d'un capteur permet d'identifier les différents type de capteur : Température, Hygrométrie, Température de l'eau... (Image au format png, jpeg ou gif et dont la taille est limitée à 500ko)"
 
 msgid "TOOLTIP_ADD_PLUG_IMAGE"
-msgstr "L'image d'un équipement permet d'identifier l'équipement branché sur une prise : Ventilateur, Chauffage, Humidificateur..."
+msgstr "L'image d'un équipement permet d'identifier l'équipement branché sur une prise : Ventilateur, Chauffage, Humidificateur... (Image au format png, jpeg ou gif et dont la taille est limitée à 500ko)"
 
 msgid "TOOLTIP_ADD_OTHER_IMAGE"
-msgstr "Les images 'autres' contiennent toutes les images permettant de modéliser votre espace: des plantes, des tentes de cultures, des serres...."
+msgstr "Les images 'autres' contiennent toutes les images permettant de modéliser votre espace: des plantes, des tentes de cultures, des serres.... (Image au format png, jpeg ou gif et dont la taille est limitée à 500ko)"
 
 msgid "TOOLTIP_MANAGE_IMAGES"
 msgstr "Ajouter vos propres images"
