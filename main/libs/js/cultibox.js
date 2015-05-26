@@ -549,7 +549,7 @@ $(document).ready(function() {
                      
                     toDisplay = "<ul class='list_diff'>";
                     $.each( objJSON, function( key, value ) {
-                        toDisplay = toDisplay + "<li><a href class='note_link' name='details_diff_link' target='"+key+"'>" + value['base'] + "</a><div name='details_diff' id='details_diff_"+key+"' class='div_code' style='diplay:none'></div></li>"
+                        toDisplay = toDisplay + "<li><a href class='note_link' name='details_diff_link' target='"+key+"'>" + value['base'] + "</a><div name='details_diff' id='details_diff_"+key+"' class='div_code' style='display:none'></div></li>"
                         diffVal[key]=value['diff'];
                     });
                     toDisplay = toDisplay + "</ul>";
@@ -576,7 +576,7 @@ $(document).ready(function() {
 
     $("a[name='details_diff_link']").live('click',function(e) {
         e.preventDefault();
-        var show=false;;
+        var show=false;
         if($("#details_diff_"+$(this).attr('target')).css('display')=="none") {
             show=true;
         }

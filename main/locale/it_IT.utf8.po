@@ -758,6 +758,9 @@ msgstr "Adresse IP :"
 
 
 # For the programs part:
+msgid "DISPLAY_ACTIONS"
+msgstr "Afficher toutes les action"
+
 msgid "PROGRAM_SELECT_PLUG"
 msgstr "Comportement de la prise"
 

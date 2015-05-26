@@ -22,6 +22,7 @@ if((empty($selected_plug))||(!isset($selected_plug))) {
 $chinfo=true;
 $chtime="";
 $resume=array();
+$real_resume=array();
 $export_selected=1;
 
 $index_info=array();
@@ -178,13 +179,17 @@ for($i=0;$i<$nb_plugs;$i++) {
 
 // Create summary for tooltip
 $resume=format_data_sumary($plugs_infos);
+$real_resume[]="";
 
 $tmp_resume[]="";
 foreach($resume as $res) {
     $tmp_res=explode("<br />",$res);
-    if(count($tmp_res)>40) {
-        $tmpr=array_chunk($tmp_res,39);
+    $real_resume[]=implode("<br />",array_slice($tmp_res,2));
+    
+    if(count($tmp_res)>30) {
+        $tmpr=array_chunk($tmp_res,29);
         $tmpr[0][]="[...]";
+        $tmpr[0][]="<p class='p_center'><button id='show_program_details'>".__('DISPLAY_ACTIONS')."</button></p>";
         $tmp_resume[]=implode("<br />", $tmpr[0]);
     } else {
         $tmp_resume[]=$res;

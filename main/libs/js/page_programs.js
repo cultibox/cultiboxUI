@@ -13,6 +13,7 @@ var plugs_infoJS   = <?php echo json_encode($plugs_infos) ?>;
 highchart_plug = <?php echo $selected_plug; ?>;
 resume_plugs   = <?php echo json_encode($resume) ?>;
 resume_regul   = <?php echo json_encode($resume_regul) ?>;
+real_resume    = <?php echo json_encode($real_resume) ?>;
 start          = <?php echo json_encode($start) ?>;
 end            = <?php echo json_encode($end) ?>;
 plug_selected  = <?php echo json_encode($selected_plug) ?>;
@@ -153,6 +154,25 @@ $(document).ready(function(){
         e.preventDefault();
         get_content("wizard",getUrlVars("selected_plug="+$("#selected_plug_conf option:selected").val()));
     });
+
+    $("#show_program_details").live("click",function(e) {
+        e.preventDefault();
+        $("#program_details").html(real_resume[$('#selected_plug').val()]);
+        $("#program_details").dialog({
+            resizable: false,
+            width: 500,
+            closeOnEscape: false,
+            modal: true,
+            dialogClass: "popup_cultibox",
+            buttons: [{
+               text: CLOSE_button,
+               click: function () {
+                   $( this ).dialog( "close" );
+                }
+            }]
+        });
+    });
+       
 
     $("#select_program_index_conf").change(function() {
         get_content("programs",getUrlVars("selected_plug="+$("#selected_plug_conf option:selected").val()+"&program_index_id="+$("#select_program_index_conf option:selected").val()));
