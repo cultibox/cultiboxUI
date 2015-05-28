@@ -290,9 +290,17 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg")
+                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || 
+                                pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
+                                pathinfo($file, PATHINFO_EXTENSION) == "jpeg"|| 
+                                pathinfo($file, PATHINFO_EXTENSION) == "jpg")
                             {
-                                echo '<option value="' . $file . '" >' . basename($file) . '</option>';
+                                $newFileName = basename($file);
+                                $newFileName = str_replace(".gif", "", $newFileName);
+                                $newFileName = str_replace(".png", "", $newFileName);
+                                $newFileName = str_replace(".jpeg", "", $newFileName);
+                                $newFileName = str_replace(".jpg", "", $newFileName);
+                                echo '<option value="' . $file . '" >' . $newFileName . '</option>';
                             }
                         }
                         echo '</select>';
@@ -302,11 +310,18 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if ((pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg") 
+                            if ((pathinfo($file, PATHINFO_EXTENSION) == "png" || 
+                                 pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
+                                 pathinfo($file, PATHINFO_EXTENSION) == "jpeg" || 
+                                 pathinfo($file, PATHINFO_EXTENSION) == "jpg") 
                                 && strpos(basename($file), "_OFF"))
                             {
                                 // Create file name (remove extension and _ON)
-                                $newFileName = str_replace("_OFF.gif", "", str_replace("_OFF.png", "", basename($file)));
+                                $newFileName = basename($file);
+                                $newFileName = str_replace("_OFF.gif", "", $newFileName);
+                                $newFileName = str_replace("_OFF.png", "", $newFileName);
+                                $newFileName = str_replace("_OFF.jpeg", "", $newFileName);
+                                $newFileName = str_replace("_OFF.jpg", "", $newFileName);
                                 echo '<option value="' . $file . '" >' . $newFileName . '</option>';
                             }
                         }
@@ -317,9 +332,17 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || pathinfo($file, PATHINFO_EXTENSION) == "gif" || pathinfo($file, PATHINFO_EXTENSION) == "jpeg")
+                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || 
+                                pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
+                                pathinfo($file, PATHINFO_EXTENSION) == "jpeg"|| 
+                                pathinfo($file, PATHINFO_EXTENSION) == "jpg")
                             {
-                                echo '<option value="' . $file . '" >' . basename($file) . '</option>';
+                                $newFileName = basename($file);
+                                $newFileName = str_replace(".gif", "", $newFileName);
+                                $newFileName = str_replace(".png", "", $newFileName);
+                                $newFileName = str_replace(".jpeg", "", $newFileName);
+                                $newFileName = str_replace(".jpg", "", $newFileName);
+                                echo '<option value="' . $file . '" >' . $newFileName . '</option>';
                             }
                         }
                         echo '</select>';
