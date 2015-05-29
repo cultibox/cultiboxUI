@@ -290,10 +290,10 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || 
-                                pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
-                                pathinfo($file, PATHINFO_EXTENSION) == "jpeg"|| 
-                                pathinfo($file, PATHINFO_EXTENSION) == "jpg")
+                            if (strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "png") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "gif") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpeg") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpg") == 0) 
                             {
                                 $newFileName = basename($file);
                                 $newFileName = str_replace(".gif", "", $newFileName);
@@ -310,10 +310,10 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if ((pathinfo($file, PATHINFO_EXTENSION) == "png" || 
-                                 pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
-                                 pathinfo($file, PATHINFO_EXTENSION) == "jpeg" || 
-                                 pathinfo($file, PATHINFO_EXTENSION) == "jpg") 
+                            if ((strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "png") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "gif") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpeg") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpg") == 0) 
                                 && strpos(basename($file), "_OFF"))
                             {
                                 // Create file name (remove extension and _ON)
@@ -332,10 +332,10 @@
                         $files  = array_diff(scandir($dir), array('..', '.'));
                         foreach ($files as $file)
                         {
-                            if (pathinfo($file, PATHINFO_EXTENSION) == "png" || 
-                                pathinfo($file, PATHINFO_EXTENSION) == "gif" || 
-                                pathinfo($file, PATHINFO_EXTENSION) == "jpeg"|| 
-                                pathinfo($file, PATHINFO_EXTENSION) == "jpg")
+                            if (strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "png") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "gif") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpeg") == 0 || 
+                                 strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpg") == 0) 
                             {
                                 $newFileName = basename($file);
                                 $newFileName = str_replace(".gif", "", $newFileName);
