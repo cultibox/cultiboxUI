@@ -746,6 +746,9 @@ msgstr "Pilotage réseau"
 msgid "PLUGS_MODULE_XMAX"
 msgstr "XMAX"
 
+msgid "PLUGS_MODULE_PWM"
+msgstr "PWM"
+
 msgid "PLUGS_MODULE_OUTPUT"
 msgstr "Sortie :"
 

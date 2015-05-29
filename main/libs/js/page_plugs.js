@@ -198,7 +198,7 @@ $(document).ready(function(){
         if(!isFinite(String(id))) {
             id="";
         }
-        
+
         // Display correct option for the plug in function of type selected
         $("#select_canal_wireless"+id).css("display","none");
         $("#select_canal_direct"+id).css("display","none");
@@ -206,6 +206,7 @@ $(document).ready(function(){
         $("#select_canal_dimmer"+id).css("display","none");
         $("#select_canal_network"+id).css("display","none");
         $("#select_canal_xmax"+id).css("display","none");
+        $("#select_canal_pwm"+id).css("display","none");
         $("#select_canal_" + $(this).val() + id).show();
         
         // Reset value for power
@@ -234,13 +235,18 @@ $(document).ready(function(){
                 if ($("#plug_power_max"+id).val() > "<?php echo $GLOBALS['NB_MAX_CANAL_NETWORK']; ?>") {
                     $("#plug_power_max"+id).val() = "1";
                 }
-                break;    
+                break;  
+            case 'pwm':
+                if ($("#plug_power_max"+id).val() > "<?php echo $GLOBALS['NB_MAX_CANAL_PWM']; ?>") {
+                    $("#plug_power_max"+id).val() = "1";
+                }
+                break;                  
             default:
                 break;
         }
         
         // If user selec a XMAX, change automatically type of plug to lamp
-        if ($(this).val() == "xmax") {
+        if ($(this).val() == "xmax" || $(this).val() == "pwm") {
             $("#plug_type"+id).val("lamp");
             $("#plug_type"+id).attr('disabled','disabled');
         } else {
@@ -575,7 +581,7 @@ $(document).ready(function(){
                         // Add module used
                         data_array['plug_module'+i] = $("select[name=plug_module"+i+"]").val();
                         
-                        // Add module number used : For mcp230xx, dimmer, xmax
+                        // Add module number used : For mcp230xx, dimmer, pwm
                         data_array['plug_num_module'+i] = 0;
                         if (data_array['plug_module'+i] == "mcp230xx" || 
                             data_array['plug_module'+i] == "dimmer" || 
@@ -594,7 +600,8 @@ $(document).ready(function(){
                         if (data_array['plug_module'+i] == "direct" || 
                             data_array['plug_module'+i] == "mcp230xx" || 
                             data_array['plug_module'+i] == "dimmer" || 
-                            data_array['plug_module'+i] == "network") {
+                            data_array['plug_module'+i] == "network" || 
+                            data_array['plug_module'+i] == "pwm") {
                             data_array['plug_module_output'+i] = $("select[name=" + data_array['plug_module'+i] + "_module_ouput" + i + "]").val();
                         }                        
 
