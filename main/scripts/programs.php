@@ -15,6 +15,10 @@ if(!isset($selected_plug)) {
     $selected_plug=getvar('selected_plug');
 }
 
+if(!isset($plugs_dial)) {
+    $plugs_dial=false;
+}
+
 if((empty($selected_plug))||(!isset($selected_plug))) {
     $selected_plug=1;
 }
