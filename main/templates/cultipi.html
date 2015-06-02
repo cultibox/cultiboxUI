@@ -268,7 +268,10 @@
             $files  = array_diff(scandir($dir), array('..', '.'));
             foreach ($files as $file)
             {
-                if (pathinfo($file, PATHINFO_EXTENSION) == "png")
+                if (strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "png") == 0 || 
+                     strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "gif") == 0 || 
+                     strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpeg") == 0 || 
+                     strcasecmp(pathinfo($file, PATHINFO_EXTENSION) , "jpg") == 0) 
                 {
                     echo '<div class="syno_add_element_elem" id="' . $file . '">';
                     echo '    <img src="main/libs/img/images-synoptic-other/' . $file . '" alt="' . basename($file) . '" style="width:40px; cursor: move" >';
