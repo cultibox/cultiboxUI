@@ -18,7 +18,7 @@ if((isset($_GET['type']))&&(!empty($_GET['type']))&&(strcmp($_GET['type'],"plug"
     $name=str_replace($pattern,"",$name);
     copy("../../../tmp/import/$filename[0]",$upload_dir . "/" . $name . "_ON." . substr(strrchr($filename[0],'.'),1));
     copy("../../../tmp/import/$filename[1]",$upload_dir . "/" . $name . "_OFF." . substr(strrchr($filename[1],'.'),1));
-    if(count($filename==2)) {
+    if(count($filename)==2) {
         if(is_file("../../../tmp/import/$filename[0]")) {
             unlink("../../../tmp/import/$filename[0]");
         }
@@ -26,7 +26,7 @@ if((isset($_GET['type']))&&(!empty($_GET['type']))&&(strcmp($_GET['type'],"plug"
         if(is_file("../../../tmp/import/$filename[1]")) {
             unlink("../../../tmp/import/$filename[1]");
         }
-    }
+    } 
 } else {
     if((is_file("../../../tmp/import/$filename"))&&(strcmp("$upload_dir","")!=0)) {
         copy("../../../tmp/import/$filename",$upload_dir . "/" . strtolower($filename));
