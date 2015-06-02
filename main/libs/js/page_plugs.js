@@ -2,6 +2,8 @@ var sensors  = <?php echo json_encode($GLOBALS['NB_MAX_SENSOR_PLUG']); ?>;
 var nb_plugs = <?php echo json_encode($nb_plugs); ?>;
 var plug_alert_change= {};
 var second_regul = <?php echo json_encode($second_regul); ?>;
+var plugs_dial = <?php echo json_encode($plugs_dial); ?>
+
 
 // {{{ getTolerance()
 // ROLE display the tolerance informations or not
@@ -315,11 +317,21 @@ $(document).ready(function(){
     });
 
     $('#div_plug_tabs').tabs();
-    // Display and control user form for settings
+
 
     var htmlPlug=$("#plugs_dialog").html();
     $("#plug_settings").click(function(e) {
         e.preventDefault();
+        open_plugs_dial(htmlPlug);
+    });
+
+    if(plugs_dial) {
+         setTimeout(function(){ open_plugs_dial(htmlPlug) }, 1000); 
+    }
+});
+
+
+function open_plugs_dial(htmlPlug) {
         $('#div_plug_tabs').tabs('select', $("#selected_plug option:selected").val()-1);
         var width=Math.round($(window).width()-($(window).width()*25/100));
         $("#plugs_dialog").dialog({
@@ -723,5 +735,4 @@ $(document).ready(function(){
                 }
             }]
         });
-    });
-});
+}
