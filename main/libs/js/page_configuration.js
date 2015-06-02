@@ -1820,6 +1820,13 @@ $(document).ready(function() {
       }
     });
 
+    
+
+    $('#wifi_wizard_link').click(function(e) {
+       e.preventDefault();
+       var count_wifi=1;
+       open_dialog_wifi_wizard(count_wifi);
+    });
 
     $('#dl_firm').click(function(e) {
        e.preventDefault();
@@ -2031,5 +2038,42 @@ $(document).ready(function() {
         });
     }); 
 });
+
+
+
+function open_dialog_wifi_wizard(step) {
+       $("#wifi_wizard_step"+step).dialog({
+            resizable: false,
+            width: 700,
+            modal: true,
+            dialogClass: "popup_message",
+            closeOnEscape: false,
+            buttons: [{
+               text: PREVIOUS_button,
+               style:"margin-right:90px;",
+               click: function () {
+                 $( this ).dialog( "close" );
+                 open_dialog_wifi_wizard(step-1)
+                 return false;
+               }
+            },{
+               text: CLOSE_button,
+               style:"margin-right:90px;",
+               click: function () {
+                 $( this ).dialog( "close" );
+                 return false;
+               }
+            },{
+               text: NEXT_button,
+               style:"margin-right:90px;",
+               click: function () {
+                 $( this ).dialog( "close" );
+                 open_dialog_wifi_wizard(step+1)
+                 return false;
+               }
+            }]
+       });
+}
+
 
 </script>

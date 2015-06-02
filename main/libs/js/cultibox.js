@@ -67,6 +67,9 @@ if(lang=="it_IT") {
     DIR_CONF_UPDATE="La configurazione è aggiornato";
     DIR_CONF_NOT_UPTODATE="La configurazione utilizzata non è aggiornata, clicca qui per aggiornare la configurazione: <button id='update_conf'>Aggiorna configurazione</button>";
     LOADING="Caricamento in corso, attendere prego...";
+    NEXT_button="Prossimo passo";
+    PREVIOUS_button="Fase precedente"
+    COMPUTE_button="Mostra risultati"
 } else if(lang=="de_DE") {
     RELOAD_button="Rescan Netzwerke";
     SELECT_button="Prüfen";
@@ -83,6 +86,9 @@ if(lang=="it_IT") {
     DIR_CONF_UPDATE="Ihre Konfiguration ist auf dem neuesten Stand";
     DIR_CONF_NOT_UPTODATE="verwendet wird, nicht aktualisierte Konfiguration, klicken Sie hier, um die Konfiguration zu aktualisieren: <button id='update_conf'>Aktualisieren Sie Konfiguration</button>";
     LOADING="Laden Laden, bitte warten...";
+    NEXT_button="Nächster Schritt";
+    PREVIOUS_button="Vorheriger Schritt"
+    COMPUTE_button="Ergebnisse anzeigen"
 } else if(lang=="en_GB") {
     RELOAD_button="Rescan networks";
     SELECT_button="Validate";
@@ -99,6 +105,9 @@ if(lang=="it_IT") {
     DIR_CONF_UPDATE="Your configuration is up to date";
     DIR_CONF_NOT_UPTODATE="The configuration used is not updated, click here to update the configuration: <button id='update_conf'> Update configuration </button>";
     LOADING="Loading, please wait...";
+    NEXT_button="Next step";
+    PREVIOUS_button="Previous step"
+    COMPUTE_button="Display result"
 } else if(lang=="es_ES") {
     RELOAD_button="Volver a examinar las redes";
     SELECT_button="Validar";
@@ -115,6 +124,9 @@ if(lang=="it_IT") {
     DIR_CONF_UPDATE="Su configuración está al día";
     DIR_CONF_NOT_UPTODATE="La configuración utilizada no está actualizado, haga clic aquí para actualizar la configuración: <button id='update_conf'>Actualizar configuración botón</button>";
     LOADING="Cargando, espere por favor...";
+    NEXT_button="Paso siguiente";
+    PREVIOUS_button="Paso previo"
+    COMPUTE_button="Mostrar resultados"
 } else {
     RELOAD_button="Re-scanner les réseaux";
     SELECT_button="Valider";
