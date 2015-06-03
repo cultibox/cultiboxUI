@@ -94,6 +94,21 @@ msgstr "Resumen de una página sobre el estado de tu cuarto de cultivo"
 
 
 # For the configuration part:
+msgid "WIFI_WIZARD1"
+msgstr "Bienvenu dans l'assistant de migration vers le module Wifi.  Avant de commencer, assurez-vous  d'avoir à disposition:<ul class='list_class_wizard'><li><b>Une Cultibox et ses équipements</b></li><li><b>Un module Wifi et ses équipements</b></li></ul>Si cela est le cas, vous pouvez passer à l'étape suivante."
+
+msgid "WIFI_WIZARD2"
+msgstr "<p><b>Etape 1/2: copie du nouveau firmware pour la cultibox</b></p>Branchez la carte SD de votre Cultibox dans votre ordinateur et passez à l'étape suivante pour que l'assistant copie le nouveau firmware sur la carte."
+
+msgid "WIFI_WIZARD2_ERROR"
+msgstr "Aucune carte SD Cultibox détectée branchez une carte SD et passez à l'étape suivante"
+
+msgid "WIFI_WIZARD3"
+msgstr " <p><b>Etape 2/2: Export de votre configuration</b></p>Passez à l'étape suivante pour que l'assistant exporte votre configuration qui pourra être importée dans le module Wifi."
+
+msgid "WIFI_WIZARD4"
+msgstr "<b>Vous pouvez maintenant connecter votre carte SD dans la Cultibox et brancher votre module Wifi.</b>" 
+
 msgid "CONFIRM_RESTART_HTTP"
 msgstr "Voulez-vous appliquer la nouvelle configuration de connexion au module?"
 
