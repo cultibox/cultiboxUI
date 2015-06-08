@@ -1135,9 +1135,11 @@ $(document).ready(function(){
                 if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
                     $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
                     $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
+                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/rpi_restart.png");
                 } else {
                     $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
                     $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
+                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/service_off.png");
                 }
 
                 // Change opacity
@@ -1296,23 +1298,29 @@ $(document).ready(function(){
                             if (value == "DEFCOM") {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('DEFCOM'); ?>");
                                 $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "0.4");
+                                $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "0.4");
                             } else if (value == "off" || value == "00.0") {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('VALUE_OFF'); ?>");
                                 $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "1");
+                                $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "1");
                             } else if (value == "TIMEOUT") {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('TIMEOUT'); ?>");
                                 $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "0.4");
+                                $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "0.4");
                             } else {
                                 // On case
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('VALUE_ON'); ?>");
                                 $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "1");
+                                $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "1");
                             }
                             
                             // Update image
                             if (value != "DEFCOM" && value != "off" && value != "TIMEOUT" && value != "00.0" ) {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('src',$('img[name="syno_elemPlugImage_' + key + '"]').attr('src').replace("_OFF", "_ON"));
+                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/service_off.png");
                             } else  {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('src',$('img[name="syno_elemPlugImage_' + key + '"]').attr('src').replace("_ON", "_OFF"));
+                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/rpi_restart.png");
                             }
                         }
                     });
