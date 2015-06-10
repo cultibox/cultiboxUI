@@ -816,4 +816,47 @@ function check_and_copy_firm($sd_card) {
 }
 // }}}
 
+
+// {{{ copy_firm_sd()
+// ROLE copy the wifi firmware into the SD card
+// IN  $sd_card     the sd card pathname 
+//     $reverse     copy or reverse a copy
+// RET true if it's ok, false if an error occured
+function copy_firm_sd($sd_card,$reverse=false) {
+  if($reverse) {
+    if(is_file("$sd_card/firm.hex.old")) {
+        copy("$sd_card/firm.hex.old","$sd_card/firm.hex");
+        unlink("$sd_card/firm.hex.old");
+    } 
+    return true;
+  } else {
+    if(strcmp("$sd_card","")==0) return false;
+
+    if(is_file("main/templates/data/cultibox_firmware_wifi/firm.hex")) {
+        $filetpl = "main/templates/data/cultibox_firmware_wifi/firm.hex";
+    } else if(is_file("../main/templates/data/cultibox_firmware_wifi/firm.hex")) {
+        $filetpl = "../main/templates/data/cultibox_firmware_wifi/firm.hex";
+    } else if(is_file("../../main/templates/data/cultibox_firmware_wifi/firm.hex")) {
+        $filetpl = "../../main/templates/data/cultibox_firmware_wifi/firm.hex";
+    } else if(is_file("../../../main/templates/data/cultibox_firmware_wifi/firm.hex")) {
+        $filetpl = "../../../main/templates/data/cultibox_firmware_wifi/firm.hex";
+    } else {
+        return false;
+    }
+
+    if(!is_file("$sd_card/firm.hex")) { 
+        return false;
+    } else {
+        if(!is_file("$sd_card/firm.hex.old")) {
+            copy("$sd_card/firm.hex","$sd_card/firm.hex.old");
+        }
+    }
+    
+    if(!@copy("$filetpl", "$sd_card/firm.hex")) return false;
+
+    return true;
+  }
+}
+//}}}
+
 ?>

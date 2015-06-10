@@ -758,9 +758,9 @@ $(function () {
                     var position="";
                     if($("#data_logs").is(':visible')) { 
                         var position=$("#data_logs").offset();
-                        $("#data_logs").dialog("widget").position({
+                        $("#data_logs").dialog("widget").position(
                             position
-                        });
+                        );
                         $("#data_logs").dialog({
                             title: '<b>'+Highcharts.dateFormat('%Y-%m-%d %H:%M', this.x) +'</b>'
                         });

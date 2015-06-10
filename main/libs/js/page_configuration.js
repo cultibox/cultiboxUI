@@ -14,6 +14,7 @@ rtc_offset_value=<?php echo json_encode($rtc_offset) ?>;
 var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
 var ajax_format;
+var sd_wizard="";
 
 
 formatCard = function(hdd,pourcent) {
@@ -2042,37 +2043,108 @@ $(document).ready(function() {
 
 
 function open_dialog_wifi_wizard(step) {
-   $("#wifi_wizard_step"+step).dialog({
-        resizable: false,
-        width: 700,
-        modal: true,
-        dialogClass: "popup_message",
-        closeOnEscape: false,
-        buttons: [{
-           text: PREVIOUS_button,
-           style:"margin-right:90px;",
-           click: function () {
-             $( this ).dialog( "close" );
-             open_dialog_wifi_wizard(step-1)
-             return false;
-           }
-        },{
-           text: CLOSE_button,
-           style:"margin-right:90px;",
-           click: function () {
-             $( this ).dialog( "close" );
-             return false;
-           }
-        },{
-           text: NEXT_button,
-           style:"margin-right:90px;",
-           click: function () {
-             $( this ).dialog( "close" );
-             open_dialog_wifi_wizard(step+1)
-             return false;
-           }
-        }]
-   });
+       $("#error_sd_wizard").css('display','none');
+
+       $("#wifi_wizard_step"+step).dialog({
+            resizable: false,
+            width: 700,
+            modal: true,
+            dialogClass: "popup_message",
+            closeOnEscape: false,
+            buttons: [{
+               text: CLOSE_button,
+               style:"margin-right:90px;",
+               click: function () {
+                 sd_wizard="";
+                 $( this ).dialog( "close" );
+                 return false;
+               }
+            },{
+               text: NEXT_button,
+               id: "btnNEXT",
+               style:"margin-right:90px;",
+               click: function () {
+                 if(step==1) {
+                    $( this ).dialog("destroy");
+                    open_dialog_wifi_wizard(step+1)
+                    return false;
+                 }
+
+                 if(step==2) {
+                     $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/get_sd.php"
+                     }).done(function(data) {
+                        sd_wizard = jQuery.parseJSON(data);
+                     });
+
+
+                     if(sd_wizard!="") {
+                        $.ajax({
+                            cache: false,
+                            async: false,
+                            url: "main/modules/external/copy_firm_sd.php",
+                            data: {path:sd_wizard,reverse:0}
+                        }).done(function(data) {
+                            var ret=jQuery.parseJSON(data);
+
+                            if(ret=="false") {
+                                 $.ajax({
+                                    cache: false,
+                                    async: false,
+                                    url: "main/modules/external/copy_firm_sd.php",
+                                    data: {path:sd_wizard,reverse:1}
+                                });
+                            }
+                        });
+
+                        $( this ).dialog( "destroy" );
+                        open_dialog_wifi_wizard(step+1)
+                        return false; 
+                     } else {
+                        $("#error_sd_wizard").show();
+                     }
+                 }
+
+
+                 if(step==3) {
+                    $("#preparing-file-modal").dialog({ modal: true, resizable: false });
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/export_conf.php"
+                    }).done(function (data) {
+                        $("#preparing-file-modal").dialog('close');
+                        var json = jQuery.parseJSON(data);
+                        if(json==1) {
+                            $.fileDownload('tmp/export/backup_cultibox.sql');
+                        } else if(json==2) {
+                            $.fileDownload('tmp/export/backup_cultibox.sql.zip');
+                        }
+                    });
+
+                    $( this ).dialog( "destroy" );
+                    open_dialog_wifi_wizard(step+1)
+                    return false;
+                 }
+
+                 if(step==4) {
+                    $( this ).dialog( "destroy" );
+                    open_dialog_wifi_wizard(step+1)
+                    return false;
+                 }
+               }
+            }],
+            open: function(event, ui) { 
+                if(step==4) {
+                    $('#btnNEXT').css("display", 'none');
+                } else {
+                     $("#btnNEXT").show();
+                }
+                alert(step);
+            }
+       });
 }
 
 
