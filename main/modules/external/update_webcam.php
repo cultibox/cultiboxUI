@@ -63,5 +63,40 @@
             exec("sudo mv /tmp/webcam".$id.".conf /etc/culticam/",$output,$err);
         }
 
+        $nb=$id+1;
+        $dim=explode("x",$resolution);
+        switch($palette) {
+            case 'MJPEG':  $ret['error']=3;
+                 break;
+
+            case 'humi':  $ret['error']=4;
+                              break;
+
+                case 'cm':  $ret['error']=5;
+                            $ret['unity']="cm";
+                            break;
+
+                case 'other':  $ret['error']=6;
+                               break;
+        }
+
+        $thread[]="videodevice /dev/video".$id;
+        $thread[]="v4l2_palette 2";
+        $thread[]="input 8";
+        $thread[]="text_left ".$title;
+        $thread[]="target_dir /var/www/cultibox/tmp/";
+        $thread[]="webcam_port 808".$nb;
+        $thread[]="width ".$dim[0];
+        $thread[]="height ".$dim[1];
+
+        if($f=fopen("/tmp/thread".$nb.".conf","w")) {
+            foreach($thread as $myInf) {
+                fputs($f,"$myInf\n");
+            }
+            fclose($f);
+
+            exec("sudo mv /tmp/thread".$nb.".conf /etc/culticam/",$output,$err);
+        }
+
         echo json_encode("0");
 ?>

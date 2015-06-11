@@ -436,8 +436,20 @@
     <br />
     <?php for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) { ?>
         <div id="webcam<?php echo $i; ?>" style="display:none" class="step">
+            <p class="p_center"><?php echo __('LAST_WEBCAM'); ?>:</p>
             <img id="screen_webcam<?php echo $i; ?>" src="<?php echo $screen{$i}; ?>" title="" class="screenshot" alt="" style="display:none" />
-            <div id="div_link_webcam<?php echo $i; ?>" style="display:none"><a href="" id="link_webcam<?php echo $i; ?>" name="<?php echo $i; ?>"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="" /></a></div>
+
+            <div id="div_link_webcam<?php echo $i; ?>" style="display:none">
+                <table class="table_width">
+                    <tr>
+                        <td></td>
+                        <td class="conf-menu-marge-plug"><a href="" id="link_webcam<?php echo $i; ?>" name="<?php echo $i; ?>"><img src='/cultibox/main/libs/img/update_rpi.png' alt='' title="<?php echo __('CONFIGURE_WEBCAM'); ?>" /></a></td>
+                        <td class="conf-menu-marge-plug"><a href="" id="link_snapshot<?php echo $i; ?>" name="<?php echo $i; ?>"><img src='/cultibox/main/libs/img/snapshot.png' alt='' title="<?php echo __('TAKE_SNAPSHOT'); ?>" /></a></td>
+                        <td class="conf-menu-marge-plug"><a href="" id="link_stream<?php echo $i; ?>" name="<?php echo $i; ?>"><img src='/cultibox/main/libs/img/flux.png' alt='' title="<?php echo __('STREAM_WEBCAM'); ?>" /></a></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
 
             <div id="error_webcam<?php echo $i; ?>" style="display:none" class="error_field">
                 <p class="p_center">
@@ -494,6 +506,10 @@
         </div>
 
     <?php } ?>
+</div>
+
+<div id="show_stream" style="display:none">
+    <iframe src="" id="stream_src">
 </div>
 
 <div id="add_images_syno" style="display:none" title="<?php echo __('TOOLTIP_MANAGE_IMAGES'); ?>">
