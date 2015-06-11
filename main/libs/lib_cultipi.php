@@ -643,6 +643,34 @@ function updateZScaleImageRotation($elem,$z,$scale,$image,$rotation) {
 }
 // }}}
 
+// {{{ updateZScaleImageRotation()
+// ROLE Update informations of an element
+// IN $elem : Element to change
+// IN $z : New Z info
+// IN $scale : New scale info
+// IN $image : New image info
+// IN $rotation : New rotation info
+// RET Return of the SQL command
+function updateImagePlug ($indexPlug,$image) {
+
+    // Update position conf
+    $sql = "UPDATE synoptic SET image='${image}' WHERE indexElem='${indexPlug}' AND element='plug' ;";
+    
+    $db = \db_priv_pdo_start("root");
+    
+    $ret = array();
+    
+    try {
+        $sth=$db->prepare($sql);
+        $sth->execute();
+    } catch(\PDOException $e) {
+        $ret=$e->getMessage();
+    }
+    
+    return $ret;
+}
+// }}}
+
 // {{{ forcePlug()
 // ROLE Force a plug
 // IN $number : Index of plug

@@ -173,9 +173,23 @@
             
             // retrieve values
             $plugValues = cultipi\getAllPlugLiveValue();
-            
+
             foreach ($plugList as $index => $plug) 
             {
+            
+                $tootlTipText = $plugValues[$plug["indexElem"]];
+                // If defcom, set opacity to 0.4
+                $newStyle = "";
+                if ($plugValues[$plug["indexElem"]] == "DEFCOM" || $plugValues[$plug["indexElem"]] == "TIMEOUT") {
+                    $newStyle = 'opacity: 0.4;';
+                    $tootlTipText = __($plugValues[$plug["indexElem"]]);
+                } elseif ($tootlTipText == "on") {
+                    $tootlTipText = __("VALUE_ON");
+                }elseif ($tootlTipText == "off") {
+                    $tootlTipText = __("VALUE_OFF");
+                }
+            
+            
                 echo '<div id="syno_elem_' . $plug["id"] . '" style="position:absolute; top:' . $plug["y"] . 'px ; left:' . $plug["x"] . 'px ;z-index:' . $plug["z"] . '" >';
                 echo '  <table>';
                 echo '    <tr>';
@@ -188,8 +202,13 @@
                 echo '          />';
                 echo '      </td>';
                 echo '      <td>';
-                echo '          <input type="image" id="syno_pilotPlug_' . $plug["id"] . '" name="syno_pilotPlug_' . $plug["id"] . '"';
-                echo '                 src="main/libs/img/rpi_restart.png"  width="22"';
+                echo '          <input type="image" id="syno_pilotPlug_' . $plug["id"] . '" name="syno_pilotPlug_' . $plug["indexElem"] . '"';
+                if ($tootlTipText == "on") {
+                    echo '                 src="main/libs/img/service_off.png"  width="22"';
+                } else {
+                    echo '                 src="main/libs/img/rpi_restart.png"  width="22"';
+                }
+                echo '                 style="' . $newStyle . '";" ';
                 echo '                 alt="pilot"';
                 echo '                 class="syno_pilot_plug_elem_button"';
                 echo '          />';
@@ -202,17 +221,6 @@
                     $newHeight = 'style="height:' . $plug["scale"] . 'px;"';
                 }
                 echo '      <td id="syno_elemImage_' . $plug["id"] . '_td" colspan="3" ' . $newHeight . ' >';
-                // If defcom, set opacity to 0.4
-                $newStyle = "";
-                $tootlTipText = $plugValues[$plug["indexElem"]];
-                if ($plugValues[$plug["indexElem"]] == "DEFCOM" || $plugValues[$plug["indexElem"]] == "TIMEOUT") {
-                    $newStyle = 'opacity: 0.4;';
-                    $tootlTipText = __($plugValues[$plug["indexElem"]]);
-                } elseif ($tootlTipText == "on") {
-                    $tootlTipText = __("VALUE_ON");
-                }elseif ($tootlTipText == "off") {
-                    $tootlTipText = __("VALUE_OFF");
-                }
                 echo '          <img id="syno_elemImage_' . $plug["id"] . '" name="syno_elemPlugImage_' . $plug["indexElem"] . '" ';
                 echo '              src="main/libs/img/images-synoptic-plug/' . $plug["image"] . '" alt="Prise" ';
                 echo '              style="' . $newStyle . 'width:' . $plug["scale"] . 'px;cursor: move";" ';

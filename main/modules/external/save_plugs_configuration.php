@@ -172,7 +172,43 @@ if($plug_count_sensor[$nb]>1) {
 }
 
 if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
+    
+    // Update in database type of the plug
     insert_plug_conf("PLUG_TYPE",$nb,$type,$main_error);
+    
+    // Also change the image in synoptic
+    switch ($type) {
+        case "extractor":
+        case "intractor":
+        case "ventilator":
+            $imageToSet = "ventilateur_OFF.gif";
+            break;
+        case "pumpfiling":
+        case "pumpempting":
+        case "pump":
+            $imageToSet = "pompe_OFF.png";
+            break;
+        case "lamp":
+            if ($module == "xmax") {
+                $imageToSet = "xmax_OFF.png";
+            } else {
+                $imageToSet = "lampe_OFF.png";
+            }
+            break;
+        case "co2":
+            $imageToSet = "CO2_OFF.png";
+            break;            
+        case "humidifier":
+        case "dehumidifier":
+        default:
+            $imageToSet = "";
+            break;
+    }
+    if ($imageToSet != "")
+    {
+        cultipi\updateImagePlug($nb,$imageToSet);
+    }
+
 
     //If second regulation is deactivated but the type of plug change, we also change default value for second regulation:
     if($second_regul == "False") {
