@@ -450,7 +450,9 @@ $(document).ready(function(){
                     data: {action:"stream",webcam:selected}
                 }).done(function(data) {
                     $.unblockUI();
-                    $("#stream_src").attr("src", "http://cultipi.loca:808"+selected);
+                    port=parseInt(selected)+1;
+                    $("#stream_src").attr("src", "http://cultipi.local:808"+port);
+                    console.log("http://cultipi.local:808"+port);
                     $("#show_stream").dialog({
                         resizable: true,
                         modal: true,
@@ -461,8 +463,32 @@ $(document).ready(function(){
                             text: CLOSE_button,
                             click: function () {
                                 $(this).dialog('close');
-                                $("#show_webcam").dialog('open');
-                                return false;
+                                $.blockUI({
+                                    message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                    centerY: 0,
+                                    css: {
+                                        top: '20%',
+                                        border: 'none',
+                                        padding: '5px',
+                                        backgroundColor: 'grey',
+                                        '-webkit-border-radius': '10px',
+                                        '-moz-border-radius': '10px',
+                                        opacity: .9,
+                                        color: '#fffff'
+                                    },
+                                    onBlock: function() {
+                                        $.ajax({
+                                            cache: false,
+                                            async: true,
+                                            url: "main/modules/external/enable_webcam.php",
+                                            data: {action:"disable",webcam:selected}
+                                        }).done(function(data) {
+                                            $.unblockUI();
+                                            $("#show_webcam").dialog('open');
+                                            return false;
+                                        });
+                                    }
+                                });
                             }
                         }]
                     });
