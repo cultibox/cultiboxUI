@@ -84,10 +84,18 @@
         $thread[]="v4l2_palette $pal";
         $thread[]="input 8";
         $thread[]="text_left ".$title;
-        $thread[]="target_dir /var/www/cultibox/tmp/";
+        $thread[]="target_dir /var/www/cultibox/tmp";
         $thread[]="webcam_port 808".$nb;
+
+        if(($dim[0] % 16 != 0) || ($dim[1] % 16 != 0)) {
+            $dim[0]="640";
+            $dim[1]="480";
+        }
+        
         $thread[]="width ".$dim[0];
         $thread[]="height ".$dim[1];
+
+    
 
         if($f=fopen("/tmp/thread".$nb.".conf","w")) {
             foreach($thread as $myInf) {
