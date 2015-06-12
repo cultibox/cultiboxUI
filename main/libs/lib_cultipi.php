@@ -795,7 +795,7 @@ function get_webcam_conf() {
                 else
                 {
                     // error opening the file.
-                    $return[$i]['resolution']="400x300";
+                    $return[$i]['resolution']="640x480";
                     $return[$i]['brightness']="55";
                     $return[$i]['contrast']="33";
                     $return[$i]['palette']="MJPEG";
@@ -805,7 +805,7 @@ function get_webcam_conf() {
             else
             {
                 // error The file doesnot exists
-                $return[$i]['resolution']="400x300";
+                $return[$i]['resolution']="640x480";
                 $return[$i]['brightness']="55";
                 $return[$i]['contrast']="33";
                 $return[$i]['palette']="MJPEG";
@@ -824,7 +824,7 @@ function get_webcam_conf() {
                 $return[$i]['palette']="AUTO";
             
             if(!array_key_exists('resolution', $return[$i]))
-                $return[$i]['resolution']="400x300";
+                $return[$i]['resolution']="640x480";
             
             if(!array_key_exists('brightness', $return[$i]))
                 $return[$i]['brightness']="55";

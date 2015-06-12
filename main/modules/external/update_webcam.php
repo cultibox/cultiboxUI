@@ -29,7 +29,7 @@
         if((isset($_GET['resolution']))&&(!empty($_GET['resolution']))) {
             $resolution=$_GET['resolution'];
         } else {
-            $resolution="400x300";
+            $resolution="640x480";
         }
 
         if((isset($_GET['title']))&&(!empty($_GET['title']))) {
@@ -66,22 +66,22 @@
         $nb=$id+1;
         $dim=explode("x",$resolution);
         switch($palette) {
-            case 'MJPEG':  $ret['error']=3;
+            case 'MJPEG': $pal=2;
                  break;
-
-            case 'humi':  $ret['error']=4;
-                              break;
-
-                case 'cm':  $ret['error']=5;
-                            $ret['unity']="cm";
-                            break;
-
-                case 'other':  $ret['error']=6;
-                               break;
+            case 'JPEG': $pal=4;
+                 break;
+            case 'RGB32': $pal=4;
+                 break;
+            case 'UYVY': $pal=5;
+                 break;
+            case 'YUYV': $pal=6;
+                 break;
+            default:
+                 $pal=8;
         }
 
         $thread[]="videodevice /dev/video".$id;
-        $thread[]="v4l2_palette 2";
+        $thread[]="v4l2_palette $pal";
         $thread[]="input 8";
         $thread[]="text_left ".$title;
         $thread[]="target_dir /var/www/cultibox/tmp/";
@@ -98,5 +98,6 @@
             exec("sudo mv /tmp/thread".$nb.".conf /etc/culticam/",$output,$err);
         }
 
+        exec("sudo chown -R cultipi:cultipi /etc/culticam",$output,$err);
         echo json_encode("0");
 ?>
