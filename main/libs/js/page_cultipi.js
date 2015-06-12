@@ -451,8 +451,7 @@ $(document).ready(function(){
                 }).done(function(data) {
                     $.unblockUI();
                     port=parseInt(selected)+1;
-                    $("#stream_src").attr("src", "http://cultipi.local:808"+port);
-                    console.log("http://cultipi.local:808"+port);
+                    $("#stream_src").attr("src", "http://<?php echo $_SERVER['SERVER_ADDR']; ?>:808"+port+"/?action=stream");
                     $("#show_stream").dialog({
                         resizable: true,
                         modal: true,
