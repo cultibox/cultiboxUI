@@ -1890,6 +1890,18 @@ msgstr "Programma corrente"
 
 
 # For the Cultipi part:
+msgid "CONFIGURE_WEBCAM"
+msgstr "Configurer la Webcam"
+
+msgid "TAKE_SNAPSHOT"
+msgstr "Prendre une image avec la Webcam"
+
+msgid "STREAM_WEBCAM"
+msgstr "Afficher le flux de la Webcam"
+
+msgid "LAST_WEBCAM"
+msgstr "Dernière image capturée"
+
 msgid "UPLOAD_PLUG_IMG"
 msgstr "Afin d'utiliser vos propres images pour les équipements des prises, il vous faudra ajouter une image lorsque la prise est en état de marche et une lorsqu'elle est à l'arrêt"
 

@@ -17,16 +17,6 @@ var upload_dir="../../libs/img/";
 var jqXHR;
 
 
-//To delete setTimeout et setInterval:
-$.webcam = [];
-$.webcam.abortAll = function() {
-    $(this).each(function(idx, jqXHR) {
-        clearTimeout(jqXHR);
-    });
-    $.webcam.length = 0
-};
-
-
 // GLobal var for slidder
 var syno_configure_element_object = {
     scaleImageId:"",
@@ -68,10 +58,12 @@ function get_webcam(first) {
                             var src="tmp/webcam"+idx+".jpg?v="+d.getTime();
                             $("#screen_webcam"+idx).attr("src", src);   
                             $("#screen_webcam"+idx).show();
+                            $("#last_webcam"+idx).show();
                         } else {
                             var src="";
                             $("#screen_webcam"+idx).attr("src", src);
                             $("#screen_webcam"+idx).hide();
+                            $("#last_webcam"+idx).hide();
                         }
                         $("#error_webcam"+idx).css("display","none");
                         $("#div_link_webcam"+idx).show();
@@ -81,20 +73,14 @@ function get_webcam(first) {
                         $("#screen_webcam"+idx).css("display","none");
                         $("#error_webcam"+idx).show();
                         $("#div_link_webcam"+idx).css("display","none");
+                        $("#last_webcam"+idx).hide();
                     }
                 });
 
                 if(first=="1") {
                     $("#webcam0").show();
                 }
-
-                $.webcam.push(setTimeout(function() {
-                    get_webcam("0");
-                },2000));
             } catch(err) {
-                $.webcam.push(setTimeout(function() {
-                    get_webcam("0");
-                },2000));
             }
         });
 }
@@ -404,6 +390,114 @@ $(document).ready(function(){
         });
     });
 
+    $('a[id^="link_snapshot"]').click(function(e) {
+        e.preventDefault();
+        var selected=$(this).attr('name');
+        $("#show_webcam").dialog('close');
+
+        $.blockUI({
+            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+                 top: '20%',
+                 border: 'none',
+                 padding: '5px',
+                 backgroundColor: 'grey',
+                 '-webkit-border-radius': '10px',
+                 '-moz-border-radius': '10px',
+                 opacity: .9,
+                 color: '#fffff'
+            },
+            onBlock: function() {
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    url: "main/modules/external/enable_webcam.php",
+                    data: {action:"snapshot",webcam:selected}
+                }).done(function(data) {
+                    $.unblockUI();
+                    get_webcam(selected);
+                    $("#show_webcam").dialog('open');
+                });
+            }
+        });
+    });
+
+
+    $('a[id^="link_stream"]').click(function(e) {
+        e.preventDefault();
+        var selected=$(this).attr('name');
+        $("#show_webcam").dialog('close');
+
+        $.blockUI({
+            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+                 top: '20%',
+                 border: 'none',
+                 padding: '5px',
+                 backgroundColor: 'grey',
+                 '-webkit-border-radius': '10px',
+                 '-moz-border-radius': '10px',
+                 opacity: .9,
+                 color: '#fffff'
+            },
+            onBlock: function() {
+                $.ajax({
+                    cache: false,
+                    async: true,
+                    url: "main/modules/external/enable_webcam.php",
+                    data: {action:"stream",webcam:selected}
+                }).done(function(data) {
+                    $.unblockUI();
+                    port=parseInt(selected)+1;
+                    $("#stream_src").attr("src", "http://<?php echo $_SERVER['SERVER_ADDR']; ?>:808"+port+"/?action=stream");
+                    $("#show_stream").dialog({
+                        resizable: true,
+                        modal: true,
+                        width: Math.round($( window ).width()*80/100),
+                        closeOnEscape: false,
+                        dialogClass: "popup_message",
+                        buttons: [{
+                            text: CLOSE_button,
+                            click: function () {
+                                $(this).dialog('close');
+                                $.blockUI({
+                                    message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                    centerY: 0,
+                                    css: {
+                                        top: '20%',
+                                        border: 'none',
+                                        padding: '5px',
+                                        backgroundColor: 'grey',
+                                        '-webkit-border-radius': '10px',
+                                        '-moz-border-radius': '10px',
+                                        opacity: .9,
+                                        color: '#fffff'
+                                    },
+                                    onBlock: function() {
+                                        $.ajax({
+                                            cache: false,
+                                            async: true,
+                                            url: "main/modules/external/enable_webcam.php",
+                                            data: {action:"disable",webcam:selected}
+                                        }).done(function(data) {
+                                            $.unblockUI();
+                                            $("#show_webcam").dialog('open');
+                                            return false;
+                                        });
+                                    }
+                                });
+                            }
+                        }]
+                    });
+                });
+            }
+        });
+    });
+
+
+
     $("input[name=webcam]:radio").change(function () {
         for(i=0;i<nb_webcam;i++) {
             if(i==$("input[type='radio'][name='webcam']:checked").val()) {
@@ -417,13 +511,6 @@ $(document).ready(function(){
     
     $('#syno_webcam').click(function(e) {
         e.preventDefault();
-        $.ajax({
-          cache: false,
-          async: true,
-          url: "main/modules/external/enable_webcam.php",
-          data: {action:"enable"}
-        });
-        
         get_webcam("1");
         $("#show_webcam").dialog({
              resizable: true,
@@ -455,7 +542,6 @@ $(document).ready(function(){
                             $("#div_link_webcam"+i).css("display","none");
                          }
                          $("#webcam_id0").prop("checked", true);
-                         $.webcam.abortAll();
                          $(this).dialog('close');
                    }
              }]

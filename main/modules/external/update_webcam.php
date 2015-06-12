@@ -29,7 +29,7 @@
         if((isset($_GET['resolution']))&&(!empty($_GET['resolution']))) {
             $resolution=$_GET['resolution'];
         } else {
-            $resolution="400x300";
+            $resolution="640x480";
         }
 
         if((isset($_GET['title']))&&(!empty($_GET['title']))) {
@@ -63,5 +63,49 @@
             exec("sudo mv /tmp/webcam".$id.".conf /etc/culticam/",$output,$err);
         }
 
+        $nb=$id+1;
+        $dim=explode("x",$resolution);
+        switch($palette) {
+            case 'MJPEG': $pal=2;
+                 break;
+            case 'JPEG': $pal=4;
+                 break;
+            case 'RGB32': $pal=4;
+                 break;
+            case 'UYVY': $pal=5;
+                 break;
+            case 'YUYV': $pal=6;
+                 break;
+            default:
+                 $pal=8;
+        }
+
+        $thread[]="videodevice /dev/video".$id;
+        $thread[]="v4l2_palette $pal";
+        $thread[]="input 8";
+        $thread[]="text_left ".$title;
+        $thread[]="target_dir /var/www/cultibox/tmp";
+        $thread[]="webcam_port 808".$nb;
+
+        if(($dim[0] % 16 != 0) || ($dim[1] % 16 != 0)) {
+            $dim[0]="640";
+            $dim[1]="480";
+        }
+        
+        $thread[]="width ".$dim[0];
+        $thread[]="height ".$dim[1];
+
+    
+
+        if($f=fopen("/tmp/thread".$nb.".conf","w")) {
+            foreach($thread as $myInf) {
+                fputs($f,"$myInf\n");
+            }
+            fclose($f);
+
+            exec("sudo mv /tmp/thread".$nb.".conf /etc/culticam/",$output,$err);
+        }
+
+        exec("sudo chown -R cultipi:cultipi /etc/culticam",$output,$err);
         echo json_encode("0");
 ?>
