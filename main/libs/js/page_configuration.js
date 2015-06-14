@@ -177,7 +177,7 @@ $(document).ready(function(){
         }).done(function (data) {
              var objJSON = jQuery.parseJSON(data);
             
-            var version="<p class='p_center'><b><i><?php echo __('CULTIPI_SOFT_VERSION'); ?>:</i></b></p><br /><?php echo __('CULTIPI_SOFT'); ?>:  <b>"+objJSON[0]+"</b><br /><?php echo __('CULTIBOX_SOFT'); ?>:  <b>"+objJSON[1]+"</b><br /><?php echo __('CULTIRAZ_SOFT'); ?>:  <b>"+objJSON[2]+"</b><br /><?php echo __('CULTITIME_SOFT'); ?>:  <b>"+objJSON[3]+"</b><br /><?php echo __('CULTICONF_SOFT'); ?>:  <b>"+objJSON[4]+"</b><br /><?php echo __('CULTICAM_SOFT'); ?>:  <b>"+objJSON[5]+"</b><br /><?php echo __('CULTIDOC_SOFT'); ?>:  <b>"+objJSON[6]+"</b><br /><?php echo __('CULTIPI_IMAGE_VERSION'); ?>:  <b>"+objJSON[7]+"</b>";
+            var version="<p class='p_center'><b><i><?php echo __('CULTIPI_SOFT_VERSION'); ?>:</i></b></p><br /><?php echo __('CULTIPI_SOFT'); ?>:  <b>"+objJSON[0]+"</b><br /><?php echo __('CULTIBOX_SOFT'); ?>:  <b>"+objJSON[1]+"</b><br /><?php echo __('CULTIRAZ_SOFT'); ?>:  <b>"+objJSON[2]+"</b><br /><?php echo __('CULTITIME_SOFT'); ?>:  <b>"+objJSON[3]+"</b><br /><?php echo __('CULTICONF_SOFT'); ?>:  <b>"+objJSON[4]+"</b><br /><?php echo __('CULTICAM_SOFT'); ?>:  <b>"+objJSON[5]+"</b><br /><?php echo __('CULTIDOC_SOFT'); ?>:  <b>"+objJSON[6]+"</b><br /><?php echo __('CULTIPI_IMAGE_VERSION'); ?>:  <b>"+objJSON[7]+"</b><br /><p class='p_center'><button id='manual_upgrade'><?php echo __('MANUAL_UPGRADE'); ?></button></p>";
 
             $('#version_soft').attr('title', version);
         });
@@ -198,6 +198,124 @@ $(document).ready(function(){
              });
         });
     <?php } ?>
+
+    $("#manual_upgrade").live("click",function(e) {
+        e.preventDefault();
+        $('#upgradeupload').trigger('click');
+    });
+
+
+    // Call the fileupload widget and set some parameters
+     $('#upgradeupload').fileupload({
+        dataType: 'json',
+        url: 'main/modules/external/files.php',
+        add: function (e, data) {
+            var name="";
+            $.each(data.files, function (index, file) {
+                name=file.name;
+            });
+
+            data.submit();
+        },
+        progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress_bar_up').css(
+                    'width',
+                    progress + '%'
+                );
+
+                $('#progress_purcent_up').html(
+                    progress + '%'
+                );
+
+                $("#progress_up").dialog({
+                    width: 700,
+                    modal: true,
+                    resizable: false,
+                    closeOnEscape: false,
+                    dialogClass: "popup_message",
+                    title: "<?php echo __('PROGRESS_CSV'); ?>"
+                });
+
+                if(progress==100) {
+                    $('#progress_bar_up').css('width','0%');
+                    $("#progress_up").dialog('close');
+                    $('#progress_purcent_up').html();
+                }
+        },
+        done: function (e, data) {
+            e.preventDefault();
+
+            var name="";
+            $.each(data.result.files, function (index, file) {
+                name=file.name;
+            });
+
+
+            $.blockUI({
+                message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                centerY: 0,
+                css: {
+                    top: '20%',
+                    border: 'none',
+                    padding: '5px',
+                    backgroundColor: 'grey',
+                    '-webkit-border-radius': '10px',
+                    '-moz-border-radius': '10px',
+                    opacity: .9,
+                    color: '#fffff'
+                },
+                onBlock: function() {
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/manual_upgrade.php",
+                        data: {file:name}
+                    }).done(function (data) {
+                        var json = jQuery.parseJSON(data);
+                        if(json==0) {
+                            $.unblockUI();
+                            $("#success_manual_upgrade").dialog({
+                                resizable: false,
+                                width: 500,
+                                modal: true,
+                                closeOnEscape: true,
+                                dialogClass: "popup_message",
+                                buttons: [{
+                                    text: CLOSE_button,
+                                    click: function () {
+                                        $( this ).dialog( "close" );
+                                        var get_array = getUrlVars('submenu=admin_ui');
+                                        get_content("configuration",get_array);
+                                        return false;
+                                    }
+                                }]
+                            });
+                        } else {
+                            $.unblockUI();
+                            $("#error_manual_upgrade").dialog({
+                                resizable: false,
+                                width: 500,
+                                closeOnEscape: true,
+                                modal: true,
+                                dialogClass: "popup_error",
+                                buttons: [{
+                                    text: CLOSE_button,
+                                    click: function () {
+                                        var get_array = getUrlVars('submenu=admin_ui');
+                                        get_content("configuration",get_array);
+                                        $( this ).dialog( "close" ); return false;
+                                    }
+                                }]
+                            });
+                        }
+                    }); 
+                } 
+            });
+        }});
+
+
+
 
     $('#reset_minmax').timepicker({
         <?php echo "timeOnlyTitle: '".__('TIMEPICKER_SELECT_TIME')."',"; ?>

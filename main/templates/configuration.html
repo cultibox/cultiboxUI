@@ -628,6 +628,7 @@
             </td>
             <td class="icon_menu2">
                 <img src='/cultibox/main/libs/img/versions.png' id="version_soft" alt='' title="">
+                <input id="upgradeupload" type="file" name="files[]" style="display:none">
             </td>
             <td class="icon_menu2">
                 <a href="" name="restart_rpi" id="restart_rpi"><img src='/cultibox/main/libs/img/rpi_restart.png' alt='' title="<?php echo __('RPI_RESTART'); ?>" /></a>
@@ -765,6 +766,20 @@
 <div id="progress_conf">
     <div id="progress_bar_conf" class="bar" style="width: 0%;"></div>
     <p class="p_center" id="progress_purcent"></p>
+</div>
+
+<div id="success_manual_upgrade" title="<?php echo __('MANUAL_UPGRADE'); ?>" style="display:none">
+    <p><?php echo __('SUCCESS_MANUAL_UPGRADE'); ?></p>
+</div>
+
+
+<div id="error_manual_upgrade" title="<?php echo __('MANUAL_UPGRADE'); ?>" style="display:none">
+    <p><?php echo __('ERROR_MANUAL_UPGRADE'); ?></p>
+</div>
+
+<div id="progress_up">
+    <div id="progress_bar_up" class="bar" style="width: 0%;"></div>
+    <p class="p_center" id="progress_purcent_up"></p>
 </div>
 
 <div id="mail_config_div" title="<?php echo __('MAIL'); ?>" style="display:none">
