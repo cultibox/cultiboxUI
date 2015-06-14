@@ -94,6 +94,15 @@ msgstr "Seite Zusammenfassung des Status des Rauminhaltes"
 
 
 # For the configuration part:
+msgid "MANUAL_UPGRADE"
+msgstr "Mise à jour manuelle"
+
+msgid "SUCCESS_MANUAL_UPGRADE"
+msgstr "Mise à jour manuelle réalisée avec succés"
+
+msgid "ERROR_MANUAL_UPGRADE"
+msgstr "Erreur lors de la mise à jour manuelle"
+
 msgid "WIFI_WIZARD1"
 msgstr "Bienvenu dans l'assistant de migration vers le module Wifi.  Avant de commencer, assurez-vous  d'avoir à disposition:<ul class='list_class_wizard'><li><b>Une Cultibox et ses équipements</b></li><li><b>Un module Wifi et ses équipements</b></li></ul>Si cela est le cas, vous pouvez passer à l'étape suivante."
 
