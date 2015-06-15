@@ -2169,6 +2169,14 @@ msgstr "Confirmation du mot de passe"
 msgid "SAVE_PASSWORD"
 msgstr "Enregistrer le mot de passe"
 
+msgid "CULTIPI_PLUG_FORCE_WAIT"
+msgstr "Pilotage en cours ..."
+
+msgid "CULTIPI_PLUG_FORCE_OK"
+msgstr "Pilotage effectué"
+
+msgid "CULTIPI_PLUG_FORCE_NOK"
+msgstr "Erreur lors du pilotage"
 
 #For the webcam part:
 msgid "PALETTE"

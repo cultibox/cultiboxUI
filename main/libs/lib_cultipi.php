@@ -679,21 +679,23 @@ function updateImagePlug ($indexPlug,$image) {
 // RET empty
 function forcePlug($number,$time,$value) {
 
-    $ret = "";
-
     $return_array = array();
-    $return_array["val1"] = "DEFCOM"; 
-    $return_array["val2"] = "DEFCOM";
-    $return_array["error"] = "";
-    
+
     try {
-        $ret = exec('tclsh "/opt/cultipi/cultiPi/set.tcl" serverPlugUpdate localhost ' . $number . ' ' . $value . ' ' . $time);
+        switch(php_uname('s')) {
+            case 'Windows NT':
+                $return_array["status"] = exec('C:\Tcl\bin\tclsh.exe "D:\CBX\cultipiCore\cultiPi\getCommand.tcl" serverPlugUpdate localhost setGetRepere ' . $number . ' ' . $value . ' ' . $time);
+                break;
+            default : 
+                $return_array["status"] = exec('tclsh "/opt/cultipi/cultiPi/getCommand.tcl" serverPlugUpdate localhost setGetRepere ' . $number . ' ' . $value . ' ' . $time);
+                break;
+        }
     } catch (Exception $e) {
         echo 'Exception reçue : ',  $e->getMessage(), "\n";
-        $return_array["error"] = $e->getMessage();
+        $return_array["status"] = $e->getMessage();
     }
 
-    return "";
+    return $return_array;
 }
 // }}}
 

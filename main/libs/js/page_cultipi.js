@@ -1121,6 +1121,9 @@ $(document).ready(function(){
         // Retrieve name of this element
         elementTitle = $("#syno_elem_title_" + idOfElem).html();
         
+        // Clear old status value
+        $('#syno_configure_element_force_plug_status').html("");
+        
         // Retrieve type of the element
         $.ajax({
             cache: false,
@@ -1205,34 +1208,77 @@ $(document).ready(function(){
                 break;
         }
 
-        $.ajax({
-            cache: false,
-            type: "POST",
-            data: {
-                action:"forcePlug",
-                id:idOfElem,
-                value:valToSend,
-                time:$( "#syno_configure_element_force_plug_time option:selected" ).val()
+        $("#syno_pilotPlug_element").dialog( "close" );
+        $.blockUI({
+            message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+                top: '20%',
+                border: 'none',
+                padding: '5px',
+                backgroundColor: 'grey',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fffff'
             },
-            url: "main/modules/external/synoptic.php",
-            success: function (data) {
+            onBlock: function() {
+        
+                $.ajax({
+                    cache: false,
+                    type: "POST",
+                    data: {
+                        action:"forcePlug",
+                        id:idOfElem,
+                        value:valToSend,
+                        time:$( "#syno_configure_element_force_plug_time option:selected" ).val()
+                    },
+                    url: "main/modules/external/synoptic.php",
+                    success: function (data) {
 
-                // Change text and image
-                if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
-                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
-                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
-                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/rpi_restart.png");
-                } else {
-                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
-                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
-                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/service_off.png");
-                }
+                        var objJSON = jQuery.parseJSON(data);
+                    
+                        switch(objJSON.status.toUpperCase()) {
+                            case 'TIMEOUT' :
+                                // Update text 
+                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?>");
+                                $('#syno_configure_element_force_plug_status').css("color", "red");
+                                break;
+                            case 'ERROR' :
+                                // Update text 
+                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?>");
+                                $('#syno_configure_element_force_plug_status').css("color", "red");
+                                break;
+                            case 'DONE' :
+                                // Change text and image
+                                if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
+                                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
+                                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
+                                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/rpi_restart.png");
+                                } else {
+                                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
+                                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
+                                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/service_off.png");
+                                }
 
-                // Change opacity
-                $('#syno_elemImage_' + idOfElem ).css("opacity", "1");
+                                // Change opacity
+                                $('#syno_elemImage_' + idOfElem ).css("opacity", "1");
+                                
+                                // Update text 
+                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_OK'); ?>");
+                                $('#syno_configure_element_force_plug_status').css("color", "black");
+                                break;
+                        }
 
-
-            }, error: function(data) {
+                        $.unblockUI();
+                        $("#syno_pilotPlug_element").dialog( "open" );
+                        
+                    }, error: function(data) {
+                        
+                        $.unblockUI();
+                        $("#syno_pilotPlug_element").dialog( "open" );
+                    }
+                });
             }
         });
     });
