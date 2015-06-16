@@ -34,10 +34,10 @@ $GLOBALS['NB_MAX_SENSOR_PLUG'] = '6';
 $GLOBALS['NB_MAX_CANAL_DIRECT'] = '8';
 
 // Number of maximal MCP230XX ouput with Cultipi
-$GLOBALS['NB_MAX_CANAL_MCP230XX'] = '8';
+$GLOBALS['NB_MAX_CANAL_MCP230XX'] = 9;
 
 // Number of maximal MCP230XX module with Cultipi
-$GLOBALS['NB_MAX_MODULE_MCP230XX'] = '3';
+$GLOBALS['NB_MAX_MODULE_MCP230XX'] = 3;
 
 // Number of maximal canal used by dimmer
 $GLOBALS['NB_MAX_CANAL_DIMMER'] = '8';

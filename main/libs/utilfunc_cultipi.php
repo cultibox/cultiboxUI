@@ -167,7 +167,16 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
                 "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",type",
                 "type" => $elemOfArray["SENSOR_TYPE"] 
             );
-            
+
+            $paramListserverAcqSensor[] = array (
+                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",statusOK",
+                "type" => $elemOfArray["SENSOR_FIRST_STATUS_OK"] 
+            );
+
+            $paramListserverAcqSensor[] = array (
+                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",statusOK2",
+                "type" => $elemOfArray["SENSOR_SECOND_STATUS_OK"] 
+            );
         }
     }
     create_conf_XML($sd_card . "/serverAcqSensor/conf.xml" , $paramListserverAcqSensor);

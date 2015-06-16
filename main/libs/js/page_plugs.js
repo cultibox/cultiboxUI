@@ -168,7 +168,7 @@ $(document).ready(function(){
     ?>
     
     
-     $('select[id^="plug_sensor"]').change(function () {
+     $('select[id^="plug_sensor"]').live("change",function () {
         //Récupération du numéro de la prise en cours d'édition. L'information est contenue dans l'id de l'élément, on découpe donc l'id pour récupérer l'information
         var plug = $(this).attr('id').substring(11,12);
         var nb_sensor=0;
@@ -194,7 +194,7 @@ $(document).ready(function(){
 
 
     //Display options for selected output :
-    $("select[name*='plug_module']").change(function () {
+    $("select[name*='plug_module']").live("change",function () {
         var id=$(this).attr('name').substr($(this).attr('name').length-1);
 
         if(!isFinite(String(id))) {
@@ -258,6 +258,7 @@ $(document).ready(function(){
 
 
     //Disable previous selected dimmer canal:
+    // To delete ?
     $("select[name*='dimmer_canal']").focus(function () {
         previous_canal = $(this).attr('value');
     }).change(function() {
@@ -280,7 +281,7 @@ $(document).ready(function(){
     });
 
 
-    $('[id*="plug_type"]').change(function() {
+    $('[id*="plug_type"]').live("change",function() {
         var plug = $(this).attr('id').substring(9,10);
 
         if(plug!="") {
@@ -325,7 +326,7 @@ $(document).ready(function(){
     $('#div_plug_tabs').tabs();
 
 
-    var htmlPlug=$("#plugs_dialog").html();
+    var htmlPlug = $("#plugs_dialog").html();
     $("#plug_settings").click(function(e) {
         e.preventDefault();
         open_plugs_dial(htmlPlug);
@@ -702,44 +703,44 @@ function open_plugs_dial(htmlPlug) {
             $("#plugs_dialog").dialog();
             $('#div_plug_tabs').tabs('select', jump_plug);
         }
-                }
-            },{
-                text: CLOSE_button,
-                "id": "btnClose",
-                click: function () {
-                    $(this).dialog('close');
-                    $.blockUI({
-                        message: LOADING+" <img src=\"main/libs/img/waiting_small.gif\" />",
-                        centerY: 0,
-                        css: {
-                            top: '20%',
-                            border: 'none',
-                            padding: '5px',
-                            backgroundColor: 'grey',
-                            '-webkit-border-radius': '10px',
-                            '-moz-border-radius': '10px',
-                            opacity: .9,
-                            color: '#fffff'
-                        },
-                        onBlock: function() {
-                            var data=htmlPlug
-                            $('#div_plug_tabs').tabs('destroy');
-                            $("#plugs_dialog").html(data);
-                            $('#div_plug_tabs').tabs();
-                            <?php
-                                for($i=1;$i<=$nb_plugs;$i++) {
-                                   echo "getTolerance('" . $plug_type{$i} . "'," . $i . ",'" . $second_regul . "');";
-                                }
+    }
+        },{
+            text: CLOSE_button,
+            "id": "btnClose",
+            click: function () {
+                $(this).dialog('close');
+                $.blockUI({
+                    message: LOADING+" <img src=\"main/libs/img/waiting_small.gif\" />",
+                    centerY: 0,
+                    css: {
+                        top: '20%',
+                        border: 'none',
+                        padding: '5px',
+                        backgroundColor: 'grey',
+                        '-webkit-border-radius': '10px',
+                        '-moz-border-radius': '10px',
+                        opacity: .9,
+                        color: '#fffff'
+                    },
+                    onBlock: function() {
+                        var data=htmlPlug
+                        $('#div_plug_tabs').tabs('destroy');
+                        $("#plugs_dialog").html(data);
+                        $('#div_plug_tabs').tabs();
+                        <?php
+                            for($i=1;$i<=$nb_plugs;$i++) {
+                               echo "getTolerance('" . $plug_type{$i} . "'," . $i . ",'" . $second_regul . "');";
+                            }
 
-                                for($i=1;$i<=$nb_plugs;$i++) {
-                                    echo "getRegul('" . $plug_regul{$i} . "'," . $i . ");";
-                                }
-                            ?>
-                            $.unblockUI();
-                        }
-                    });
-                    return false;
-                }
-            }]
-        });
+                            for($i=1;$i<=$nb_plugs;$i++) {
+                                echo "getRegul('" . $plug_regul{$i} . "'," . $i . ");";
+                            }
+                        ?>
+                        $.unblockUI();
+                    }
+                });
+                return false;
+            }
+        }]
+    });
 }

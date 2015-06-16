@@ -27,6 +27,7 @@ function check_db() {
     $plugs_index_col["PLUG_NUM_MODULE"]     = array ( 'Field' => "PLUG_NUM_MODULE", 'Type' => "int(11)", 'default_value' => '0', 'carac' => "NOT NULL");
     $plugs_index_col["PLUG_MODULE_OPTIONS"] = array ( 'Field' => "PLUG_MODULE_OPTIONS", 'Type' => "varchar(20)", 'default_value' => '', 'carac' => "NOT NULL");
     $plugs_index_col["PLUG_MODULE_OUTPUT"]  = array ( 'Field' => "PLUG_MODULE_OUTPUT", 'Type' => "int(11)", 'default_value' => '1', 'carac' => "NOT NULL");
+    $plugs_index_col["PLUG_START_OFFSET"]   = array ( 'Field' => "PLUG_START_OFFSET", 'Type' => "int(11)", 'default_value' => '0', 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'plugs';";
@@ -63,7 +64,8 @@ function check_db() {
                     ."PLUG_MODULE varchar(10) NOT NULL DEFAULT 'wireless'),"
                     ."PLUG_NUM_MODULE int(11) NOT NULL DEFAULT '0'),"
                     ."PLUG_MODULE_OPTIONS varchar(20) NOT NULL DEFAULT ''),"
-                    ."PLUG_MODULE_OUTPUT int(11) NOT NULL DEFAULT '1');";
+                    ."PLUG_MODULE_OUTPUT int(11) NOT NULL DEFAULT '1'),"
+                    ."PLUG_START_OFFSET int(11) NOT NULL DEFAULT '0');";
 
         // Create table
         try {
