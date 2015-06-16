@@ -184,7 +184,7 @@
                         </td>
                         <td>
                             <!-- Dimmer plug: --> 
-                            <div id="dimmer_div" style="<?php if($plugs_infos[$selected_plug-1]["PLUG_POWER_MAX"]>10) echo "display:none"; ?>"><input type="radio" name="regul_program" id="regdim" value="dimmer" <?php if(strcmp("$regul_program","dimmer")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" ><?php echo __('VALUE_DIMMER'); ?></div>  
+                            <div id="dimmer_div" style="<?php if($plugs_infos[$selected_plug-1]["PLUG_MODULE"] != "pwm") echo "display:none"; ?>"><input type="radio" name="regul_program" id="regdim" value="dimmer" onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" ><?php echo __('VALUE_DIMMER'); ?></div>  
                         </td>
                     </tr>
                 </table>

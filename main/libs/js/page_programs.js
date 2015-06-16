@@ -1419,7 +1419,7 @@ $(document).ready(function() {
         }
 
 
-        if(plugs_infoJS[$('#selected_plug').val()-1]['PLUG_POWER_MAX']<10) {
+        if(plugs_infoJS[$('#selected_plug').val()-1]['PLUG_MODULE'] == "pwm") {
             $("#dimmer_div").show();
         } else {
             $("#dimmer_div").css("display", "none");
@@ -1567,7 +1567,7 @@ $(document).ready(function() {
             default: getRegulation(regul,plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); $('#regul_div').show(); break;
         }
 
-         if(plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_POWER_MAX']<10) {
+         if(plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_MODULE'] == "pwm") {
             $("#dimmer_div").show();
         } else {
             $("#dimmer_div").css("display", "none");
