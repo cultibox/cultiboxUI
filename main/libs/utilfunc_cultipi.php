@@ -108,7 +108,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         {
             // Add parameters
             $paramListCultipiStart[] = call_user_func($plugin . '\addInStartXMLCultiCore');                                        
-        } 
+        }
     }
     
     create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart,"starts");
