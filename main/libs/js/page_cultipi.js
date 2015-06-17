@@ -483,6 +483,7 @@ $(document).ready(function(){
                                             data: {action:"disable",webcam:selected}
                                         }).done(function(data) {
                                             $.unblockUI();
+                                            get_webcam(selected);
                                             $("#show_webcam").dialog('open');
                                             return false;
                                         });
