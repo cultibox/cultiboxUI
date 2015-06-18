@@ -148,6 +148,12 @@
                                             </select>
                                         </div>
                                         <div id="select_canal_pwm<?php echo $i; ?>" style="<?php if($plug_module{$i} != "pwm") { echo 'display:none'; } ?>">
+                                            <?php echo __('PLUGS_MODULE_INDEX'); ?>
+                                            <select id="pwm_module<?php echo $i; ?>" name="pwm_module_num<?php echo $i; ?>">
+                                                <?php for($j=1;$j<=$GLOBALS['NB_MAX_MODULE_PWM'];$j++) { ?>
+                                                    <option value="<?php echo $j; ?>" <?php if(intval($plug_num_module{$i})==$j) { echo ' selected'; } else  { if(!$status[$j-1]) { echo ' disabled'; } } ?>><?php echo $j; ?></option>
+                                                <?php } ?>
+                                            </select>
                                             <?php echo __('PLUGS_MODULE_OUTPUT'); ?>
                                             <select id="pwm_canal<?php echo $i; ?>" name="pwm_module_ouput<?php echo $i; ?>">
                                                 <?php for($j=1;$j<=$GLOBALS['NB_MAX_CANAL_PWM'];$j++) { ?>

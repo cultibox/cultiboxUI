@@ -351,11 +351,6 @@ function get_content(page,get_array) {
   });
 })();
 
-
-<?php if(isset($GLOBALS['MODE']) && strcmp($GLOBALS['MODE'],"cultipi") == 0) 
-{ 
-    // Only for cultipi
-?>
 $(window).unload( function () { 
     $.ajax({
         cache: false,
@@ -377,7 +372,6 @@ $(window).unload( function () {
         }
     });
 });
-<?php } ?>
 
 $(document).ready(function() {
     var position_set=$("#content").position();

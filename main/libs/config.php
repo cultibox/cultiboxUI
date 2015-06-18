@@ -54,8 +54,11 @@ $GLOBALS['NB_MAX_CANAL_XMAX'] = '3';
 // Number of maximal module dimmer ouput with Cultipi
 $GLOBALS['NB_MAX_MODULE_XMAX'] = '1';
 
-// Number of maximal module dimmer ouput with Cultipi
-$GLOBALS['NB_MAX_CANAL_PWM'] = '8';
+// Number of maximal module pwm ouput with Cultipi
+$GLOBALS['NB_MAX_MODULE_PWM'] = '3';
+
+// Number of maximal canal pwm ouput with Cultipi
+$GLOBALS['NB_MAX_CANAL_PWM'] = '6';
 
 // Colors for plugs program:
 $GLOBALS['LIST_GRAPHIC_COLOR_PROGRAM'] = array('#0033CC','#FF0000', '#336600', '#F6F61A','#FF9900','#006666','#999966','#663300','#FF0066','#CC66FF','#660000','#3D96AE','#DB843D','#00FF00','#CCFF33','#B5CA92');

@@ -316,7 +316,14 @@ function compare_pluga($sd_card) {
                     // xmax plug case 
                     // Module 1 : (Adresse 105 --> 108)
                     $tmp_pluga = 105 + $tmp_MODULE_OUTPUT - 1;
-                    break;                    
+                    break;
+                case "pwm":
+                    // pwm plug case 
+                    // Module 1 : (Adresse 31 --> 36)
+                    // Module 2 : (Adresse 37 --> 42)
+                    // Module 3 : (Adresse 43 --> 48)
+                    $tmp_pluga = 31 + 6 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
+                    break;    
             }
 
             while(strlen($tmp_pluga)<3) {
