@@ -783,25 +783,30 @@ function check_and_copy_firm($sd_card) {
 
         //Si le firmware sur la carte SD et le firmware de référence ont été trouvé, on compare le numéro de version du firmware
         //Si les numéro diffèrent (numéro firmware de référence > numéro firmware sur la carte SD) on copiera le firmware de référence sur la carte SD
-        if((isset($new_firm))&&(!empty($new_firm))&&(isset($current_firm))&&(!empty($current_firm))) {
-                $current_firm=trim("$current_firm");
-                $new_firm=trim("$new_firm");
+        if( isset($new_firm) &&
+            !empty($new_firm) &&
+            isset($current_firm) &&
+            !empty($current_firm)) {
 
-                if((strlen($current_firm)==43)&&(strlen($new_firm)==43)) {   
-                    $new_firm=substr($new_firm,9,4); 
-                    $current_firm=substr($current_firm,9,4);
+            $current_firm=trim("$current_firm");
+            $new_firm=trim("$new_firm");
 
-                    if(hexdec($new_firm) > hexdec($current_firm)) {
-                        copy($new_file, $current_file);
-                        if($copy) $copy=1;
-                    } 
-                } else {
-                    $copy=0;
-                }
-        } elseif((!is_file("$current_file"))&&(is_file("$new_file"))) {
-        //S'il n'y a pas de firmware sur la carte SD, on copie le firmware de référence:
-                copy($new_file, $current_file);
-                if($copy) $copy=1;
+            if((strlen($current_firm)==43)&&(strlen($new_firm)==43)) {   
+                $new_firm=substr($new_firm,9,4); 
+                $current_firm=substr($current_firm,9,4);
+
+                if(hexdec($new_firm) > hexdec($current_firm)) {
+                    copy($new_file, $current_file);
+                    if($copy) $copy=1;
+                } 
+            } else {
+                $copy=0;
+            }
+        } elseif(!is_file("$current_file") &&
+                 is_file("$new_file")) {
+            //S'il n'y a pas de firmware sur la carte SD, on copie le firmware de référence:
+            copy($new_file, $current_file);
+            if($copy) $copy=1;
         } else {
             $copy=0;
         }

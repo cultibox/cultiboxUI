@@ -92,7 +92,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     }
 
 
-    $ret_firm=check_and_copy_firm($sd_card);
+    $ret_firm = check_and_copy_firm($sd_card);
     if(!$ret_firm) {
         $main_error_tab[]=__('ERROR_COPY_FIRM'); 
         return ERROR_COPY_FIRM;

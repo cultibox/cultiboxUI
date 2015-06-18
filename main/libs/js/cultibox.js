@@ -352,22 +352,32 @@ function get_content(page,get_array) {
 })();
 
 
+<?php if(isset($GLOBALS['MODE']) && strcmp($GLOBALS['MODE'],"cultipi") == 0) 
+{ 
+    // Only for cultipi
+?>
 $(window).unload( function () { 
     $.ajax({
         cache: false,
         async: false,
         url: "main/modules/external/set_variable.php",
-        data: {name:"ADHOC", value: "False", duration: 86400*30}
+        data: {
+            name:"ADHOC",
+            value: "False",
+            duration: 86400*30
+        }
     });
 
     $.ajax({
         cache: false,
         async: false,
         url: "main/modules/external/enable_webcam.php",
-        data: {action:"disable"}
+        data: {
+            action:"disable"
+        }
     });
 });
-
+<?php } ?>
 
 $(document).ready(function() {
     var position_set=$("#content").position();
