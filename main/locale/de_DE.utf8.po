@@ -1897,6 +1897,9 @@ msgstr "Aktuelles Programm"
 
 
 #For the Cultipi part:
+msgid "DURATION_ACTION_PLUG"
+msgstr "Pendant"
+
 msgid "CONFIGURE_WEBCAM"
 msgstr "Configurer la Webcam"
 

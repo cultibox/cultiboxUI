@@ -54,7 +54,7 @@ function get_webcam(first) {
                 $.each(objJSON, function(idx, obj) {
                     if(obj!="0") {
                         d = new Date();
-                        if(obj==1) {
+                        if((obj==1)&&($('#webcam_id'+idx).is(':checked'))) {
                             var src="tmp/webcam"+idx+".jpg?v="+d.getTime();
                             $("#screen_webcam"+idx).attr("src", src);   
                             $("#screen_webcam"+idx).show();
@@ -88,6 +88,17 @@ function get_webcam(first) {
 $(document).ready(function(){
      pop_up_remove("main_error");
      pop_up_remove("main_info");
+
+     $("#syno_configure_element_force_plug_time").slider({
+        max: 1800,
+        min: 1,
+        slide: function( event, ui) {
+            $("#equi_time").html(secondsToTime(ui.value));
+            $("#duration_plug_label").val(ui.value);
+        },
+        step: 1,
+        value: 1
+     });
 
      for(i=0;i<nb_webcam;i++) {
         var val=i;
@@ -1170,11 +1181,104 @@ $(document).ready(function(){
 
                     $("#syno_pilotPlug_element").dialog({
                         resizable: false,
-                        width: 400,
+                        width: 500,
                         closeOnEscape: true,
                         dialogClass: "popup_message",
-                        title:"Piloter " + elementTitle,
+                        title:"<?php echo __('CULTIPI_SYNO_PILOTER'); ?> " + elementTitle,
                         buttons: [{
+                            id: "syno_configure_element_force_plug_pilot",
+                            text: "<?php echo __('CULTIPI_SYNO_PILOTER'); ?>",
+                            click: function () {
+                                $( this ).dialog( "close" );
+
+                                // Retrieve the good value to send
+                                switch (typeOfElem)
+                                {
+                                    case "xmax" :
+                                        valToSend = $("#syno_configure_element_force_plug_xmax_1_slider_val").val().toString()
+                                                  + $("#syno_configure_element_force_plug_xmax_2_slider_val").val().toString()
+                                                  + "."
+                                                  + $("#syno_configure_element_force_plug_xmax_3_slider_val").val().toString();
+                                        break;
+                                    case "dimmer" :
+                                        valToSend = $("#syno_configure_element_force_plug_dimmer_slider_val").val();
+                                        break;
+                                    default :
+                                        valToSend = $( "#syno_configure_element_force_plug_value option:selected" ).val()
+                                        break;
+                                }
+
+                                $.blockUI({
+                                    message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                    centerY: 0,
+                                    css: {
+                                        top: '20%',
+                                        border: 'none',
+                                        padding: '5px',
+                                        backgroundColor: 'grey',
+                                        '-webkit-border-radius': '10px',
+                                        '-moz-border-radius': '10px',
+                                        opacity: .9,
+                                        color: '#fffff'
+                                    },
+                                    onBlock: function() {
+                                        $.ajax({
+                                            cache: false,
+                                            type: "POST",
+                                            data: {
+                                                action:"forcePlug",
+                                                id:idOfElem,
+                                                value:valToSend,
+                                                time:$("#duration_plug_label").val()
+                                            },
+                                            url: "main/modules/external/synoptic.php",
+                                            success: function (data) {
+
+                                                var objJSON = jQuery.parseJSON(data);
+
+                                                switch(objJSON.status.toUpperCase()) {
+                                                    case 'TIMEOUT' :
+                                                        // Update text 
+                                                        $('#syno_configure_element_force_plug_status').html("<div class='error_field'><?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?></div>");
+                                                        break;
+                                                    case 'ERROR' :
+                                                        // Update text 
+                                                        $('#syno_configure_element_force_plug_status').html("<div class='error_field'><?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?></div>");
+                                                        break;
+                                                    case 'DONE' :
+                                                        // Change text and image
+                                                        if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
+                                                            $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
+                                                            $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
+                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/rpi_restart.png");
+                                                        } else {
+                                                            $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
+                                                            $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
+                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/service_off.png");
+                                                             }
+
+                                                        // Change opacity
+                                                        $('#syno_elemImage_' + idOfElem ).css("opacity", "1");
+
+                                                        // Update text 
+                                                        $('#syno_configure_element_force_plug_status').html("<div class='info_field'><?php echo __('CULTIPI_PLUG_FORCE_OK'); ?></div>");
+                                                        break;
+                                                }
+
+                                                $.unblockUI();
+                                                $("#syno_pilotPlug_element").dialog( "open" );
+
+                                            }, error: function(data) {
+
+                                                $.unblockUI();
+                                                $("#syno_pilotPlug_element").dialog( "open" );
+                                            }
+                                        });
+                                    }
+                                });
+                                return false;
+                            }
+                        },{
                             text: CLOSE_button,
                             click: function () {
                                 $( this ).dialog( "close" );
@@ -1182,109 +1286,11 @@ $(document).ready(function(){
                             }
                         }]
                     });
-                    
                 }
             }, error: function(data) {
             }
         });
     });
-    
-    // Function used to pilot a plug
-    $("#syno_configure_element_force_plug_pilot").click(function(){
-
-        // Retrieve the good value to send
-        switch (typeOfElem)
-        {
-            case "xmax" :
-                valToSend = $("#syno_configure_element_force_plug_xmax_1_slider_val").val().toString() 
-                          + $("#syno_configure_element_force_plug_xmax_2_slider_val").val().toString()
-                          + "."
-                          + $("#syno_configure_element_force_plug_xmax_3_slider_val").val().toString();
-                break;
-            case "dimmer" :
-                valToSend = $("#syno_configure_element_force_plug_dimmer_slider_val").val();
-                break;
-            default :
-                valToSend = $( "#syno_configure_element_force_plug_value option:selected" ).val()
-                break;
-        }
-
-        $("#syno_pilotPlug_element").dialog( "close" );
-        $.blockUI({
-            message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-            centerY: 0,
-            css: {
-                top: '20%',
-                border: 'none',
-                padding: '5px',
-                backgroundColor: 'grey',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                opacity: .9,
-                color: '#fffff'
-            },
-            onBlock: function() {
-        
-                $.ajax({
-                    cache: false,
-                    type: "POST",
-                    data: {
-                        action:"forcePlug",
-                        id:idOfElem,
-                        value:valToSend,
-                        time:$( "#syno_configure_element_force_plug_time option:selected" ).val()
-                    },
-                    url: "main/modules/external/synoptic.php",
-                    success: function (data) {
-
-                        var objJSON = jQuery.parseJSON(data);
-                    
-                        switch(objJSON.status.toUpperCase()) {
-                            case 'TIMEOUT' :
-                                // Update text 
-                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?>");
-                                $('#syno_configure_element_force_plug_status').css("color", "red");
-                                break;
-                            case 'ERROR' :
-                                // Update text 
-                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_NOK'); ?>");
-                                $('#syno_configure_element_force_plug_status').css("color", "red");
-                                break;
-                            case 'DONE' :
-                                // Change text and image
-                                if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
-                                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
-                                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
-                                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/rpi_restart.png");
-                                } else {
-                                    $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
-                                    $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
-                                    $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/service_off.png");
-                                }
-
-                                // Change opacity
-                                $('#syno_elemImage_' + idOfElem ).css("opacity", "1");
-                                
-                                // Update text 
-                                $('#syno_configure_element_force_plug_status').html("<?php echo __('CULTIPI_PLUG_FORCE_OK'); ?>");
-                                $('#syno_configure_element_force_plug_status').css("color", "black");
-                                break;
-                        }
-
-                        $.unblockUI();
-                        $("#syno_pilotPlug_element").dialog( "open" );
-                        
-                    }, error: function(data) {
-                        
-                        $.unblockUI();
-                        $("#syno_pilotPlug_element").dialog( "open" );
-                    }
-                });
-            }
-        });
-    });
-    //////////////////////////////////////////////////////////////////
-    
     
 
     function baseName(str)

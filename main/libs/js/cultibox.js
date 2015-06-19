@@ -149,6 +149,26 @@ if(lang=="it_IT") {
 }
 
 
+// {{{ secondsToTime()
+// ROLE transofrm seconds into HH:MM:SS
+// IN seconds to be converded
+function secondsToTime(secs)
+{
+    var hours = Math.floor(secs / (60 * 60));
+    if(hours<10) hours="0"+hours;
+
+    var divisor_for_minutes = secs % (60 * 60);
+    var minutes = Math.floor(divisor_for_minutes / 60);
+    if(minutes<10) minutes="0"+minutes;
+ 
+    var divisor_for_seconds = divisor_for_minutes % 60;
+    var seconds = Math.ceil(divisor_for_seconds);
+    if(seconds<10) seconds="0"+seconds;
+
+    return hours+":"+minutes+":"+seconds;
+}
+
+
 // {{{ VerifNumber()
 // ROLE function of verification of an input value
 // IN input value "e" to be checked
