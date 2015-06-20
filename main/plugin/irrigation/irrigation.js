@@ -156,7 +156,10 @@ $(document).ready(function(){
                 
                 if(objJSON[0].length>0) {
                     $.each(objJSON[0], function(i, item) {
-                        $("#logServerIrrigation").append(item+"<br />");
+                        if (item != "" && item != "NULL" )
+                        {
+                            $("#logServerIrrigation").append(item+"<br />");
+                        }
                     });
                 }
                 $("#logServerIrrigation").scrollTop($("#logServerIrrigation")[0].scrollHeight);
