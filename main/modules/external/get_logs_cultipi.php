@@ -44,7 +44,10 @@
             exec("sudo cat /var/log/cultipi/cultipi.log 2>/dev/null | grep " . $server . " | tail -n " . $nbLine ,$ret[0],$err);
             $ret[1]="";
             break;
-            
+        case "logs_system":
+            exec("sudo cat /var/log/messages 2>/dev/null | tail -n " . $nbLine ,$ret[0],$err);
+            $ret[1]="";
+            break;
         default:
             break;
     }

@@ -102,6 +102,11 @@ $(document).ready(function(){
 
      for(i=0;i<nb_webcam;i++) {
         var val=i;
+        if(webcam_conf[i]['auto_brightness']=="-1") {
+            var auto=true;
+        } else {
+            var auto=false;
+        }
         $("#brightness_slider"+i).slider({
             max: 100,
             min: 0,
@@ -109,9 +114,18 @@ $(document).ready(function(){
                 $("#brightness"+$(this).attr('id').substr($(this).attr('id').length - 1)).val(ui.value);
             },
             step: 1,
-            value: webcam_conf[i]['brightness']
+            value: webcam_conf[i]['brightness'],
         });
 
+        if(auto) {
+            $("#brightness_slider"+i).slider("option","disabled",true);
+        }
+
+        if(webcam_conf[i]['auto_contrast']=="-1") {
+            var auto=true;
+        } else {
+            var auto=false;
+        }
         $("#contrast_slider"+i).slider({
             max: 100,
             min: 0,
@@ -119,8 +133,13 @@ $(document).ready(function(){
                 $("#contrast"+$(this).attr('id').substr($(this).attr('id').length - 1)).val(ui.value);
             },
             step: 1,
-            value: webcam_conf[i]['contrast']
+            value: webcam_conf[i]['contrast'],
+            disabled: auto
         });
+
+        if(auto) {
+            $("#contrast_slider"+i).slider("option","disabled",true);
+        }
     }
 
     $("#import_image_plug").click(function(e) {
@@ -373,7 +392,7 @@ $(document).ready(function(){
         var selected=$(this).attr('name');
         $("#configure_webcam"+$(this).attr('name')).dialog({
              resizable: false,
-             width: 650,
+             width: 700,
              modal: false,
              closeOnEscape: false,
              dialogClass: "popup_message",
@@ -385,7 +404,7 @@ $(document).ready(function(){
                             cache: false,
                             async: true,
                             url: "main/modules/external/update_webcam.php",
-                            data: {id:selected,brightness:$("#brightness"+selected).val() , contrast:$("#contrast"+selected).val(), resolution:$("#resolution_value"+selected+" option:selected").val(), palette:$("#palette_value"+selected+" option:selected").val(), title: $("#webcam_name"+selected).val()}
+                            data: {id:selected,brightness:$("#brightness"+selected).val() , contrast:$("#contrast"+selected).val(), resolution:$("#resolution_value"+selected+" option:selected").val(), palette:$("#palette_value"+selected+" option:selected").val(), title: $("#webcam_name"+selected).val(), auto_contrast: $("#auto_contrast"+selected).prop('checked'),auto_brightness:$("#auto_brightness"+selected).prop('checked')}
                          }).done(function (data) {
 
                           
@@ -517,6 +536,28 @@ $(document).ready(function(){
             } else {
                 $("#webcam"+i).css("display","none");
             }
+        }
+    });
+
+    $('input[id^="auto_contrast"]').click(function(e) {
+        var selected=$(this).attr('name');
+        if($("#auto_contrast"+selected).is(':checked')) {
+            $("#contrast_slider"+selected).slider("option","disabled",true);
+            $("#label_contrast"+selected).css('display','none');
+        } else {
+            $("#contrast_slider"+selected).slider("option","disabled",false);
+            $("#label_contrast"+selected).show();
+        }
+    });
+
+    $('input[id^="auto_brightness"]').click(function(e) {
+        var selected=$(this).attr('name');
+        if($("#auto_brightness"+selected).is(':checked')) {
+            $("#brightness_slider"+selected).slider( "option", "disabled", true );
+            $("#label_brightness"+selected).css('display','none');
+        } else {
+            $("#brightness_slider"+selected).slider( "option", "disabled", false );
+            $("#label_brightness"+selected).show();
         }
     });
 

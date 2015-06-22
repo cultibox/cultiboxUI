@@ -404,7 +404,6 @@
 
 <!-- Conf reseau -->
 <div id="div_network_conf_ui" style="display:none">
-
     <!-- Top button -->
     <table class="table_width">
         <tr>
@@ -473,7 +472,7 @@
              </tr>
              <tr>
                 <td></td>
-                <td><?php echo __('GATEWAY'); ?>:</td>
+                <td><?php echo __('GATEWAY'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_GATEWAY'); ?>" /></td>
                 <td><input type="text" size=15 maxlength=15 id="wire_gw" name="wire_gw" value="<?php echo $wire_gw; ?>"></td>
                 <td></td>
              </tr>
@@ -574,7 +573,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><?php echo __('GATEWAY'); ?>:</td>
+                        <td><?php echo __('GATEWAY'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_GATEWAY'); ?>" /></td>
                         <td><input type="text" size="15" name="wifi_gw" id="wifi_gw" value="<?php echo $wifi_gw; ?>" /></td>
                         <td></td>
                     </tr>
@@ -621,6 +620,13 @@
             </td>
             <td class="icon_menu2">
                 <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
+            </td>
+            <td></td>
+            <td class="icon_menu2">
+                <a href="" id="logs_system" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-system.png' alt='' title="<?php echo __('CULTIPI_LOGS_SYSTEM'); ?>"></a>
+            </td>
+            <td class="icon_menu2">
+                <a href="" id="dl_logs_system" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/dl_system.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SYSTEM'); ?>"></a>
             </td>
             <td></td>
             <td class="icon_menu2">

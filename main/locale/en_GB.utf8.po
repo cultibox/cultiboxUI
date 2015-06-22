@@ -1896,6 +1896,27 @@ msgid "CURRENT_PROG_COMMENT"
 msgstr "Current program"
 
 #For the Cultipi part:
+msgid "AUTO"
+msgstr "Automatique"
+
+msgid "TOOLTIP_AUTO_WEBCAM"
+msgstr "Laisser la webcam gérer automatiquement la valeur"
+
+msgid "CULTIPI_LOGS_SYSTEM"
+msgstr "Cliquez sur l'image pour afficher les logs du système"
+
+msgid "CULTIPI_DL_LOGS_SYSTEM"
+msgstr "Cliquez sur l'image pour télécharger les logs du système"
+
+msgid "VALUE_MULTI"
+msgstr "Valeur"
+
+msgid "COLOR_MULTI"
+msgstr "Multi"
+
+msgid "IMAGE"
+msgstr "Image"
+
 msgid "DURATION_ACTION_PLUG"
 msgstr "Pendant"
 

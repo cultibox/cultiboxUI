@@ -774,13 +774,15 @@ function get_webcam_conf() {
                         $value=explode("=",$line);
                         $value[1]=trim($value[1]);
                         $return[$i]['brightness']=substr($value[1],0,strlen($value[1])-1);
-                    }
+                        $return[$i]['auto_brightness']="0";
+                    } 
 
                     if(strpos($line, "contrast")!==false) {
                         $value=explode("=",$line);
                         $value[1]=trim($value[1]);
                         $return[$i]['contrast']=substr($value[1],0,strlen($value[1])-1);
-                    }
+                        $return[$i]['auto_contrast']="0";
+                    } 
 
                     if(strpos($line, "palette")!==false) {
                         $value=explode(" ",$line);
@@ -802,6 +804,8 @@ function get_webcam_conf() {
                     $return[$i]['contrast']="33";
                     $return[$i]['palette']="MJPEG";
                     $return[$i]['name']="Webcam $i";
+                    $return[$i]['auto_brightness']="0";
+                    $return[$i]['auto_contrast']="0";
                 }
             } 
             else
@@ -812,6 +816,8 @@ function get_webcam_conf() {
                 $return[$i]['contrast']="33";
                 $return[$i]['palette']="MJPEG";
                 $return[$i]['name']="Webcam $i";
+                $return[$i]['auto_brightness']="0";
+                $return[$i]['auto_contrast']="0";
             }
         }
 
@@ -833,6 +839,12 @@ function get_webcam_conf() {
             
             if(!array_key_exists('contrast', $return[$i]))
                 $return[$i]['contrast']="33";
+    
+            if(!array_key_exists('auto_brightness', $return[$i]))
+                $return[$i]['auto_brightness']="-1";
+
+            if(!array_key_exists('auto_contrast', $return[$i]))
+                $return[$i]['auto_contrast']="-1";
         }
         
         return $return;
