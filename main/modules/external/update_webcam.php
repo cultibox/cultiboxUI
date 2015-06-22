@@ -104,6 +104,19 @@
         
         $thread[]="width ".$dim[0];
         $thread[]="height ".$dim[1];
+    
+        if(strcmp("$brightness","-1")!=0) {
+            $brightness=intval($brightness*100/255);
+            $thread[]="brightness $brightness";
+        }
+
+
+        if(strcmp("$contrast","-1")!=0) {
+           $contrast=intval($contrast*100/255); 
+           $thread[]="contrast $contrast";
+        }
+
+        $thread[]="text_right %d-%m-%Y\\n%T"; 
 
     
 
