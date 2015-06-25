@@ -28,7 +28,21 @@ if(is_file("/tmp/interfaces")) {
             exec("sleep 2",$output,$err);
             exec("sudo /sbin/modprobe rt2800usb",$output,$err);
             exec("sleep 5",$output,$err);
+            
             exec("sudo /usr/sbin/invoke-rc.d networking force-reload",$output,$err);
+
+            exec("grep 'post-up /sbin/route add default gw' /etc/network/interfaces|grep eth0|sed -e 's/post-up //g'",$out,$err);
+            if((count($out)==1)&&(strcmp($out[0],"")!=0)) {
+                exec("sudo /sbin/route del default",$output,$err);
+                exec("sudo ".$out[0],$output,$err);
+            } else {
+                unset($out);
+                exec("grep 'post-up /sbin/route add default gw' /etc/network/interfaces|grep wlan0|sed -e 's/post-up //g'",$out,$err);
+                if((count($out)==1)&&(strcmp($out[0],"")!=0)) {
+                    exec("sudo /sbin/route del default",$output,$err);
+                    exec("sudo ".$out[0],$output,$err);
+                }
+            }
         }
         exec("sudo /bin/mv /var/cache/lighttpd/compress/cultibox /tmp/",$output,$err);
         echo json_encode("1");

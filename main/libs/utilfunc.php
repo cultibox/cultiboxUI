@@ -1150,6 +1150,7 @@ function create_network_file($myConf) {
                 $myArray[]="gateway ".$myConf['wifi_gw'];
                 if(!$route_gw) {
                     $myArray[]="post-up /sbin/route add default gw ".$myConf['wifi_gw']." wlan0";
+                    $myArray[]="post-down /bin/pkill -9 wpa_supplicant";
                 }
             }
         } else {
