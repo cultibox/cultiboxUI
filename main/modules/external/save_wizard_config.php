@@ -30,10 +30,6 @@ if($selected_plug==1) {
 
 if($selected_plug>3) {
     $plug_power_max=getvar('plug_power_max');
-    if(strcmp($plug_power_max,"VARIO")==0) {
-       $plug_power_max=getvar("dimmer_canal");
-       $type="2";
-   }
 } 
 $value_program=getvar('value_program');
 

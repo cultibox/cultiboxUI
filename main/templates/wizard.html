@@ -92,7 +92,7 @@
                 <td></td>
                 <td><?php echo __('PLUG_MAX_POWER'); ?>:</td>
                 <td>
-                    <?php if($selected_plug <= $GLOBALS['NB_MIN_PLUG']) { ?>
+                     <?php if($selected_plug <= $GLOBALS['NB_MIN_PLUG']) { ?>
                         <label class="readonly" id="plug_power_maximal"><?php echo $plug_power_max; ?>W</label>
                         <?php if($plug_power_max==3500) { ?>
                             <img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_MAX_POWER_PLUG_3500'); ?>" />
@@ -104,17 +104,8 @@
                             <tr>
                                 <td><input type= "radio" name="plug_power_max" value="1000" <?php if(strcmp($plug_power_max,"1000")==0) { echo "checked"; } ?>>1000W<img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_MAX_POWER_PLUG_1000'); ?>" /></td>
                                 <td><input type= "radio" name="plug_power_max" value="3500" <?php if(strcmp($plug_power_max,"3500")==0) { echo "checked"; } ?>>3500W<img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_MAX_POWER_PLUG_3500'); ?>" /></td>
-                                <td><input type= "radio" name="plug_power_max" value="VARIO" <?php if(intval($plug_power_max)<10) { echo "checked"; } ?>><?php echo __('DIMMER'); ?><img src="main/libs/img/infos.png" alt=""  title="<?php echo __('TOOLTIP_MAX_POWER_PLUG_DIMMER'); ?>" /></td>
                             </tr>
-                            <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="canal-vario"><div id="select_canal_dimmer" name="select_canal_dimmer" style="<?php if(intval($plug_power_max)>10) { echo 'display:none'; } ?>"><?php echo __('CANAL'); ?>:<select id="dimmer_canal" name="dimmer_canal"><?php for($j=1;$j<=$GLOBALS['NB_MAX_CANAL_DIMMER'];$j++) { ?><option value="<?php echo $j; ?>" <?php if(intval($plug_power_max)==$j) { echo ' selected'; } else  { if(!$status[$j-1]) { echo ' disabled'; } } ?>><?php echo $j; ?></option><?php } ?></select></div></td>
-                        </tr>
                         </table>
-                       <div id="error_canal_status" style="display:none" class="error_field step">
-                          <?php echo __('ERROR_CANAL_STATUS'); ?>
-                       <div>
                     <?php } ?>
                 </td>
             </tr>

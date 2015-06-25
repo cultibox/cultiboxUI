@@ -12,7 +12,6 @@ step=<?php echo json_encode($step); ?>;
 nb_plugs=<?php echo json_encode($nb_plugs); ?>;
 selected_plug=<?php echo json_encode($selected_plug); ?>;
 error_valueJS=<?php echo json_encode($error_value); ?>;
-canal_status= <?php echo json_encode($status); ?>;
 title_msgbox=<?php echo json_encode(__('TOOLTIP_MSGBOX_EYES')); ?>;
 var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
@@ -36,45 +35,42 @@ $(document).ready(function(){
    //Event fire when clicking the wizard button:
    $("#next").click(function(e) {
         e.preventDefault(); 
-        if(($("input[name=plug_power_max]:checked").val()!="VARIO")||(typeof($("#dimmer_canal option:selected").val())!="undefined")) {
-            $("#error_canal_status").css("display","none");
-            step=step+1;
+        step=step+1;
 
-            var chk_plg=false; 
-            if(selected_plug==nb_plugs) chk_plg=true;
-            expand_wizard(step,chk_plg,selected_plug);
+        var chk_plg=false; 
+        if(selected_plug==nb_plugs) chk_plg=true;
+        expand_wizard(step,chk_plg,selected_plug);
 
-            plug_type=$("#plug_type option:selected").val();
-            if(selected_plug>1) {
-                switch (plug_type) {
-                case "ventilator" :
-                case "heating" :
-                case "extractor" :
-                case "intractor" :
-                    $("#value_wished").text("<?php echo __('TEMP_WISHED','html').':'; ?>"); 
-                    $("#tooltip_value").show();
-                    $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="22" /><label id="label_unity">°C</label>');
+        plug_type=$("#plug_type option:selected").val();
+        if(selected_plug>1) {
+            switch (plug_type) {
+            case "ventilator" :
+            case "heating" :
+            case "extractor" :
+            case "intractor" :
+                $("#value_wished").text("<?php echo __('TEMP_WISHED','html').':'; ?>"); 
+                $("#tooltip_value").show();
+                $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="22" /><label id="label_unity">°C</label>');
                     break;
-                case "pumpfiling" :
-                case "pumpempting" :
-                case "pump" :
-                    $("#value_wished").text("<?php echo __('WATER_WISHED','html').':'; ?>");
-                    $("#tooltip_value").show();
-                    $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="22" /><label id="label_unity">cm</label>');
-                    break;
-                case "humidifier" :
-                case "dehumidifier" :
-                    $("#value_wished").text("<?php echo __('HUMI_WISHED','html').':'; ?>");
-                    $("#tooltip_value").show();
-                    $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="70" /><label id="label_unity">%</label>');
-                    break;
-                default :
-                    $("#value_wished").text("");
-                    $("#tooltip_value").css("display","none");
-                    $('#value_prog_div').append('<input type="hidden" name="value_program" id="value_program" value="99.9" />');
-                    $("#label_unity").text("");
-                    break;
-                }
+            case "pumpfiling" :
+            case "pumpempting" :
+            case "pump" :
+                $("#value_wished").text("<?php echo __('WATER_WISHED','html').':'; ?>");
+                $("#tooltip_value").show();
+                $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="22" /><label id="label_unity">cm</label>');
+                break;
+            case "humidifier" :
+            case "dehumidifier" :
+                $("#value_wished").text("<?php echo __('HUMI_WISHED','html').':'; ?>");
+                $("#tooltip_value").show();
+                $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="70" /><label id="label_unity">%</label>');
+                break;
+            default :
+                $("#value_wished").text("");
+                $("#tooltip_value").css("display","none");
+                $('#value_prog_div').append('<input type="hidden" name="value_program" id="value_program" value="99.9" />');
+                $("#label_unity").text("");
+                break;
             }
         }
     });
@@ -95,23 +91,6 @@ $(document).ready(function(){
             $("#label_unity").text("");
         }
     });
-
-    $('input[name=plug_power_max]').change(function() {
-        if($("input[name=plug_power_max]:checked").val()=="VARIO") {
-            if(($("input[name=plug_power_max]:checked").val()=="VARIO")&&(typeof($("#dimmer_canal option:selected").val())=="undefined")) {
-                $("#error_canal_status").show(700);
-            }
-            $("#select_canal_dimmer").show();
-        } else {
-            $("#select_canal_dimmer").css("display","none");
-            if(($("input[name=plug_power_max]:checked").val()!="VARIO")||(typeof($("#dimmer_canal option:selected").val())!="undefined")) {
-                $("#error_canal_status").css('display','none');
-            } 
-        }
-
-    });
-
-    
 
 
    $("#close").click(function(e) {
