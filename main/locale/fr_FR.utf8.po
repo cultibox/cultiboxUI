@@ -1770,7 +1770,7 @@ msgid "TOOLTIP_COST_STOP_TIME"
 msgstr "Date de fin du calcul de coût de votre installation. Vous pouvez calculer le coût de votre installation sur une période définie par la date de départ et la date de fin de ce formulaire"
 
 msgid "TOOLTIP_REGUL_SENSOR"
-msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
+msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration. Si aucun capteur n'est sélectionné, le capteur numéro 1 sera utilisé par défaut.<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
 
 msgid "TOOLTIP_SECOND_REGUL_ENABLE"
 msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Une fois activée, cette option vous permet d'accéder au mode expert qui comprend de nouvelles fonctionnalités: régulation secondaire, programmes journaliers... Pour plus d'information, se reporter à la documentation"
