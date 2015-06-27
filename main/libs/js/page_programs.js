@@ -160,7 +160,7 @@ $(document).ready(function(){
         $("#program_details").html(real_resume[$('#selected_plug').val()]);
         $("#program_details").dialog({
             resizable: false,
-            width: 500,
+            width: 600,
             closeOnEscape: false,
             modal: true,
             dialogClass: "popup_cultibox",

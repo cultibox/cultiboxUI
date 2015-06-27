@@ -167,25 +167,23 @@
                 <?php echo __('VALUE_ON_OFF'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_VALUE_PROGRAM'); ?>" />
             </td>
             <td class="program-field">
-                <table>
+                <table class="table_width">
                     <tr>
-                        <td>
-                            <input type="radio" name="regul_program" id="regon" value="on" <?php if(strcmp("$regul_program","on")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><?php echo __('VALUE_ON'); ?> 
+                        <td class="center_menu">
+                            <input type="radio" name="regul_program" id="regon" value="on" <?php if(strcmp("$regul_program","on")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><br /><?php echo __('VALUE_ON'); ?> 
                         </td>
-                        <td>
-                            <input type="radio" name="regul_program" id="regoff" value="off" <?php if(strcmp("$regul_program","off")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><?php echo __('VALUE_OFF'); ?>
+                        <td class="center_menu">
+                            <input type="radio" name="regul_program" id="regoff" value="off" <?php if(strcmp("$regul_program","off")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><br /><?php echo __('VALUE_OFF'); ?>
                         </td>
-                        <td>
-                            <?php if((strcmp($plugs_infos[$selected_plug-1]["PLUG_TYPE"],"lamp")==0)||(strcmp($plugs_infos[$selected_plug-1]["PLUG_TYPE"],"other")==0)) { ?>
-                                <div id="regul_div" style="display:none"><input type="radio" name="regul_program" id="regprog" value="regul" <?php if(strcmp("$regul_program","regul")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><?php echo __('VALUE_REGUL'); ?></div>
-                            <?php } else { ?>
-                                <div id="regul_div" style=""><input type="radio" name="regul_program" id="regprog" value="regul" <?php if(strcmp("$regul_program","regul")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><?php echo __('VALUE_REGUL'); ?></div>
-                            <?php } ?>
+                        <td class="center_menu">
+                            <?php if((strcmp($plugs_infos[$selected_plug-1]["PLUG_TYPE"],"lamp")==0)||(strcmp($plugs_infos[$selected_plug-1]["PLUG_TYPE"],"other")==0)) { $style='display:none'; } else { $style=''; } ?>
+                                <div id="regul_div" style="<?php echo $style; ?>"><input type="radio" name="regul_program" id="regprog" value="regul" <?php if(strcmp("$regul_program","regul")==0) { ?>checked<?php } ?> onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);"><br /><?php echo __('VALUE_REGUL'); ?></div>
                         </td>
-                        <td>
+                        <td class="center_menu">
                             <!-- Dimmer plug: --> 
-                            <div id="dimmer_div" style="<?php if($plugs_infos[$selected_plug-1]["PLUG_MODULE"] != "pwm") echo "display:none"; ?>"><input type="radio" name="regul_program" id="regdim" value="dimmer" onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" ><?php echo __('VALUE_DIMMER'); ?></div>  
+                            <div id="dimmer_div" style="<?php if($plugs_infos[$selected_plug-1]['PLUG_MODULE'] != 'pwm') echo 'display:none'; ?>"><input type="radio" name="regul_program" id="regdim" value="dimmer" onClick="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" onLoad="getRegulation(this.value,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);" ><br /><?php echo __('VALUE_DIMMER'); ?></div>  
                         </td>
+                        <td></td>
                     </tr>
                 </table>
 

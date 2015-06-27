@@ -248,7 +248,7 @@ $(document).ready(function(){
         }
         
         // If user selec a XMAX, change automatically type of plug to lamp
-        if ($(this).val() == "xmax" || $(this).val() == "pwm") {
+        if ($(this).val() == "xmax") {
             $("#plug_type"+id).val("lamp");
             $("#plug_type"+id).trigger("change");
             $("#plug_type"+id).attr('disabled','disabled');
