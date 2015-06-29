@@ -595,40 +595,11 @@
         <tr>
             <td class="calendar-conf-marge"></td>
             <td class="icon_menu2">
-                <a href="" id="logs_httpd" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-http.png' alt='' title="<?php echo __('CULTIPI_LOGS_HTTPD'); ?>"></a>
+                <a href="" id="view_logs"><img src='/cultibox/main/libs/img/view_logs.png' alt='' title="<?php echo __('CULTIPI_VIEW_LOGS'); ?>"></a>
             </td>
             <td class="icon_menu2">
-                <a href="" id="dl_logs_httpd" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-http.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_HTTPD'); ?>"></a>
+                <a href="" id="dl_logs"><img src='/cultibox/main/libs/img/dl_logs.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS'); ?>"></a>
             </td>
-            <td></td>
-            <td class="icon_menu2">
-                <a href="" id="logs_mysql" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_LOGS_MYSQL'); ?>"></a>
-            </td>
-            <td class="icon_menu2">
-                <a href="" id="dl_logs_mysql" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-mysql.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_MYSQL'); ?>"></a>
-            </td>   
-            <td></td>
-            <td class="icon_menu2">
-                <a href="" id="logs_service" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-service.png' alt='' title="<?php echo __('CULTIPI_LOGS_SERVICE'); ?>"></a>
-            </td>
-            <td class="icon_menu2">
-                <a href="" id="dl_logs_service" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-service.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SERVICE'); ?>"></a>
-            </td>
-            <td></td>
-            <td class="icon_menu2">
-                <a href="" id="logs_cultipi" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-culti.png' alt='' title="<?php echo __('CULTIPI_LOGS_CULTIPI'); ?>"></a>
-            </td>
-            <td class="icon_menu2">
-                <a href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/download-logs-culti.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_CULTIPI'); ?>"></a>
-            </td>
-            <td></td>
-            <td class="icon_menu2">
-                <a href="" id="logs_system" name="cultipi_logs"><img src='/cultibox/main/libs/img/view-logs-system.png' alt='' title="<?php echo __('CULTIPI_LOGS_SYSTEM'); ?>"></a>
-            </td>
-            <td class="icon_menu2">
-                <a href="" id="dl_logs_system" name="dl_cultipi_logs"><img src='/cultibox/main/libs/img/dl_system.png' alt='' title="<?php echo __('CULTIPI_DL_LOGS_SYSTEM'); ?>"></a>
-            </td>
-            <td></td>
             <td class="icon_menu2">
                 <a href="" id="dl_firm" name="dl_firm"><img src='/cultibox/main/libs/img/box_icon.png' alt='' title="<?php echo __('DL_CULTIBOX_FIRM'); ?>"></a>
             </td>
@@ -658,6 +629,40 @@
             <td class="conf-field-service"><?php echo __('CHANGE_PASSWORD'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_CHANGE_PWD'); ?>" /></td>
             <td><button id="change_password" name="change_password"><?php echo __('NEW_PASSWORD'); ?></button>
             </td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+<div id="dialog_view_logs" style="display:none">
+    <?php echo __('CULTIPI_VIEW_LOGS_TITLE'); ?>:
+    <ul class="list_class">
+        <li><a class="note_link" href="" id="logs_httpd" name="cultipi_logs"><?php echo __('CULTIPI_LOGS_HTTPD'); ?></a></li>
+        <li><a class="note_link" href="" id="logs_mysql" name="cultipi_logs"><?php echo __('CULTIPI_LOGS_MYSQL'); ?></a></li>
+        <li><a class="note_link" href="" id="logs_service" name="cultipi_logs"><?php echo __('CULTIPI_LOGS_SERVICE'); ?></a></li>
+        <li><a class="note_link" href="" id="logs_cultipi" name="cultipi_logs"><?php echo __('CULTIPI_LOGS_CULTIPI'); ?></a></li>
+        <li><a class="note_link" href="" id="logs_system" name="cultipi_logs"><?php echo __('CULTIPI_LOGS_SYSTEM'); ?></a></li>
+    </ul>
+</div>
+
+
+<div id="dialog_dl_logs" style="display:none">
+    <?php echo __('CULTIPI_DL_LOGS_TITLE'); ?>:
+    <ul class="list_class">
+        <li><a class="note_link" href="" id="dl_logs_httpd" name="dl_cultipi_logs"><?php echo __('CULTIPI_LOGS_HTTPD'); ?></a></li>
+        <li><a class="note_link" href="" id="dl_logs_mysql" name="dl_cultipi_logs"><?php echo __('CULTIPI_LOGS_MYSQL'); ?></a></li>
+        <li><a class="note_link" href="" id="dl_logs_service" name="dl_cultipi_logs"><?php echo __('CULTIPI_LOGS_SERVICE'); ?></a></li>
+        <li><a class="note_link" href="" id="dl_logs_cultipi" name="dl_cultipi_logs"><?php echo __('CULTIPI_LOGS_CULTIPI'); ?></a></li>
+        <li><a class="note_link" href="" id="dl_logs_system" name="dl_cultipi_logs"><?php echo __('CULTIPI_LOGS_SYSTEM'); ?></a></li>
+    </ul>
+</div>
+
+<div id="confirm_upgrade" style="display:none">
+    <table class="table_width">
+        <tr>
+            <td></td>
+            <td></td>
+            <td><input type="checkbox" name="beta_upgrade" id="beta_upgrade" <?php if(beta) echo 'checked'; ?> /></td>
             <td></td>
         </tr>
     </table>

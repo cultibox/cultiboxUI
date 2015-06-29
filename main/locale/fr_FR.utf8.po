@@ -94,6 +94,21 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "CULTIPI_VIEW_LOGS_TITLE"
+msgstr "Afficher les logs"
+
+msgid "CULTIPI_DL_LOGS_TITLE"
+msgstr "Télécharger les logs" 
+
+msgid "UPDATE_BUTTON"
+msgstr "Rechercher les mises à jours"
+
+msgid "CULTIPI_VIEW_LOGS"
+msgstr "Cliquer sur l'image pour afficher les logs du système"
+
+msgid "CULTIPI_DL_LOGS"
+msgstr "Cliquez sur l'image pour télécharger les logs du système"
+
 msgid "TOOLTIP_GATEWAY"
 msgstr "La passerelle permet à votre module de sortir vers l'extérieur (pour se mettre à jour par exemple). Elle correspond à l'adresse de l'équipement faisant le lien vers l'exterieur de votre réseau, comme l'adresse de votre box."
 
@@ -1909,10 +1924,7 @@ msgid "TOOLTIP_AUTO_WEBCAM"
 msgstr "Laisser la webcam gérer automatiquement la valeur"
 
 msgid "CULTIPI_LOGS_SYSTEM"
-msgstr "Cliquez sur l'image pour afficher les logs du système"
-
-msgid "CULTIPI_DL_LOGS_SYSTEM"
-msgstr "Cliquez sur l'image pour télécharger les logs du système"
+msgstr "du système"
 
 msgid "VALUE_MULTI"
 msgstr "Valeur" 
@@ -2068,28 +2080,16 @@ msgid "CULTIPI_SYNO_PILOTER"
 msgstr "Piloter"
 
 msgid "CULTIPI_LOGS_HTTPD"
-msgstr "Cliquez sur l'image pour afficher les logs du service Http"
+msgstr "du service Http"
 
 msgid "CULTIPI_LOGS_MYSQL"
-msgstr "Cliquez sur l'image pour afficher les logs du service Mysql"
+msgstr "du service Mysql"
 
 msgid "CULTIPI_LOGS_CULTIPI"
-msgstr "Cliquez sur l'image pour afficher les logs du service Cultipi"
+msgstr "du service Cultipi"
 
 msgid "CULTIPI_LOGS_SERVICE"
-msgstr "Cliquez sur l'image pour afficher les logs des services du système"
-
-msgid "CULTIPI_DL_LOGS_SERVICE"
-msgstr "Cliquez sur l'image pour télécharger les logs des services du système"
-
-msgid "CULTIPI_DL_LOGS_HTTPD"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Http"
-
-msgid "CULTIPI_DL_LOGS_MYSQL"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Mysql"
-
-msgid "CULTIPI_DL_LOGS_CULTIPI"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Cultipi"
+msgstr "des autres services Cultipi"
 
 msgid "DEFCOM"
 msgstr "Défaut de communication entre le logiciel et l'élément"

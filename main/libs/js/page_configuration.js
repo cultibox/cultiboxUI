@@ -10,7 +10,7 @@
 ?>
 
 
-rtc_offset_value=<?php echo json_encode($rtc_offset) ?>;
+var rtc_offset_value=<?php echo json_encode($rtc_offset) ?>;
 var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
 var ajax_format;
@@ -1130,8 +1130,27 @@ $(document).ready(function(){
 
 
 // Display services logs:
+    $("#view_logs").click(function(e) {
+        e.preventDefault();
+        $("#dialog_view_logs").dialog({
+            modal: true,
+            width: 600,
+            closeOnEscape: false,
+            dialogClass: "popup_message",
+            buttons: [{
+                 text: CLOSE_button,
+                 click: function () {
+                     $(this).dialog('close');
+                     return false;
+                 }
+            }]
+        });
+    });
+
+
     $("a[name='cultipi_logs']").click(function(e) {
         e.preventDefault();
+        $("#dialog_view_logs").dialog('close');
         var id=$(this).attr('id');
         $.blockUI({
         message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -1189,13 +1208,14 @@ $(document).ready(function(){
                             text: CLOSE_button,
                             id: "btnCloseLogs",
                             click: function () {
-                                $(this).scrollTop(0);
                                 $(this).dialog('close'); 
+                                $("#dialog_view_logs").dialog('open');
                                 return false;
                             }
                         }]
                     });
                 },error: function (data) {
+                    $("#dialog_view_logs").dialog('open');
                     $.unblockUI();
                 }
             });
@@ -1203,9 +1223,28 @@ $(document).ready(function(){
     });
 
 
-     // Download logs services file:
+    // Download logs services file:
+    $("#dl_logs").click(function(e) {
+        e.preventDefault();
+        $("#dialog_dl_logs").dialog({
+            modal: true,
+            width: 600,
+            closeOnEscape: false,
+            dialogClass: "popup_message",
+            buttons: [{
+                 text: CLOSE_button,
+                 click: function () {
+                     $(this).dialog('close');
+                     return false;
+                 }
+            }]
+        });
+    });
+
+
     $("a[name='dl_cultipi_logs']").click(function(e) {
         e.preventDefault();
+        $("#dialog_dl_logs").dialog('close');
         var id=$(this).attr('id');
         $.blockUI({
         message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
@@ -1236,9 +1275,12 @@ $(document).ready(function(){
                     }
 
                     $.unblockUI();
+                    $("#dialog_dl_logs").dialog('open');
+
 
                 },error: function (data) {
                     $.unblockUI();
+                    $("#dialog_dl_logs").dialog('open');
                 }
             });
         }});
