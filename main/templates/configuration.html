@@ -657,13 +657,14 @@
     </ul>
 </div>
 
-<div id="confirm_upgrade" style="display:none">
+<div id="confirm_upgrade" style="display:none" title="<?php echo __('UPDATE_CONFIGURATION'); ?>">
+    <br /><br />
     <table class="table_width">
         <tr>
-            <td></td>
-            <td></td>
+            <td class="conf-marge-cultipi"></td>
+            <td><?php echo __('ENABLE_REPO_DEV'); ?>:<img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_ENABLE_BETA'); ?>" /></td>
             <td><input type="checkbox" name="beta_upgrade" id="beta_upgrade" <?php if(beta) echo 'checked'; ?> /></td>
-            <td></td>
+            <td class="conf-marge-cultipi"></td>
         </tr>
     </table>
 </div>

@@ -94,13 +94,22 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "UPDATE_CONFIGURATION"
+msgstr "Configuration des mises à jour"
+
+msgid "ENABLE_REPO_DEV"
+msgstr "Activer la recherche de versions de test"
+
+msgid "TOOLTIP_ENABLE_BETA"
+msgstr "L'activation des mises à jours des versions de test  permet d'accéder à de nouvelles fonctionnalités encore en phase de développement. Ces fonctionnalités peuvent donc rendre instable le logiciel."
+
 msgid "CULTIPI_VIEW_LOGS_TITLE"
 msgstr "Afficher les logs"
 
 msgid "CULTIPI_DL_LOGS_TITLE"
 msgstr "Télécharger les logs" 
 
-msgid "UPDATE_BUTTON"
+msgid "UPGRADE_BUTTON"
 msgstr "Rechercher les mises à jours"
 
 msgid "CULTIPI_VIEW_LOGS"

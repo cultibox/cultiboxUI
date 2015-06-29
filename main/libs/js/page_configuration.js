@@ -13,6 +13,7 @@
 var rtc_offset_value=<?php echo json_encode($rtc_offset) ?>;
 var main_error = <?php echo json_encode($main_error); ?>;
 var main_info = <?php echo json_encode($main_info); ?>;
+var advanced_regul =  <?php echo json_encode($advanced_regul); ?>;
 var ajax_format;
 var sd_wizard="";
 
@@ -36,6 +37,124 @@ formatCard = function(hdd,pourcent) {
         }
     });
 }
+
+// {{{
+function check_rpi_update() {
+        $.blockUI({
+            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+              top: '20%',
+              border: 'none',
+              padding: '5px',
+              backgroundColor: 'grey',
+              '-webkit-border-radius': '10px',
+              '-moz-border-radius': '10px',
+              opacity: .9,
+              color: '#fffff'
+           },
+           onBlock: function() {
+               $.ajax({
+                    cache: false,
+                    url: "main/modules/external/check_rpi_update.php",
+                    async: false
+               }).done(function (data) {
+                     $.unblockUI();
+                     var objJSON = jQuery.parseJSON(data)
+                     if(objJSON=="1") {
+                        $("#cultipi_access_update").dialog({
+                            resizable: false,
+                            height:170,
+                            width: 500,
+                            modal: true,
+                            closeOnEscape: false,
+                            dialogClass: "popup_error",
+                            buttons: [{
+                                text: CLOSE_button,
+                                click: function () {
+                                    $( this ).dialog("close");
+                                }
+                            }]
+                        });
+                     } else if(objJSON=="") {
+                        $("#cultipi_no_update").dialog({
+                            resizable: false,
+                            height:150,
+                            width: 500,
+                            modal: true,
+                            closeOnEscape: false,
+                            dialogClass: "popup_message",
+                            buttons: [{
+                                text: CLOSE_button,
+                                click: function () {
+                                    $( this ).dialog("close");
+                                }
+                            }]
+                        });
+                     } else {
+                        $("#cultipi_confirm_update").dialog({
+                            resizable: false,
+                            height:150,
+                            width: 500,
+                            modal: true,
+                            closeOnEscape: false,
+                            dialogClass: "dialog_cultibox",
+                            buttons: [{
+                                text: OK_button,
+                                click: function () {
+                                    $( this ).dialog("close");
+                                    $.blockUI({
+                                        message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                        centerY: 0,
+                                        css: {
+                                            top: '20%',
+                                            border: 'none',
+                                            padding: '5px',
+                                            backgroundColor: 'grey',
+                                            '-webkit-border-radius': '10px',
+                                            '-moz-border-radius': '10px',
+                                            opacity: .9,
+                                            color: '#fffff'
+                                        },
+                                        onBlock: function() {
+                                            $.ajax({
+                                                cache: false,
+                                                url: "main/modules/external/upgrade_rpi.php",
+                                                async: false
+                                            }).done(function (data) {
+                                                $.unblockUI();
+                                                $("#cultipi_updated").dialog({
+                                                    resizable: false,
+                                                    height:150,
+                                                    width: 500,
+                                                    modal: true,
+                                                    closeOnEscape: false,
+                                                    dialogClass: "popup_message",
+                                                    buttons: [{
+                                                        text: CLOSE_button,
+                                                        click: function () {
+                                                            $( this ).dialog("close");
+                                                            window.location = "/cultibox"
+                                                        }
+                                                    }]
+                                                });
+                                            });
+                                        }
+                                    });
+                                }}, {
+                                text: CLOSE_button,
+                                id: "btnCloseUp",
+                                click: function () {
+                                    $( this ).dialog("close");
+                                }
+                            }]
+                        });
+                     }
+               });
+            }
+        });
+}
+// }}}
 
 // {{{ getAlarm()
 // ROLE display or not the alarm part from the configuration menu
@@ -785,6 +904,18 @@ $(document).ready(function(){
                 }
             });
 
+            if($("#advanced_regul_options option:selected").val()=="False") {
+                var bet="False";
+            } else {
+                var bet="True";
+            }
+
+            $.ajax({
+                cache: false,
+                url: "main/modules/external/manage_dev_repo.php",
+                async: false,
+                data: {beta:bet}
+            });
 
             if(check_update) {
                         $("#update_conf").dialog({
@@ -1296,123 +1427,64 @@ $(document).ready(function(){
     //Update RPI:
     $("#update_rpi").click(function(e) {
         e.preventDefault();
+        if(advanced_regul=="True") {
+            $("#confirm_upgrade").dialog({
+                  resizable: false,
+                  height:200,
+                  width: 500,
+                  modal: true,
+                  closeOnEscape: false,
+                  dialogClass: "popup_message",
+                  buttons: [{
+                      text: CLOSE_button,
+                      click: function () {
+                         $( this ).dialog("close");
+                         if($('#beta_upgrade').is(':checked')) {
+                            var bet="True";
+                         } else {
+                            var bet="False";
+                         }
 
-        $.blockUI({
-            message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-            centerY: 0,
-            css: {
-              top: '20%',
-              border: 'none',
-              padding: '5px',
-              backgroundColor: 'grey',
-              '-webkit-border-radius': '10px',
-              '-moz-border-radius': '10px',
-              opacity: .9,
-              color: '#fffff'
-           },
-           onBlock: function() {
-               $.ajax({
-                    cache: false,
-                    url: "main/modules/external/check_rpi_update.php",
-                    async: false
-               }).done(function (data) {
-                     $.unblockUI();
-                     var objJSON = jQuery.parseJSON(data)
-                     if(objJSON=="1") {
-                        $("#cultipi_access_update").dialog({
-                            resizable: false,
-                            height:170,
-                            width: 500,
-                            modal: true,
-                            closeOnEscape: false,
-                            dialogClass: "popup_error",
-                            buttons: [{
-                                text: CLOSE_button,
-                                click: function () {
-                                    $( this ).dialog("close");
-                                }
-                            }]
-                        });
-                     } else if(objJSON=="") {
-                        $("#cultipi_no_update").dialog({
-                            resizable: false,
-                            height:150,
-                            width: 500,
-                            modal: true,
-                            closeOnEscape: false,
-                            dialogClass: "popup_message",
-                            buttons: [{
-                                text: CLOSE_button,
-                                click: function () {
-                                    $( this ).dialog("close");
-                                }
-                            }]
-                        });
-                     } else {
-                        $("#cultipi_confirm_update").dialog({
-                            resizable: false,
-                            height:150,
-                            width: 500,
-                            modal: true,
-                            closeOnEscape: false,
-                            dialogClass: "dialog_cultibox",
-                            buttons: [{
-                                text: OK_button,
-                                click: function () {
-                                    $( this ).dialog("close");
-                                    $.blockUI({
-                                        message: "<?php echo __('LOADING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-                                        centerY: 0,
-                                        css: {
-                                            top: '20%',
-                                            border: 'none',
-                                            padding: '5px',
-                                            backgroundColor: 'grey',
-                                            '-webkit-border-radius': '10px',
-                                            '-moz-border-radius': '10px',
-                                            opacity: .9,
-                                            color: '#fffff'
-                                        },
-                                        onBlock: function() {
-                                            $.ajax({
-                                                cache: false,
-                                                url: "main/modules/external/upgrade_rpi.php",
-                                                async: false
-                                            }).done(function (data) {
-                                                $.unblockUI();
-                                                $("#cultipi_updated").dialog({
-                                                    resizable: false,
-                                                    height:150,
-                                                    width: 500,
-                                                    modal: true,
-                                                    closeOnEscape: false,
-                                                    dialogClass: "popup_message",
-                                                    buttons: [{
-                                                        text: CLOSE_button,
-                                                        click: function () {
-                                                            $( this ).dialog("close");
-                                                            window.location = "/cultibox"
-                                                        }
-                                                    }]
-                                                });
-                                            });
-                                        }
-                                    });
-                                }}, {
-                                text: CLOSE_button,
-                                id: "btnCloseUp",
-                                click: function () {
-                                    $( this ).dialog("close");
-                                }
-                            }]
-                        });
-                     }
-               });
-            }
-        });
-        
+                         $.ajax({
+                            cache: false,
+                            url: "main/modules/external/manage_dev_repo.php",
+                            async: false,
+                            data: {beta:bet}
+                         }).done(function(data) {
+                            return false;
+                         });
+                      }
+                  }, {
+                    text: "<?php echo __('UPGRADE_BUTTON','dialog'); ?>",
+                    click: function () {
+                         if($('#beta_upgrade').is(':checked')) {
+                            var bet="True";
+                         } else {
+                            var bet="False";
+                         }
 
-
+                         $( this ).dialog("close");
+                         $.ajax({
+                            cache: false,
+                            url: "main/modules/external/manage_dev_repo.php",
+                            async: false,
+                            data: {beta:bet}
+                         }).done(function (data) {   
+                             check_rpi_update();                    
+                         });
+                      }
+                  }]
+             });
+        } else {
+            $.ajax({
+               cache: false,
+               url: "main/modules/external/manage_dev_repo.php",
+               async: false,
+               data: {beta:"False"}
+            }).done(function (data) {
+               check_rpi_update();
+            });
+        }
     });
 
 
