@@ -343,7 +343,7 @@ function format_program_highchart_data($arr,$date_start="") {
          } else {
             $last=mktime(23,59,59,$ref_month,$ref_day,$ref_year)*1000; 
          }
-         $data=$data.",[".$last_time.",0],[".$last.",0]";
+         $data=$data.",[".$last_time=$val_end.",0],[".$last.",0]";
       } 
    } else {
       $first=mktime(0,0,0,$ref_month,$ref_day,$ref_year)*1000;
