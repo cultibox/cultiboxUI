@@ -2062,6 +2062,9 @@ msgstr "Click on the image to download the logs of the MySQL service"
 msgid "CULTIPI_DL_LOGS_CULTIPI"
 msgstr "Click on the image to download the logs of Cultipi service"
 
+msgid "NA"
+msgstr "Non définit"
+
 msgid "DEFCOM"
 msgstr "Failure of communication between the software and the element"
 

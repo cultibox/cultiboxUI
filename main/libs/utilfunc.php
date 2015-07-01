@@ -406,7 +406,7 @@ function check_tolerance_value($type,&$tolerance=0) {
         case "intractor":
         case "ventilator":
         case "heating":
-        case "pumpfiling":
+        case "pumpfilling":
         case "pumpempting":
         case "pump":
             if($tolerance >= 0 && $tolerance <= 10) {
@@ -646,7 +646,7 @@ function format_data_sumary($data) {
                 case 'heating':
                     $unity="°C";
                     break;
-                case 'pumpfiling':
+                case 'pumpfilling':
                 case 'pumpempting':
                 case 'pump':
                     $unity="cm";

@@ -1440,6 +1440,10 @@ $(document).ready(function(){
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('TIMEOUT'); ?>");
                                 $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "0.4");
                                 $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "0.4");
+                            } else if (value == "NA") {
+                                $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('NA'); ?>");
+                                $('img[name="syno_elemPlugImage_' + key + '"]').css("opacity", "0.4");
+                                $('input[name="syno_pilotPlug_' + key + '"]').css("opacity", "0.4");                                
                             } else {
                                 // On case
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('title',"<?php echo __('VALUE_ON'); ?>");
@@ -1448,7 +1452,7 @@ $(document).ready(function(){
                             }
                             
                             // Update image
-                            if (value != "DEFCOM" && value != "off" && value != "TIMEOUT" && value != "00.0" ) {
+                            if (value != "DEFCOM" && value != "off" && value != "TIMEOUT" && value != "00.0"  && value != "NA") {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('src',$('img[name="syno_elemPlugImage_' + key + '"]').attr('src').replace("_OFF", "_ON"));
                                 $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/service_off.png");
                             } else  {
@@ -1516,6 +1520,7 @@ $(document).ready(function(){
                             break;
                         case "TIMEOUT" :
                         case "DEFCOM" :
+                        case "NA" :
                         default :
                             $('#synoptic_updateCultipiStatus').attr('src','main/libs/img/button_cancel.png');
                             $('#synoptic_updateCultipiStatus').attr('title','<?php echo __('SYNO_UPDATE_CULTIPI_STATUS_TIMEOUT'); ?>' + "<br />Heure locale : " + objJSON.cultihour);

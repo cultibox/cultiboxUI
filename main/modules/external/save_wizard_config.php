@@ -51,7 +51,7 @@ if((empty($value_program))||(!isset($value_program))) {
             case 'dehumidifier':
                 $value_program=55.0;
                 break;
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
                 $value_program=22.0;
@@ -91,7 +91,7 @@ if((strcmp($type_submit,"submit_close")==0)||(strcmp($type_submit,"submit_next")
             case 'ventilator':
             case 'humidifier':
             case 'dehumidifier':
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
                 if(!isset($type) || empty($type)) {
@@ -175,7 +175,7 @@ if((strcmp($type_submit,"submit_close")==0)||(strcmp($type_submit,"submit_next")
                             insert_plug_conf("PLUG_SENSO",$prog[0]["selected_plug"],"T",$main_error);
                             insert_plug_conf("PLUG_REGUL_VALUE",$prog[0]["selected_plug"],"70",$main_error);
                             break;
-                        case 'pumpfiling':
+                        case 'pumpfilling':
                         case 'pumpempting':
                         case 'pump':
                             insert_plug_conf("PLUG_REGUL",$prog[0]["selected_plug"],"False",$main_error);

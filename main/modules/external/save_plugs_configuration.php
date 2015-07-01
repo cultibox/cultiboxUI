@@ -89,7 +89,7 @@ switch ($type) {
     case "intractor":
     case "ventilator":
     case "heating":
-    case "pumpfiling":
+    case "pumpfilling":
     case "pumpempting":
     case "pump":
     case "humidifier":
@@ -136,7 +136,7 @@ switch ($type) {
     case "heating":
         $regul_senso = "H";
         break;
-    case "pumpfiling":
+    case "pumpfilling":
     case "pumpempting":
     case "pump":
         $regul_senso = "L";
@@ -183,7 +183,7 @@ if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
         case "ventilator":
             $imageToSet = "ventilateur_OFF.gif";
             break;
-        case "pumpfiling":
+        case "pumpfilling":
         case "pumpempting":
         case "pump":
             $imageToSet = "pompe_OFF.png";
@@ -222,7 +222,7 @@ if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
                 insert_plug_conf("PLUG_SENSS",$nb,"+",$main_error);
                 insert_plug_conf("PLUG_SECOND_TOLERANCE",$nb,"0",$main_error);
                 break;
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
                 insert_plug_conf("PLUG_REGUL_VALUE",$nb,"22",$main_error);

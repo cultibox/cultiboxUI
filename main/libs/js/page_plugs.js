@@ -408,7 +408,7 @@ function open_plugs_dial(htmlPlug) {
                         $("#plug_type"+i).val()=="pump" || 
                         $("#plug_type"+i).val()=="extractor" || 
                         $("#plug_type"+i).val()=="intractor" || 
-                        $("#plug_type"+i).val()=="pumpfiling" || 
+                        $("#plug_type"+i).val()=="pumpfilling" || 
                         $("#plug_type"+i).val()=="pumpempting")
                         {
                             if($("#plug_tolerance"+i).val()=="0" || $("#plug_tolerance"+i).val()=="" )
@@ -438,7 +438,7 @@ function open_plugs_dial(htmlPlug) {
                                             case 'heating' :
                                                 $("#error_tolerance_value_temp"+i).show(700);
                                                 break;
-                                            case 'pumpfiling' :
+                                            case 'pumpfilling' :
                                             case 'pumpempting' :
                                             case 'pump' :
                                                 $("#error_tolerance_value_water"+i).show(700);
@@ -478,7 +478,7 @@ function open_plugs_dial(htmlPlug) {
                                     case 'heating' :
                                         $("#error_second_tolerance_value_humi"+i).show(700);
                                         break;
-                                    case 'pumpfiling' :
+                                    case 'pumpfilling' :
                                     case 'pumpempting' :
                                     case 'pump' :
                                         // TODO : Normallement la régulation secondaire est désactivé pour la pompe

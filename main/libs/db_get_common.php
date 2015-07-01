@@ -1696,14 +1696,12 @@ function create_plugconf_from_database($nb=0,&$out) {
                 case "heating":
                     $reg="REG:T-${tol}";
                     break;
-                case "pumpfiling":
+                case "pump":
+                case "pumpfilling":
                     $reg="REG:L-${tol}";
                     break;
                 case "pumpempting":
                     $reg="REG:L+${tol}";
-                    break;
-                case "pump":
-                    $reg="REG:T-${tol}";
                     break;
                 case "humidifier":
                     $reg="REG:H-${tol}";
@@ -1732,7 +1730,7 @@ function create_plugconf_from_database($nb=0,&$out) {
                         $sec="SEC:N+1000";
                         break;
                     case "humidifier":
-                    case "pumpfiling":
+                    case "pumpfilling":
                     case "pumpempting":
                     case "pump":
                     default:

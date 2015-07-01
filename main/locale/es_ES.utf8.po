@@ -2063,6 +2063,9 @@ msgstr "Haga clic en la imagen para descargar los registros del servicio de MySQ
 msgid "CULTIPI_DL_LOGS_CULTIPI" 
 msgstr "Haga clic en la imagen para descargar los registros de servicio Cultipi"
 
+msgid "NA"
+msgstr "Non définit"
+
 msgid "DEFCOM"
 msgstr "La falta de comunicación entre el software y el elemento"
 

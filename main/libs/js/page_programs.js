@@ -78,7 +78,7 @@ function getRegulation(i, type) {
                 var divValue = document.getElementById('value_program');
                 divValue.value="22";
                 break;
-            case 'pumpfiling' :
+            case 'pumpfilling' :
             case 'pumpempting' :
             case 'pump' :
                 divValHumi.style.display = 'none';
@@ -1160,7 +1160,7 @@ $(document).ready(function() {
                                     echo 'if(this.value == 100) return "' . __("CHART_FORCE_ON_VALUE") . '";';
                                     echo "return this.value+'°C';";
                                     break;
-                                case "pumpfiling" :
+                                case "pumpfilling" :
                                 case "pumpempting" :
                                 case "pump" :
                                     echo 'if(this.value == 100) return "' . __("CHART_FORCE_ON_VALUE") . '";';
@@ -1223,7 +1223,7 @@ $(document).ready(function() {
                                             unity="%";
                                             break;
                                         case "pump" :
-                                        case "pumpfiling" :
+                                        case "pumpfilling" :
                                         case "pumpempting" :
                                             unity="cm";
                                             break;
@@ -1259,7 +1259,7 @@ $(document).ready(function() {
                                 unity="%";
                                 break;
                             case "pump" :
-                            case "pumpfiling" :
+                            case "pumpfilling" :
                             case "pumpempting" :
                                 unity="cm";
                                 break;
@@ -1356,7 +1356,7 @@ $(document).ready(function() {
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 break;
                             case "pump" :
-                            case "pumpfiling" :
+                            case "pumpfilling" :
                             case "pumpempting" :
                                 if(this.value==100) return '<?php echo __("CHART_FORCE_ON_VALUE"); ?>';
                                 if(this.value>0) return this.value+' cm';
@@ -1378,7 +1378,7 @@ $(document).ready(function() {
             case "intractor":
             case "ventilator":
             case "heating":
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
             case "humidifier":
@@ -1505,7 +1505,7 @@ $(document).ready(function() {
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 break;
                             case "pump" :
-                            case "pumpfiling" :
+                            case "pumpfilling" :
                             case "pumpempting" :
                                 if(this.value==100) return '<?php echo __("CHART_FORCE_ON_VALUE"); ?>';
                                 if(this.value>0) return this.value+' cm';
@@ -1527,7 +1527,7 @@ $(document).ready(function() {
             case "intractor":
             case "ventilator":
             case "heating":
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
             case "humidifier":

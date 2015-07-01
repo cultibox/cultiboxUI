@@ -55,7 +55,7 @@ $(document).ready(function(){
                     $("#tooltip_value").show();
                     $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="22" /><label id="label_unity">°C</label>');
                     break;
-                case "pumpfiling" :
+                case "pumpfilling" :
                 case "pumpempting" :
                 case "pump" :
                     $("#value_wished").text("<?php echo __('WATER_WISHED','html').':'; ?>");
@@ -233,7 +233,7 @@ $("#value_program").keypress(function(e) {
             case "intractor":
             case "ventilator":
             case "heating":
-            case "pumpfiling":
+            case "pumpfilling":
             case "pumpempting":
             case "pump":
             case "humidifier":
@@ -266,7 +266,7 @@ $("#value_program").keypress(function(e) {
                                     case 'extractor' :
                                     case 'intractor' :
                                     case 'pump':
-                                    case 'pumpfiling' :
+                                    case 'pumpfilling' :
                                     case 'pumpempting' :
                                         $("#value_program").val("22");
                                         break;
@@ -291,7 +291,7 @@ $("#value_program").keypress(function(e) {
                         case 'extractor' :
                         case 'intractor' :
                         case 'pump':
-                        case 'pumpfiling' :
+                        case 'pumpfilling' :
                         case 'pumpempting' :
                             $("#value_program").val("22");
                             break;

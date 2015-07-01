@@ -87,7 +87,7 @@ switch($type) {
                 case "heating":
                     $check = check_format_values_program($value,"temp",$tolerance);
                     break;
-                case "pumpfiling":
+                case "pumpfilling":
                 case "pumpempting":
                 case "pump":
                     $check=check_format_values_program($value,"cm",$tolerance);

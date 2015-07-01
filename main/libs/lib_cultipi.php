@@ -383,7 +383,7 @@ function getPlugOfSynoptic () {
                     $image = "lampe_OFF.png";
                     break;
                 case "pump" :
-                case "pumpfiling" :
+                case "pumpfilling" :
                 case "pumpempting" :
                     $image = "pompe_OFF.png";
                     break;
