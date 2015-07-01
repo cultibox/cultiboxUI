@@ -9,7 +9,6 @@ $main_info=array();
 
 // ================= VARIABLES ================= //
 $nb_plugs=get_configuration("NB_PLUGS",$main_error);
-$status=get_canal_status($main_error);
 $step=1;
 
 // Trying to find if a cultibox SD card is currently plugged and if it's the case, get the path to this SD card

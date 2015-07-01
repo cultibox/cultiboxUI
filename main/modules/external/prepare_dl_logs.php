@@ -39,6 +39,13 @@
                 $name="cultipi-service.log";
             }
             break;
+        case "dl_logs_system":
+            exec("sudo cp /var/log/messages /var/www/cultibox/tmp/export/ 2>/dev/null",$ret,$err);
+            exec("sudo chown www-data:www-data /var/www/cultibox/tmp/export/messages 2>/dev/null");
+            if($err==0) {
+                $name="messages";
+            }
+            break;
         default:
             break;
     }

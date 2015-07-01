@@ -39,6 +39,12 @@ if((!isset($sd_card))||(empty($sd_card))) {
     setcookie("CHECK_SD", "False", time()+1800,"/",false,false);
 }
 
+if(is_file("/etc/apt/sources.list.d/cultibox-dev.list")) {
+    $beta=true;
+} else {
+    $beta=false;
+}
+
 
 //============================== GET OR SET CONFIGURATION PART ====================
 //update_conf sert à définir si la configuration impacte la carte SD

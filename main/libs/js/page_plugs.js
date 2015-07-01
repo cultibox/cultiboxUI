@@ -248,8 +248,9 @@ $(document).ready(function(){
         }
         
         // If user selec a XMAX, change automatically type of plug to lamp
-        if ($(this).val() == "xmax" || $(this).val() == "pwm") {
+        if ($(this).val() == "xmax") {
             $("#plug_type"+id).val("lamp");
+            $("#plug_type"+id).trigger("change");
             $("#plug_type"+id).attr('disabled','disabled');
         } else {
             $("#plug_type"+id).removeAttr('disabled');
@@ -392,7 +393,7 @@ function open_plugs_dial(htmlPlug) {
                                 }
                             }).done(function(data) {
                                 if(data!=1) {
-                                    $("#error_power_value"+i).show(700);
+                                    $("#error_power_value"+i).show(400);
                                     checked=false;
                                     jump_plug=i-1;
                                 }
@@ -430,18 +431,18 @@ function open_plugs_dial(htmlPlug) {
                                         switch ($("#plug_type"+i).val()) {
                                             case 'humidifier' :
                                             case 'dehumidifier' :
-                                                $("#error_tolerance_value_humi"+i).show(700);
+                                                $("#error_tolerance_value_humi"+i).show(400);
                                                 break;
                                             case 'extractor' :
                                             case 'intractor' :
                                             case 'ventilator' :
                                             case 'heating' :
-                                                $("#error_tolerance_value_temp"+i).show(700);
+                                                $("#error_tolerance_value_temp"+i).show(400);
                                                 break;
                                             case 'pumpfilling' :
                                             case 'pumpempting' :
                                             case 'pump' :
-                                                $("#error_tolerance_value_water"+i).show(700);
+                                                $("#error_tolerance_value_water"+i).show(400);
                                                 break;
                                         }
 
@@ -459,31 +460,49 @@ function open_plugs_dial(htmlPlug) {
                     } else {
                         if($("#plug_second_tolerance"+i).val()=="0") $("#plug_second_tolerance"+i).val('0.0');
                         $("#plug_second_tolerance"+i).val($("#plug_second_tolerance"+i).val().replace(",","."));
+
+                        var second_type="";
+                        switch ($("#plug_type"+i).val()) {
+                            case 'humidifier' :
+                            case 'dehumidifier' :
+                                  second_type="ventilator";
+                                  break;
+                            case 'extractor' :
+                            case 'intractor' :
+                            case 'ventilator' :
+                            case 'heating' :
+                            case 'pumpfiling' :
+                            case 'pumpempting' :
+                            case 'pump' :
+                                second_type="humidifier";
+                                break;
+                        }
+
                         $.ajax({
-                        cache: false,
-                        async: false,
-                        url: "main/modules/external/check_value.php",
-                        data: {value:$("#plug_second_tolerance"+i).val(),type:'tolerance',plug: $("#plug_type"+i).val()}
+                            cache: false,
+                            async: false,
+                            url: "main/modules/external/check_value.php",
+                            data: {value:$("#plug_second_tolerance"+i).val(),type:'tolerance',plug: second_type}
                         }).done(function(data) {
                             if(data!=1) {
                             
                                 switch ($("#plug_type"+i).val()) {
                                     case 'humidifier' :
                                     case 'dehumidifier' :
-                                        $("#error_second_tolerance_value_temp"+i).show(700);
+                                        $("#error_second_tolerance_value_temp"+i).show(400);
                                         break;
                                     case 'extractor' :
                                     case 'intractor' :
                                     case 'ventilator' :
                                     case 'heating' :
-                                        $("#error_second_tolerance_value_humi"+i).show(700);
+                                        $("#error_second_tolerance_value_humi"+i).show(400);
                                         break;
                                     case 'pumpfilling' :
                                     case 'pumpempting' :
                                     case 'pump' :
                                         // TODO : Normallement la régulation secondaire est désactivé pour la pompe
                                         // Dans ce cas, ce code ne doit pas exister
-                                        $("#error_second_tolerance_value_humi"+i).show(700);
+                                        $("#error_second_tolerance_value_humi"+i).show(400);
                                         break;
                                 }
 
@@ -491,11 +510,11 @@ function open_plugs_dial(htmlPlug) {
                                 jump_plug=i-1;
                             }
                         });
-                    } 
+            } 
 
 
                     if(($("#plug_regul_value"+i).val()=="0")||($("#plug_regul_value"+i).val()=="")) {
-                        $("#error_regul_value"+i).show(700);
+                        $("#error_regul_value"+i).show(400);
                         checked=false;
                         jump_plug=i-1;
                     } else {
@@ -507,7 +526,7 @@ function open_plugs_dial(htmlPlug) {
                         data: {value:$("#plug_regul_value"+i).val(),type:'regulation'}
                         }).done(function(data) {
                             if(data!=1) {
-                                $("#error_regul_value"+i).show(700);
+                                $("#error_regul_value"+i).show(400);
                                 checked=false;
                                 jump_plug=i-1;
                             }

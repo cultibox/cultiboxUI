@@ -1102,6 +1102,7 @@ function get_phy_addr($iface) {
 // IN  $myConf  array containing informations
 // RET error number or -1 else
 function create_network_file($myConf) {
+    $route_gw=false;
     if(count($myConf)==0) return 2;
     
     $myArray=array();
@@ -1123,6 +1124,8 @@ function create_network_file($myConf) {
 
             if((strcmp($myConf['wire_gw'],"")!=0)&&(strcmp($myConf['wire_gw'],"0.0.0.0")!=0)) {
                 $myArray[]="gateway ".$myConf['wire_gw'];
+                $myArray[]="post-up /sbin/route add default gw ".$myConf['wire_gw']." eth0";
+                $route_gw=true;  
             }
         } else {
             $myArray[]="iface eth0 inet dhcp";
@@ -1145,6 +1148,10 @@ function create_network_file($myConf) {
 
             if((strcmp($myConf['wifi_gw'],"")!=0)&&(strcmp($myConf['wifi_gw'],"0.0.0.0")!=0)) {
                 $myArray[]="gateway ".$myConf['wifi_gw'];
+                if(!$route_gw) {
+                    $myArray[]="post-up /sbin/route add default gw ".$myConf['wifi_gw']." wlan0";
+                    $myArray[]="post-down /bin/pkill -9 wpa_supplicant";
+                }
             }
         } else {
             $myArray[]="iface wlan0 inet dhcp";

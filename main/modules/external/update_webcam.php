@@ -13,13 +13,17 @@
             $palette="MJPEG";
         }
 
-        if((isset($_GET['brightness']))&&(!empty($_GET['brightness']))) {
+        if((isset($_GET['auto_brightness']))&&(!empty($_GET['auto_brightness']))&&(strcmp($_GET['auto_brightness'],"true")==0)) {
+            $brightness="-1";
+        } else if((isset($_GET['brightness']))&&(!empty($_GET['brightness']))) {
             $brightness=$_GET['brightness'];
         } else {
             $brightness="0";
         }
 
-        if((isset($_GET['contrast']))&&(!empty($_GET['contrast']))) {
+        if((isset($_GET['auto_contrast']))&&(!empty($_GET['auto_contrast']))&&(strcmp($_GET['auto_contrast'],"true")==0)) {
+            $contrast="-1";
+        } else if((isset($_GET['contrast']))&&(!empty($_GET['contrast']))) {
             $contrast=$_GET['contrast'];
         } else {
             $contrast="0";
@@ -42,8 +46,14 @@
 
         $conf[]="device /dev/video".$id;
         $conf[]="resolution ".$resolution;
-        $conf[]="set brightness=".$brightness."%";
-        $conf[]="set contrast=".$contrast."%";
+        if(strcmp("$brightness","-1")!=0) {
+            $conf[]="set brightness=".$brightness."%";
+        }
+
+        if(strcmp("$contrast","-1")!=0) {
+            $conf[]="set contrast=".$contrast."%";
+        }
+
         $conf[]="skip 10";
         $conf[]="title \"".$title."\"";
         $conf[]="top-banner";
@@ -94,6 +104,19 @@
         
         $thread[]="width ".$dim[0];
         $thread[]="height ".$dim[1];
+    
+        if(strcmp("$brightness","-1")!=0) {
+            $brightness=intval($brightness*100/255);
+            $thread[]="brightness $brightness";
+        }
+
+
+        if(strcmp("$contrast","-1")!=0) {
+           $contrast=intval($contrast*100/255); 
+           $thread[]="contrast $contrast";
+        }
+
+        $thread[]="text_right %d-%m-%Y\\n%T"; 
 
     
 

@@ -94,6 +94,33 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "UPDATE_CONFIGURATION"
+msgstr "Configuration des mises à jour"
+
+msgid "ENABLE_REPO_DEV"
+msgstr "Activer la recherche de versions de test"
+
+msgid "TOOLTIP_ENABLE_BETA"
+msgstr "L'activation des mises à jours des versions de test  permet d'accéder à de nouvelles fonctionnalités encore en phase de développement. Ces fonctionnalités peuvent donc rendre instable le logiciel."
+
+msgid "CULTIPI_VIEW_LOGS_TITLE"
+msgstr "Afficher les logs"
+
+msgid "CULTIPI_DL_LOGS_TITLE"
+msgstr "Télécharger les logs" 
+
+msgid "UPGRADE_BUTTON"
+msgstr "Rechercher les mises à jours"
+
+msgid "CULTIPI_VIEW_LOGS"
+msgstr "Cliquer sur l'image pour afficher les logs du système"
+
+msgid "CULTIPI_DL_LOGS"
+msgstr "Cliquez sur l'image pour télécharger les logs du système"
+
+msgid "TOOLTIP_GATEWAY"
+msgstr "La passerelle permet à votre module de sortir vers l'extérieur (pour se mettre à jour par exemple). Elle correspond à l'adresse de l'équipement faisant le lien vers l'exterieur de votre réseau, comme l'adresse de votre box."
+
 msgid "MANUAL_UPGRADE"
 msgstr "Mise à jour manuelle" 
 
@@ -1767,7 +1794,7 @@ msgid "TOOLTIP_COST_STOP_TIME"
 msgstr "Date de fin du calcul de coût de votre installation. Vous pouvez calculer le coût de votre installation sur une période définie par la date de départ et la date de fin de ce formulaire"
 
 msgid "TOOLTIP_REGUL_SENSOR"
-msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
+msgstr "La régulation d'une prise est réalisée en fonction des données relevées par un ou plusieurs capteurs. Ce champ vous permet de sélectionner ce(s) capteur(s) si vous avez activé les options avancées de régulation dans la partie configuration. Si aucun capteur n'est sélectionné, le capteur numéro 1 sera utilisé par défaut.<br /><b>Note:</b> les capteurs non adaptés ne seront pas pris en compte lors du calcul, un capteur de PH/Ec par exemple ne sera pas utilisé pour calculer une moyenne de température."
 
 msgid "TOOLTIP_SECOND_REGUL_ENABLE"
 msgstr "Assurez-vous de bien avoir lu l'aide avant d'activer cette option. Une fois activée, cette option vous permet d'accéder au mode expert qui comprend de nouvelles fonctionnalités: régulation secondaire, programmes journaliers... Pour plus d'information, se reporter à la documentation"
@@ -1899,6 +1926,27 @@ msgstr "Programme courant"
 
 
 # For the Cultipi part 
+msgid "AUTO"
+msgstr "Automatique"
+
+msgid "TOOLTIP_AUTO_WEBCAM"
+msgstr "Laisser la webcam gérer automatiquement la valeur"
+
+msgid "CULTIPI_LOGS_SYSTEM"
+msgstr "du système"
+
+msgid "VALUE_MULTI"
+msgstr "Valeur" 
+
+msgid "COLOR_MULTI"
+msgstr "Multi"
+
+msgid "IMAGE"
+msgstr "Image"
+
+msgid "DURATION_ACTION_PLUG"
+msgstr "Pendant"
+
 msgid "CONFIGURE_WEBCAM"
 msgstr "Configurer la Webcam"
 
@@ -2041,28 +2089,16 @@ msgid "CULTIPI_SYNO_PILOTER"
 msgstr "Piloter"
 
 msgid "CULTIPI_LOGS_HTTPD"
-msgstr "Cliquez sur l'image pour afficher les logs du service Http"
+msgstr "du service Http"
 
 msgid "CULTIPI_LOGS_MYSQL"
-msgstr "Cliquez sur l'image pour afficher les logs du service Mysql"
+msgstr "du service Mysql"
 
 msgid "CULTIPI_LOGS_CULTIPI"
-msgstr "Cliquez sur l'image pour afficher les logs du service Cultipi"
+msgstr "du service Cultipi"
 
 msgid "CULTIPI_LOGS_SERVICE"
-msgstr "Cliquez sur l'image pour afficher les logs des services du système"
-
-msgid "CULTIPI_DL_LOGS_SERVICE"
-msgstr "Cliquez sur l'image pour télécharger les logs des services du système"
-
-msgid "CULTIPI_DL_LOGS_HTTPD"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Http"
-
-msgid "CULTIPI_DL_LOGS_MYSQL"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Mysql"
-
-msgid "CULTIPI_DL_LOGS_CULTIPI"
-msgstr "Cliquez sur l'image pour télécharger les logs du service Cultipi"
+msgstr "des autres services Cultipi"
 
 msgid "NA"
 msgstr "Non définit"
