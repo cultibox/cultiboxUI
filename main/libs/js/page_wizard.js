@@ -73,7 +73,6 @@ $(document).ready(function(){
                     break;
                 }
             }
-        }
     });
 
     $("#previous").click(function(e) {
@@ -113,6 +112,7 @@ $(document).ready(function(){
         e.preventDefault();
         get_content("programs",getUrlVars("selected_plug=1"));
     });
+
 
 $('#start_time').timepicker({
     <?php echo "timeOnlyTitle: '".__('TIMEPICKER_SELECT_TIME')."',"; ?>

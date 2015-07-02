@@ -2087,6 +2087,20 @@ $(document).ready(function() {
 
     $('#dl_wifi_firm').click(function(e) {
        e.preventDefault();
+       $("#wifi_upgrade").dialog({
+            resizable: false,
+            width: 700,
+            modal: false,
+            closeOnEscape: true,
+            dialogClass: "popup_message",
+            buttons: [{
+               text: CLOSE_button,
+               click: function () {
+                 $( this ).dialog( "close" );
+                 return false;
+               }
+            }]
+       });
        $.fileDownload('main/templates/data/cultibox_firmware_wifi/firm.hex');
     });
 

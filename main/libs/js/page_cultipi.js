@@ -1291,11 +1291,11 @@ $(document).ready(function(){
                                                         if (valToSend == "off" || valToSend == "00.0" || valToSend == 0) {
                                                             $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_OFF'); ?>");
                                                             $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_ON", "_OFF"));
-                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/plug_on.png");
+                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/plug_off.png");
                                                         } else {
                                                             $('#syno_elemImage_' + idOfElem).attr('title',"<?php echo __('VALUE_ON'); ?>");
                                                             $('#syno_elemImage_' + idOfElem ).attr('src',$('#syno_elemImage_' + idOfElem ).attr('src').replace("_OFF", "_ON"));
-                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/plug_off.png");
+                                                            $('#syno_pilotPlug_' + idOfElem ).attr('src',"main/libs/img/plug_on.png");
                                                              }
 
                                                         // Change opacity
@@ -1505,10 +1505,10 @@ $(document).ready(function(){
                             // Update image
                             if (value != "DEFCOM" && value != "off" && value != "TIMEOUT" && value != "00.0"  && value != "NA") {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('src',$('img[name="syno_elemPlugImage_' + key + '"]').attr('src').replace("_OFF", "_ON"));
-                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/plug_off.png");
+                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/plug_on.png");
                             } else  {
                                 $('img[name="syno_elemPlugImage_' + key + '"]').attr('src',$('img[name="syno_elemPlugImage_' + key + '"]').attr('src').replace("_ON", "_OFF"));
-                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/plug_on.png");
+                                $('input[name="syno_pilotPlug_' + key + '"]').attr('src',"main/libs/img/plug_off.png");
                             }
                         }
                     });
