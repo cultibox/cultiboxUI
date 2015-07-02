@@ -166,10 +166,10 @@ msgstr "Activer la connexion sécurisée de l'interface"
 msgid "DISABLE_HTTPS"
 msgstr "Désactiver la connexion sécurisée de l'interface"
 
-msgid "DL_FIRM_CULTIBOX"
+msgid "DL_FIRM_WIFI"
 msgstr "<b>Si vous possédez le module Cultipi Wifi et que vous souhaitez l'activer, veuillez copier le fichier téléchargé (firm.hex) à la racine de la carte SD de la Cultibox :</b>"
 
-msgid "DL_FIRM_WIFI"
+msgid "DL_FIRM_CULTIBOX"
 msgstr "<b>Les utilisateurs expérimentés peuvent revenir à l'ancien mode de fonctionnement de la Cultibox en téléchargeant le firmware ci-dessous :</b>"
 
 msgid "DL_BUTTON_CULTIBOX"
