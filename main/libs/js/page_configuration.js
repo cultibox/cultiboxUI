@@ -70,7 +70,8 @@ function check_rpi_update() {
                             closeOnEscape: false,
                             dialogClass: "popup_error",
                             buttons: [{
-                                text: CLOSE_button,
+                                text: CLOSE_button, 
+                                id: 'btnCloseUp',
                                 click: function () {
                                     $( this ).dialog("close");
                                 }
@@ -86,6 +87,7 @@ function check_rpi_update() {
                             dialogClass: "popup_message",
                             buttons: [{
                                 text: CLOSE_button,
+                                id: 'btnCloseUp',
                                 click: function () {
                                     $( this ).dialog("close");
                                 }
@@ -565,8 +567,16 @@ $(document).ready(function(){
                                 dialogClass: "popup_message",
                                 buttons: [{
                                     text: CLOSE_button,
+                                    id: 'btnCloseImport',
                                     click: function () {
                                         $( this ).dialog( "close" );
+                                        $.ajax({
+                                            cache: false,
+                                            async: true,
+                                            url: "main/modules/external/set_variable.php",
+                                            data: {name:"UPDATED_CONF", value: "True", duration: 86400 * 365}
+                                        });
+
                                         var get_array = {};
                                         get_content("welcome",get_array);
                                         return false;
