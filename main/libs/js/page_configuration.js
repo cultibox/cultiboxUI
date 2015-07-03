@@ -2097,6 +2097,7 @@ $(document).ready(function() {
 
     $('#dl_wifi_firm').click(function(e) {
        e.preventDefault();
+       $("#dl_firm_div").dialog('close');
        $("#wifi_upgrade").dialog({
             resizable: false,
             width: 700,
@@ -2107,6 +2108,7 @@ $(document).ready(function() {
                text: CLOSE_button,
                click: function () {
                  $( this ).dialog( "close" );
+                 $("#dl_firm_div").dialog('open');
                  return false;
                }
             }]

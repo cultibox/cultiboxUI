@@ -94,8 +94,11 @@ msgstr "Page du résumé de l'état de votre espace de culture"
 
 
 # For the configuration part:
+msgid "WIFI_UPGRADE_TITLE"
+msgstr "Procédure de mise à jour du firmware Wifi"
+
 msgid "TOOLTIP_WIFI_UPGRADE"
-msgstr "<ul><li>Copier le firmware à la racine de la carte SD de la Cultibox</li><li>Débrancher la Cultibox du module WiFi</li><li>Insérer la carte à l'intérieur de la Cultibox</li><li>Brancher une alimentation électrique à la Cultibox (soit avec le chargeur d'origine et le câble USB d'origine, soit en branchant directement le câble USB d’origine entre la Cultibox et un ordinateur)</li><li>Au démarrage la Cultibox va mettre le firmware a jour. Attention, il ne faut surtout pas débrancher durant cette mise à jour sous peine de voir sa Cultibox inutilisable</li><li>Une fois la mise a jour terminée, on peut rebrancher la Cultibox au module WiFi comme avant la mise à jour</li></ul>"
+msgstr "<ul class='list_class'><li>Copier le firmware à la racine de la carte SD de la Cultibox</li><li>Débrancher la Cultibox du module WiFi</li><li>Insérer la carte à l'intérieur de la Cultibox</li><li>Brancher une alimentation électrique à la Cultibox (soit avec le chargeur d'origine et le câble USB d'origine, soit en branchant directement le câble USB d’origine entre la Cultibox et un ordinateur)</li><li>Au démarrage la Cultibox va mettre le firmware à jour. Attention, il ne faut surtout pas débrancher durant cette mise à jour sous peine de rendre sa Cultibox inutilisable</li><li>Une fois la mise à jour terminée, on peut rebrancher la Cultibox au module WiFi comme avant la mise à jour</li></ul>"
 
 msgid "UPDATE_CONFIGURATION"
 msgstr "Configuration des mises à jour"
