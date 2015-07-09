@@ -80,8 +80,8 @@ function check_db() {
     $plateforme_col["ip"]            = array ( 'Field' => "ip", 'Type' => "VARCHAR(16)", "default_value" => "1", 'carac' => "NOT NULL");
     $plateforme_col["pompeName"]     = array ( 'Field' => "pompeName", 'Type' => "VARCHAR(20)", "default_value" => "pompe", 'carac' => "NOT NULL");
     $plateforme_col["pompePrise"]    = array ( 'Field' => "pompePrise", 'Type' => "int(11)", "default_value" => 1, 'carac' => "NOT NULL");
-    $plateforme_col["active"]        = array ( 'Field' => "active", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
-    $plateforme_col["limitDesamorcagePompe"]        = array ( 'Field' => "limitDesamorcagePompe", 'Type' => "VARCHAR(5)", "default_value" => "on", 'carac' => "NOT NULL");
+    $plateforme_col["active"]        = array ( 'Field' => "active", 'Type' => "VARCHAR(5)", "default_value" => "true", 'carac' => "NOT NULL");
+    $plateforme_col["limitDesamorcagePompe"]        = array ( 'Field' => "limitDesamorcagePompe", 'Type' => "VARCHAR(5)", "default_value" => "true", 'carac' => "NOT NULL");
     $plateforme_col["tempsPerco"]    = array ( 'Field' => "tempsPerco", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["tempsMaxRemp"]  = array ( 'Field' => "tempsMaxRemp", 'Type' => "int(11)", "default_value" => 300, 'carac' => "NOT NULL");
     $plateforme_col["tempsMaxRempApresMidi"]  = array ( 'Field' => "tempsMaxRempApresMidi", 'Type' => "int(11)", "default_value" => 300, 'carac' => "NOT NULL");
@@ -89,6 +89,8 @@ function check_db() {
     $plateforme_col["priseDansLT"]          = array ( 'Field' => "priseDansLT", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["tempsPercoNuit"]       = array ( 'Field' => "tempsPercoNuit", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["tempsPercoApresMidi"]  = array ( 'Field' => "tempsPercoApresMidi", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["priseEau"]      = array ( 'Field' => "priseEau", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["activeAutoRemplissage"] = array ( 'Field' => "activeAutoRemplissage", 'Type' => "VARCHAR(5)", "default_value" => "false", 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_plateforme';";
@@ -121,7 +123,9 @@ function check_db() {
             ."tempsMaxRempNuit int(11) NOT NULL DEFAULT '100',"
             ."priseDansLT int(11) NOT NULL DEFAULT '0',"
             ."tempsPercoNuit int(11) NOT NULL DEFAULT '0'"
-            ."tempsPercoApresMidi int(11) NOT NULL DEFAULT '0' );";
+            ."tempsPercoApresMidi int(11) NOT NULL DEFAULT '0'"
+            ."priseEau int(11) NOT NULL DEFAULT '0',"
+            ."activeAutoRemplissage varchar(5) NOT NULL DEFAULT 'false' );";
 
         // Create table
         try {
