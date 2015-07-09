@@ -158,7 +158,7 @@ $(document).ready(function(){
                     $.each(objJSON[0], function(i, item) {
                         if (item != "" && item != "NULL" )
                         {
-                            $("#logServerIrrigation").append(item+"<br />");
+                            $("#logServerIrrigation").append(item.substr(11)+"<br />");
                         }
                     });
                 }
