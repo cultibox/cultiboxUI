@@ -16,7 +16,7 @@ $PASSWORD = 'cultipi';
 $ACCOUNTS = array();
 
 // Home directory (absolute or relative path)
-$HOME_DIRECTORY = '';
+$HOME_DIRECTORY = '/home/cultipi';
 
 // Code below is automatically generated from different components
 // For more information see: https://github.com/nickola/web-console

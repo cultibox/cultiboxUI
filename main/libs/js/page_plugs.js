@@ -195,7 +195,8 @@ $(document).ready(function(){
 
     //Display options for selected output :
     $("select[name*='plug_module']").live("change",function () {
-        var id=$(this).attr('name').substr($(this).attr('name').length-1);
+        var id=$(this).attr('name').replace(/\D+/g,'');
+
 
         if(!isFinite(String(id))) {
             id="";
@@ -210,6 +211,7 @@ $(document).ready(function(){
         $("#select_canal_xmax"+id).css("display","none");
         $("#select_canal_pwm"+id).css("display","none");
         $("#select_canal_" + $(this).val() + id).show();
+        
         
         // Reset value for power
         switch($(this).val()) {
