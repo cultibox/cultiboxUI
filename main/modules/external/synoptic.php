@@ -29,8 +29,6 @@
        
             cultipi\check_db();
             
-            //cultipi\addElementInSynoptic("sensor", 1, "capteur.png");
-            
             $ret_array = configuration\getConfElem("NB_PLUGS");
             
             break;
