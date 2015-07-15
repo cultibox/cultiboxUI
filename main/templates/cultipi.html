@@ -385,8 +385,8 @@
     <div id="syno_pilotPlug_element" style="display:none" title="<?php echo __('CULTIPI_SYNO_PILOTAGE'); ?>">
         <table class="table_width" >
             <tr id="syno_configure_element_force_plug_on_off">
-                <td><?php echo __('CULTIPI_SYNO_PILOTAGE'); ?>:</td>
-                <td>
+                <td class="cultipi_blank"><?php echo __('CULTIPI_SYNO_PILOTAGE'); ?>:</td>
+                <td class="cultipi-pilot-field">
                     <select id="syno_configure_element_force_plug_value" >
                         <option value="on"><?php echo __('VALUE_ON'); ?></option>
                         <option value="off"><?php echo __('VALUE_OFF'); ?></option>
@@ -416,7 +416,7 @@
             <tr>
                 <td><?php echo __('DURATION_ACTION_PLUG'); ?>:</td>
                 <td><div class="slider_div" id="syno_configure_element_force_plug_time"></div></td>
-                <td><input style="display:none" type="text" name="duration_plug_label" id="duration_plug_label" value="1" /><div id="equi_time">00:00:01</div></td>
+                <td><input style="display:none" type="text" name="duration_plug_label" id="duration_plug_label" value="1" /><div id="equi_time" >00:00:01</div></td>
                </td>
             </tr>
         </table>

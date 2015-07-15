@@ -90,7 +90,7 @@ $(document).ready(function(){
      pop_up_remove("main_info");
 
      $("#syno_configure_element_force_plug_time").slider({
-        max: 1800,
+        max: 3599,
         min: 1,
         slide: function( event, ui) {
             $("#equi_time").html(secondsToTime(ui.value));
@@ -1222,7 +1222,7 @@ $(document).ready(function(){
 
                     $("#syno_pilotPlug_element").dialog({
                         resizable: false,
-                        width: 500,
+                        width: 600,
                         closeOnEscape: true,
                         dialogClass: "popup_message",
                         title:"<?php echo __('CULTIPI_SYNO_PILOTER'); ?> " + elementTitle,
