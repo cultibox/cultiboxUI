@@ -2400,7 +2400,6 @@ function open_dialog_wifi_wizard(step) {
                 } else {
                      $("#btnNEXT").show();
                 }
-                alert(step);
             }
        });
 }
