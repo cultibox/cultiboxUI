@@ -441,7 +441,10 @@
     <?php for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) { ?>
         <div id="webcam<?php echo $i; ?>" style="display:none" class="step">
             <p id="last_webcam<?php echo $i; ?>" class="p_center" style="display:none"><?php echo __('LAST_WEBCAM'); ?>:</p>
-            <img id="screen_webcam<?php echo $i; ?>" src="<?php echo $screen{$i}; ?>" title="" class="screenshot" alt="" style="display:none" />
+            <div id="content_screen<?php echo $i; ?>
+">
+                <img id="screen_webcam<?php echo $i; ?>" src="<?php echo $screen{$i}; ?>" title="" class="screenshot" alt="" style="display:none" />
+            </div>
 
             <div id="div_link_webcam<?php echo $i; ?>" style="display:none">
                 <table class="table_width">

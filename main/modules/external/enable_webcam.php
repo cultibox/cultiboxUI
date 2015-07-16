@@ -22,11 +22,11 @@ if(strcmp("$action","stream")==0) {
     } else {
         $count=0;
         while(true) {
-            sleep(1);
+            sleep(2);
             $count=$count+1;
             if((!is_file("/var/www/culticam_$action"))||($count>10)) break;
         }
-        sleep(2);
+        sleep(5);
     }
 }
 
