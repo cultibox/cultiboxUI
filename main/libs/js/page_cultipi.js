@@ -56,20 +56,21 @@ function get_webcam(first) {
                         d = new Date();
                         if((obj==1)&&($('#webcam_id'+idx).is(':checked'))) {
                             var src="tmp/webcam"+idx+".jpg?v="+d.getTime();
-                            $("#content_screen"+idx).empty();
-                            $("#content_screen"+idx).append('<img id="screen_webcam'+idx+'" src="'+src+'" title="" class="screenshot" alt="" />');
+                            $("#screen_webcam"+idx).attr("src", src);   
+                            $("#screen_webcam"+idx).show();
                             $("#last_webcam"+idx).show();
                         } else {
                             var src="";
                             $("#screen_webcam"+idx).attr("src", src);
-                            $("#content_screen"+idx).empty();
-                            $("#content_screen"+idx).append('<img id="screen_webcam'+idx+'" src="'+src+'" title="" class="screenshot" alt="" style="display:none" />');
+                            $("#screen_webcam"+idx).hide();
                             $("#last_webcam"+idx).hide();
                         }
                         $("#error_webcam"+idx).css("display","none");
                         $("#div_link_webcam"+idx).show();
                     } else {
-                        $("#content_screen"+idx).empty();
+                        d = new Date();
+                        $("#screen_webcam"+idx).attr("src", "");
+                        $("#screen_webcam"+idx).css("display","none");
                         $("#error_webcam"+idx).show();
                         $("#div_link_webcam"+idx).css("display","none");
                         $("#last_webcam"+idx).hide();
@@ -444,9 +445,9 @@ $(document).ready(function(){
                     url: "main/modules/external/enable_webcam.php",
                     data: {action:"snapshot",webcam:selected}
                 }).done(function(data) {
+                    $.unblockUI();
                     get_webcam(selected);
                     $("#show_webcam").dialog('open');
-                    $.unblockUI();
                 });
             }
         });
@@ -1220,7 +1221,7 @@ $(document).ready(function(){
                     }
 
                     $("#syno_pilotPlug_element").dialog({
-                        resizable: false,
+                        resizable: true,
                         width: 600,
                         closeOnEscape: true,
                         dialogClass: "popup_message",

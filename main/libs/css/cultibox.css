@@ -746,6 +746,10 @@ td.conf-field-cultipi {
     width: 20%;
 }
 
+td.cultipi-pilot-field {
+    width: 80%
+}
+
 td.conf-marge-webcam {
     width: 20%;
 }

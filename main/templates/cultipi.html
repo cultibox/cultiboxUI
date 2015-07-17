@@ -416,7 +416,7 @@
             <tr>
                 <td><?php echo __('DURATION_ACTION_PLUG'); ?>:</td>
                 <td><div class="slider_div" id="syno_configure_element_force_plug_time"></div></td>
-                <td><input style="display:none" type="text" name="duration_plug_label" id="duration_plug_label" value="1" /><div id="equi_time" >00:00:01</div></td>
+                <td><input style="display:none" type="text" name="duration_plug_label" id="duration_plug_label" value="1" /><div id="equi_time" >00m01s</div></td>
                </td>
             </tr>
         </table>
@@ -441,10 +441,7 @@
     <?php for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++) { ?>
         <div id="webcam<?php echo $i; ?>" style="display:none" class="step">
             <p id="last_webcam<?php echo $i; ?>" class="p_center" style="display:none"><?php echo __('LAST_WEBCAM'); ?>:</p>
-            <div id="content_screen<?php echo $i; ?>
-">
-                <img id="screen_webcam<?php echo $i; ?>" src="<?php echo $screen{$i}; ?>" title="" class="screenshot" alt="" style="display:none" />
-            </div>
+            <img id="screen_webcam<?php echo $i; ?>" src="<?php echo $screen{$i}; ?>" title="" class="screenshot" alt="" style="display:none" />
 
             <div id="div_link_webcam<?php echo $i; ?>" style="display:none">
                 <table class="table_width">
