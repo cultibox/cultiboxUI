@@ -18,7 +18,7 @@ if(strcmp("$action","stream")==0) {
             $count=$count+1;
             if((is_file("/var/www/cultibox/tmp/webcam$webcam.jpg"))||($count>10)) break;
         }
-        sleep(2);
+        sleep(3);
     } else {
         $count=0;
         while(true) {
@@ -26,7 +26,7 @@ if(strcmp("$action","stream")==0) {
             $count=$count+1;
             if((!is_file("/var/www/culticam_$action"))||($count>10)) break;
         }
-        sleep(5);
+        sleep(3);
     }
 }
 
