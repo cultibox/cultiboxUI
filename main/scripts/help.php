@@ -62,7 +62,7 @@
                  echo $my_html;
 
                  ?>
-                 <p class="subtitle_right"><b><i><a href="/cultibox/help.php">Retour au sommaire</a></i></b></p>
+                 <p class="subtitle_right"><b><i><a href="/cultibox/main/script/help.php">Retour au sommaire</a></i></b></p>
              </div>
         </div>
     </div>
