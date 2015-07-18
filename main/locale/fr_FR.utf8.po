@@ -732,7 +732,7 @@ msgid "PLUG_CO2"
 msgstr "CO²"
 
 msgid "POWER_PLUG"
-msgstr "Puissance consommée par l'élément (en Watt)"
+msgstr "Puissance de l'élément "
 
 msgid "ENABLE_REGUL_PLUG"
 msgstr "Régulation secondaire (Utilisateur expert)"
@@ -1758,7 +1758,7 @@ msgid "TOOLTIP_DIMMER_VALUE"
 msgstr "La Cultibox va utiliser la prise variateur pour n'utiliser que la puissance désirée de l'équipement"
 
 msgid "TOOLTIP_POWER"
-msgstr "La puissance de l'équipement branché. Renseigner ce champ vous permet de calculer la consommation de votre installation, son prix..."
+msgstr "La puissance de l'équipement branché (en Watt). Renseigner ce champ vous permet de calculer la consommation de votre installation, son prix..."
 
 msgid "TOOLTIP_POWER_LOG"
 msgstr "Cette option calcule et affiche la puissance consommée pour la/les prise(s) sélectionnée(s). Pour que cela soit possible il faudra renseigner le champ 'puissance' dans la partie de configuration des prises"

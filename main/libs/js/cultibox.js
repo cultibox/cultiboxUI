@@ -162,7 +162,7 @@ function secondsToTime(secs)
     var seconds = Math.ceil(divisor_for_seconds);
     if(seconds<10) seconds="0"+seconds;
 
-    return minutes+":"+seconds;
+    return minutes+"m"+seconds+"s";
 }
 
 

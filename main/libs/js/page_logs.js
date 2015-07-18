@@ -611,8 +611,8 @@ $(function () {
             subtitle: {
                 useHTML: true,
                 text: document.ontouchstart === undefined ?
-                <?php echo "'".__('DRAG_PLOT')."'"; ?>:
-                <?php echo "'".__('DRAG_PLOT')."'"; ?>
+                <?php echo "'".__('DRAG_PLOT','hc')."'"; ?>:
+                <?php echo "'".__('DRAG_PLOT','hc')."'"; ?>
             },
             lang: {
                 useHTML: true,
@@ -629,9 +629,15 @@ $(function () {
             scrollbar: {
                 enabled: true
             },
-        
             rangeSelector: {
                 selected: 1
+            },
+            exporting: {
+                chartOptions:{
+                    subtitle : {
+                        text:""
+                     }
+                }
             },
             xAxis: {
                 type: 'datetime',

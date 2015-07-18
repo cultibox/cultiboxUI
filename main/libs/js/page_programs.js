@@ -1071,7 +1071,7 @@ $(document).ready(function() {
             },
             title: {
                 useHTML: true,
-                text: <?php echo "'".__('CURRENT_PLUG_PROGRAM').": '"; ?>,
+                text: <?php echo "'".__('CURRENT_PLUG_PROGRAM','hc').": '"; ?>,
                 margin: 40
             },
             subtitle: {
@@ -1149,7 +1149,7 @@ $(document).ready(function() {
                 labels: {
                     useHTML: true,
                     formatter: function() {
-                        if(this.value == 0) return "<?php echo __("VALUE_OFF") ;?>";
+                        if(this.value == 0) return "<?php echo __("VALUE_OFF","HC") ;?>";
                         if(this.value >= 0 && this.value <= 100) {
                         <?php
                             switch ($plugs_infos[$selected_plug-1]["PLUG_TYPE"]) {
@@ -1182,6 +1182,13 @@ $(document).ready(function() {
                 },
                 title: false
             },
+            exporting: {
+                chartOptions:{
+                    subtitle : {
+                        text:""
+                     }
+                }
+            },
             plotOptions: {
                 series: {
                     events: {
@@ -1207,8 +1214,8 @@ $(document).ready(function() {
                         useHTML: true,
                         formatter: function(){ 
                             if (this.visible) {                      
-                                if(this.y=="99.9") { return "<?php echo __('CHART_FORCE_ON_VALUE'); ?>"; }
-                                else if(this.y=="0") { return "<?php echo __('VALUE_OFF'); ?>"; }
+                                if(this.y=="99.9") { return "<?php echo __('CHART_FORCE_ON_VALUE','hc'); ?>"; }
+                                else if(this.y=="0") { return "<?php echo __('VALUE_OFF','hc'); ?>"; }
                                 else { 
                                     var unity="";
                                     switch (plugs_infoJS[this.series.index]["PLUG_TYPE"]) {
@@ -1244,7 +1251,7 @@ $(document).ready(function() {
                     if(this.y == 99.9) {
                         return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b><?php echo __("CHART_FORCE_ON_VALUE"); ?></p>";
                     } else if(this.y == 0) {
-                        return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b><?php echo __("VALUE_OFF"); ?></p>";
+                        return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b><?php echo __("VALUE_OFF","hc"); ?></p>";
                     } else { 
                         var unity="";
                         switch (plugs_infoJS[this.series.index]["PLUG_TYPE"]) {

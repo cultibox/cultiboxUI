@@ -242,8 +242,8 @@ $(document).ready(function() {
       },
       title: {
          useHTML: true,
-         text: <?php if(strcmp("$startday","$endday")!=0) { echo "'".__('COST_PRICE_COMPUTE_GRAPH')." ".__('COST_PRICE_TIME')." ".$startday." ".__('COST_PRICE_TO')." ".$endday."'"; } else {
-                    echo "'".__('COST_PRICE_COMPUTE_GRAPH')." ".__('COST_PRICE_FOR_DAY')." ".$startday."'"; } ?>
+         text: <?php if(strcmp("$startday","$endday")!=0) { echo "'".__('COST_PRICE_COMPUTE_GRAPH','hc')." ".__('COST_PRICE_TIME','hc')." ".$startday." ".__('COST_PRICE_TO','hc')." ".$endday."'"; } else {
+                    echo "'".__('COST_PRICE_COMPUTE_GRAPH','hc')." ".__('COST_PRICE_FOR_DAY','hc')." ".$startday."'"; } ?>
       },
       subtitle: {
          text: ''
@@ -262,8 +262,8 @@ $(document).ready(function() {
       },
       xAxis: {
          categories: [
-            '<?php echo __('REAL_PRICE'); ?>',
-            '<?php echo __('THEORICAL_PRICE'); ?>'
+            '<?php echo __('REAL_PRICE','hc'); ?>',
+            '<?php echo __('THEORICAL_PRICE','hc'); ?>'
          ],
      labels: {
         useHTML: true
@@ -273,7 +273,7 @@ $(document).ready(function() {
          min: 0,
          title: {
             useHTML: true,
-            text: '<?php echo __('INSTALLATION_PRICE'); ?>'
+            text: '<?php echo __('INSTALLATION_PRICE','hc'); ?>'
          }
       },
       credits: {
