@@ -22,39 +22,49 @@
     <tr>
         <td class="calendar-conf-marge"></td>
             <td class="icon_menu2">
-            <!-- Button to change parameters-->
-            <input type="image" id="button_parameters" 
-                name="button_parameters"
-                title="<?php echo __('TOOLTIP_PARAMETERS_LOGS'); ?>"
-                src="main/libs/img/advancedsettings.png" 
-                alt="parameters"
-            />
+                <!-- Button to change parameters-->
+                <input type="image" id="button_parameters" 
+                    name="button_parameters"
+                    title="<?php echo __('TOOLTIP_PARAMETERS_LOGS'); ?>"
+                    src="main/libs/img/advancedsettings.png" 
+                    alt="parameters"
+                />
             </td>
             <td class="icon_menu2">
-            <!-- Button to view curve to select-->
-            <input type="image" id="curve_select_button"
-                name="curve_select_button"
-                title="<?php echo __('SELECT_CURVE_TO_DISPLAY'); ?>"
-                src="main/libs/img/text-x-log.png"
-                alt="parameters"
-            />
+                <!-- Button to view curve to select-->
+                <input type="image" id="curve_select_button"
+                    name="curve_select_button"
+                    title="<?php echo __('SELECT_CURVE_TO_DISPLAY'); ?>"
+                    src="main/libs/img/text-x-log.png"
+                    alt="parameters"
+                />
             </td>
             <td class="icon_menu2">
-            <!-- Button to manage database-->
-            <input type="image" id="database_management_button"
-                name="database_management_button"
-                title="<?php echo __('MANAGE_LOG_INFOS'); ?>"
-                src="main/libs/img/database.png" 
-                alt="parameters"
-            />
+                <!-- Button to manage database-->
+                <input type="image" id="database_management_button"
+                    name="database_management_button"
+                    title="<?php echo __('MANAGE_LOG_INFOS'); ?>"
+                    src="main/libs/img/database.png" 
+                    alt="parameters"
+                />
             </td>
             <td class="icon_menu2">
-            <input type="image" id="cost"
-                name="cost"
-                title="<?php echo __('COST_PRICE_COMPUTE'); ?>"
-                src="main/libs/img/cost.png" 
-                alt="cost"
-            />
+                <!-- Button to show cost-->
+                <input type="image" id="cost"
+                    name="cost"
+                    title="<?php echo __('COST_PRICE_COMPUTE'); ?>"
+                    src="main/libs/img/cost.png" 
+                    alt="cost"
+                />
+            </td>
+            <td class="icon_menu2">
+                <!-- Button to show sensor type-->
+                <input type="image" id="button_sensors_parameters"
+                    name="button_sensors_parameters"
+                    title="Paramètres capteur"
+                    src="main/libs/img/Farm-Fresh_temperature_1.png" 
+                    alt="sensors_parameters"
+                />
             </td>
             <td></td>
     </tr>
@@ -898,5 +908,57 @@
             </td>
             <td><div id="error_power_value" class='error_field' style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_POWER_VALUE'); ?></div></td>
         </tr>
+    </table>
+</div>
+
+<!-- Div used for selecting sensor type -->
+<div id="ui_sensors_parameters" name="ui_sensors_parameters" title="Paramètres capteurs" style="display:none">
+    <table class="table_width">
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Détection automatique</th>
+            <th>Type</th>
+            <th>Paramètres</th>
+        <tr>
+        <?php
+            // Retriev sensor infos 
+            $sensorList = \sensors\getDB();
+            
+            // foreach sensor, get type and position
+            foreach ($sensorList as $index => $sensor){
+            
+                $sensorNum = $sensor["id"];
+            
+                ?>
+                <tr>
+                    <td>
+                        <p> <?php echo __('SENSOR') . " " . $sensorNum; ?> : </p>
+                    </td>
+                    <td>
+                        <input type="text" id="ui_sensors_parameters_tableSensor_name_<?php echo $sensorNum; ?>" value="<?php echo $sensor["name"]; ?>" size="10" />
+                    </td>
+                    <td>
+                        <input type="checkbox" id="ui_sensors_parameters_tableSensor_detectionAuto_<?php echo $sensorNum; ?>" value="true" <?php if(strcmp($sensor["detectionAuto"],"true") == 0) echo ' checked'; ?>/>
+                    </td>
+                    <td>
+                        <select id="ui_sensors_parameters_tableSensor_type_<?php echo $sensorNum; ?>" >
+                            <option value="0" <?php if(strcmp($sensor['type'],"0")==0) echo 'selected'; ?> > <?php echo __("NO_SENSOR"); ?> </option>
+                            <option value="2" <?php if(strcmp($sensor['type'],"2")==0) echo 'selected'; ?> > <?php echo __("TEMP_HUMI_SENSOR"); ?> </option>
+                            <option value="3" <?php if(strcmp($sensor['type'],"3")==0) echo 'selected'; ?> > <?php echo __("WATER_SENSOR"); ?> </option>
+                            <option value="6" <?php if(strcmp($sensor['type'],"6")==0) echo 'selected'; ?> > <?php echo __("LEVEL_SENSOR"); ?> </option>
+                            <option value="8" <?php if(strcmp($sensor['type'],"8")==0) echo 'selected'; ?> > <?php echo __("PH_SENSOR"); ?> </option>
+                            <option value="9" <?php if(strcmp($sensor['type'],"9")==0) echo 'selected'; ?> > <?php echo __("EC_SENSOR"); ?> </option>
+                            <option value=":" <?php if(strcmp($sensor['type'],":")==0) echo 'selected'; ?> > <?php echo __("OD_SENSOR"); ?> </option>
+                            <option value=";" <?php if(strcmp($sensor['type'],";")==0) echo 'selected'; ?> > <?php echo __("ORP_SENSOR"); ?> </option>
+                            <option value="10" <?php if(strcmp($sensor['type'],"10")==0) echo 'selected'; ?> > <?php echo __("CO2_SENSOR"); ?> </option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <?php
+            
+            }
+        ?>
     </table>
 </div>

@@ -147,6 +147,7 @@ function check_export_table_csv($name="",&$out) {
 // '9' => 'ec' => 1 => µs/cm
 // ':' => 'od' => 100 => mg/l
 // ';' => 'orp' => 1 => mV 
+// '10' => CO²  => 1 => ppm 
 
 function get_sensor_db_type($sensor = "") {
 
@@ -286,6 +287,19 @@ function get_sensor_db_type($sensor = "") {
                     "sensorName" => "orp",
                     "translation" => "ORP_SENSOR",
                     "unity" => "mV"
+                );
+                $nb_sens=$nb_sens+1;
+                break;
+
+            case '10': 
+                $sensors[]=array(
+                    "id" => $sens['id'],
+                    "type" => $sens['type'],
+                    "sensor_nb" => $nb_sens,
+                    "ratio" => 1,
+                    "sensorName" => "co2",
+                    "translation" => "CO2_SENSOR",
+                    "unity" => "ppm"
                 );
                 $nb_sens=$nb_sens+1;
                 break;

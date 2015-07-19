@@ -211,6 +211,9 @@ msgstr "Color de las curvas de OD"
 msgid "CONFIGURE_ORP"
 msgstr "Color de las curvas de ORP"
 
+msgid "CONFIGURE_CO2"
+msgstr "Color de las curvas de CO²"
+
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Números de enchufes en vuestro sistema"
 
@@ -558,6 +561,9 @@ msgstr "Avance de la supresión"
 msgid "SUMARY_RESUME_MINMAX"
 msgstr "Resumen de los valores mínimos, máximos y promedio"
 
+msgid "NO_SENSOR"
+msgstr "Aucun"
+
 msgid "TEMP_HUMI_SENSOR"
 msgstr "Temp & Hum"
 
@@ -585,6 +591,9 @@ msgstr "OD"
 msgid "ORP_SENSOR"
 msgstr "ORP"
 
+msgid "CO2_SENSOR"
+msgstr "CO²"
+
 msgid "TEMP_LEGEND"
 msgstr "Temperatura (°C)"
 
@@ -608,6 +617,9 @@ msgstr "Oxígeno Disuelto (mg/l)"
 
 msgid "ORP_LEGEND"
 msgstr "ORP (mV)"
+
+msgid "CO2_LEGEND"
+msgstr "CO² (ppm)"
 
 msgid "POWER_LEGEND"
 msgstr "Consumo de energía (W)"

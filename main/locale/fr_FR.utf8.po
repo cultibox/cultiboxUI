@@ -244,6 +244,9 @@ msgstr "Couleur des courbes d'OD"
 msgid "CONFIGURE_ORP"
 msgstr "Couleur des courbes d'ORP"
 
+msgid "CONFIGURE_CO2"
+msgstr "Couleur des courbes de CO²"
+
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Nombre de prises de votre système"
 
@@ -591,6 +594,9 @@ msgstr "Progression de la suppression"
 msgid "SUMARY_RESUME_MINMAX"
 msgstr "Résumé des valeurs minimales, maximales et moyenne"
 
+msgid "NO_SENSOR"
+msgstr "Aucun"
+
 msgid "TEMP_HUMI_SENSOR"
 msgstr "Temp & Hygro"
 
@@ -618,6 +624,9 @@ msgstr "OD"
 msgid "ORP_SENSOR"
 msgstr "ORP"
 
+msgid "CO2_SENSOR"
+msgstr "CO²"
+
 msgid "TEMP_LEGEND"
 msgstr "Température (°C)"
 
@@ -641,6 +650,9 @@ msgstr "Oxygène Dissous (mg/l)"
 
 msgid "ORP_LEGEND"
 msgstr "ORP (mV)"
+
+msgid "CO2_LEGEND"
+msgstr "CO² (ppm)"
 
 msgid "POWER_LEGEND"
 msgstr "Puissance consommée (W)"
@@ -1048,7 +1060,7 @@ msgid "NO_PLUG_SELECTED"
 msgstr "Aucune prise sélectionnée"
 
 msgid "SELECT_FILE_NAME"
-msgstr "Aucun fichier selectionné"
+msgstr "Aucun fichier sélectionné"
 
 msgid "TITLE_EXPORT_SET_PROGRAM"
 msgstr "Exporter un jeu de programmes"

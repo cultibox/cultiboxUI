@@ -211,6 +211,9 @@ msgstr "Farbe OD-Kurven"
 msgid "CONFIGURE_ORP"
 msgstr "Farbe ORP Kurven"
 
+msgid "CONFIGURE_CO2"
+msgstr "Farbe CO² Kurven"
+
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Anzahl der Steckdosen in Ihrem System"
 
@@ -558,6 +561,9 @@ msgstr "Fortschritt der Löschung"
 msgid "SUMARY_RESUME_MINMAX"
 msgstr "Zusammenfassung der Minimal-, Maximal- und Durchschnitts"
 
+msgid "NO_SENSOR"
+msgstr "Aucun"
+
 msgid "TEMP_HUMI_SENSOR"
 msgstr "Temp & Luft"
 
@@ -585,6 +591,9 @@ msgstr "OD"
 msgid "ORP_SENSOR"
 msgstr "ORP"
 
+msgid "CO2_SENSOR"
+msgstr "CO²"
+
 msgid "TEMP_LEGEND"
 msgstr "Temperatur (°C)"
 
@@ -608,6 +617,9 @@ msgstr "Gelösten Sauerstoff (mg/l)"
 
 msgid "ORP_LEGEND"
 msgstr "ORP (mV)"
+
+msgid "CO2_LEGEND"
+msgstr "CO² (ppm)"
 
 msgid "POWER_LEGEND"
 msgstr "Leistungsaufnahme (W)"

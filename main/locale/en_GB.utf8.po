@@ -211,6 +211,9 @@ msgstr "Color OD curves"
 msgid "CONFIGURE_ORP"
 msgstr "Color ORP curves"
 
+msgid "CONFIGURE_CO2"
+msgstr "Color CO² curves"
+
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Number of sockets in your system"
 
@@ -558,6 +561,9 @@ msgstr "Progress of the deletion"
 msgid "SUMARY_RESUME_MINMAX"
 msgstr "Summary of minimum, maximum and average values"
 
+msgid "NO_SENSOR"
+msgstr "No sensor"
+
 msgid "TEMP_HUMI_SENSOR"
 msgstr "Temp & Humi"
 
@@ -585,6 +591,9 @@ msgstr "OD"
 msgid "ORP_SENSOR"
 msgstr "ORP"
 
+msgid "CO2_SENSOR"
+msgstr "CO²"
+
 msgid "TEMP_LEGEND"
 msgstr "Temperature (°C)"
 
@@ -608,6 +617,9 @@ msgstr "Dissolved Oxygen (mg/l)"
 
 msgid "ORP_LEGEND"
 msgstr "ORP (mV)"
+
+msgid "CO2_LEGEND"
+msgstr "CO² (ppm)"
 
 msgid "POWER_LEGEND"
 msgstr "Power consumption (W)"

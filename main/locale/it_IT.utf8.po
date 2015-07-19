@@ -211,6 +211,9 @@ msgstr "Curve OD Colore"
 msgid "CONFIGURE_ORP"
 msgstr "Curve di colore ORP"
 
+msgid "CONFIGURE_CO2"
+msgstr "Curve di colore CO²"
+
 msgid "CONFIGURE_NB_PLUGS"
 msgstr "Numero di prese nel sistema"
 
@@ -559,6 +562,9 @@ msgstr "Progressi della delezione"
 msgid "SUMARY_RESUME_MINMAX"
 msgstr "Sintesi dei valori minimi ,massimi e media"
 
+msgid "NO_SENSOR"
+msgstr "Aucun"
+
 msgid "TEMP_HUMI_SENSOR"
 msgstr "Temp & Umi"
 
@@ -586,6 +592,9 @@ msgstr "OD"
 msgid "ORP_SENSOR"
 msgstr "ORP"
 
+msgid "CO2_SENSOR"
+msgstr "CO²"
+
 msgid "TEMP_LEGEND"
 msgstr "Temperatura (°C)"
 
@@ -609,6 +618,9 @@ msgstr "Ossigeno Disciolto (mg/l)"
 
 msgid "ORP_LEGEND"
 msgstr "ORP (mV)"
+
+msgid "CO2_LEGEND"
+msgstr "CO² (ppm)"
 
 msgid "POWER_LEGEND"
 msgstr "Potenza assorbita (W)"

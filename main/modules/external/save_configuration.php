@@ -56,6 +56,46 @@ switch ($parttosave)
         
         break;
         
+    case "sensors":
+
+            // Save each element
+            foreach ($_GET as $key => $value) {
+                $table = "";
+                // Search which table must be modified
+                if (strstr($key,"_tableSensor_"))
+                {
+                    // This is table sensors
+                    $table = "sensors";
+                }
+                else if (strstr($key,"_engrais_"))
+                {
+                    // This a engrais parameters
+                    $table = "irrigation_engrais";
+                }
+                else if (strstr($key,"_plateforme_"))
+                {
+                    // This a plateforme parameters
+                    $table = "irrigation_plateforme";
+                }
+                else if (strstr($key,"_zone_"))
+                {
+                    // This a zone parameters
+                    $table = "irrigation_zone";
+                }
+                
+                if ($table != "")
+                {
+                    $exploded = explode("_",$key);
+                    $parameter = $exploded[4];
+                    $id = $exploded[5];
+                    
+                    // Update the parameter in table
+                    sensors\updateTable ($table, $id , $parameter, $value);
+                }
+            }
+            break;
+        break;        
+        
     default:
         break;
 }

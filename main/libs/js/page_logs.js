@@ -2060,5 +2060,61 @@ function getYValue(chartObj,xValue){
  }
  return yValue;
 } 
- 
+
+/**
+ * Display sensors parameters UI.
+ */
+ $(document).ready(function() {
+    $("#button_sensors_parameters").click(function(e) {
+        e.preventDefault();
+
+        // Display parmateres UI
+        $("#ui_sensors_parameters").dialog({
+            resizable: false,
+            width: 750,
+            closeOnEscape: true,
+            modal: true,
+            dialogClass: "popup_message",
+            buttons: [{
+                text: CLOSE_button,
+                "id": "btnClose_sensor_param",
+                click: function () {
+                    $( this ).dialog( "close" ); return false;
+                }
+            },{
+                text: SAVE_button,
+                "id": "btnSave_sensor_param",
+                click: function () {
+                    
+                    // Create data to send (property of each element)
+                    var dataTosend = new Object();
+                    // Add every input
+                    $( "#ui_sensors_parameters :input" ).each(function( index ) {
+                        // If this is a checkbox, use .prop('checked', true);
+                        value = $( this ).val();
+                        if ($( this ).prop('type') == "checkbox")
+                        {
+                            value = $( this ).prop('checked');
+                        }
+                        dataTosend[$( this ).attr('id')] = value;
+                    });
+                    
+                    dataTosend["parttosave"] = "sensors";
+                    
+                    $.ajax({
+                        cache: false,
+                        async: true,
+                        url: "main/modules/external/save_configuration.php", 
+                        data: dataTosend
+                    }).done(function (data) {
+                        $.unblockUI();
+                    });
+                    
+                    $( this ).dialog( "close" ); return false;
+                }
+            }]
+        });
+    });
+});
+
 </script>
