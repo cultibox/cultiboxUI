@@ -13,7 +13,7 @@ if(strcmp("$action","enable")==0) {
         $count=0;
         while(true) {
             sleep(1);
-			exec("wget http://".$_SERVER['SERVER_ADDR']."/?action=snapshot -O /var/www/cultibox/tmp/webcam$webcamout.jpg",$output,$err);
+			exec("wget http://".$_SERVER['SERVER_ADDR']."/?action=snapshot -O /var/www/cultibox/tmp/webcam$webcam.jpg",$output,$err);
             sleep(1);
 			$count=$count+1;
             if((is_file("/var/www/cultibox/tmp/webcam$webcam.jpg"))||($count>5)) break;
