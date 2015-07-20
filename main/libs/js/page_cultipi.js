@@ -480,8 +480,7 @@ $(document).ready(function(){
                     data: {action:"stream",webcam:selected}
                 }).done(function(data) {
                     $.unblockUI();
-                    port=parseInt(selected)+1;
-                    $("#stream_src").attr("src", "http://<?php echo $_SERVER['SERVER_ADDR']; ?>:808"+port+"/?action=stream");
+                    $("#stream_src").attr("src", "http://<?php echo $_SERVER['SERVER_ADDR']; ?>:8081/?action=stream");
                     $("#show_stream").dialog({
                         resizable: true,
                         modal: true,
