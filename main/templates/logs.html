@@ -919,7 +919,7 @@
             <th>Nom</th>
             <th>Détection automatique</th>
             <th>Type</th>
-            <th>Paramètres</th>
+            <th>Source</th>
         <tr>
         <?php
             // Retriev sensor infos 
@@ -954,11 +954,44 @@
                             <option value="10" <?php if(strcmp($sensor['type'],"10")==0) echo 'selected'; ?> > <?php echo __("CO2_SENSOR"); ?> </option>
                         </select>
                     </td>
+                    <td>
+                        <select id="ui_sensors_parameters_tableSensor_source_<?php echo $sensorNum; ?>" >
+                            <option value="rj12" <?php if(strcmp($sensor['source'],"rj12")==0) echo 'selected'; ?> > RJ12 </option>
+                            <option value="directread" <?php if(strcmp($sensor['source'],"directread")==0) echo 'selected'; ?> > Lecture directe </option>
+                            <option value="rs232" <?php if(strcmp($sensor['source'],"rs232")==0) echo 'selected'; ?> > Liaison Série </option>
+                        </select>
+                        
+                        <?php
+                            if(strcmp($sensor['source'],"directread")==0)
+                            {
+                        ?>
+                                <input type="image" id="button_sensors_parameters_direct_read_<?php echo $sensorNum; ?>"
+                                    name="button_sensors_parameters_direct_read"
+                                    title="Paramètres capteur"
+                                    src="main/libs/img/add.png" 
+                                    alt="sensors_parameters"
+                                />
+                        <?php
+                            }
+                        ?>
+                    </td>
                 </tr>
-                
+
                 <?php
             
             }
         ?>
+    </table>
+</div>
+
+<!-- Div used for displaying parameters for direct read -->
+<div id="ui_sensors_parameters_direct_read" name="ui_sensors_parameters_direct_read" title="Paramètres capteurs" style="display:none">
+    <table id="ui_sensors_parameters_direct_read_table" class="table_width">
+        <tr>
+            <th></th>
+            <th>Nom</th>
+            <th>Source</th>
+        <tr>
+
     </table>
 </div>

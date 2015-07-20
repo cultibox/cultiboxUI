@@ -93,7 +93,10 @@ switch ($parttosave)
                     sensors\updateTable ($table, $id , $parameter, $value);
                 }
             }
-            break;
+
+        // Write in XML
+        sensors\serverAcqSensor_createXMLConf();
+            
         break;        
         
     default:
