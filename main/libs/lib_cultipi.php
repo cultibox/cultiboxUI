@@ -765,31 +765,27 @@ function get_webcam_conf() {
                 if($handle) {
                     while(($line = fgets($handle)) !== false) {
                     // process the line read.
-                    if(strpos($line, "resolution")!==false) {
-                        $value=explode(" ",$line);
+                    if(strpos($line, "RESOLUTION")!==false) {
+                        $value=explode("=",$line);
                         $return[$i]['resolution']=trim($value[1]);
                     }
 
-                    if(strpos($line, "brightness")!==false) {
+                    if(strpos($line, "BRIGHTNESS")!==false) {
                         $value=explode("=",$line);
                         $value[1]=trim($value[1]);
                         $return[$i]['brightness']=substr($value[1],0,strlen($value[1])-1);
                         $return[$i]['auto_brightness']="0";
                     } 
 
-                    if(strpos($line, "contrast")!==false) {
+                    if(strpos($line, "CONTRAST")!==false) {
                         $value=explode("=",$line);
                         $value[1]=trim($value[1]);
                         $return[$i]['contrast']=substr($value[1],0,strlen($value[1])-1);
                         $return[$i]['auto_contrast']="0";
                     } 
 
-                    if(strpos($line, "palette")!==false) {
-                        $value=explode(" ",$line);
-                        $return[$i]['palette']=trim($value[1]);
-                    }
 
-                    if(strpos($line, "title")!==false) {
+                    if(strpos($line, "TITLE")!==false) {
                         $value=explode("\"",$line);
                         $return[$i]['name']=trim($value[1]);
                     }
@@ -799,25 +795,31 @@ function get_webcam_conf() {
                 else
                 {
                     // error opening the file.
-                    $return[$i]['resolution']="640x480";
+                    $return[$i]['resolution']="800x600";
                     $return[$i]['brightness']="55";
                     $return[$i]['contrast']="33";
-                    $return[$i]['palette']="MJPEG";
                     $return[$i]['name']="Webcam $i";
-                    $return[$i]['auto_brightness']="0";
-                    $return[$i]['auto_contrast']="0";
+                    $return[$i]['auto_brightness']="1";
+                    $return[$i]['auto_contrast']="1";
                 }
             } 
             else
             {
                 // error The file doesnot exists
-                $return[$i]['resolution']="640x480";
+                $return[$i]['resolution']="800x600";
                 $return[$i]['brightness']="55";
                 $return[$i]['contrast']="33";
-                $return[$i]['palette']="MJPEG";
                 $return[$i]['name']="Webcam $i";
-                $return[$i]['auto_brightness']="0";
-                $return[$i]['auto_contrast']="0";
+                $return[$i]['auto_brightness']="1";
+                $return[$i]['auto_contrast']="1";
+            }
+
+
+            if(is_file("/var/www/cultibox/tmp/webcam$i.jpg")) {
+                date_default_timezone_set('Europe/Paris');
+                $return[$i]['creation']=__('LAST_WEBCAM')." : ".date('d-m-Y H:i:s', filemtime("/var/www/cultibox/tmp/webcam${i}.jpg"));
+            } else {
+                $return[$i]['creation']="";
             }
         }
 
@@ -828,11 +830,9 @@ function get_webcam_conf() {
             if(!array_key_exists('name', $return[$i])) 
                 $return[$i]['name']="Webcam $name";
             
-            if(!array_key_exists('palette', $return[$i]))
-                $return[$i]['palette']="AUTO";
             
             if(!array_key_exists('resolution', $return[$i]))
-                $return[$i]['resolution']="640x480";
+                $return[$i]['resolution']="800x600";
             
             if(!array_key_exists('brightness', $return[$i]))
                 $return[$i]['brightness']="55";
@@ -841,10 +841,10 @@ function get_webcam_conf() {
                 $return[$i]['contrast']="33";
     
             if(!array_key_exists('auto_brightness', $return[$i]))
-                $return[$i]['auto_brightness']="-1";
+                $return[$i]['auto_brightness']="1";
 
             if(!array_key_exists('auto_contrast', $return[$i]))
-                $return[$i]['auto_contrast']="-1";
+                $return[$i]['auto_contrast']="1";
         }
         
         return $return;

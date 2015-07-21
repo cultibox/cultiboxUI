@@ -358,41 +358,44 @@ $(function () {
                             cache: false,
                             async: false,
                             url: "main/modules/external/import_csv_logs.php",
-                            data: {filename:name,table:upload_type},
+                            data: {
+                                filename:name,
+                                table:upload_type
+                            },
                             success: function (data) {
-                            var json = jQuery.parseJSON(data);
-                            $.unblockUI();
-                            if(json=="0") {
-                                $("#success_import_logs").dialog({
-                                    width: 550,
-                                    modal: true,
-                                    closeOnEscape: false,
-                                    dialogClass: "popup_message",
-                                    buttons: [{
-                                        text: CLOSE_button,
-                                        "id": "btnClose",
-                                        click: function () {
-                                            $(this).dialog('close');    
-                                            get_content("logs",getFormInputs('display-log'));
-                                        }
-                                    }]      
-                                });
-                            } else {
-                                $("#error_import_logs").dialog({
-                                    width: 550,
-                                    modal: true,
-                                    closeOnEscape: false,
-                                    dialogClass: "popup_error",
-                                    buttons: [{
-                                        text: CLOSE_button,
-                                        "id": "btnClose",
-                                        click: function () {
-                                            $(this).dialog('close');
-                                            get_content("logs",getFormInputs('display-log'));
-                                        }
-                                    }]
-                                });
-                            }
+                                var json = jQuery.parseJSON(data);
+                                $.unblockUI();
+                                if(json=="0") {
+                                    $("#success_import_logs").dialog({
+                                        width: 550,
+                                        modal: true,
+                                        closeOnEscape: false,
+                                        dialogClass: "popup_message",
+                                        buttons: [{
+                                            text: CLOSE_button,
+                                            "id": "btnClose",
+                                            click: function () {
+                                                $(this).dialog('close');    
+                                                get_content("logs",getFormInputs('display-log'));
+                                            }
+                                        }]
+                                    });
+                                } else {
+                                    $("#error_import_logs").dialog({
+                                        width: 550,
+                                        modal: true,
+                                        closeOnEscape: false,
+                                        dialogClass: "popup_error",
+                                        buttons: [{
+                                            text: CLOSE_button,
+                                            "id": "btnClose",
+                                            click: function () {
+                                                $(this).dialog('close');
+                                                get_content("logs",getFormInputs('display-log'));
+                                            }
+                                        }]
+                                    });
+                                }
                             }, error: function (data) {
                             $.unblockUI();
                             $("#error_import_logs").dialog({
@@ -435,7 +438,11 @@ $(function () {
             cache: false,
             async: false,
             url: "main/modules/external/set_variable.php",
-            data: {name:"LOAD_LOG", value: "False", duration: 36000}
+            data: {
+                name:"LOAD_LOG",
+                value: "False",
+                duration: 36000
+            }
         });
         }
 
@@ -1284,9 +1291,13 @@ $(document).ready(function() {
                 }
             });
             
-           $.ajax({
-                data:{ list_power:list_power },
-                url: 'main/modules/external/check_configuration_power.php'}).done(function(data) {
+            $.ajax({
+                data:{ 
+                    list_power:list_power
+                },
+                url: 'main/modules/external/check_configuration_power.php'
+            }).done(
+                function(data) {
                     if(jQuery.parseJSON(data)!="") {
                          pop_up_remove("power_status");
                          pop_up_add_information(jQuery.parseJSON(data),"power_status","error");
@@ -1294,7 +1305,8 @@ $(document).ready(function() {
                     } else {
                         pop_up_remove("power_status");
                     }
-           });
+                }
+            );
         }
 
         // If checked
@@ -2116,5 +2128,107 @@ function getYValue(chartObj,xValue){
         });
     });
 });
+
+/**
+ * Display direct read sensors parameters UI.
+ */
+ $(document).ready(function() {
+    $("[name=button_sensors_parameters_direct_read]").click(function(e) {
+        e.preventDefault();
+
+        indexVal = $(this).attr('id').substr($(this).attr('id').length - 1);;
+        
+        // Retrieve direct read informations
+        $.ajax({
+            cache: false,
+            url: "main/modules/external/get_variable.php",
+            data: {
+                name:"SENSOR_DIRECT_READ",
+                index:indexVal
+            }
+        }).done(function (data) {
+            
+            var json = jQuery.parseJSON(data);
+            
+            // Delete previous informations
+            $("#ui_sensors_parameters_direct_read_table").empty();
+            
+            // Add Rows
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_input"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_input").append( '<td>Entrée 1</td>' );
+            $("#ui_sensors_parameters_direct_read_table_input").append( '<td>' + json.input + '</td>' );
+            
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_value"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_value").append( '<td>Valeur</td>' );
+            $("#ui_sensors_parameters_direct_read_table_value").append( '<td>' + json.value + '</td>' );
+            
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_input2"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td>Entrée 2</td>' );
+            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td>' + json.input2 + '</td>' );
+            
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_value2"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td>Valeur 2</td>' );
+            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td>' + json.value2 + '</td>' );
+            
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_statusOK"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td>Etat Actif 1</td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td>' + json.statusOK + '</td>' );
+            
+            $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_statusOK2"></tr>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td>Etat Actif 2</td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td>' + json.statusOK2 + '</td>' );
+            
+            // Display parmateres UI
+            $("#ui_sensors_parameters_direct_read").dialog({
+                resizable: false,
+                width: 750,
+                closeOnEscape: true,
+                modal: true,
+                dialogClass: "popup_message",
+                buttons: [{
+                    text: CLOSE_button,
+                    "id": "btnClose_sensor_param",
+                    click: function () {
+                        $( this ).dialog( "close" ); return false;
+                    }
+                },{
+                    text: SAVE_button,
+                    "id": "btnSave_sensor_param",
+                    click: function () {
+                        
+                        // Create data to send (property of each element)
+                        var dataTosend = new Object();
+                        // Add every input
+                        $( "#ui_sensors_parameters :input" ).each(function( index ) {
+                            // If this is a checkbox, use .prop('checked', true);
+                            value = $( this ).val();
+                            if ($( this ).prop('type') == "checkbox")
+                            {
+                                value = $( this ).prop('checked');
+                            }
+                            dataTosend[$( this ).attr('id')] = value;
+                        });
+                        
+                        dataTosend["parttosave"] = "sensors";
+                        
+                        $.ajax({
+                            cache: false,
+                            async: true,
+                            url: "main/modules/external/save_configuration.php", 
+                            data: dataTosend
+                        }).done(function (data) {
+                            $.unblockUI();
+                        });
+                        
+                        $( this ).dialog( "close" ); return false;
+                    }
+                }]
+            });
+        });
+        
+        
+    });
+});
+
 
 </script>

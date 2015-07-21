@@ -31,9 +31,9 @@ $webcam_conf = cultipi\get_webcam_conf();
 
 for($i=0;$i<$GLOBALS['MAX_WEBCAM'];$i++)
 {
-    if(is_file("/tmp/webcam$i.jpg"))
+    if(is_file("tmp/webcam$i.jpg"))
     {
-        $screen{$i} = "/tmp/webcam$i.jpg";
+        $screen{$i} = "tmp/webcam$i.jpg";
     }
     else 
     {

@@ -40,14 +40,14 @@ if((!isset($name))||(empty($name))) {
             if((isset($_COOKIE['IMPORTANT']))&&(!empty($_COOKIE['IMPORTANT']))) {
                 echo json_encode($_COOKIE['IMPORTANT']);
             } else {
-                 echo json_encode("0");
+                echo json_encode("0");
             }
             break;
         case 'TOOLTIP_MSG_BOX':
             if((isset($_COOKIE['TOOLTIP_MSG_BOX']))&&(!empty($_COOKIE['TOOLTIP_MSG_BOX']))) {
                 echo json_encode($_COOKIE['TOOLTIP_MSG_BOX']);
             } else {
-                 echo json_encode("0");
+                echo json_encode("0");
             }
             break;
         case 'CHECK_PROGRAM':
@@ -65,14 +65,23 @@ if((!isset($name))||(empty($name))) {
                 }
             }
             break;
-        case 'COST' : echo json_encode(get_configuration("SHOW_COST",$error));
-                     break;
-        case 'LANG' : if((isset($_COOKIE['LANG']))&&(!empty($_COOKIE['LANG']))) {
-                        echo json_encode($_COOKIE['LANG']);
-                      } else {
-                            echo json_encode("0");
-                      }
-                    break;
+            
+        case 'COST' : 
+            echo json_encode(get_configuration("SHOW_COST",$error));
+            break;
+            
+        case 'LANG' : 
+            if((isset($_COOKIE['LANG']))&&(!empty($_COOKIE['LANG']))) {
+                echo json_encode($_COOKIE['LANG']);
+            } else {
+                echo json_encode("0");
+            }
+            break;
+            
+        case 'SENSOR_DIRECT_READ' : 
+            echo json_encode(\sensors\getDB("sensors_directRead"));
+            break;
+
         default:
             echo json_encode("0");
     }
