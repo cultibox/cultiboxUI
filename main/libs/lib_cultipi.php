@@ -813,6 +813,14 @@ function get_webcam_conf() {
                 $return[$i]['auto_brightness']="1";
                 $return[$i]['auto_contrast']="1";
             }
+
+
+            if(is_file("/var/www/cultibox/tmp/webcam$i.jpg")) {
+                date_default_timezone_set('Europe/Paris');
+                $return[$i]['creation']=__('LAST_WEBCAM')." : ".date('d-m-Y H:i:s', filemtime("/var/www/cultibox/tmp/webcam${i}.jpg"));
+            } else {
+                $return[$i]['creation']="";
+            }
         }
 
         for($i=0;$i<count($return);$i++)
