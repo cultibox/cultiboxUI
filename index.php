@@ -144,8 +144,8 @@ check_database();
                             </ul>
                         </div>
 
-                                          
-                        <div id="box">                      
+
+                        <div id="box">
                             <img src="/cultibox/main/libs/img/box.png" alt="">
                         </div>
                                     
@@ -178,12 +178,12 @@ check_database();
                                     // Check if function exists
                                     if (function_exists($plugin . '\addInMenu'))
                                     {
-                                        call_user_func($plugin . '\addInMenu');                                        
+                                        call_user_func($plugin . '\addInMenu');
                                     }
                                 }
                             ?>
                    </ul>
-            </div>               
+            </div>
 
                 <div class="message" style="display:none" title="<?php echo __('MESSAGE_BOX'); ?>">
                     <br />

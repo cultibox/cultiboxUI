@@ -52,7 +52,7 @@ if((!isset($name))||(empty($name))) {
             break;
         case 'CHECK_PROGRAM':
             if((isset($_GET['value']))&&(!empty($_GET['value']))) {
-                    $value=strtoupper($_GET['value']);
+                $value=strtoupper($_GET['value']);
             } 
 
             if((!isset($value))||(empty($value))) {
@@ -78,8 +78,12 @@ if((!isset($name))||(empty($name))) {
             }
             break;
             
-        case 'SENSOR_DIRECT_READ' : 
-            echo json_encode(\sensors\getDB("sensors_directRead"));
+        case 'SENSOR' : 
+            $sensor = "all";
+            if((isset($_GET['sensor']))&&(!empty($_GET['sensor']))) {
+                $sensor = $_GET['sensor'];
+            } 
+            echo json_encode(\sensors\getDB($sensor));
             break;
 
         default:

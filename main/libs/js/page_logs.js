@@ -2143,40 +2143,40 @@ function getYValue(chartObj,xValue){
             cache: false,
             url: "main/modules/external/get_variable.php",
             data: {
-                name:"SENSOR_DIRECT_READ",
-                index:indexVal
+                name:"SENSOR",
+                sensor:indexVal
             }
         }).done(function (data) {
             
-            var json = jQuery.parseJSON(data);
+            var json = jQuery.parseJSON(data)[0];
             
             // Delete previous informations
             $("#ui_sensors_parameters_direct_read_table").empty();
             
             // Add Rows
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_input"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_input").append( '<td>Entrée 1</td>' );
-            $("#ui_sensors_parameters_direct_read_table_input").append( '<td>' + json.input + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_input").append( '<td>Entrée 1 : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_input").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_input_' + indexVal + '" value="' + json.input + '" size="10" /></td>' );
             
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_value"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_value").append( '<td>Valeur</td>' );
-            $("#ui_sensors_parameters_direct_read_table_value").append( '<td>' + json.value + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_value").append( '<td>Valeur : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_value").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_value_' + indexVal + '" value="' + json.value + '" size="10" /></td>' );
             
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_input2"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td>Entrée 2</td>' );
-            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td>' + json.input2 + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td>Entrée 2 : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_input2").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_input2_' + indexVal + '" value="' + json.input2 + '" size="10" /></td>' );
             
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_value2"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td>Valeur 2</td>' );
-            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td>' + json.value2 + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td>Valeur 2 : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_value2").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_value2_' + indexVal + '" value="' + json.value2 + '" size="10" /></td>' );
             
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_statusOK"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td>Etat Actif 1</td>' );
-            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td>' + json.statusOK + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td>Etat Actif 1 : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_statusOK_' + indexVal + '" value="' + json.statusOK + '" size="10" /></td>' );
             
             $("#ui_sensors_parameters_direct_read_table").append( '<tr id="ui_sensors_parameters_direct_read_table_statusOK2"></tr>' );
-            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td>Etat Actif 2</td>' );
-            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td>' + json.statusOK2 + '</td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td>Etat Actif 2 : </td>' );
+            $("#ui_sensors_parameters_direct_read_table_statusOK2").append( '<td><input type="text" id="ui_sensors_parameters_tableSensor_statusOK2_' + indexVal + '" value="' + json.statusOK2 + '" size="10" /></td>' );
             
             // Display parmateres UI
             $("#ui_sensors_parameters_direct_read").dialog({
@@ -2193,13 +2193,13 @@ function getYValue(chartObj,xValue){
                     }
                 },{
                     text: SAVE_button,
-                    "id": "btnSave_sensor_param",
+                    "id": "btnSave_sensor_directRead_param",
                     click: function () {
                         
                         // Create data to send (property of each element)
                         var dataTosend = new Object();
                         // Add every input
-                        $( "#ui_sensors_parameters :input" ).each(function( index ) {
+                        $( "#ui_sensors_parameters_direct_read_table :input" ).each(function( index ) {
                             // If this is a checkbox, use .prop('checked', true);
                             value = $( this ).val();
                             if ($( this ).prop('type') == "checkbox")
