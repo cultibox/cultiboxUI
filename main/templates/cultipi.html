@@ -91,14 +91,17 @@
             {
             
                 // Retrieve sensor informations
-                $sensorInformation = sensors\getDB($sensor["indexElem"]);
+                $sensorInformation = sensors\getDB($sensor["indexElem"])[0];
                 
                 if ($sensorInformation["type"] == 0) 
                 {
                     continue;
                 }
                 
-
+                
+                $sensorValuesList = explode(" ", $sensorValues[$sensor["indexElem"]]);
+                if (!array_key_exists(1, $sensorValuesList)) {$sensorValuesList[1] = "";}
+                
                 $newStyle = "";
                 $tootlTipText = "";
                 $newText = "";
@@ -147,7 +150,7 @@
                 echo '<div id="syno_elem_' . $sensor["id"] . '" class="" style="position:absolute; top:' . $sensor["y"] . 'px ; left:' . $sensor["x"] . 'px ;z-index:' . $sensor["z"] . '" >';
                 echo '  <table>';
                 echo '    <tr>';
-                echo '      <td id="syno_elem_title_' . $sensor["id"] . '" >' $sensorInformation["name"] . " " . $sensor["indexElem"] . '</td>';
+                echo '      <td id="syno_elem_title_' . $sensor["id"] . '" >' . $sensorInformation["name"] . " " . $sensor["indexElem"] . '</td>';
                 echo '      <td>';
                 echo '          <input type="image" id="syno_elemConfigur_' . $sensor["id"] . '" name="syno_elemConfigur_' . $sensor["id"] . '"';
                 echo '                 title=""';
@@ -158,10 +161,6 @@
                 echo '      </td>';
                 echo '    </tr>';
                 echo '    <tr>';
-                
-                $sensorValuesList = explode(" ", $sensorValues[$sensor["indexElem"]]);
-                if (!array_key_exists(1, $sensorValuesList)) {$sensorValuesList[1] = "";}
-
 
                 // If defcom, set opacity to 0.4
                 if ($sensorValuesList[0] == "DEFCOM" || $sensorValuesList[0] == "TIMEOUT") {

@@ -719,8 +719,6 @@ EOF;
             $sql = $sql." UPDATE `sensors` SET type=0 WHERE id=".$index."; ";
          }
 
-        echo "$sql";
-
         $db=db_priv_pdo_start();
         try {
             $db->exec("$sql");
