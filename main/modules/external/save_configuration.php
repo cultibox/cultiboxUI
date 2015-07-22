@@ -67,21 +67,6 @@ switch ($parttosave)
                     // This is table sensors
                     $table = "sensors";
                 }
-                else if (strstr($key,"_engrais_"))
-                {
-                    // This a engrais parameters
-                    $table = "irrigation_engrais";
-                }
-                else if (strstr($key,"_plateforme_"))
-                {
-                    // This a plateforme parameters
-                    $table = "irrigation_plateforme";
-                }
-                else if (strstr($key,"_zone_"))
-                {
-                    // This a zone parameters
-                    $table = "irrigation_zone";
-                }
                 
                 if ($table != "")
                 {

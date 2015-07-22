@@ -14,7 +14,13 @@ function check_db() {
     $sensors_index_col["detectionAuto"] = array ( 'Field' => "detectionAuto", 'Type' => "varchar(5)", 'default_value' => "true", 'carac' => "NOT NULL");
     $sensors_index_col["name"] = array ( 'Field' => "name", 'Type' => "varchar(20)", 'default_value' => "capteur", 'carac' => "NOT NULL");
     $sensors_index_col["source"] = array ( 'Field' => "source", 'Type' => "varchar(10)", 'default_value' => "rj12", 'carac' => "NOT NULL");
-
+    $sensors_index_col["input"]  = array ( 'Field' => "input", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
+    $sensors_index_col["value"]  = array ( 'Field' => "value", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
+    $sensors_index_col["input2"] = array ( 'Field' => "input2", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
+    $sensors_index_col["value2"] = array ( 'Field' => "value2", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
+    $sensors_index_col["statusOK"]  = array ( 'Field' => "statusOK", 'Type' => "int(11)", 'default_value' => 1, 'carac' => "NOT NULL");
+    $sensors_index_col["statusOK2"] = array ( 'Field' => "statusOK2", 'Type' => "int(11)", 'default_value' => 1, 'carac' => "NOT NULL");
+    
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'sensors';";
     
@@ -37,6 +43,12 @@ function check_db() {
                 . "type varchar(2) NOT NULL DEFAULT '0', "
                 . "detectionAuto varchar(5) NOT NULL DEFAULT 'true', "
                 . "name varchar(20) NOT NULL DEFAULT 'capteur'"
+                . "input varchar(2) NOT NULL DEFAULT 'NA', "
+                . "value varchar(2) NOT NULL DEFAULT 'NA'"
+                . "input2 varchar(2) NOT NULL DEFAULT 'NA'"
+                . "value2 varchar(2) NOT NULL DEFAULT 'NA'"
+                . "statusOK int(11) NOT NULL DEFAULT 1"
+                . "statusOK2 int(11) NOT NULL DEFAULT 1"
              . ");";
 
 
@@ -84,13 +96,7 @@ function check_db() {
     $direct_read_index_col           = array();
     $direct_read_index_col["id"]     = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => 'NOT NULL AUTO_INCREMENT');
     $direct_read_index_col["sensorIndex"]  = array ( 'Field' => "sensorIndex", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["input"]  = array ( 'Field' => "input", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["value"]  = array ( 'Field' => "value", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["input2"] = array ( 'Field' => "input2", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["value2"] = array ( 'Field' => "value2", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["type"]   = array ( 'Field' => "type", 'Type' => "varchar(20)", 'default_value' => "NA", 'carac' => "NOT NULL");
-    $direct_read_index_col["statusOK"]  = array ( 'Field' => "statusOK", 'Type' => "int(11)", 'default_value' => 1, 'carac' => "NOT NULL");
-    $direct_read_index_col["statusOK2"] = array ( 'Field' => "statusOK2", 'Type' => "int(11)", 'default_value' => 1, 'carac' => "NOT NULL");
+
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'sensors_directRead';";
@@ -139,10 +145,18 @@ function check_db() {
 }
 
 // Function used to get sensor list
-function getDB($db = "sensors") {
+function getDB($sensor = "all") {
 
-        // Check if table configuration exists
-    $sql = "SELECT * FROM " . $db  . ";";
+    // Check if table configuration exists
+    if ($sensor == "all") 
+    {
+        $sql = "SELECT * FROM sensors;";
+    }
+    else
+    {
+        $sql = "SELECT * FROM sensors WHERE id='${sensor}';";
+    }
+
     
     $db = \db_priv_pdo_start("root");
     
@@ -185,6 +199,7 @@ function updateTable ($table, $id , $parameter, $value) {
 }
 // }}}
 
+
 // {{{ serverAcqSensor_createXMLConf()
 // ROLE Create serverAcqSensor configuration XML
 // RET
@@ -201,7 +216,7 @@ function serverAcqSensor_createXMLConf () {
     );
     
     // Retriev sensor infos 
-    $sensorList = getDB("sensors");
+    $sensorList = getDB();
 
     // foreach sensor,add every informations
     foreach ($sensorList as $index => $sensorInfos){
@@ -212,20 +227,32 @@ function serverAcqSensor_createXMLConf () {
                 "value" => $value
             );
         }
-    }
-    
-    // Add informations for direct read
-    $directReadList = getDB("sensors_directRead");
-    
-    // foreach sensor,add every informations
-    foreach ($directReadList as $index => $sensorInfos){
         
-        foreach ($sensorInfos as $key => $value){
+        // If the sensor is a direct read, add it
+        if ($sensorInfos["source"] == "directread") 
+        {
             $paramListServerAcqSensor[] = array (
-                "name" => "direct_read," . $sensorInfos["sensorIndex"] . "," . $key,
-                "value" => $value
+                "name" => "direct_read," . $sensorInfos["id"] . ",input",
+                "value" => $sensorInfos["input"]
+            );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",value",
+                "value" => $sensorInfos["value"]
+            );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",input2",
+                "value" => $sensorInfos["input2"]
+            );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",value2",
+                "value" => $sensorInfos["value2"]
+            );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",type",
+                "value" => $sensorInfos["type"]
             );
         }
+        
     }
 
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverAcqSensor/conf.xml" , $paramListServerAcqSensor);
