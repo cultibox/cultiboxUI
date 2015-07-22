@@ -89,10 +89,65 @@
 
             foreach ($sensorList as $index => $sensor) 
             {
+            
+                // Retrieve sensor informations
+                $sensorInformation = sensors\getDB($sensor["indexElem"]);
+                
+                if ($sensorInformation["type"] == 0) 
+                {
+                    continue;
+                }
+                
+
+                $newStyle = "";
+                $tootlTipText = "";
+                $newText = "";
+                switch ($sensorInformation["type"])
+                {
+                    case "2" : 
+                        $newText = $tootlTipText = $sensorValuesList[0] . "°C " . $sensorValuesList[1] . "RH" ;
+                        $sensor["image"] = 'T_RH_sensor.png';
+                        break;
+                    case "3" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "°C";
+                        $sensor["image"] = 'water_T_sensor.png';
+                        break;
+                    case "6" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "cm";
+                        if ($sensor["image"] != 'level_sensor.png' && $sensor["image"] != 'symbole_cuve.png') {
+                            $sensor["image"] = 'symbole_cuve.png';
+                        }
+                        break;
+                    case "8" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "ph";
+                        $sensor["image"] = 'pH-sensor.png';
+                        break;
+                    case "9" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "ec";
+                        $sensor["image"] = 'conductivity-sensor.png';
+                        break;
+                    case ":" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "OD";
+                        $sensor["image"] = 'dissolved-oxygen-sensor.png';
+                        break;
+                    case ";" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "ORP";
+                        $sensor["image"] = 'ORP-sensor.png';
+                        break;
+                    case "10" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "ppm";
+                        $sensor["image"] = 'co2-sensor.png';
+                        break;  
+                    default :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "???";
+                        $sensor["image"] = 'T_RH_sensor.png';
+                        break;  
+                }
+            
                 echo '<div id="syno_elem_' . $sensor["id"] . '" class="" style="position:absolute; top:' . $sensor["y"] . 'px ; left:' . $sensor["x"] . 'px ;z-index:' . $sensor["z"] . '" >';
                 echo '  <table>';
                 echo '    <tr>';
-                echo '      <td id="syno_elem_title_' . $sensor["id"] . '" >Capteur ' . $sensor["indexElem"] . '</td>';
+                echo '      <td id="syno_elem_title_' . $sensor["id"] . '" >' $sensorInformation["name"] . " " . $sensor["indexElem"] . '</td>';
                 echo '      <td>';
                 echo '          <input type="image" id="syno_elemConfigur_' . $sensor["id"] . '" name="syno_elemConfigur_' . $sensor["id"] . '"';
                 echo '                 title=""';
@@ -103,39 +158,10 @@
                 echo '      </td>';
                 echo '    </tr>';
                 echo '    <tr>';
+                
                 $sensorValuesList = explode(" ", $sensorValues[$sensor["indexElem"]]);
                 if (!array_key_exists(1, $sensorValuesList)) {$sensorValuesList[1] = "";}
 
-                $newStyle = "";
-                $tootlTipText = "";
-                $newText = "";
-                switch ($sensor["image"])
-                {
-                    case 'T_RH_sensor.png' :
-                        $newText = $tootlTipText = $sensorValuesList[0] . "°C " . $sensorValuesList[1] . "RH" ;
-                        break;
-                    case 'water_T_sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "°C";
-                        break;
-                    case 'level_sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "cm";
-                        break;
-                    case 'pH-sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "ph";
-                        break;
-                    case 'conductivity-sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "ec";
-                        break;
-                    case 'dissolved-oxygen-sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "OD";
-                        break;
-                    case 'ORP-sensor.png': 
-                        $newText = $tootlTipText = $sensorValuesList[0] . "ORP";
-                        break;
-                    default :
-                        $newText = $tootlTipText = $sensorValuesList[0] . "???";
-                        break;
-                }
 
                 // If defcom, set opacity to 0.4
                 if ($sensorValuesList[0] == "DEFCOM" || $sensorValuesList[0] == "TIMEOUT") {
