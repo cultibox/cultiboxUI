@@ -255,6 +255,23 @@ function serverAcqSensor_createXMLConf () {
         
     }
 
+    if ($GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] == 1)
+    {
+        foreach ($GLOBALS['CULTIPI']['REMOTE_SENSOR'] as $elemOfArray)
+        {
+            $paramListserverAcqSensor[] = array (
+                "name" => "network_read," . $elemOfArray["SENSOR_INDEX_IN_MASTER"] . ",ip",
+                "ip" => $GLOBALS['CULTIPI']['REMOTE_SLAVE']["IP_" . $elemOfArray["REMOTE_SLAVE"]]
+            );
+            
+            $paramListserverAcqSensor[] = array (
+                "name" => "network_read," . $elemOfArray["SENSOR_INDEX_IN_MASTER"] . ",sensor",
+                "sensor" => $elemOfArray["SENSOR_INDEX_IN_SLAVE"]
+            );
+        }
+    }
+    
+    
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverAcqSensor/conf.xml" , $paramListServerAcqSensor);
     
 }

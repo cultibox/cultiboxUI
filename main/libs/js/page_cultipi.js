@@ -1438,6 +1438,7 @@ $(document).ready(function(){
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "°C");
                                         $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "°C");
                                         break;
+                                    case 'symbole_cuve.png': 
                                     case 'level_sensor.png': 
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
                                         $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
@@ -1458,9 +1459,9 @@ $(document).ready(function(){
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ORP");
                                         $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ORP");
                                         break;
-                                    case 'symbole_cuve.png': 
-                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "cm");
-                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "cm");
+                                    case 'co2-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ppm");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ppm");
                                         break;
                                     default :
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "???");

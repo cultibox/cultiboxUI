@@ -114,72 +114,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     create_conf_XML($sd_card . "/cultiPi/start.xml" , $paramListCultipiStart,"starts");
     
     // Server acq sensor
-    $paramListserverAcqSensor[] = array (
-        "name" => "verbose",
-        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverAcqSensor']
-    );
-    $paramListserverAcqSensor[] = array (
-        "name" => "simulator",
-        "actif" => "off"
-    );
-    //  <item name="network_read,1,ip" ip="192.178.0.10" />
-    //  <item name="network_read,1,sensor" sensor="2" />
-    if ($GLOBALS['CULTIPI']['USE_REMOTE_SENSOR'] == 1)
-    {
-        foreach ($GLOBALS['CULTIPI']['REMOTE_SENSOR'] as $elemOfArray)
-        {
-            $paramListserverAcqSensor[] = array (
-                "name" => "network_read," . $elemOfArray["SENSOR_INDEX_IN_MASTER"] . ",ip",
-                "ip" => $GLOBALS['CULTIPI']['REMOTE_SLAVE']["IP_" . $elemOfArray["REMOTE_SLAVE"]]
-            );
-            
-            $paramListserverAcqSensor[] = array (
-                "name" => "network_read," . $elemOfArray["SENSOR_INDEX_IN_MASTER"] . ",sensor",
-                "sensor" => $elemOfArray["SENSOR_INDEX_IN_SLAVE"]
-            );
-        }
-    }
-    if ($GLOBALS['CULTIPI']['USE_DIRECT_READ'] == 1)
-    {
-        foreach ($GLOBALS['CULTIPI']['DIRECT_SENSOR'] as $elemOfArray)
-        {
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",input",
-                "input" => $elemOfArray["SENSOR_FIRST_INPUT"] 
-            );
-            
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",value",
-                "value" => $elemOfArray["SENSOR_FIRST_VALUE"] 
-            );
-            
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",input2",
-                "input" => $elemOfArray["SENSOR_SECOND_INPUT"] 
-            );
-            
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",value2",
-                "value" => $elemOfArray["SENSOR_SECOND_VALUE"] 
-            );
-            
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",type",
-                "type" => $elemOfArray["SENSOR_TYPE"] 
-            );
-
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",statusOK",
-                "type" => $elemOfArray["SENSOR_FIRST_STATUS_OK"] 
-            );
-
-            $paramListserverAcqSensor[] = array (
-                "name"  => "direct_read," . $elemOfArray["SENSOR_INDEX"] . ",statusOK2",
-                "type" => $elemOfArray["SENSOR_SECOND_STATUS_OK"] 
-            );
-        }
-    }
-    create_conf_XML($sd_card . "/serverAcqSensor/conf.xml" , $paramListserverAcqSensor);
+    sensors\serverAcqSensor_createXMLConf();
     
     // Server plug update
     $paramListServerPlugUpdate[] = array (
