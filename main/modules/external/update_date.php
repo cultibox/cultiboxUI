@@ -22,6 +22,7 @@ if(isset($_GET['date']) && !empty($_GET['date'])) {
             echo 'Exception reçue : ',  $e->getMessage(), "\n";
         }
 
+		exec("sudo /sbin/hwclock --systohc --utc",$output,$err);
         echo "set date";
     }
 }
