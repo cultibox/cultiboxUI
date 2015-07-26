@@ -251,6 +251,14 @@ function serverAcqSensor_createXMLConf () {
                 "name" => "direct_read," . $sensorInfos["id"] . ",type",
                 "value" => $sensorInfos["type"]
             );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",statusOK",
+                "value" => $sensorInfos["statusOK"]
+            );
+            $paramListServerAcqSensor[] = array (
+                "name" => "direct_read," . $sensorInfos["id"] . ",statusOK2",
+                "value" => $sensorInfos["statusOK2"]
+            );
         }
         
     }
