@@ -627,6 +627,9 @@ msgstr "ORP"
 msgid "CO2_SENSOR"
 msgstr "CO²"
 
+msgid "PRESSURE_SENSOR"
+msgstr "Pression"
+
 msgid "TEMP_LEGEND"
 msgstr "Température (°C)"
 
@@ -653,6 +656,9 @@ msgstr "ORP (mV)"
 
 msgid "CO2_LEGEND"
 msgstr "CO² (ppm)"
+
+msgid "PRESSURE_LEGEND"
+msgstr "Pression (bar)"
 
 msgid "POWER_LEGEND"
 msgstr "Puissance consommée (W)"

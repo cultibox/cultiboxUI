@@ -1463,6 +1463,10 @@ $(document).ready(function(){
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "ppm");
                                         $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "ppm");
                                         break;
+                                    case 'manometre-sensor.png': 
+                                        $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "bar");
+                                        $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "bar");
+                                        break;                                        
                                     default :
                                         $('#syno_elemValueSensor_val1_' + key).html(valueSplitted[0]  + "???");
                                         $('img[name="syno_elemSensorImage_' + key + '"]').attr('title',valueSplitted[0]  + "???");

@@ -20,6 +20,7 @@ function check_db() {
     $conf_index_col["COLOR_OD_GRAPH"]       = array ( 'Field' => "COLOR_OD_GRAPH", 'Type' => "varchar(30)", 'default_value' => "red",'carac' => "NOT NULL");
     $conf_index_col["COLOR_ORP_GRAPH"]      = array ( 'Field' => "COLOR_ORP_GRAPH", 'Type' => "varchar(30)", 'default_value' => "blue",'carac' => "NOT NULL");
     $conf_index_col["COLOR_CO2_GRAPH"]      = array ( 'Field' => "COLOR_CO2_GRAPH", 'Type' => "varchar(30)", 'default_value' => "blue",'carac' => "NOT NULL");
+    $conf_index_col["COLOR_PRESSURE_GRAPH"] = array ( 'Field' => "COLOR_PRESSURE_GRAPH", 'Type' => "varchar(30)", 'default_value' => "blue",'carac' => "NOT NULL");
     $conf_index_col["NB_PLUGS"]             = array ( 'Field' => "NB_PLUGS", 'Type' => "int(11)", 'default_value' => 3,'carac' => "NOT NULL");
     $conf_index_col["ALARM_ACTIV"]          = array ( 'Field' => "ALARM_ACTIV", 'Type' => "varchar(4)", 'default_value' => "0000",'carac' => "NOT NULL");
     $conf_index_col["ALARM_VALUE"]          = array ( 'Field' => "ALARM_VALUE", 'Type' => "varchar(5)", 'default_value' => "60.00",'carac' => "NOT NULL");
@@ -73,6 +74,7 @@ function check_db() {
             ."COLOR_OD_GRAPH varchar(30) NOT NULL DEFAULT 'red',"
             ."COLOR_ORP_GRAPH varchar(30) NOT NULL DEFAULT 'blue',"
             ."COLOR_CO2_GRAPH varchar(30) NOT NULL DEFAULT 'blue',"
+            ."COLOR_PRESSURE_GRAPH varchar(30) NOT NULL DEFAULT 'blue',"
             ."NB_PLUGS int(11) NOT NULL DEFAULT '3',"
             ."ALARM_ACTIV varchar(4) NOT NULL DEFAULT '0000',"
             ."ALARM_VALUE varchar(5) NOT NULL DEFAULT '60.00',"

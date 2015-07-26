@@ -140,7 +140,11 @@
                     case "10" :
                         $newText = $tootlTipText = $sensorValuesList[0] . "ppm";
                         $sensor["image"] = 'co2-sensor.png';
-                        break;  
+                        break;
+                    case "11" :
+                        $newText = $tootlTipText = $sensorValuesList[0] . "bar";
+                        $sensor["image"] = 'manometre-sensor.png';
+                        break;                        
                     default :
                         $newText = $tootlTipText = $sensorValuesList[0] . "???";
                         $sensor["image"] = 'T_RH_sensor.png';

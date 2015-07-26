@@ -131,7 +131,8 @@ $GLOBALS['SENSOR_DEFINITION']=array(
                                 '9' => 'ec',
                                 ':' => 'od',
                                 ';' => 'orp',
-                                '10' => 'co2');
+                                '10' => 'co2',
+                                '11' => 'pressure');
 
 //Number of state's changement allowed by the cultibox for the plugv file:
 $GLOBALS['PLUGV_MAX_CHANGEMENT']=999;

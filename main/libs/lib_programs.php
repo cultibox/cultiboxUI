@@ -780,6 +780,18 @@ function get_curve_information($curveType, $curveIndex = 0) {
             $ret_array['unit']      = "ppm";
             $ret_array['curveType'] = "co2";
             break;
+        case 'pressure' :
+        case '111': 
+            $ret_array['name']      =__('PRESSURE_SENSOR','hc'); 
+            $colorIndexName         = "LIST_GRAPHIC_COLOR_SENSOR_" . strtoupper(get_configuration("COLOR_PRESSURE_GRAPH",$main_error));
+            if ($colorIndexName == "LIST_GRAPHIC_COLOR_SENSOR_")
+                $colorIndexName = "LIST_GRAPHIC_COLOR_SENSOR_BLUE" ;
+            $ret_array['color']     = $GLOBALS[$colorIndexName][$curveIndex % 5] ;
+            $ret_array['legend']    =__('PRESSURE_LEGEND','hc');
+            $ret_array['yaxis']     = 7;
+            $ret_array['unit']      = "bar";
+            $ret_array['curveType'] = "pressure";
+            break;
         case 'power': 
             $ret_array['name']      = __('POWER'); 
             $ret_array['color']     = $GLOBALS["LIST_GRAPHIC_COLOR_POWER"][$curveIndex % 10] ;

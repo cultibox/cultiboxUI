@@ -304,6 +304,19 @@ function get_sensor_db_type($sensor = "") {
                 $nb_sens=$nb_sens+1;
                 break;
 
+            case '11': 
+                $sensors[]=array(
+                    "id" => $sens['id'],
+                    "type" => $sens['type'],
+                    "sensor_nb" => $nb_sens,
+                    "ratio" => 100,
+                    "sensorName" => "pressure",
+                    "translation" => "PRESSURE_SENSOR",
+                    "unity" => "bar"
+                );
+                $nb_sens=$nb_sens+1;
+                break;
+
             default:  
                 $sensors[]=array(
                     "id" => $sens['id'],
