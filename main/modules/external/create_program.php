@@ -23,6 +23,8 @@ $resume=array();
 $index_info=array();
 program\get_program_index_info($index_info);
 
+$plugsInfo = plugs\getDB($selected_plug);
+$plugInfo = $plugsInfo[0];
 
 $cyclic=getvar("cyclic"); 
 $apply=getvar('apply'); 
@@ -66,7 +68,14 @@ if(isset($cyclic)&&(!empty($cyclic))) {
 //Vérification et mise en place de la value du programme en fonction du type de prise entre autre:
 if($regul_program == "on") {
     //Valeur de 99.9 pour un programme en marche forcé:
-    $value_program="99.9";
+    if ($plugInfo["PLUG_TYPE"] != "electrovanne_co2")
+    {
+        $value_program="99.9";
+    }
+    else
+    {
+        $value_program="9990";
+    }
     //Type de programme pour différencier les programmes variateurs des programmes de prises classiques: 0 pour classique, 2 pour les variateurs
     $type="0";
     $check="1";
