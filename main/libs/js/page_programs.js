@@ -30,26 +30,37 @@ var main_info = <?php echo json_encode($main_info); ?>;
 // HOW IT WORKS: get id from div to be displayed or not and display it (or not) depending the input value
 // USED BY: templates/programs.html 
 function getRegulation(i, type) {
-      var divValTemp = document.getElementById('regul_value_temp');
-      var divLabelTemp = document.getElementById('regul_label_temp');
-      var divValHumi = document.getElementById('regul_value_humi');
-      var divLabelHumi = document.getElementById('regul_label_humi');
-      var divLabelWater = document.getElementById('regul_label_water');
-      var divValWater = document.getElementById('regul_value_water');
+    var divValTemp = document.getElementById('regul_value_temp');
+    var divLabelTemp = document.getElementById('regul_label_temp');
+    var divValHumi = document.getElementById('regul_value_humi');
+    var divLabelHumi = document.getElementById('regul_label_humi');
+    var divLabelWater = document.getElementById('regul_label_water');
+    var divValWater = document.getElementById('regul_value_water');
+    var divLabelPpm = document.getElementById('regul_label_ppm');
+    var divValPpm = document.getElementById('regul_value_ppm');
 
-      if(i=="dimmer") {
-            divValHumi.style.display = '';
-            divLabelHumi.style.display = 'none';
-            divValTemp.style.display = 'none';
-            divLabelTemp.style.display = 'none';
-            divValWater.style.display = 'none';
-            divLabelWater.style.display = 'none';
-            var divValue = document.getElementById('value_program');
-            divValue.value="50";
+    var divDimmerLabel=document.getElementById('dimmer_label');
+    var divValue = document.getElementById('value_program');
+ 
+    divValTemp.style.display = 'none';
+    divLabelTemp.style.display = 'none';
+    divValHumi.style.display = 'none';
+    divLabelHumi.style.display = 'none';
+    divValWater.style.display = 'none';
+    divLabelWater.style.display = 'none';
+    divValPpm.style.display = 'none';
+    divLabelPpm.style.display = 'none';
+    divDimmerLabel.style.display = 'none';
+    /*
+    if(i=="dimmer") {
+        divValHumi.style.display = '';
 
-            var divDimmerLabel=document.getElementById('dimmer_label');
-            divDimmerLabel.style.display = '';
-      } else {
+        divValue.value="50";
+
+        var divDimmerLabel=document.getElementById('dimmer_label');
+        divDimmerLabel.style.display = '';
+    } else {
+    */
         var divDimmerLabel=document.getElementById('dimmer_label');
         divDimmerLabel.style.display = 'none';
         switch(type) {
@@ -57,46 +68,35 @@ function getRegulation(i, type) {
             case 'dehumidifier' : 
                 divValHumi.style.display = '';
                 divLabelHumi.style.display = '';
-                divValTemp.style.display = 'none';
-                divLabelTemp.style.display = 'none';
-                divValWater.style.display = 'none';
-                divLabelWater.style.display = 'none';
-                var divValue = document.getElementById('value_program');
                 divValue.value="55";
                 break;
             case 'extractor' :
             case 'intractor' :
             case 'heating' : 
             case 'ventilator' : 
-                divValHumi.style.display = 'none';
-                divLabelHumi.style.display = 'none';
                 divValTemp.style.display = '';
                 divLabelTemp.style.display = '';
-                divValWater.style.display = 'none';
-                divLabelWater.style.display = 'none';
-
-                var divValue = document.getElementById('value_program');
                 divValue.value="22";
                 break;
             case 'pumpfilling' :
             case 'pumpempting' :
             case 'pump' :
-                divValHumi.style.display = 'none';
-                divLabelHumi.style.display = 'none';
-                divValTemp.style.display = 'none';
-                divLabelTemp.style.display = 'none';
                 divValWater.style.display = '';
                 divLabelWater.style.display = '';
-
-                var divValue = document.getElementById('value_program');
-                divValue.value="22";
+                divValue.value="10";
+                break;
+            case 'electrovanne_co2' :
+                divValPpm.style.display = '';
+                divLabelPpm.style.display = '';
+                divValue.value="1500";
                 break;
             default:
-                var divValue = document.getElementById('value_program');
                 divValue.value="";
                 break;
         }
+        /*
       }
+      */
 
       var divValueRegul = document.getElementById('regul_value');
       var divLabelRegul = document.getElementById('regul_label');
@@ -146,7 +146,11 @@ $(document).ready(function(){
             cache: false,
             async: false,
             url: "main/modules/external/set_variable.php",
-            data: {name:"LOAD_LOG", value: "False", duration: 36000 }
+            data: {
+                name:"LOAD_LOG",
+                value: "False",
+                duration: 36000
+            }
         });
     }
 
@@ -653,39 +657,39 @@ $(document).ready(function(){
                                 color: '#fffff'
                             },
                             onBlock: function() {
-                    $.ajax({
-                        cache: false,
-                        async: false,
-                        url: "main/modules/external/create_program.php",
-                        data: data_array
-                    }).done(function(data) {
-                          if(sd_card!="") {
                                 $.ajax({
-                                    type: "GET",
-                                    url: "main/modules/external/check_and_update_sd.php",
-                                    data: {
-                                        sd_card:"<?php echo $sd_card ;?>"
-                                    },
+                                    cache: false,
                                     async: false,
-                                    context: document.body,
-                                    success: function(data, textStatus, jqXHR) {
-                                    },
-                                    error: function(jqXHR, textStatus, errorThrown) {
-                                        // Error during request
-                                    }
+                                    url: "main/modules/external/create_program.php",
+                                    data: data_array
+                                }).done(function(data) {
+                                      if(sd_card!="") {
+                                            $.ajax({
+                                                type: "GET",
+                                                url: "main/modules/external/check_and_update_sd.php",
+                                                data: {
+                                                    sd_card:"<?php echo $sd_card ;?>"
+                                                },
+                                                async: false,
+                                                context: document.body,
+                                                success: function(data, textStatus, jqXHR) {
+                                                },
+                                                error: function(jqXHR, textStatus, errorThrown) {
+                                                    // Error during request
+                                                }
+                                            });
+                                        }
+
+                                        $.ajax({
+                                            cache: false,
+                                            async: false,
+                                            url: "main/modules/external/set_variable.php",
+                                            data: {name:"UPDATED_CONF", value: "True", duration: 86400 * 365}
+                                        });
+
+                                        get_content("programs",getFormInputs('actionprog'));        
                                 });
                             }
-
-                            $.ajax({
-                                cache: false,
-                                async: false,
-                                url: "main/modules/external/set_variable.php",
-                                data: {name:"UPDATED_CONF", value: "True", duration: 86400 * 365}
-                            });
-
-                            get_content("programs",getFormInputs('actionprog'));        
-                    });
-                    }
                     });
                 } 
             }
@@ -1112,18 +1116,18 @@ $(document).ready(function() {
                 }
             },
             xAxis: {
-             type: 'datetime',
-             endOnTick: true,
-             showFirstLabel: false,
-             showLastLabel: true,
-             dateTimeLabelFormats: { // don't display the dummy year
-                hours: '%H',
-                minutes: '%M',
-                seconds: '%S'
-            },
-            min: 0,
-            max: 86399999,
-            tickInterval: 6 * 3600 * 1000,
+                type: 'datetime',
+                endOnTick: true,
+                showFirstLabel: false,
+                showLastLabel: true,
+                dateTimeLabelFormats: { // don't display the dummy year
+                    hours: '%H',
+                    minutes: '%M',
+                    seconds: '%S'
+                },
+                min: 0,
+                max: 86399999,
+                tickInterval: 6 * 3600 * 1000,
                 labels: {
                 formatter: function () {
                     var tmp=Highcharts.dateFormat('%H:%M', this.value);
@@ -1141,7 +1145,20 @@ $(document).ready(function() {
                     }
                 }
             },
-          yAxis: {
+          yAxis: 
+          <?php
+            // Check if we have to display ppm yaxis
+            $ppmToAdd = 0;
+            foreach ($plugs_infos as $plugs) {
+                if ($plugs["PLUG_TYPE"] == "electrovanne_co2")
+                    $ppmToAdd = 1;
+            }
+            if ($ppmToAdd == 1) 
+            {
+                echo '[';
+            }
+          ?>
+          {
                 min: -1,
                 max: 100,
                 startOnTick: false,
@@ -1170,7 +1187,7 @@ $(document).ready(function() {
                                 case "dehumidifier" :
                                     echo 'if(this.value == 100) return "' . __("CHART_FORCE_ON_VALUE") . '";';
                                     echo "return this.value+'%';";
-                                    break;
+                                    break;                                 
                                 default :
                                     echo 'if(this.value == 100) return "' . __("VALUE_ON") . '";';
                                     echo "return this.value;";
@@ -1181,7 +1198,34 @@ $(document).ready(function() {
                     }
                 },
                 title: false
-            },
+            }
+          <?php
+            if ($ppmToAdd == 1) 
+            {
+          ?>
+            ,{
+                min: -1,
+                max: 2000,
+                startOnTick: false,
+                endOnTick: false,
+                labels: {
+                    useHTML: true,
+                    formatter: function() {
+                        if(this.value == 0) return "<?php echo __("VALUE_OFF","HC") ;?>";
+                        
+                        if(this.value >= 0 && this.value <= 2000) {
+                            if(this.value == 2000)
+                                return "<?php echo __('CHART_FORCE_ON_VALUE','hc'); ?>";
+                            return this.value+'ppm';
+                        }
+                    }
+                },
+                title: false
+            }]
+          <?php
+            }
+          ?>
+            ,
             exporting: {
                 chartOptions:{
                     subtitle : {
@@ -1213,10 +1257,15 @@ $(document).ready(function() {
                         x: +20,
                         useHTML: true,
                         formatter: function(){ 
-                            if (this.visible) {                      
-                                if(this.y=="99.9") { return "<?php echo __('CHART_FORCE_ON_VALUE','hc'); ?>"; }
-                                else if(this.y=="0") { return "<?php echo __('VALUE_OFF','hc'); ?>"; }
-                                else { 
+                            if (this.visible) {
+                                if(this.y=="99.9" || this.y=="9990" ) {
+                                    return "<?php echo __('CHART_FORCE_ON_VALUE','hc'); ?>";
+                                }
+                                else if(this.y=="0") {
+                                    return "<?php echo __('VALUE_OFF','hc'); ?>";
+                                }
+                                else
+                                { 
                                     var unity="";
                                     switch (plugs_infoJS[this.series.index]["PLUG_TYPE"]) {
                                         case "extractor" :
@@ -1234,6 +1283,9 @@ $(document).ready(function() {
                                         case "pumpempting" :
                                             unity="cm";
                                             break;
+                                        case "electrovanne_co2" :
+                                            unity="ppm";
+                                            break;                                            
                                     }
                                     return "<?php echo __('VALUE_REGUL'); ?>: "+this.y+unity;
                                 }
@@ -1270,6 +1322,9 @@ $(document).ready(function() {
                             case "pumpempting" :
                                 unity="cm";
                                 break;
+                            case "electrovanne_co2" :
+                                unity="ppm";
+                                break;                                
                         }
                         return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b>"+this.y+unity+" (<?php echo __('REGULATION'); ?>)</p><br />"+resume_regul[this.series.index+1];
                     } 
@@ -1278,7 +1333,7 @@ $(document).ready(function() {
             series: [
                 <?php 
                 $count=0;
-                foreach($plugs_infos as $plugs) {  
+                foreach($plugs_infos as $plugs) {
                 ?>
 
                     {
@@ -1288,6 +1343,7 @@ $(document).ready(function() {
                         name: <?php echo "'".clean_highchart_message($plugs_infos[$plugs['id']-1]['PLUG_NAME'])." (".clean_highchart_message($plugs_infos[$plugs['id']-1]['translate']).")',"; ?>
                      <?php } ?>
                      color: <?php echo "'".$GLOBALS['LIST_GRAPHIC_COLOR_PROGRAM'][$plugs['id']-1]."'"; ?>,
+                     yAxis: <?php if($plugs['PLUG_TYPE'] != "electrovanne_co2") { echo "0"; } else { echo "1"; } ?> ,
                      showCheckbox: false,
                      
                      <?php if($plugs['id']!=$selected_plug) { echo "visible: false,"; } else { echo "selected: true,"; } ?>
@@ -1369,6 +1425,11 @@ $(document).ready(function() {
                                 if(this.value>0) return this.value+' cm';
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 break;
+                            case "electrovanne_co2" :
+                                if(this.value==9990) return '<?php echo __("CHART_FORCE_ON_VALUE"); ?>';
+                                if(this.value>0) return this.value+' ppm';
+                                if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
+                                break;                                
                             default :
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 if(this.value==100) return '<?php echo __("VALUE_ON"); ?>';
@@ -1390,6 +1451,7 @@ $(document).ready(function() {
             case "pump":
             case "humidifier":
             case "dehumidifier":
+            case "electrovanne_co2":
                 if($('#regul_program option[value="regul"]').length==0) {
                     $("#regul_program").append('<option value="regul"><?php echo __('VALUE_REGUL'); ?></option>');
                 }
@@ -1409,20 +1471,25 @@ $(document).ready(function() {
         }
             
         switch(plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']) { 
-            case 'other': getRegulation("on",plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']); 
-                        if($('#regprog').is(':checked')) {
-                           $('#regoff').attr('checked', true); 
-                        }  
-                        $('#regul_div').hide();
-                        break;
-            case 'lamp': getRegulation("on",plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']); 
-                         $('#regul_div').hide(); 
-                         if($('#regprog').is(':checked')) {
-                           $('#regoff').attr('checked', true); 
-                         }  
-                         $('#regul_div').hide(); 
-                         break;
-            default: getRegulation(regul,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']); $('#regul_div').show(); break;
+            case 'other': 
+                getRegulation("on",plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']); 
+                if($('#regprog').is(':checked')) {
+                    $('#regoff').attr('checked', true); 
+                }  
+                $('#regul_div').hide();
+                break;
+            case 'lamp':
+                getRegulation("on",plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']); 
+                $('#regul_div').hide(); 
+                if($('#regprog').is(':checked')) {
+                    $('#regoff').attr('checked', true); 
+                }  
+                $('#regul_div').hide(); 
+                break;
+            default:
+                getRegulation(regul,plugs_infoJS[$('#selected_plug').val()-1]['PLUG_TYPE']);
+                $('#regul_div').show();
+                break;
         }
 
 
@@ -1518,6 +1585,11 @@ $(document).ready(function() {
                                 if(this.value>0) return this.value+' cm';
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 break;
+                            case "electrovanne_co2" :
+                                if(this.value==9990) return '<?php echo __("CHART_FORCE_ON_VALUE"); ?>';
+                                if(this.value>0) return this.value+' ppm';
+                                if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
+                                break;  
                             default :
                                 if(this.value==0) return '<?php echo __("VALUE_OFF"); ?>';
                                 if(this.value==100) return '<?php echo __("VALUE_ON"); ?>';
@@ -1539,6 +1611,7 @@ $(document).ready(function() {
             case "pump":
             case "humidifier":
             case "dehumidifier":
+            case "electrovanne_co2":
                 if($('#regul_program option[value="regul"]').length!=0) {
                     $("#regul_program option[value='regul']").remove();
                 }
@@ -1558,19 +1631,21 @@ $(document).ready(function() {
         }
             
         switch(plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']) { 
-            case 'other': getRegulation("on",plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); 
-                          if($('#regprog').is(':checked')) {
-                           $('#regoff').attr('checked', true); 
-                          }  
-                          $('#regul_div').hide();
-                          break;
-            case 'lamp': getRegulation("on",plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); 
-                         $('#regul_div').hide(); 
-                         if($('#regprog').is(':checked')) {
-                           $('#regoff').attr('checked', true); 
-                         }  
-                         $('#regul_div').hide(); 
-                         break;
+            case 'other': 
+                getRegulation("on",plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); 
+                if($('#regprog').is(':checked')) {
+                    $('#regoff').attr('checked', true); 
+                }  
+                $('#regul_div').hide();
+                break;
+            case 'lamp': 
+                getRegulation("on",plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); 
+                $('#regul_div').hide(); 
+                if($('#regprog').is(':checked')) {
+                    $('#regoff').attr('checked', true); 
+                }  
+                $('#regul_div').hide(); 
+                break;
             default: getRegulation(regul,plugs_infoJS[$('#selected_plug_conf').val()-1]['PLUG_TYPE']); $('#regul_div').show(); break;
         }
 
@@ -1635,10 +1710,10 @@ $(document).ready(function() {
                 cache: false,
                 url: "main/modules/external/update_configuration.php",
                 data: {
-                        value:newValue,
-                        variable:varToUpdate,
-                        updateConf:updateConf
-                    }
+                    value:newValue,
+                    variable:varToUpdate,
+                    updateConf:updateConf
+                }
             }).done(function (data) {
             });
         });

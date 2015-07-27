@@ -407,10 +407,19 @@ function write_pluga($sd_card,&$out) {
                     break;  
                 case "pwm":
                     // pwm plug case 
-                    // Module 1 : (Adresse 31 --> 36)
-                    // Module 2 : (Adresse 37 --> 42)
-                    // Module 3 : (Adresse 43 --> 48)
-                    $tmp_pluga = 31 + 6 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
+                    // Module 1 : (Adresse 31 --> 38)
+                    // Module 2 : (Adresse 39 --> 44)
+                    // Module 3 : (Adresse 45 --> 49)
+                    $base = 31;
+                    if ($tmp_NUM_MODULE == 2)
+                    {
+                        $base = 39;
+                    }
+                    if ($tmp_NUM_MODULE == 3)
+                    {
+                        $base = 45;
+                    }
+                    $tmp_pluga = $base + $tmp_MODULE_OUTPUT - 1;
                     break; 
             }
 

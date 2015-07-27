@@ -271,16 +271,16 @@ function check_times($start_time="",$end_time="") {
 //      $date_start          
 // RET data for highchart and cultibox programs
 function format_program_highchart_data($arr,$date_start="") {
-   $data="";
-   if(empty($date_start)) {
-      $ref_day=1;
-      $ref_month=1;
-      $ref_year=1970;
-   } else {
-       $ref_year=substr($date_start, 0, 4);
-                $ref_month=substr($date_start, 5, 2);
-                $ref_day=substr($date_start, 8, 2);
-   }
+    $data="";
+    if(empty($date_start)) {
+        $ref_day=1;
+        $ref_month=1;
+        $ref_year=1970;
+    } else {
+        $ref_year=substr($date_start, 0, 4);
+        $ref_month=substr($date_start, 5, 2);
+        $ref_day=substr($date_start, 8, 2);
+    }
    date_default_timezone_set('UTC');
    if($GLOBALS['DEBUG_TRACE']) {
          echo "<br />Debug Trace Highchart Data:<br />";
@@ -453,22 +453,32 @@ function check_format_values_program($value="0",$type="temp",$tol=0) {
    if(!is_numeric($value)) {   
        $ret['error']=2;
    } else {
-       if((($value+$tol)>$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['max'])||(($value-$tol)<$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['min'])) {
+       if((($value+$tol)>$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['max'])||
+          (($value-$tol)<$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['min'])) {
             switch($type) {
-                case 'temp':  $ret['error']=3;
-                              $ret['unity']="°C";
-                              break;
+                case 'temp':  
+                    $ret['error']=3;
+                    $ret['unity']="°C";
+                    break;
 
-                case 'humi':  $ret['error']=4;
-                              $ret['unity']="%";
-                              break;
+                case 'humi':  
+                    $ret['error']=4;
+                    $ret['unity']="%";
+                    break;
 
-                case 'cm':  $ret['error']=5;
-                            $ret['unity']="cm";
-                            break;
+                case 'cm':  
+                    $ret['error']=5;
+                    $ret['unity']="cm";
+                    break;
 
-                case 'other':  $ret['error']=6;
-                               break;
+                case 'ppm':  
+                    $ret['error']=6;
+                    $ret['unity']="ppm";
+                    break;
+
+                case 'other':  
+                    $ret['error']=6;
+                    break;
             }
             $ret['min']=$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['min']+$tol;
             $ret['max']=$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['max']-$tol;
@@ -902,6 +912,7 @@ function get_decode_rtc_offset($offset=0) {
 
 //{{{ translate_PlugType()
 // ROLE Translate plug type
+// Ajout de 'html' pour affichage correcte dans le graph des programmes de la légende
 // IN plug
 // RET plug translated
 function translate_PlugType ($plug) {
@@ -910,40 +921,43 @@ function translate_PlugType ($plug) {
 
     switch($plug) {
         case 'other':
-            $ret['translate'] = __('PLUG_UNKNOWN');
+            $ret['translate'] = __('PLUG_UNKNOWN','html');
             break;
         case 'extractor' :
-            $ret['translate'] = __('PLUG_EXTRACTOR');
+            $ret['translate'] = __('PLUG_EXTRACTOR','html');
             break;
         case 'intractor' :
-            $ret['translate'] = __('PLUG_INTRACTOR');
+            $ret['translate'] = __('PLUG_INTRACTOR','html');
             break;
         case 'ventilator': 
-            $ret['translate'] =__('PLUG_VENTILATOR');
+            $ret['translate'] =__('PLUG_VENTILATOR','html');
             break;
         case 'heating': 
-            $ret['translate'] = __('PLUG_HEATING');
+            $ret['translate'] = __('PLUG_HEATING','html');
             break;
         case 'pump': 
-            $ret['translate'] = __('PLUG_PUMP');
+            $ret['translate'] = __('PLUG_PUMP','html');
             break;
         case 'pumpfilling' :
-            $ret['translate'] = __('PLUG_PUMPFILLING');
+            $ret['translate'] = __('PLUG_PUMPFILLING','html');
             break;
         case 'pumpempting' :
-            $ret['translate'] = __('PLUG_PUMPEMPTING');
+            $ret['translate'] = __('PLUG_PUMPEMPTING','html');
             break;            
         case 'lamp': 
-            $ret['translate'] = __('PLUG_LAMP');
+            $ret['translate'] = __('PLUG_LAMP','html');
             break;
         case 'humidifier': 
-            $ret['translate'] = __('PLUG_HUMIDIFIER');
+            $ret['translate'] = __('PLUG_HUMIDIFIER','html');
             break;
         case 'dehumidifier': 
-            $ret['translate'] = __('PLUG_DEHUMIDIFIER');
+            $ret['translate'] = __('PLUG_DEHUMIDIFIER','html');
+            break;
+        case 'electrovanne_co2': 
+            $ret['translate'] = __('PLUG_CO2','html');
             break;
         default: 
-            $ret['translate'] = __('PLUG_UNKNOWN');
+            $ret['translate'] = __('PLUG_UNKNOWN','html');
             break;
     }
 

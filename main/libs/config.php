@@ -58,7 +58,7 @@ $GLOBALS['NB_MAX_MODULE_XMAX'] = '1';
 $GLOBALS['NB_MAX_MODULE_PWM'] = '3';
 
 // Number of maximal canal pwm ouput with Cultipi
-$GLOBALS['NB_MAX_CANAL_PWM'] = '6';
+$GLOBALS['NB_MAX_CANAL_PWM'] = '8';
 
 // Colors for plugs program:
 $GLOBALS['LIST_GRAPHIC_COLOR_PROGRAM'] = array('#0033CC','#FF0000', '#336600', '#F6F61A','#FF9900','#006666','#999966','#663300','#FF0066','#CC66FF','#660000','#3D96AE','#DB843D','#00FF00','#CCFF33','#B5CA92');
@@ -151,6 +151,9 @@ $GLOBALS['LIMIT_PLUG_PROGRAM']=array(
                                     'cm' => array(
                                          'min' => '5',
                                          'max' => '27'),
+                                    'ppm' => array(
+                                         'min' => '50',
+                                         'max' => '9950'),
                                     'other' => array(
                                          'min' => '0',
                                          'max' => '99.9')

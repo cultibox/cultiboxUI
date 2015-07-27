@@ -714,7 +714,7 @@ msgid "PLUG_INTRACTOR"
 msgstr "Intracteur"
 
 msgid "PLUG_CO2"
-msgstr "CO²"
+msgstr "Électrovanne CO²"
 
 msgid "POWER_PLUG"
 msgstr "Potencia consumida por el elemento (en Watt)"
@@ -840,6 +840,9 @@ msgstr "Nivel del agua deseada"
 
 msgid "DIMMER_WISHED"
 msgstr "Potencia deseada"
+
+msgid "PPM_WISHED"
+msgstr "Desired ppm"
 
 msgid "VALUE_ON"
 msgstr "Activar"
@@ -1532,6 +1535,9 @@ msgstr "Valor de tolerancia : tiene de estar entre 0&#37; y 25.5&#37;"
 
 msgid "ERROR_TOLERANCE_VALUE_CM"
 msgstr "Valor de tolerancia: tiene de estar entre 0 cm y 10 cm"
+
+msgid "ERROR_TOLERANCE_VALUE_PPM"
+msgstr "La tolérance doit être comprise entre 0 cm et 100 ppm"
 
 msgid "ERROR_VALUE_PROGRAM"
 msgstr "Error: el valor indicado tiene que ser un numero"

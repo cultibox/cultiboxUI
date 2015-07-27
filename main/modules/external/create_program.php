@@ -70,18 +70,16 @@ if($regul_program == "on") {
     //Type de programme pour différencier les programmes variateurs des programmes de prises classiques: 0 pour classique, 2 pour les variateurs
     $type="0";
     $check="1";
-} else if("$regul_program"=="off") {
+} else if($regul_program == "off") {
     $value_program="0";
     $check="1";
-} else if("$regul_program"=="dimmer") {
+} else if($regul_program == "dimmer") {
     $type="2";
     $check="1";
 } else {
     $check="1";
     $type="1";
 }
-
-
 
 if($check == "1") { //Si la valeur du programme est correcte:
     if(isset($cyclic)&&(!empty($cyclic))&&(strcmp("$repeat_time","00:00:00")!=0)) {
@@ -104,7 +102,7 @@ if($check == "1") { //Si la valeur du programme est correcte:
     //Vérification du type de programme, les traitements ne sont pas les même si le programme reboucle (départ>fin) ou s'il ne reboucle pas (départ<fin)
     $chtime=check_times($start_time,$end_time);
 
-    if($chtime==2) { //Dans le cas d'un programme ou la première action depasse sur le début de la journée: 
+    if($chtime==2) { //Dans le cas d'un programme ou la première action dépasse sur le début de la journée: 
         $prog[]= array(
             "start_time" => "$start_time",
             "end_time" => "23:59:59",

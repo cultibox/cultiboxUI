@@ -16,6 +16,7 @@ function getTolerance(i,j,secondR) {
     var pDegree = document.getElementById('degree'+j);
     var pPourcent = document.getElementById('pourcent'+j);
     var pCm = document.getElementById('cm'+j);
+    var pPPM = document.getElementById('ppm'+j);
     var divHumiRegul = document.getElementById('humi_regul_senso'+j);
     var divTempRegul = document.getElementById('temp_regul_senso'+j);
     var divUnknownRegul = document.getElementById('unknown_regul_senso'+j);
@@ -45,6 +46,7 @@ function getTolerance(i,j,secondR) {
     labelDeg.style.display = 'none';
     labelPct.style.display = 'none';
     pCm.style.display = 'none';
+    pPPM.style.display = 'none';
     labelSecondDeg.style.display = 'none';
     labelSecondPct.style.display = 'none';
     labelSensor.style.display = 'none'; 
@@ -88,13 +90,23 @@ function getTolerance(i,j,secondR) {
                 computeRegul.style.display = '';
             }
             break;
+        case "electrovanne_co2" :
+            // Electrovanne co2: no second regulation
+            divTolerance.style.display = '';
+            divToleranceLabel.style.display = '';
+            pPPM.style.display = '';
+            if(secondR=="True") {
+                Sensor.style.display = '';
+                labelSensor.style.display = '';
+                labelComputeRegul.style.display = '';
+                computeRegul.style.display = '';
+            }
+            break;
         case "humidifier" :
         case "dehumidifier" :
             divTolerance.style.display = ''; 
-            divToleranceLabel.style.display = ''; 
-            pDegree.style.display = 'none'; 
-            pPourcent.style.display = ''; 
-            pCm.style.display = 'none';
+            divToleranceLabel.style.display = '';
+            pPourcent.style.display = '';
             if(secondR=="True") {
                 divTempRegul.style.display = ''; 
                 labelDeg.style.display = '';
@@ -412,7 +424,8 @@ function open_plugs_dial(htmlPlug) {
                         $("#plug_type"+i).val()=="extractor" || 
                         $("#plug_type"+i).val()=="intractor" || 
                         $("#plug_type"+i).val()=="pumpfilling" || 
-                        $("#plug_type"+i).val()=="pumpempting")
+                        $("#plug_type"+i).val()=="pumpempting" || 
+                        $("#plug_type"+i).val()=="electrovanne_co2")
                         {
                             if($("#plug_tolerance"+i).val()=="0" || $("#plug_tolerance"+i).val()=="" )
                             {
@@ -441,6 +454,9 @@ function open_plugs_dial(htmlPlug) {
                                             case 'heating' :
                                                 $("#error_tolerance_value_temp"+i).show(400);
                                                 break;
+                                            case 'electrovanne_co2' :
+                                                $("#error_tolerance_value_co2"+i).show(400);
+                                                break;                                                
                                             case 'pumpfilling' :
                                             case 'pumpempting' :
                                             case 'pump' :
@@ -502,7 +518,8 @@ function open_plugs_dial(htmlPlug) {
                                     case 'pumpfilling' :
                                     case 'pumpempting' :
                                     case 'pump' :
-                                        // TODO : Normallement la régulation secondaire est désactivé pour la pompe
+                                    case 'electrovanne_co2' :
+                                        // TODO : Normalement la régulation secondaire est désactivé pour la pompe
                                         // Dans ce cas, ce code ne doit pas exister
                                         $("#error_second_tolerance_value_humi"+i).show(400);
                                         break;

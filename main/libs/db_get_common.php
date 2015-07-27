@@ -1709,6 +1709,9 @@ function create_plugconf_from_database($nb=0,&$out) {
                 case "dehumidifier":
                     $reg="REG:H+${tol}";
                     break;
+                case "electrovanne_co2":
+                    $reg="REG:C+${tol}";
+                    break;                    
                 default:
                     $reg="REG:N+000";
                     break;
@@ -1733,6 +1736,7 @@ function create_plugconf_from_database($nb=0,&$out) {
                     case "pumpfilling":
                     case "pumpempting":
                     case "pump":
+                    case "electrovanne_co2":
                     default:
                         $sec="SEC:N-1000";
                         break;
@@ -1808,17 +1812,20 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
     date_default_timezone_set('UTC');
 
     // Read the number of plugs
-    $nb_plugs=get_configuration("NB_PLUGS",$out);
+    $nb_plugs = get_configuration("NB_PLUGS",$out);
+    
+    // Read plugs configuration 
+    $plugsConfig = plugs\getDB();
     
     // Get programs for plugs 
-   $sql = "SELECT * FROM programs WHERE plug_id IN (SELECT id FROM plugs WHERE id <= " . $nb_plugs . ") AND number = '" . $fieldNumber . "' ORDER BY time_start ASC;";
+    $sql = "SELECT * FROM programs WHERE plug_id IN (SELECT id FROM plugs WHERE id <= " . $nb_plugs . ") AND number = '" . $fieldNumber . "' ORDER BY time_start ASC;";
   
-   $db=db_priv_pdo_start();
-   try {
+    $db=db_priv_pdo_start();
+    try {
         $sth=$db->prepare($sql);
         $sth->execute();
         $res=$sth->fetchAll(PDO::FETCH_ASSOC);
-   } catch(PDOException $e) {
+    } catch(PDOException $e) {
         $ret=$e->getMessage();
        
         if($GLOBALS['DEBUG_TRACE']) {
@@ -1828,11 +1835,11 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
         }
         
         unset($ret);
-   }
+    }
 
    
-   // Select first element of program
-   $sql = "SELECT * FROM programs WHERE time_start = '000000' AND plug_id IN (SELECT id FROM plugs WHERE id <= " . $nb_plugs . ") AND number = '" . $fieldNumber . "' ORDER BY time_start ASC;";
+    // Select first element of program
+    $sql = "SELECT * FROM programs WHERE time_start = '000000' AND plug_id IN (SELECT id FROM plugs WHERE id <= " . $nb_plugs . ") AND number = '" . $fieldNumber . "' ORDER BY time_start ASC;";
 
     try {
         $sth=$db->prepare($sql);
@@ -1879,7 +1886,7 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
          if($j>$nb_plugs) {
             $result="000";
          } else {
-            $result=find_value_for_plug($first,"000000",$j);
+            $result = find_value_for_plug($first,"000000",$j,$plugsConfig[$j-1]["PLUG_TYPE"]);
          }
          $data[0]=$data[0]."$result";
          $j=$j+1;
@@ -1947,7 +1954,7 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
                 if($j>$nb_plugs) {
                     $result="000";
                 } else {
-                    $result=find_value_for_plug($plg[$j],$event[$i],$j);
+                    $result = find_value_for_plug($plg[$j],$event[$i],$j,$plugsConfig[$j-1]["PLUG_TYPE"]);
 				}
 
                 $data[$i+1]=$data[$i+1]."$result";
@@ -1973,7 +1980,7 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
             if($j>$nb_plugs) {
                 $result="000";
             } else {
-                $result=find_value_for_plug($last,"235959",$j);
+                $result = find_value_for_plug($last,"235959",$j,$plugsConfig[$j-1]["PLUG_TYPE"]);
             }
 
             if(isset($data[$count])) {
@@ -1997,9 +2004,19 @@ function create_program_from_database(&$out,$fieldNumber = 1) {
 //ROLE find if a plug is concerned by a time spaces and return its value
 // IN $data       array to look for time space
 //    $time       the time to find
-//    $plug        the specific plug concerned
+//    $plug       the specific plug concerned
+//    $plugType   Th type of the plug
 // RET   000 if the plug is not concerned or if its value is 0, 0001 else
-function find_value_for_plug($data,$time,$plug) {
+function find_value_for_plug($data,$time,$plug,$plugType = "other") {
+    
+    // Apply coef
+    if ($plugType == "electrovanne_co2")
+    {
+        $coef = 0.1;
+    } else {
+        $coef = 10;
+    }
+    
     for($i=0;$i<count($data);$i++) {
         //data must be ordered by time_start ASC
         if($data[$i]['time_start']>$time) {
@@ -2010,11 +2027,11 @@ function find_value_for_plug($data,$time,$plug) {
         if(($data[$i]['time_start']<=$time)&&($data[$i]['time_stop']>=$time)&&($data[$i]['plug_id']==$plug)) {
             if($data[$i]['time_stop']==$time) {
                 if($data[$i]['time_stop']=="235959") {
-                    $ret=$data[$i]['value']*10;
+                    $ret= round($data[$i]['value'] * $coef);
                 } else {
                     for($j=0;$j<count($data);$j++) {
                         if(($data[$j]["time_start"]=="$time")&&($data[$j]['plug_id']==$plug)) {
-                            $ret=$data[$j]['value']*10;
+                            $ret = round($data[$j]['value'] * $coef);
                         } 
                     }
                     if(empty($ret)) {
@@ -2022,7 +2039,7 @@ function find_value_for_plug($data,$time,$plug) {
                     }   
                 }
             } else {
-                $ret=$data[$i]['value']*10;
+                $ret = round($data[$i]['value'] * $coef);
             }
             while(strlen($ret)<3) {
                 $ret="0$ret";

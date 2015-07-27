@@ -61,20 +61,16 @@ function check_db() {
 
     $db = null;
 
-
-
-
-
     // Define columns of the programs table
     $program_col = array();
-    $program_col["plug_id"]            = array ( 'Field' => "plug_id", 'Type' => "int(11)", 'carac' => "NOT NULL");
-    $program_col["time_start"]          = array ( 'Field' => "time_start", 'Type' => "VARCHAR(6)", 'carac' => "NOT NULL");
-    $program_col["time_stop"]       = array ( 'Field' => "time_stop", 'Type' => "VARCHAR(6)", 'carac' => "NOT NULL");
-    $program_col["value"]   = array ( 'Field' => "value", 'Type' => "decimal(3,1)", 'carac' => "NOT NULL");
+    $program_col["plug_id"]     = array ( 'Field' => "plug_id", 'Type' => "int(11)", 'carac' => "NOT NULL");
+    $program_col["time_start"]  = array ( 'Field' => "time_start", 'Type' => "VARCHAR(6)", 'carac' => "NOT NULL");
+    $program_col["time_stop"]   = array ( 'Field' => "time_stop", 'Type' => "VARCHAR(6)", 'carac' => "NOT NULL");
+    $program_col["value"]       = array ( 'Field' => "value", 'Type' => "decimal(5,1)", 'carac' => "NOT NULL");
     $program_col["number"]      = array ( 'Field' => "number", 'Type' => "int(11)", 'default_value' => 1, 'carac' => "NOT NULL");
     $program_col["date_start"]  = array ( 'Field' => "date_start", 'Type' => "varchar(10)",  'default_value' => '0000-00-00', 'carac' => "NOT NULL");
-    $program_col["date_end"] = array ( 'Field' => "date_end", 'Type' => "VARCHAR(10)",  'default_value' => '0000-00-00', 'carac' => "NOT NULL");
-    $program_col["type"]      = array ( 'Field' => "type", 'Type' => "int(11)",  'default_value' => '0', 'carac' => "NOT NULL");
+    $program_col["date_end"]    = array ( 'Field' => "date_end", 'Type' => "VARCHAR(10)",  'default_value' => '0000-00-00', 'carac' => "NOT NULL");
+    $program_col["type"]        = array ( 'Field' => "type", 'Type' => "int(11)",  'default_value' => '0', 'carac' => "NOT NULL");
 
     // Check if table programs exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'programs';";
@@ -96,7 +92,7 @@ function check_db() {
             ."plug_id int(11) NOT NULL,"
             ."time_start varchar(6) NOT NULL,"
             ."time_stop varchar(6) NOT NULL,"
-            ."value decimal(3,1) NOT NULL,"
+            ."value decimal(5,1) NOT NULL,"
             ."number int(11) NOT NULL DEFAULT '1',"
             ."date_start varchar(10) NOT NULL DEFAULT '0000-00-00',"
             ."date_end varchar(10) NOT NULL DEFAULT '0000-00-00',"

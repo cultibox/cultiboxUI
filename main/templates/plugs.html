@@ -157,7 +157,7 @@
                                             <?php echo __('PLUGS_MODULE_OUTPUT'); ?>
                                             <select id="pwm_canal<?php echo $i; ?>" name="pwm_module_ouput<?php echo $i; ?>">
                                                 <?php for($j=1;$j<=$GLOBALS['NB_MAX_CANAL_PWM'];$j++) { ?>
-                                                    <option value="<?php echo $j; ?>" <?php if(intval($plug_num_module{$i})==$j) { echo ' selected'; } else  { if(!$status[$j-1]) { echo ' disabled'; } } ?>><?php echo $j; ?></option>
+                                                    <option value="<?php echo $j; ?>" <?php if(intval($plug_module_output{$i})==$j) { echo ' selected'; } else  { if(!$status[$j-1]) { echo ' disabled'; } } ?>><?php echo $j; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -185,7 +185,7 @@
                                 <option <?php if($plug_type{$i} == "pumpempting") { echo 'selected';} ?> value="pumpempting"><?php echo __('PLUG_PUMPEMPTING'); ?></option>
                                 <option <?php if($plug_type{$i} == "humidifier") { echo 'selected';} ?> value="humidifier"><?php echo __('PLUG_HUMIDIFIER'); ?></option>
                                 <option <?php if($plug_type{$i} == "dehumidifier") { echo 'selected';} ?> value="dehumidifier"><?php echo __('PLUG_DEHUMIDIFIER'); ?></option>
-                                <option <?php if($plug_type{$i} == "co2") { echo 'selected';} ?> value="co2"><?php echo __('PLUG_CO2'); ?></option>
+                                <option <?php if($plug_type{$i} == "electrovanne_co2") { echo 'selected';} ?> value="electrovanne_co2"><?php echo __('PLUG_CO2'); ?></option>
                                 <option <?php if($plug_type{$i} == "other") { echo 'selected';} ?> value="other"><?php echo __('PLUG_UNKNOWN'); ?></option>
                             </select>
                         </td>
@@ -214,13 +214,15 @@
                                 <label id="pourcent<?php echo $i; ?>" > %</label>
                                 <label id="degree<?php echo $i; ?>" > °C</label>
                                 <label id="cm<?php echo $i; ?>" > cm</label>
+                                <label id="ppm<?php echo $i; ?>" > ppm</label>
                             </div>
                         </td>
                         <td>
                             <div class='error_field' id="error_tolerance_value_temp<?php echo $i; ?>" style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_TOLERANCE_VALUE_DEGREE','html'); ?></div>
                             <div class='error_field' id="error_tolerance_value_humi<?php echo $i; ?>" style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_TOLERANCE_VALUE_POURCENT','html'); ?></div>
                             <div class='error_field' id="error_tolerance_value_water<?php echo $i; ?>" style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_TOLERANCE_VALUE_CM','html'); ?></div>
-                        </td>
+                            <div class='error_field' id="error_tolerance_value_co2<?php echo $i; ?>" style="display:none"><img src='/cultibox/main/libs/img/arrow_error.png' alt='->'><?php echo __('ERROR_TOLERANCE_VALUE_PPM','html'); ?></div>
+                         </td>
                     </tr>
                 </table>
 

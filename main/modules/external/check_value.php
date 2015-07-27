@@ -96,6 +96,9 @@ switch($type) {
                 case "dehumidifier":
                     $check = check_format_values_program($value,"humi",$tolerance);
                     break;
+                case "electrovanne_co2":
+                    $check = check_format_values_program($value,"ppm",$tolerance);
+                    break;                    
                 default:
                     $check=check_format_values_program($value,"other",$tolerance);
                     break;

@@ -65,6 +65,11 @@ $(document).ready(function(){
                     $("#tooltip_value").show();
                     $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="70" /><label id="label_unity">%</label>');
                     break;
+                case "electrovanne_co2" :
+                    $("#value_wished").text("<?php echo __('PPM_WISHED','html').':'; ?>");
+                    $("#tooltip_value").show();
+                    $('#value_prog_div').append('<input type="text" maxlength="4" size="4" name="value_program" id="value_program" value="1500" /><label id="label_unity">ppm</label>');
+                    break;                    
                 default :
                     $("#value_wished").text("");
                     $("#tooltip_value").css("display","none");
