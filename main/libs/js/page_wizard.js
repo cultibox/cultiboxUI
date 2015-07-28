@@ -223,6 +223,7 @@ $("#value_program").keypress(function(e) {
             case "pump":
             case "humidifier":
             case "dehumidifier":
+            case "electrovanne_co2":
                 if(($("#value_program").val())&&($("#value_program").val()!="")) {
                     $("#value_program").val($("#value_program").val().replace(",","."));
                     $.ajax({
@@ -255,6 +256,9 @@ $("#value_program").keypress(function(e) {
                                     case 'pumpempting' :
                                         $("#value_program").val("22");
                                         break;
+                                    case 'electrovanne_co2' :
+                                        $("#value_program").val("1500");
+                                        break;                                        
                                     default: 
                                         break;
                                 }
@@ -279,6 +283,9 @@ $("#value_program").keypress(function(e) {
                         case 'pumpfilling' :
                         case 'pumpempting' :
                             $("#value_program").val("22");
+                            break;
+                        case 'electrovanne_co2' :
+                            $("#value_program").val("1500");
                             break;
                         default: 
                             break;

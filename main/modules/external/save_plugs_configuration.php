@@ -94,6 +94,7 @@ switch ($type) {
     case "pump":
     case "humidifier":
     case "dehumidifier":
+    case "electrovanne_co2":
         insert_plug_conf("PLUG_TOLERANCE",$nb,$tolerance,$main_error);
         break;
     default:
@@ -145,6 +146,9 @@ switch ($type) {
     case "dehumidifier":
         $regul_senso = "T";
         break;
+    case "electrovanne_co2":
+        $regul_senso = "C";
+        break;
     default:
         $regul_senso = getvar("plug_senso${nb}");
         break;
@@ -195,9 +199,10 @@ if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
                 $imageToSet = "lampe_OFF.png";
             }
             break;
+        case "electrovanne_co2" :
         case "co2":
             $imageToSet = "CO2_OFF.png";
-            break;            
+            break;  
         case "humidifier":
         case "dehumidifier":
         default:
@@ -232,6 +237,12 @@ if(!empty($type) && isset($type) && strcmp("$old_type","$type")!=0) {
                 break;
             case "humidifier":
             case "dehumidifier":
+                insert_plug_conf("PLUG_REGUL_VALUE",$nb,"35",$main_error);
+                insert_plug_conf("PLUG_SENSO",$nb,"T",$main_error);
+                insert_plug_conf("PLUG_SENSS",$nb,"+",$main_error);
+                insert_plug_conf("PLUG_SECOND_TOLERANCE",$nb,"0",$main_error);
+                break;
+            case "electrovanne_co2":
                 insert_plug_conf("PLUG_REGUL_VALUE",$nb,"35",$main_error);
                 insert_plug_conf("PLUG_SENSO",$nb,"T",$main_error);
                 insert_plug_conf("PLUG_SENSS",$nb,"+",$main_error);

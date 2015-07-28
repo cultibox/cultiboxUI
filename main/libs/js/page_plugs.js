@@ -492,6 +492,7 @@ function open_plugs_dial(htmlPlug) {
                             case 'pumpfiling' :
                             case 'pumpempting' :
                             case 'pump' :
+                            case 'electrovanne_co2' :
                                 second_type="humidifier";
                                 break;
                         }

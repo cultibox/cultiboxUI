@@ -423,6 +423,13 @@ function check_tolerance_value($type,&$tolerance=0) {
                 return false;
             }
             break;
+        case "electrovanne_co2":
+            if($tolerance >= 0 && $tolerance <= 1000) {
+                return true;
+            } else {
+                return false;
+            }
+            break;            
         default:
             return true;
             break;

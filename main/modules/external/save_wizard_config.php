@@ -52,6 +52,9 @@ if((empty($value_program))||(!isset($value_program))) {
             case "pump":
                 $value_program=22.0;
                 break;
+            case "electrovanne_co2":
+                $value_program=1500;
+                break;
             default :
                 $value_program=0.0;
                break;
@@ -90,6 +93,7 @@ if((strcmp($type_submit,"submit_close")==0)||(strcmp($type_submit,"submit_next")
             case "pumpfilling":
             case "pumpempting":
             case "pump":
+            case "electrovanne_co2":
                 if(!isset($type) || empty($type)) {
                     $type="1";
                 }
@@ -170,6 +174,10 @@ if((strcmp($type_submit,"submit_close")==0)||(strcmp($type_submit,"submit_next")
                         case 'dehumidifier':
                             insert_plug_conf("PLUG_SENSO",$prog[0]["selected_plug"],"T",$main_error);
                             insert_plug_conf("PLUG_REGUL_VALUE",$prog[0]["selected_plug"],"70",$main_error);
+                            break;
+                        case 'electrovanne_co2':
+                            insert_plug_conf("PLUG_SENSO",$prog[0]["selected_plug"],"C",$main_error);
+                            insert_plug_conf("PLUG_REGUL_VALUE",$prog[0]["selected_plug"],"1500",$main_error);
                             break;
                         case 'pumpfilling':
                         case 'pumpempting':

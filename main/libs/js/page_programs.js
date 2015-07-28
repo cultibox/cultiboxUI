@@ -1187,6 +1187,10 @@ $(document).ready(function() {
                                 case "dehumidifier" :
                                     echo 'if(this.value == 100) return "' . __("CHART_FORCE_ON_VALUE") . '";';
                                     echo "return this.value+'%';";
+                                    break;          
+                                case "electrovanne_co2" :
+                                    echo 'if(this.value == 100) return "' . __("CHART_FORCE_ON_VALUE") . '";';
+                                    echo "return this.value+'ppm';";
                                     break;                                 
                                 default :
                                     echo 'if(this.value == 100) return "' . __("VALUE_ON") . '";';
