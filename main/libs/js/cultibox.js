@@ -335,7 +335,7 @@ function get_content(page,get_array) {
                 active_menu(page);
 
                 //Logs hav a special behaviour: interface is unlocked after graph is loaded.
-                if(page!="logs") {
+                if(page != "logs") {
                     $.unblockUI();
                 }
             });

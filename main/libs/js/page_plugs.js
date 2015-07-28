@@ -529,7 +529,7 @@ function open_plugs_dial(htmlPlug) {
                                 jump_plug=i-1;
                             }
                         });
-            } 
+                    } 
 
 
                     if(($("#plug_regul_value"+i).val()=="0")||($("#plug_regul_value"+i).val()=="")) {
@@ -559,7 +559,7 @@ function open_plugs_dial(htmlPlug) {
                     if(sensors) {
                         for (var j = 1  ; j<=sensors; j++) {
                             if($("#plug_sensor"+i+j+" option:selected").val()=="True") {
-                                //Compte du nombre de capteur selectionné:
+                                //Compte du nombre de capteur sélectionné:
                                 nb_sensor=nb_sensor+1;
                             }
                         }
@@ -573,7 +573,7 @@ function open_plugs_dial(htmlPlug) {
                         }
 
                         if(nb_sensor==0) {
-                            // Si aucun capteur n'est selectionné: affichage du message précisant que le capteur 1 sera selectionné + selection automatique du capteur 1
+                            // Si aucun capteur n'est sélectionné: affichage du message précisant que le capteur 1 sera sélectionné + sélection automatique du capteur 1
                             $("#error_select_sensor"+i).show();
                             $("#plug_sensor"+i+"1 option[value='True']").prop('selected', 'selected');
                             checked=false;

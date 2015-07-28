@@ -156,6 +156,10 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
         "value" => "+"
     );
 
+    $paramListServerPlugUpdate[] = array (
+        "name" => "pwm_output",
+        "value" => $GLOBALS['PWM_OUTPUT']
+    );
 
     // Add network slave
     //  <item name="module_CULTIPI,ip,0" ip="192.168.1.10" />

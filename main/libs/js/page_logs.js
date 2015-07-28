@@ -468,6 +468,7 @@ $(function () {
                         var chart = $('#container').highcharts();
                         
                         // For each selected checkbutton, display the curve
+                        var nbCurveToDisplay = 0;
                         $("#select_curve input[type=checkbox], #select_logs_to_display input[type=checkbox], #select_logs_to_display_month input[type=checkbox]").each(function() {
                             var cheBu = $(this);
 
@@ -477,6 +478,8 @@ $(function () {
                                 var startDate=$("#startyear").val()+"-"+$("#startmonth").val();
                             }
                             if (cheBu.attr("checked") == "checked") {
+                           
+                                nbCurveToDisplay = nbCurveToDisplay + 1;
                            
                                 // Call logs_get_serie to get programm value
                                 $.ajax({
@@ -602,11 +605,11 @@ $(function () {
                                     },
                                     cache: false
                                 });
-                                
                             }
-                            
                         });
-
+                        // If there are no sensors
+                        if (nbCurveToDisplay == 0)
+                            $.unblockUI();
                     }
                 }
             },
