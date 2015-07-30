@@ -1710,7 +1710,7 @@ function create_plugconf_from_database($nb=0,&$out) {
                     $reg="REG:H+${tol}";
                     break;
                 case "electrovanne_co2":
-                    $reg="REG:C+${tol}";
+                    $reg="REG:C-${tol}";
                     break;                    
                 default:
                     $reg="REG:N+000";
