@@ -245,7 +245,7 @@ function check_and_update_sd_card($sd_card="",&$main_info_tab,&$main_error_tab,$
     
     $paramListCultibox[] = array (
         "name" => "verbose",
-        "level" => "info"
+        "level" => $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverCultibox']
     ); 
     $paramListCultibox[] = array (
         "name" => "updateFreq",

@@ -200,6 +200,7 @@ $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverLog']         = "warning";
 $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverPlugUpdate']  = "info";
 $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverMail']        = "info";
 $GLOBALS['CULTIPI']['TRACE_LEVEL']['serverSupervision'] = "info";
+$GLOBALS['CULTIPI']['TRACE_LEVEL']['serverCultibox']    = "info";
 
 // -------------------------------------------------- 
 
