@@ -1159,7 +1159,7 @@ $(document).ready(function() {
             }
           ?>
           {
-                min: 0,
+                min: -1,
                 max: 100,
                 startOnTick: false,
                 endOnTick: false,
@@ -1208,7 +1208,7 @@ $(document).ready(function() {
             {
           ?>
             ,{
-                min: 0,
+                min: -20,
                 max: 2000,
                 startOnTick: false,
                 endOnTick: false,
