@@ -917,7 +917,6 @@
         <tr>
             <th></th>
             <th>Nom</th>
-            <th>Détection automatique</th>
             <th>Type</th>
             <th>Source</th>
         <tr>
@@ -937,9 +936,6 @@
                     </td>
                     <td>
                         <input type="text" id="ui_sensors_parameters_tableSensor_name_<?php echo $sensorNum; ?>" value="<?php echo $sensor["name"]; ?>" size="10" />
-                    </td>
-                    <td>
-                        <input type="checkbox" id="ui_sensors_parameters_tableSensor_detectionAuto_<?php echo $sensorNum; ?>" value="true" <?php if(strcmp($sensor["detectionAuto"],"true") == 0) echo ' checked'; ?>/>
                     </td>
                     <td>
                         <select id="ui_sensors_parameters_tableSensor_type_<?php echo $sensorNum; ?>" >

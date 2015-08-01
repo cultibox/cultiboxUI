@@ -11,7 +11,6 @@ function check_db() {
     $sensors_index_col         = array();
     $sensors_index_col["id"]   = array ( 'Field' => "id", 'Type' => "int(11)", 'carac' => 'NOT NULL  AUTO_INCREMENT');
     $sensors_index_col["type"] = array ( 'Field' => "type", 'Type' => "varchar(2)", 'default_value' => 0, 'carac' => "NOT NULL");
-    $sensors_index_col["detectionAuto"] = array ( 'Field' => "detectionAuto", 'Type' => "varchar(5)", 'default_value' => "true", 'carac' => "NOT NULL");
     $sensors_index_col["name"] = array ( 'Field' => "name", 'Type' => "varchar(20)", 'default_value' => "capteur", 'carac' => "NOT NULL");
     $sensors_index_col["source"] = array ( 'Field' => "source", 'Type' => "varchar(10)", 'default_value' => "rj12", 'carac' => "NOT NULL");
     $sensors_index_col["input"]  = array ( 'Field' => "input", 'Type' => "varchar(2)", 'default_value' => "NA", 'carac' => "NOT NULL");
@@ -41,7 +40,6 @@ function check_db() {
         $sql = "CREATE TABLE sensors ("
                 . "id int(11) NOT NULL  AUTO_INCREMENT PRIMARY KEY, "
                 . "type varchar(2) NOT NULL DEFAULT '0', "
-                . "detectionAuto varchar(5) NOT NULL DEFAULT 'true', "
                 . "name varchar(20) NOT NULL DEFAULT 'capteur'"
                 . "input varchar(2) NOT NULL DEFAULT 'NA', "
                 . "value varchar(2) NOT NULL DEFAULT 'NA'"
