@@ -80,7 +80,17 @@ switch($type) {
 
             $plug_type=$_GET['plug_type'];
             $check=array();
-            switch ($plug_type) {
+
+            if((isset($_GET['plug_module']))&&(!empty($_GET['plug_module']))) {
+                $module=$_GET['plug_module'];
+            } else {
+                $module="";
+            }
+
+            if(strcmp("$module","pwm")==0) {
+                $check = check_format_values_program($value,"purcent",$tolerance);
+            } else {
+              switch ($plug_type) {
                 case "extractor":
                 case "intractor":
                 case "ventilator":
@@ -102,6 +112,7 @@ switch($type) {
                 default:
                     $check=check_format_values_program($value,"other",$tolerance);
                     break;
+              }
             }
 
             if(count($check)==0) {

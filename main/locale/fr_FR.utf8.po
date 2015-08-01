@@ -836,6 +836,9 @@ msgstr "Adresse IP :"
 
 
 # For the programs part:
+msgid "VARIO_WISHED"
+msgstr "Pourcentage voulu"
+
 msgid "DISPLAY_ACTIONS"
 msgstr "Afficher toutes les action"
 
@@ -1566,6 +1569,9 @@ msgstr "La tolérance doit être comprise entre 0 cm et 100 ppm"
 
 msgid "ERROR_VALUE_PROGRAM"
 msgstr "La valeur rentrée doit être un nombre"
+
+msgid "ERROR_VALUE_PURCENT"
+msgstr "Le pourcentage rentré doit être compris entre"
 
 msgid "ERROR_VALUE_PROGRAM_TEMP"
 msgstr "La température doit être comprise entre"

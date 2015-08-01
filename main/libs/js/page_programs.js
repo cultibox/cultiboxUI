@@ -29,7 +29,7 @@ var main_info = <?php echo json_encode($main_info); ?>;
 // IN  input value: display or not the informations
 // HOW IT WORKS: get id from div to be displayed or not and display it (or not) depending the input value
 // USED BY: templates/programs.html 
-function getRegulation(i, type) {
+function getRegulation(i, type, module) {
     var divValTemp = document.getElementById('regul_value_temp');
     var divLabelTemp = document.getElementById('regul_label_temp');
     var divValHumi = document.getElementById('regul_value_humi');
@@ -38,6 +38,7 @@ function getRegulation(i, type) {
     var divValWater = document.getElementById('regul_value_water');
     var divLabelPpm = document.getElementById('regul_label_ppm');
     var divValPpm = document.getElementById('regul_value_ppm');
+    var divValVario = document.getElementById('regul_value_vario');
 
     var divDimmerLabel=document.getElementById('dimmer_label');
     var divValue = document.getElementById('value_program');
@@ -51,6 +52,8 @@ function getRegulation(i, type) {
     divValPpm.style.display = 'none';
     divLabelPpm.style.display = 'none';
     divDimmerLabel.style.display = 'none';
+    divValVario.style.display = 'none';
+
     /*
     if(i=="dimmer") {
         divValHumi.style.display = '';
@@ -63,6 +66,28 @@ function getRegulation(i, type) {
     */
         var divDimmerLabel=document.getElementById('dimmer_label');
         divDimmerLabel.style.display = 'none';
+
+
+        var divValueRegul = document.getElementById('regul_value');
+        var divLabelRegul = document.getElementById('regul_label');
+
+        switch(i) {
+         case 'regul' : divLabelRegul.style.display = ''; divValueRegul.style.display = ''; break;
+         case 'dimmer': divLabelRegul.style.display = 'none'; divValueRegul.style.display = ''; break;
+         default: divLabelRegul.style.display = 'none'; divValueRegul.style.display = 'none'; break;
+        }
+
+        switch(module) {
+            case 'pwm':
+                divValVario.style.display = '';
+                divDimmerLabel.style.display = '';
+                
+                return true;
+            default:
+                break;
+        }
+
+
         switch(type) {
             case 'humidifier' :
             case 'dehumidifier' : 
@@ -97,16 +122,6 @@ function getRegulation(i, type) {
         /*
       }
       */
-
-      var divValueRegul = document.getElementById('regul_value');
-      var divLabelRegul = document.getElementById('regul_label');
-    
-      switch(i) {
-         case 'regul' : divLabelRegul.style.display = ''; divValueRegul.style.display = ''; break;
-         case 'dimmer': divLabelRegul.style.display = 'none'; divValueRegul.style.display = ''; break;
-         default: divLabelRegul.style.display = 'none'; divValueRegul.style.display = 'none'; break;
-      }
-
 }
 // }}}
 
@@ -504,14 +519,14 @@ $(document).ready(function(){
             }
 
 
-            if($('#regprog').is(':checked')) {
+            if(($('#regprog').is(':checked'))||($('#regdim').is(':checked'))) {
                 if(($("#value_program").val())&&($("#value_program").val()!="")) { 
                     $("#value_program").val($("#value_program").val().replace(",","."));
                     $.ajax({
                         cache: false,
                         url: "main/modules/external/check_value.php",
                         async: false,
-                        data: {value:$("#value_program").val(),type:'value_program',plug_type:plugs_infoJS[$('#selected_plug option:selected').val()-1]['PLUG_TYPE'],plug_tolerance:plugs_infoJS[$('#selected_plug option:selected').val()-1]['PLUG_TOLERANCE']}
+                        data: {value:$("#value_program").val(),type:'value_program',plug_type:plugs_infoJS[$('#selected_plug option:selected').val()-1]['PLUG_TYPE'],plug_tolerance:plugs_infoJS[$('#selected_plug option:selected').val()-1]['PLUG_TOLERANCE'],plug_module:plugs_infoJS[$('#selected_plug option:selected').val()-1]['PLUG_MODULE']}
                     }).done(function (data) {
                         var return_array = JSON.parse(data);
                         if(parseInt(return_array['error'])>1) {

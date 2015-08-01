@@ -486,6 +486,10 @@ function check_format_values_program($value="0",$type="temp",$tol=0) {
                 case 'other':  
                     $ret['error']=6;
                     break;
+                case 'purcent':
+                    $ret['error']=7;
+                    $ret['unity']="%";
+                    break;
             }
             $ret['min']=$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['min']+$tol;
             $ret['max']=$GLOBALS['LIMIT_PLUG_PROGRAM'][$type]['max']-$tol;
