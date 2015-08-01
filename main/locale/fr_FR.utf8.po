@@ -836,6 +836,9 @@ msgstr "Adresse IP :"
 
 
 # For the programs part:
+msgid "VARIATION"
+msgstr "Variation"
+
 msgid "VARIO_WISHED"
 msgstr "Pourcentage voulu"
 
@@ -952,6 +955,12 @@ msgstr "Régulation en marche"
 
 msgid "SUMARY_REGUL_OFF"
 msgstr "Régulation à l'arrêt"
+
+msgid "SUMARY_VARIO_ON"
+msgstr "Variateur en marche"
+
+msgid "SUMARY_VARIO_OFF"
+msgstr "Variateur à l'arrêt"
 
 msgid "ADD_PLUG"
 msgstr "Ajouter une prise"

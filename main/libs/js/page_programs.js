@@ -1325,7 +1325,11 @@ $(document).ready(function() {
                         return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b><?php echo __("VALUE_OFF","hc"); ?></p>";
                     } else { 
                         var unity="";
-                        switch (plugs_infoJS[this.series.index]["PLUG_TYPE"]) {
+                        if((plugs_infoJS[this.series.index]["PLUG_MODULE"]=="pwm")) {
+                             unity="%";
+                             var regul="<?php echo __('VARIATION'); ?>";
+                        } else {
+                          switch (plugs_infoJS[this.series.index]["PLUG_TYPE"]) {
                             case "extractor" :
                             case "intractor" :
                             case "ventilator" :
@@ -1344,8 +1348,11 @@ $(document).ready(function() {
                             case "electrovanne_co2" :
                                 unity="ppm";
                                 break;                                
+                          }
+
+                          var regul="<?php echo __('REGULATION'); ?>";
                         }
-                        return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b>"+this.y+unity+" (<?php echo __('REGULATION'); ?>)</p><br />"+resume_regul[this.series.index+1];
+                        return "<p align='left'><b><?php echo __('XAXIS_LEGEND_DAY'); ?>:  </b>"+Highcharts.dateFormat('%H:%M:%S', this.x) +"<br /><b><?php echo __('BEHAVIOUR'); ?>: </b>"+this.y+unity+" ("+regul+")</p><br />"+resume_regul[this.series.index+1];
                     } 
                 }
             },

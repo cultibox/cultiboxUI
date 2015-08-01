@@ -660,7 +660,13 @@ function format_data_sumary($data) {
         if((empty($plugs_info["data"]))||(empty($plugs_info['PLUG_NAME']))||(empty($number))|(empty($plugs_info['PLUG_TYPE']))) {
             $resume[]="<p align='center'><b><i>".__('SUMARY_TITLE')." ".$number.":<br /> ".$plugs_info['PLUG_NAME']."</i></b></p><p align='center'>".__('EMPTY_ACTION')."</p>";
         } else {
-            switch($plugs_info['PLUG_TYPE']) {
+            if(strcmp($plugs_info['PLUG_MODULE'],"pwm")==0) {
+              $unity="%";
+              $val_on=__('SUMARY_VARIO_ON');
+              $val_off=__('SUMARY_VARIO_OFF');
+              
+            } else {
+              switch($plugs_info['PLUG_TYPE']) {
                 case 'extractor':
                 case 'intractor':
                 case 'ventilator':
@@ -679,6 +685,9 @@ function format_data_sumary($data) {
                 default :
                     $unity="";
                     break;
+              }
+              $val_on=__('SUMARY_REGUL_ON');
+              $val_off=__('SUMARY_REGUL_OFF');
             }
             $actions=array();
             $actions=explode('[',$plugs_info["data"]);
@@ -697,13 +706,13 @@ function format_data_sumary($data) {
                                         if(strcmp($action[1],"99.9")==0) {
                                             $resume[$number]="<p align='center'><b><i>".__('SUMARY_TITLE')." ".$number.":<br /> ".$plugs_info['PLUG_NAME']."</i></b></p><p align='left'>".__('SUMARY_ON')." ".__('SUMARY_HOUR')." ".$heure."<br />";
                                         } else {
-                                            $resume[$number]="<p align='center'><b><i>".__('SUMARY_TITLE')." ".$number.":<br /> ".$plugs_info['PLUG_NAME']."</i></b></p><p align='left'>".__('SUMARY_REGUL_ON')." (".$action[1].$unity.") ".__('SUMARY_HOUR')." ".$heure."<br />";
+                                            $resume[$number]="<p align='center'><b><i>".__('SUMARY_TITLE')." ".$number.":<br /> ".$plugs_info['PLUG_NAME']."</i></b></p><p align='left'>".$val_on." (".$action[1].$unity.") ".__('SUMARY_HOUR')." ".$heure."<br />";
                                         }
                                     } else {
                                         if(strcmp($action[1],"99.9")==0) {
                                             $resume[$number]=$resume[$number].__('SUMARY_ON')." ".__('SUMARY_HOUR')." ".$heure."<br />";
                                         } else {
-                                            $resume[$number]=$resume[$number].__('SUMARY_REGUL_ON')." (".$action[1].$unity.") ".__('SUMARY_HOUR')." ".$heure."<br />";
+                                            $resume[$number]=$resume[$number].$val_on." (".$action[1].$unity.") ".__('SUMARY_HOUR')." ".$heure."<br />";
                                         }
                                     }
                                     $prev_value=$action[1];
@@ -711,7 +720,7 @@ function format_data_sumary($data) {
                                         if(strcmp("$prev_value","99.9")==0) {
                                             $resume[$number]=$resume[$number].__('SUMARY_OFF')." ".__('SUMARY_HOUR')." ".$heure."<br />";
                                         } else {
-                                            $resume[$number]=$resume[$number].__('SUMARY_REGUL_OFF')." ".__('SUMARY_HOUR')." ".$heure."<br />";
+                                            $resume[$number]=$resume[$number].$val_off." ".__('SUMARY_HOUR')." ".$heure."<br />";
 
                                         }
                                             $prev_value=0;
