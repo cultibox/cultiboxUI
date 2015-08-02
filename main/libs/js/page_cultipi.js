@@ -1241,7 +1241,6 @@ $(document).ready(function(){
             success: function (data) {
             
                 if(data != "") {
-
                     syno_pilot_element_object = jQuery.parseJSON(data);
                     
                     typeOfElem = syno_pilot_element_object.PLUG_MODULE;
@@ -1257,6 +1256,7 @@ $(document).ready(function(){
                             $("#syno_configure_element_force_plug_on_off").hide();
                             break;
                         case "dimmer" :
+                        case "pwm" :
                             $("#syno_configure_element_force_plug_xmax_1").hide();
                             $("#syno_configure_element_force_plug_xmax_2").hide();
                             $("#syno_configure_element_force_plug_xmax_3").hide();
@@ -1294,7 +1294,16 @@ $(document).ready(function(){
                                                   + $("#syno_configure_element_force_plug_xmax_3_slider_val").val().toString();
                                         break;
                                     case "dimmer" :
+                                    case "pwm" :
                                         valToSend = $("#syno_configure_element_force_plug_dimmer_slider_val").val();
+                                        if(valToSend == 0 ) {
+                                                valToSend="off";
+                                        }
+
+                                        if(valToSend == 100 ) {
+                                                valToSend="on";
+                                        }
+            
                                         break;
                                     default :
                                         valToSend = $( "#syno_configure_element_force_plug_value option:selected" ).val()
