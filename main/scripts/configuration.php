@@ -35,6 +35,14 @@ if((!isset($GLOBALS['MODE']))||(strcmp($GLOBALS['MODE'],"cultipi")!=0)) {
 }
 
 
+exec("cat /etc/hostname",$output,$err);
+
+if((count($output)==1)&&(strcmp($output[0],"")!=0)) {
+    $hostname=$output[0].".local";
+} else {
+    $hostname="cultipi.local";
+}
+
 if((!isset($sd_card))||(empty($sd_card))) {
     setcookie("CHECK_SD", "False", time()+1800,"/",false,false);
 }
