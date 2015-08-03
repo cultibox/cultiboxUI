@@ -128,9 +128,12 @@
                                         <div id="select_canal_network<?php echo $i; ?>" style="<?php if($plug_module{$i} != "network") { echo 'display:none'; } ?>">
                                             <?php echo __('PLUGS_MODULE_IP_ADRESS'); ?>
                                             <select id="network_module_options<?php echo $i; ?>" name="network_module_options<?php echo $i; ?>">
-                                                <?php for($j = 0 ; $j < $GLOBALS['CULTIPI']['REMOTE_NB_SLAVE'] ; $j++) { ?>
+                                                 <?php
+                                                if(isset($GLOBALS['CULTIPI']['REMOTE_NB_SLAVE'])) {
+                                                 for($j = 0 ; $j < $GLOBALS['CULTIPI']['REMOTE_NB_SLAVE'] ; $j++) { ?>
                                                     <option value="<?php echo $j; ?>" <?php if(intval($plug_module_options{$i})==$j) { echo ' selected'; } else  { if(!$status[$j]) { echo ' disabled'; } } ?>><?php echo $GLOBALS['CULTIPI']['REMOTE_SLAVE']["NAME_" . $j]; ?></option>
-                                                <?php } ?>
+                                                <?php }  } ?>
+
                                             </select>
                                             <?php echo __('PLUGS_MODULE_OUTPUT'); ?>
                                             <select id="network_canal<?php echo $i; ?>" name="network_module_ouput<?php echo $i; ?>">
