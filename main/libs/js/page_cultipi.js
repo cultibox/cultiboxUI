@@ -1212,6 +1212,21 @@ $(document).ready(function(){
         step: 1,
         value: syno_configure_element_force_plug_dimmer_slider_val
     });
+
+    // Slider for dimmer
+    syno_configure_element_force_plug_pwm_slider_val = 0;
+    $("#syno_configure_element_force_plug_pwm_slider_val").val(syno_configure_element_force_plug_pwm_slider_val);
+    $("#syno_configure_element_force_plug_pwm_slider").slider({
+        max: 100,
+        min: 0,
+        slide: function( event, ui ) {
+            // While sliding, update the value in the div element
+            $("#syno_configure_element_force_plug_pwm_slider_val").val(ui.value);
+        },
+        step: 1,
+        value: syno_configure_element_force_plug_pwm_slider_val
+    });
+
     $("#syno_configure_element_force_plug_dimmer_slider_val").change(function() {
        syno_configure_element_force_plug_dimmer_slider_val = $("#syno_configure_element_force_plug_dimmer_slider_val").val();
        $( "#syno_configure_element_force_plug_dimmer_slider" ).slider( "option", "value", syno_configure_element_force_plug_dimmer_slider_val );
@@ -1241,6 +1256,7 @@ $(document).ready(function(){
             success: function (data) {
             
                 if(data != "") {
+                    console.log(data);
                     syno_pilot_element_object = jQuery.parseJSON(data);
                     
                     typeOfElem = syno_pilot_element_object.PLUG_MODULE;
@@ -1254,6 +1270,7 @@ $(document).ready(function(){
                             $("#syno_configure_element_force_plug_xmax_3").show();
                             $("#syno_configure_element_force_plug_dimmer").hide();
                             $("#syno_configure_element_force_plug_on_off").hide();
+                            $("#syno_configure_element_force_plug_pwm").hide();
                             break;
                         case "dimmer" :
                         case "pwm" :
@@ -1262,6 +1279,15 @@ $(document).ready(function(){
                             $("#syno_configure_element_force_plug_xmax_3").hide();
                             $("#syno_configure_element_force_plug_dimmer").show();
                             $("#syno_configure_element_force_plug_on_off").hide();
+                            $("#syno_configure_element_force_plug_pwm").hide();
+                            break;
+                        case 'pwm' :
+                            $("#syno_configure_element_force_plug_xmax_1").hide();
+                            $("#syno_configure_element_force_plug_xmax_2").hide();
+                            $("#syno_configure_element_force_plug_xmax_3").hide();
+                            $("#syno_configure_element_force_plug_dimmer").hide();
+                            $("#syno_configure_element_force_plug_on_off").hide();
+                            $("#syno_configure_element_force_plug_pwm").show();
                             break;
                         default :
                             $("#syno_configure_element_force_plug_xmax_1").hide();
@@ -1269,6 +1295,7 @@ $(document).ready(function(){
                             $("#syno_configure_element_force_plug_xmax_3").hide();
                             $("#syno_configure_element_force_plug_dimmer").hide();
                             $("#syno_configure_element_force_plug_on_off").show();
+                            $("#syno_configure_element_force_plug_pwm").hide();
                             break;
                     }
 
