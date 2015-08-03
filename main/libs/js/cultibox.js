@@ -380,12 +380,12 @@ $(window).unload( function () {
         }
     });
 
-    $.ajax({
+     $.ajax({
         cache: false,
-        async: false,
         url: "main/modules/external/enable_webcam.php",
         data: {
-            action:"disable"
+            action:"disable",
+            webcam: "1"
         }
     });
 });
