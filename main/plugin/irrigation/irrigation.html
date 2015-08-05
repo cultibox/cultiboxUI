@@ -203,7 +203,23 @@ foreach ($plateformeList as $key => $plateforme)
     echo '<td><input type="text" id="priseEau_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseEau'] . '" > </td>';
     echo '<td><input type="text" id="priseDansLT_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseDansLT'] . '" > </td>';
     echo '</tr></table>';
-
+    
+    // Fourth table
+    ?>
+    <br />
+    <table border="1" >
+        <tr><th>Autoremplissage direct</th><th>Prise régulation</th><th>Prise remplissage</th></tr>
+    <?php
+    echo '<tr>';
+    $checked = "";
+    if ($plateforme['autoRemplissageDirect'] == "true")
+        $checked = "checked";
+    echo '<td><input type="checkbox" id="autoRemplissageDirect_plateforme_' . $plateforme['id'] . '" ' . $checked . ' > </td>';
+    echo '<td><input type="text" id="priseRegulation_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseRegulation'] . '" > </td>';
+    echo '<td><input type="text" id="priseRemplissage_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseRemplissage'] . '" > </td>';
+    echo '</tr></table>';
+    
+    
     echo '<p>Paramètres des zones : </p>';
     // Display parameters for each zone
     echo '<table border="1" >';
