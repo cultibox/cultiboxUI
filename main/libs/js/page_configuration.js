@@ -2333,6 +2333,7 @@ $(document).ready(function() {
                                 eMail:   $("#supervision_edit_checkPing_eMail").val()
                             }
                             actionVal = "checkPing";
+                            actionName = "Vérification ping";
                             break;
                         case "supervision_edit_checkSensor" :
                             XMLVal = {
@@ -2345,6 +2346,7 @@ $(document).ready(function() {
                                 alertIf: $("#supervision_edit_checkSensor_alertIf").val()
                             }
                             actionVal = "checkSensor";
+                            actionName = "Vérification capteur";
                             break;
                         case "supervision_edit_report" :
                             XMLVal = {
@@ -2354,6 +2356,7 @@ $(document).ready(function() {
                                 eMail: $("#supervision_edit_dailyReport_eMail").val()
                             }
                             actionVal = "report";
+                            actionName = "Rapport";
                             break;
                     }
                     $(this).dialog("close");
@@ -2387,7 +2390,7 @@ $(document).ready(function() {
                                 $.unblockUI();
                                 
                                 // Add the new row 
-                                var RowToAdd = '<tr id="process_' + idProcess + '.xml"><td><label>' + idProcess + ' : Vérification ping :</label></td> ';
+                                var RowToAdd = '<tr id="process_' + idProcess + '.xml"><td><label>' + idProcess + ' : ' + actionName + ' :</label></td> ';
                                 RowToAdd = RowToAdd + '<td><input type="image" id="button_supervision_configure_process_' + idProcess + '.xml" ';
                                 RowToAdd = RowToAdd + 'data-filename="process_' + idProcess + '.xml" '
                                 RowToAdd = RowToAdd + 'data-supervisiontype="' + actionVal + '" '
