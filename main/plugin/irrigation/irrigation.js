@@ -180,6 +180,43 @@ $(document).ready(function(){
     $.timeout.push(
         setTimeout(updatelogsServerLog, 3000)
     );
+    
+    // Fill cuves
+    $('input[name="fill_cuve"]').click(function(e) {
+        e.preventDefault()
+        
+        // Read cuve index 
+        idxcuveval = $(this).data( "idxcuve" );
+        
+        // Block user interface
+        $.blockUI({
+            message: "",
+            centerY: 0,
+            css: {
+                top: '20%',
+                border: 'none',
+                padding: '5px',
+                backgroundColor: 'grey',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fffff'
+            }
+        });
+    
+    
+        $.ajax({
+            cache: false,
+            async: true,
+            url: "main/plugin/irrigation/external_irrigation.php", 
+            data: {
+                action:"fillCuve",
+                idxcuve:idxcuveval
+            }
+        }).done(function (data) {
+            $.unblockUI();
+        });
+    });
 
 });
 

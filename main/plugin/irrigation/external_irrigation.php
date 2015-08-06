@@ -66,6 +66,19 @@
             //irrigation\reloadXMLConfServerIrrigation();
         
             break;
+        case "fillCuve" :
+            $idxcuve = -1;
+            if(isset($_GET['idxcuve']) && !empty($_GET['idxcuve'])) {
+                $idxcuve = $_GET['idxcuve'];
+            }
+            if ($idxcuve == -1) {
+                echo "Try again !";
+            } else {
+                $ret = irrigation\fillCuve($idxcuve);
+                print_r($ret);
+            }
+
+            break;            
     }
 
 ?>
