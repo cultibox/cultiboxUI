@@ -2220,28 +2220,84 @@ $(document).ready(function() {
             width: 900,
             modal: true,
             resizable: false,
-            closeOnEscape: false,
+            dialogClass: "popup_message",
+            buttons: [{
+                text: CLOSE_button,
+                click: function () {
+                    $(this).dialog("close");
+                    $("#supervision_config_div").html(htmlSupervision);
+                    return false;
+                }
+            }]
+        });
+    });
+    
+    // Variable to know index for process 
+    $('#button_supervision_add').click(function(e) {
+        e.preventDefault();
+        
+        idProcess = $("#button_supervision_add").data( "nextprocess" );
+        
+        switch ($('#button_supervision_add_type').val()) {
+            case "checkPing" :
+                dialogMsgToShow = "supervision_edit_checkPing";
+                break;
+            case "checkSensor" :
+                dialogMsgToShow = "supervision_edit_checkSensor";
+                break;
+            case "report" :
+                dialogMsgToShow = "supervision_edit_dailyReport";
+                break;
+        }
+        
+        $("#" + dialogMsgToShow).dialog({
+            modal: true,
+            resizable: false,
             dialogClass: "popup_message",
             buttons: [{
                 text: SAVE_button,
                 click: function () {
+                    // Create XML and save it 
+                    var XMLVal = new Array();
+
+                    switch (dialogMsgToShow) {
+                        case "supervision_edit_checkPing" :
+                            XMLVal = {
+                                action: "checkPing",
+                                ip: $("#supervision_edit_checkPing_ip").val(),
+                                timeMax: $("#supervision_edit_checkPing_timeMax").val(),
+                                eMail:   $("#supervision_edit_checkPing_eMail").val()
+                            }
+                            actionVal = "checkPing";
+                            actionName = "Vérification ping";
+                            break;
+                        case "supervision_edit_checkSensor" :
+                            XMLVal = {
+                                action: "checkSensor",
+                                eMail: $("#supervision_edit_checkSensor_eMail").val(),
+                                sensor: $("#supervision_edit_checkSensor_sensor").val(),
+                                sensorOutput: $("#supervision_edit_checkSensor_sensorOutput").val(),
+                                valueSeuil: $("#supervision_edit_checkSensor_valueSeuil").val(),
+                                timeSeuilInS: $("#supervision_edit_checkSensor_timeSeuilInS").val(),
+                                alertIf: $("#supervision_edit_checkSensor_alertIf").val()
+                            }
+                            actionVal = "checkSensor";
+                            actionName = "Vérification capteur";
+                            break;
+                        case "supervision_edit_report" :
+                            XMLVal = {
+                                action: "report",
+                                frequency: $("#supervision_edit_report_frequency").val(),
+                                hour: $("#supervision_edit_report_hour").val(),
+                                eMail: $("#supervision_edit_dailyReport_eMail").val()
+                            }
+                            actionVal = "report";
+                            actionName = "Rapport";
+                            break;
+                    }
                     $(this).dialog("close");
-                    
-                    supervision_checkPing_en = "off";
-                    if( $('#supervision_checkPing_en').is(':checked') ){
-                        supervision_checkPing_en = "on";
-                    }
-                    supervision_dailyReport_en = "off";
-                    if( $('#supervision_dailyReport_en').is(':checked') ){
-                        supervision_dailyReport_en = "on";
-                    }
-                    supervision_monthlyReport_en = "off";
-                    if( $('#supervision_monthlyReport_en').is(':checked') ){
-                        supervision_monthlyReport_en = "on";
-                    }
-                    
                     $.blockUI({
-                        message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                        message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
                         centerY: 0,
                         css: {
                             top: '20%',
@@ -2256,152 +2312,341 @@ $(document).ready(function() {
                         onBlock: function() {
                             $.ajax({
                                 async: true,
-                                url: "main/modules/external/save_configuration.php",
+                                url: "main/modules/external/XML_set.php",
                                 data: {
-                                    parttosave:"supervision",
-                                    checkPing_en:supervision_checkPing_en,
-                                    checkPing_adress:$('#supervision_checkPing_adress').val(),
-                                    checkPing_action:$('#supervision_checkPing_action').val(),
-                                    dailyReport_en:supervision_dailyReport_en,
-                                    monthlyReport_en:supervision_monthlyReport_en
+                                    server:"serverSupervision",
+                                    filename:"process_" + idProcess + ".xml",
+                                    xml:JSON.stringify(XMLVal)
                                 }
                             }).done(function (data) {
+                                
+                                // Update name of the button
+                                $("#button_supervision_add").data( "nextprocess" , idProcess + 1);
+                                
                                 $.unblockUI();
-                                $("#success_save_supervision").dialog({
-                                    resizable: false,
-                                    width: 500,
-                                    modal: true,
-                                    closeOnEscape: true,
-                                    dialogClass: "popup_message",
-                                    buttons: [{
-                                         text: CLOSE_button,
-                                         click: function () {
-                                            $( this ).dialog( "close" );
-                                            return false;
-                                         }
-                                     }]
-                                 });
+                                
+                                // Add the new row 
+                                var RowToAdd = '<tr id="process_' + idProcess + '.xml"><td><label>' + idProcess + ' : ' + actionName + ' :</label></td> ';
+                                RowToAdd = RowToAdd + '<td><input type="image" id="button_supervision_configure_process_' + idProcess + '.xml" ';
+                                RowToAdd = RowToAdd + 'data-filename="process_' + idProcess + '.xml" '
+                                RowToAdd = RowToAdd + 'data-supervisiontype="' + actionVal + '" '
+                                RowToAdd = RowToAdd + 'data-processid="' + idProcess + '" '
+                                RowToAdd = RowToAdd + 'name="button_supervision_configure" '
+                                RowToAdd = RowToAdd + 'title="Configurer" '
+                                RowToAdd = RowToAdd + 'src="main/libs/img/advancedsettings.png" '
+                                RowToAdd = RowToAdd + 'alt="Configurer" '
+                                RowToAdd = RowToAdd + '/></td>'
+                                RowToAdd = RowToAdd + '<td><input type="image" id="button_supervision_remove_$file" '
+                                RowToAdd = RowToAdd + 'data-filename="process_' + idProcess + '.xml" '
+                                RowToAdd = RowToAdd + 'name="button_supervision_remove" '
+                                RowToAdd = RowToAdd + 'title="Supprimer" '
+                                RowToAdd = RowToAdd + 'src="main/libs/img/button_cancel.png" '
+                                RowToAdd = RowToAdd + 'alt="Supprimer" '
+                                RowToAdd = RowToAdd + '/></td>'
+                                RowToAdd = RowToAdd + '</tr>'
+
+                                $('#button_supervision_row_add_type').before(RowToAdd);
+                                
+                                return false;
                             });
                         }
                     });
-                    return false;
                 }
             }, {
                 text: CLOSE_button,
                 click: function () {
                     $(this).dialog("close");
-                    $("#supervision_config_div").html(htmlSupervision);
                     return false;
                 }
             }]
         });
-    }); 
+    });
+    
+    // To delete a process 
+    $('#supervision_config_table').on("click", "input[name='button_supervision_remove']", function(e){   
+        e.preventDefault();
+        
+        filename = $(this).data( "filename" );
+        
+        $.blockUI({
+            message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+                top: '20%',
+                border: 'none',
+                padding: '5px',
+                backgroundColor: 'grey',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fffff'
+            },
+            onBlock: function() {
+                $.ajax({
+                    async: true,
+                    url: "main/modules/external/XML_delete.php",
+                    data: {
+                        server:"serverSupervision",
+                        filename:filename,
+                    }
+                }).done(function (data) {
+                    
+                    // Delete the row
+                    $("#" + filename.replace(".", "\\.")).remove();
+                    
+                    $.unblockUI();
+
+                    return false;
+                });
+            }
+        });
+    });
+    
+    // To configure an supervion element 
+    $('#supervision_config_table').on("click", "input[name='button_supervision_configure']", function(e){  
+        e.preventDefault();
+        
+        filename = $(this).data( "filename" );
+        supervisiontype = $(this).data( "supervisiontype" );
+        processid = $(this).data( "processid" );
+        
+        $.blockUI({
+            message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+            centerY: 0,
+            css: {
+                top: '20%',
+                border: 'none',
+                padding: '5px',
+                backgroundColor: 'grey',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+                opacity: .9,
+                color: '#fffff'
+            },
+            onBlock: function() {
+                $.ajax({
+                    async: true,
+                    url: "main/modules/external/XML_get.php",
+                    data: {
+                        server:"serverSupervision",
+                        filename:filename,
+                    }
+                }).done(function (data) {
+                    
+                    var objJSON = jQuery.parseJSON(data)
+                    
+                    // load element 
+                    switch (supervisiontype) {
+                        case "checkPing" :
+                            dialogMsgToShow = "supervision_edit_checkPing";
+                            break;
+                        case "checkSensor" :
+                            dialogMsgToShow = "supervision_edit_checkSensor";
+                            break;
+                        case "report" :
+                            dialogMsgToShow = "supervision_edit_dailyReport";
+                            break;
+                    }
+                    
+                    $("#" + dialogMsgToShow).dialog({
+                        modal: true,
+                        resizable: false,
+                        dialogClass: "popup_message",
+                        open: function( event, ui ) {
+                            jQuery.each(objJSON, function(name, value) {
+                                $("#supervision_edit_" + supervisiontype + "_" + name).val(value);
+                            });
+                        },
+                        buttons: [{
+                            text: SAVE_button,
+                            click: function () {
+                                // Create XML and save it 
+                                var XMLVal = new Array();
+
+                                switch (dialogMsgToShow) {
+                                    case "supervision_edit_checkPing" :
+                                        XMLVal = {
+                                            action: "checkPing",
+                                            ip: $("#supervision_edit_checkPing_ip").val(),
+                                            timeMax: $("#supervision_edit_checkPing_timeMax").val(),
+                                            eMail:   $("#supervision_edit_checkPing_eMail").val()
+                                        }
+                                        break;
+                                    case "supervision_edit_checkSensor" :
+                                        XMLVal = {
+                                            action: "checkSensor",
+                                            eMail: $("#supervision_edit_checkSensor_eMail").val(),
+                                            sensor: $("#supervision_edit_checkSensor_sensor").val(),
+                                            sensorOutput: $("#supervision_edit_checkSensor_sensorOutput").val(),
+                                            valueSeuil: $("#supervision_edit_checkSensor_valueSeuil").val(),
+                                            timeSeuilInS: $("#supervision_edit_checkSensor_timeSeuilInS").val(),
+                                            alertIf: $("#supervision_edit_checkSensor_alertIf").val()
+                                        }
+                                        break;
+                                    case "supervision_edit_report" :
+                                        XMLVal = {
+                                            action: "report",
+                                            frequency: $("#supervision_edit_report_frequency").val(),
+                                            hour: $("#supervision_edit_report_hour").val(),
+                                            eMail: $("#supervision_edit_dailyReport_eMail").val()
+                                        }
+                                        break;
+                                }
+                                $(this).dialog("close");
+                                $.blockUI({
+                                    message: "<?php echo __('CULTIPI_PLUG_FORCE_WAIT'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                                    centerY: 0,
+                                    css: {
+                                        top: '20%',
+                                        border: 'none',
+                                        padding: '5px',
+                                        backgroundColor: 'grey',
+                                        '-webkit-border-radius': '10px',
+                                        '-moz-border-radius': '10px',
+                                        opacity: .9,
+                                        color: '#fffff'
+                                    },
+                                    onBlock: function() {
+                                        $.ajax({
+                                            async: true,
+                                            url: "main/modules/external/XML_set.php",
+                                            data: {
+                                                server:"serverSupervision",
+                                                filename:"process_" + processid + ".xml",
+                                                xml:JSON.stringify(XMLVal)
+                                            }
+                                        }).done(function (data) {
+                                            $.unblockUI();
+                                            return false;
+                                        });
+                                    }
+                                });
+                            }
+                        }, {
+                            text: CLOSE_button,
+                            click: function () {
+                                $(this).dialog("close");
+                                return false;
+                            }
+                        }]
+                    });
+                    
+
+                    $.unblockUI();
+
+                    return false;
+                });
+            }
+        });
+    });
+    
+    
 });
 
 
 
 function open_dialog_wifi_wizard(step) {
-       $("#error_sd_wizard").css('display','none');
+    $("#error_sd_wizard").css('display','none');
 
-       $("#wifi_wizard_step"+step).dialog({
-            resizable: false,
-            width: 700,
-            modal: true,
-            dialogClass: "popup_message",
-            closeOnEscape: false,
-            buttons: [{
-               text: CLOSE_button,
-               style:"margin-right:90px;",
-               click: function () {
-                 sd_wizard="";
-                 $( this ).dialog( "close" );
-                 return false;
-               }
-            },{
-               text: NEXT_button,
-               id: "btnNEXT",
-               style:"margin-right:90px;",
-               click: function () {
-                 if(step==1) {
-                    $( this ).dialog("destroy");
-                    open_dialog_wifi_wizard(step+1)
-                    return false;
-                 }
+    $("#wifi_wizard_step"+step).dialog({
+        resizable: false,
+        width: 700,
+        modal: true,
+        dialogClass: "popup_message",
+        closeOnEscape: false,
+        buttons: [{
+           text: CLOSE_button,
+           style:"margin-right:90px;",
+           click: function () {
+             sd_wizard="";
+             $( this ).dialog( "close" );
+             return false;
+           }
+        },{
+           text: NEXT_button,
+           id: "btnNEXT",
+           style:"margin-right:90px;",
+           click: function () {
+             if(step==1) {
+                $( this ).dialog("destroy");
+                open_dialog_wifi_wizard(step+1)
+                return false;
+             }
 
-                 if(step==2) {
-                     $.ajax({
-                        cache: false,
-                        async: false,
-                        url: "main/modules/external/get_sd.php"
-                     }).done(function(data) {
-                        sd_wizard = jQuery.parseJSON(data);
-                     });
-
-
-                     if(sd_wizard!="") {
-                        $.ajax({
-                            cache: false,
-                            async: false,
-                            url: "main/modules/external/copy_firm_sd.php",
-                            data: {path:sd_wizard,reverse:0}
-                        }).done(function(data) {
-                            var ret=jQuery.parseJSON(data);
-
-                            if(ret=="false") {
-                                 $.ajax({
-                                    cache: false,
-                                    async: false,
-                                    url: "main/modules/external/copy_firm_sd.php",
-                                    data: {path:sd_wizard,reverse:1}
-                                });
-                            }
-                        });
-
-                        $( this ).dialog( "destroy" );
-                        open_dialog_wifi_wizard(step+1)
-                        return false; 
-                     } else {
-                        $("#error_sd_wizard").show();
-                     }
-                 }
+             if(step==2) {
+                 $.ajax({
+                    cache: false,
+                    async: false,
+                    url: "main/modules/external/get_sd.php"
+                 }).done(function(data) {
+                    sd_wizard = jQuery.parseJSON(data);
+                 });
 
 
-                 if(step==3) {
-                    $("#preparing-file-modal").dialog({ modal: true, resizable: false });
+                 if(sd_wizard!="") {
                     $.ajax({
                         cache: false,
                         async: false,
-                        url: "main/modules/external/export_conf.php"
-                    }).done(function (data) {
-                        $("#preparing-file-modal").dialog('close');
-                        var json = jQuery.parseJSON(data);
-                        if(json==1) {
-                            $.fileDownload('tmp/export/backup_cultibox.sql');
-                        } else if(json==2) {
-                            $.fileDownload('tmp/export/backup_cultibox.sql.zip');
+                        url: "main/modules/external/copy_firm_sd.php",
+                        data: {path:sd_wizard,reverse:0}
+                    }).done(function(data) {
+                        var ret=jQuery.parseJSON(data);
+
+                        if(ret=="false") {
+                             $.ajax({
+                                cache: false,
+                                async: false,
+                                url: "main/modules/external/copy_firm_sd.php",
+                                data: {path:sd_wizard,reverse:1}
+                            });
                         }
                     });
 
                     $( this ).dialog( "destroy" );
                     open_dialog_wifi_wizard(step+1)
-                    return false;
+                    return false; 
+                 } else {
+                    $("#error_sd_wizard").show();
                  }
+             }
 
-                 if(step==4) {
-                    $( this ).dialog( "destroy" );
-                    open_dialog_wifi_wizard(step+1)
-                    return false;
-                 }
-               }
-            }],
-            open: function(event, ui) { 
-                if(step==4) {
-                    $('#btnNEXT').css("display", 'none');
-                } else {
-                     $("#btnNEXT").show();
-                }
+
+             if(step==3) {
+                $("#preparing-file-modal").dialog({ modal: true, resizable: false });
+                $.ajax({
+                    cache: false,
+                    async: false,
+                    url: "main/modules/external/export_conf.php"
+                }).done(function (data) {
+                    $("#preparing-file-modal").dialog('close');
+                    var json = jQuery.parseJSON(data);
+                    if(json==1) {
+                        $.fileDownload('tmp/export/backup_cultibox.sql');
+                    } else if(json==2) {
+                        $.fileDownload('tmp/export/backup_cultibox.sql.zip');
+                    }
+                });
+
+                $( this ).dialog( "destroy" );
+                open_dialog_wifi_wizard(step+1)
+                return false;
+             }
+
+             if(step==4) {
+                $( this ).dialog( "destroy" );
+                open_dialog_wifi_wizard(step+1)
+                return false;
+             }
+           }
+        }],
+        open: function(event, ui) { 
+            if(step==4) {
+                $('#btnNEXT').css("display", 'none');
+            } else {
+                 $("#btnNEXT").show();
             }
-       });
+        }
+    });
 }
 
 

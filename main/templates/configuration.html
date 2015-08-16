@@ -872,55 +872,199 @@
 </div>
 
 <div id="supervision_config_div" title="<?php echo __('CONF_SUPERVISION'); ?>" style="display:none">
-    <table class="table_width">
+    <table class="table_width" id="supervision_config_table">
         <?php
             // Retrieve information about supervision 
             $supervisionElements = array();
             $supervisionElements = cultipi\getSupervisionUserConf();
-        ?>
+            
+            // Load XML events
+            // List process already defined
+            $dir    = $GLOBALS['CULTIPI_CONF_TEMP_PATH'] . '/' .  'serverSupervision' . '/';
+            $files  = array_diff(scandir($dir), array('..', '.', 'conf.xml'));
+            sort($files,SORT_STRING);
+
+            foreach ($files as $file)
+            {
+                // Load XML contents
+                $xml = simplexml_load_file($dir . $file);
+                
+                // Get id of process 
+                $fileBase = explode( ".", $file )[0];
+                $processID  = explode( "_", $fileBase )[1];
+
+                // Retrieve action of this process 
+                $action = $xml->xpath('/conf/item[@name="action"]')[0]["value"];
+                
+                switch ($action) 
+                {
+                    case "checkPing" :
+                        
+                        ?>
+                        <tr id="<?php echo $file ;?>">
+                            <td><label><?php echo $processID ;?> : Vérification ping :</label></td>
+                            <td><input type="image" id="button_supervision_configure_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                data-supervisiontype="<?php echo $action ;?>"
+                                data-processid="<?php echo $processID ;?>"
+                                name="button_supervision_configure"
+                                title="Configurer"
+                                src="main/libs/img/advancedsettings.png" 
+                                alt="Configurer"
+                            /></td>
+                            <td><input type="image" id="button_supervision_remove_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                name="button_supervision_remove"
+                                title="Supprimer"
+                                src="main/libs/img/button_cancel.png" 
+                                alt="Supprimer"
+                            /></td>
+                        </tr>
+                        <?php
+                        break;
+                    case "checkSensor" :
+                        $sensor = $xml->xpath('/conf/item[@name="sensor"]')[0]["value"];
+                        ?>
+                        <tr id="<?php echo $file ;?>">
+                            <td><label><?php echo $processID ;?> : Vérification Capteur n°<?php echo $sensor; ?> :</label></td>
+                            <td><input type="image" id="button_supervision_configure_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                data-supervisiontype="<?php echo $action ;?>"
+                                data-processid="<?php echo $processID ;?>"
+                                name="button_supervision_configure"
+                                title="Configurer"
+                                src="main/libs/img/advancedsettings.png" 
+                                alt="Configurer"
+                            /></td>
+                            <td><input type="image" id="button_supervision_remove_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                name="button_supervision_remove"
+                                title="Supprimer"
+                                src="main/libs/img/button_cancel.png" 
+                                alt="Supprimer"
+                            /></td>
+                        </tr>
+                        <?php
+                        break;
+                    case "report" :
+                        ?>
+                        <tr id="<?php echo $file ;?>">
+                            <td><label><?php echo $processID ;?> : Rapport journalier :</label></td>
+                            <td><input type="image" id="button_supervision_configure_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                data-supervisiontype="<?php echo $action ;?>"
+                                data-processid="<?php echo $processID ;?>"
+                                name="button_supervision_configure"
+                                title="Configurer"
+                                src="main/libs/img/advancedsettings.png" 
+                                alt="Configurer"
+                            /></td>
+                            <td><input type="image" id="button_supervision_remove_<?php echo $file ;?>"
+                                data-filename="<?php echo $file ;?>"
+                                name="button_supervision_remove"
+                                title="Supprimer"
+                                src="main/libs/img/button_cancel.png" 
+                                alt="Supprimer"
+                            /></td>
+                        </tr>
+                        <?php
+                        break;
+                }
+            }
+            ?>
+            <tr id="button_supervision_row_add_type" >
+                <td>
+                    <select id="button_supervision_add_type">
+                        <option value="checkPing" > Check Ping </option>
+                        <option value="checkSensor" > Check Sensor </option>
+                        <option value="report" > Rapport </option>
+                    </select>
+                </td>
+                <td><input type="image" id="button_supervision_add"
+                    name="button_supervision_add"
+                    data-nextprocess="<?php echo $processID + 1 ;?>"
+                    title="Ajout supervision"
+                    src="main/libs/img/add.png" 
+                    alt="Ajout supervision"
+                /></td>
+            </tr>
+    </table>
+</div>
+
+<div id="supervision_edit_checkSensor" title="" style="display:none">
+    <table>
         <tr>
-             <?php
-                $en = "";
-                if (strcmp($supervisionElements["checkPing_en"],"on") == 0)
-                    $en = "checked";
-                    
-             ?>
-            <td><label>Vérification ping :</label></td>
-            <td>Activée : <input type="checkbox" id="supervision_checkPing_en" value="on" <?php echo $en;?>></td>
-            <td><label>Adresse : </label></td>
-            <td><input  type="text" size="40" id="supervision_checkPing_adress" value="<?php echo $supervisionElements['checkPing_adress']; ?>" /></td>
-            <td><label>Action : </label></td>
+            <td>Capteur : </td>
+            <td><input  type="text" size="5" id="supervision_edit_checkSensor_sensor" value="" /></td>
+        </tr>
+        <tr>
+            <td>Sortie capteur : </td>
             <td>
-                <select id="supervision_checkPing_action">
-                    <option value="reboot" <?php if (strcmp($supervisionElements["checkPing_action"],"reboot") == 0) echo "selected"; ?> > Reboot </option>
-                    <option value="sendMail" <?php if (strcmp($supervisionElements["checkPing_action"],"sendMail") == 0) echo "selected"; ?> > Envoi Mail </option>
+                <select id="supervision_edit_checkSensor_sensorOutput">
+                    <option value="1" > 1 </option>
+                    <option value="2" > 2 </option>
                 </select>
             </td>
         </tr>
-        
         <tr>
-             <?php
-                $en = "";
-                if (strcmp($supervisionElements["dailyReport_en"],"on") == 0)
-                    $en = "checked";
-                    
-             ?>
-            <td><label>Rapport journalier :</label></td>
-            <td>Activée : <input type="checkbox" id="supervision_dailyReport_en" value="on" <?php echo $en;?>></td>
+            <td>Seuil : </td>
+            <td><input  type="text" size="5" id="supervision_edit_checkSensor_valueSeuil" value="" /></td>
         </tr>
-        
         <tr>
-             <?php
-                $en = "";
-                if (strcmp($supervisionElements["monthlyReport_en"],"on") == 0)
-                    $en = "checked";
-                    
-             ?>
-            <td><label>Rapport journalier :</label></td>
-            <td>Activée : <input type="checkbox" id="supervision_monthlyReport_en" value="on" <?php echo $en;?>></td>
+            <td>Déclenchement si valeur : </td>
+            <td><select id="supervision_edit_checkSensor_alertIf">
+                    <option value="up"> Supérieure </option>
+                    <option value="down"> Inférieure </option>
+                </select></td>
+            <td>au seuil </td>
+        </tr>
+        <tr>
+            <td>Temps avant déclenchement : </td>
+            <td><input  type="text" size="5" id="supervision_edit_checkSensor_timeSeuilInS" value="" /></td>
+        </tr>
+        <tr>
+            <td>Adresse eMail : </td>
+            <td><input  type="text" size="40" id="supervision_edit_checkSensor_eMail" value="" /></td>
         </tr>
     </table>
 </div>
+
+<div id="supervision_edit_checkPing" title="" style="display:none">
+    <table>
+        <tr>
+            <td>Adresse ip: </td>
+            <td><input  type="text" size="5" id="supervision_edit_checkPing_ip" value="" /></td>
+        </tr>
+        <tr>
+            <td>Temps avant déclenchement : </td>
+            <td><input  type="text" size="5" id="supervision_edit_checkPing_timeMax" value="" /></td>
+        </tr>
+        <tr>
+            <td>Adresse eMail : </td>
+            <td><input  type="text" size="40" id="supervision_edit_checkPing_eMail" value="" /></td>
+        </tr>
+    </table>
+</div>
+
+<div id="supervision_edit_report" title="" style="display:none">
+    <table>
+        <tr>
+            <td>Adresse eMail : </td>
+            <td><input  type="text" size="40" id="supervision_edit_report_eMail" value="" /></td>
+        </tr>
+        <tr>
+            <td><select id="supervision_edit_report_frequency">
+                    <option value="daily"> journalier </option>
+                    <option value="monthly"> mensuel </option>
+                </select></td>
+        </tr>
+        <tr>
+            <td>Heure : </td>
+            <td><input  type="text" size="40" id="supervision_edit_report_hour" value="18" /></td>
+        </tr>
+    </table>
+</div>
+
 
 <div id="success_save_supervision" title="" style="display:none">
     <p><?php echo __('SUCCESS_SAVE_SUPERVISION'); ?></p>

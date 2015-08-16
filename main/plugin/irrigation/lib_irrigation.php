@@ -91,6 +91,10 @@ function check_db() {
     $plateforme_col["tempsPercoApresMidi"]  = array ( 'Field' => "tempsPercoApresMidi", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["priseEau"]      = array ( 'Field' => "priseEau", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
     $plateforme_col["activeAutoRemplissage"] = array ( 'Field' => "activeAutoRemplissage", 'Type' => "VARCHAR(5)", "default_value" => "false", 'carac' => "NOT NULL");
+    $plateforme_col["autoRemplissageDirect"] = array ( 'Field' => "autoRemplissageDirect", 'Type' => "VARCHAR(5)", "default_value" => "true", 'carac' => "NOT NULL");
+    $plateforme_col["priseRegulation"]      = array ( 'Field' => "priseRegulation", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["priseRemplissage"]     = array ( 'Field' => "priseRemplissage", 'Type' => "int(11)", "default_value" => 0, 'carac' => "NOT NULL");
+    $plateforme_col["tempsAutoRemplissage"]  = array ( 'Field' => "tempsAutoRemplissage", 'Type' => "int(11)", "default_value" => 30, 'carac' => "NOT NULL");
 
     // Check if table configuration exists
     $sql = "SHOW TABLES FROM cultibox LIKE 'irrigation_plateforme';";
@@ -125,7 +129,11 @@ function check_db() {
             ."tempsPercoNuit int(11) NOT NULL DEFAULT '0'"
             ."tempsPercoApresMidi int(11) NOT NULL DEFAULT '0'"
             ."priseEau int(11) NOT NULL DEFAULT '0',"
-            ."activeAutoRemplissage varchar(5) NOT NULL DEFAULT 'false' );";
+            ."activeAutoRemplissage varchar(5) NOT NULL DEFAULT 'false',"
+            ."autoRemplissageDirect varchar(5) NOT NULL DEFAULT 'true',"
+            ."priseRegulation int(11) NOT NULL DEFAULT '0',"
+            ."priseRemplissage int(11) NOT NULL DEFAULT '0',"
+            ."tempsAutoRemplissage int(11) NOT NULL DEFAULT '30' );";
 
         // Create table
         try {
@@ -574,6 +582,26 @@ function createXML () {
     
 }
 // }}}
+
+// {{{ fillCuve(idxCuve)
+// ROLE Fill cuve
+// RET 
+function fillCuve ($idxCuve) {
+    
+    $return_array = array();
+    $return_array["error"] = "";
+    
+    $commandLine = 'tclsh "/opt/cultipi/cultiPi/setCommand.tcl" serverIrrigation localhost fillCuve ' . $idxCuve;
+    
+    try {
+        $ret = exec($commandLine);
+    } catch (Exception $e) {
+        echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        $return_array["error"] = $e->getMessage();
+    }
+    
+    return $return_array;
+}
 
 
 }

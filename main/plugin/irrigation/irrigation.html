@@ -203,12 +203,32 @@ foreach ($plateformeList as $key => $plateforme)
     echo '<td><input type="text" id="priseEau_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseEau'] . '" > </td>';
     echo '<td><input type="text" id="priseDansLT_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseDansLT'] . '" > </td>';
     echo '</tr></table>';
-
-    echo '<p>Paramètres des zones : </p>';
+    
+    // Fourth table
+    ?>
+    <br />
+    <table border="1" >
+        <tr><th>Autoremplissage direct</th><th>Prise régulation</th><th>Prise remplissage</th><th>Temps auto remplissage</th></tr>
+    <?php
+    echo '<tr>';
+    $checked = "";
+    if ($plateforme['autoRemplissageDirect'] == "true")
+        $checked = "checked";
+    echo '<td><input type="checkbox" id="autoRemplissageDirect_plateforme_' . $plateforme['id'] . '" ' . $checked . ' > </td>';
+    echo '<td><input type="text" id="priseRegulation_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseRegulation'] . '" > </td>';
+    echo '<td><input type="text" id="priseRemplissage_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['priseRemplissage'] . '" > </td>';
+    echo '<td><input type="text" id="tempsAutoRemplissage_plateforme_' . $plateforme['id'] . '" maxlength="4" size="4" value="' . $plateforme['tempsAutoRemplissage'] . '" > </td>';
+    ?>
+    </tr></table>
+    
+    
+    <p>Paramètres des zones : </p>
+    
+    <table border="1" >
+        <tr> <th colspan="2"></th>        <th colspan="2">Matin</th>          <th colspan="2">Apres Midi</th>     <th colspan="2">Nuit</th>
+        <tr> <th>Zone</th> <th>prise</th> <th>Temps On</th> <th>Temps Off</th><th>Temps On</th> <th>Temps Off</th><th>Temps On</th> <th>Temps Off</th><th>Active</th> </tr>
+    <?php
     // Display parameters for each zone
-    echo '<table border="1" >';
-    echo '<tr> <th colspan="2"></th>        <th colspan="2">Matin</th>          <th colspan="2">Apres Midi</th>     <th colspan="2">Nuit</th>';
-    echo '<tr> <th>Zone</th> <th>prise</th> <th>Temps On</th> <th>Temps Off</th><th>Temps On</th> <th>Temps Off</th><th>Temps On</th> <th>Temps Off</th><th>Active</th> </tr>'; #<th>Coef temp</th> </tr>';
     $zoneList = irrigation\getZone($plateforme['idPlateforme']); 
     foreach ($zoneList as $key => $zone)
     {
@@ -229,9 +249,15 @@ foreach ($plateformeList as $key => $plateforme)
         // echo '<td><input type="text" id="coef_zone_' . $zone['id'] . '" maxlength="4" size="4" value="' . $zone['coef'] . '" > </td>';
         echo '</tr>';
     }
-    echo '</table>';
-    echo '</div>';
-
+    ?>
+        </table>
+        <p>Commande : </p>
+        <input type="button" id="button_supervision_configure_<?php echo $plateforme['id'] ;?>"
+            data-idxcuve="<?php echo $plateforme['id'] ;?>"
+            name="fill_cuve"
+            value="Remplir la cuve"/>
+    </div>
+    <?php
 }
 
 ?>
