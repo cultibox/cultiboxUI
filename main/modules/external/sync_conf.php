@@ -10,6 +10,7 @@
         case 'Windows NT':
             $path = str_replace("/","\\",$GLOBALS['CULTIPI_CONF_TEMP_PATH']);
             $confPath = str_replace("/","\\",$path_output);
+			exec("move /Y $confPath\\*.* %TEMP%\\",$ret,$err);
             exec("xcopy /Y /E $path $confPath",$ret,$err);
             if ($err != 0) 
             {
@@ -18,6 +19,7 @@
             break;
         default : 
             if(($path_output!="")&&(is_dir($path_output))) {
+				exec("sudo mv $path_output/* /tmp/",$ret,$err);
                 exec("sudo cp -R $path_input_linux_cp $path_output/",$ret,$err);
                 if ($err != 0) 
                 {
