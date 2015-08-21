@@ -443,18 +443,15 @@
             <tr>
                 <td class="conf-marge"></td>
                 <td class="conf-title"><label class="subsub_title"><?php echo __('WIRE_CONF'); ?>:</label><img src="main/libs/img/infos.png" alt="" title="<?php if(strcmp("$eth_phy","")==0) { echo __('NO_IFACE_FOUND'); } else { echo __('PHY_ADDR').": ".strtoupper($eth_phy); } ?>" /></td>
-                <td class="conf-field">
-                    <select name="activ_wire" id="activ_wire" <?php if(strcmp("$eth_phy","")==0) { echo " disabled"; } ?>>
-                    <option value="True" <?php if($wire_enable) echo "selected"; ?>><?php echo __('ACTIVATED'); ?></option>
-                    <option value="False" <?php if((!$wire_enable)||(strcmp("$eth_phy","")==0)) echo "selected"; ?>><?php echo __('DEACTIVATED'); ?></option>
-                    </select>
-                </td>
+                <td></td>
             </tr>
         </table>
 
         <div id="wire_interface" <?php if((!$wire_enable)||(strcmp("$eth_phy","")==0)) echo 'style="display:none"'; ?>>
             <p class="p_center">
-               <input type="radio" name="wire_type" value="static" <?php if($wire_static) echo 'checked'; ?>><?php echo __('MANUAL_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_MANUAL_IP'); ?>" /><input type="radio" name="wire_type" value="dhcp" <?php if($wire_dhcp) echo 'checked'; ?>><?php echo __('DYNAMIC_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_DYNAMIC_IP'); ?>" /></p>
+               <input type="radio" name="wire_type" value="dhcp" <?php if($wire_dhcp) echo 'checked'; ?>><?php echo __('DYNAMIC_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_DYNAMIC_IP'); ?>" />
+               <input type="radio" name="wire_type" value="static" <?php if($wire_static) echo 'checked'; ?>><?php echo __('MANUAL_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_MANUAL_IP'); ?>" />
+            </p>
 
             <div id="wire_static" <?php if(!$wire_static) echo 'style="display:none"'; ?>>
             <table class="table_width">
@@ -489,11 +486,6 @@
                 <td class="conf-marge"></td>
                 <td class="conf-title"><label class="subsub_title"><?php echo __('WIRELESS_CONF'); ?>:</label><img src="main/libs/img/infos.png" alt="" title="<?php if(strcmp("$wlan_phy","")==0) { echo __('NO_IFACE_FOUND'); } else { echo __('PHY_ADDR').": ".strtoupper($wlan_phy); } ?>" /></td>
                 <td>
-                    <select name="activ_wifi" id="activ_wifi">
-                        <option value="True" <?php if($wifi_enable) echo "selected"; ?>><?php echo __('ACTIVATED'); ?></option>
-                        <option value="False" <?php if(!$wifi_enable) echo "selected"; ?>><?php echo __('DEACTIVATED'); ?></option>
-                    </select>
-                </td>
             </tr>
         </table>
         <br />
@@ -554,7 +546,8 @@
                         <td></td>
                         <td><?php echo __('ADDR_TYPE'); ?>:</td>
                         <td>
-                            <input type="radio" name="wifi_type" value="static" <?php if(($wifi_static)&&(strcmp("$wifi_ssid","")!=0)) echo 'checked'; ?>><?php echo __('MANUAL_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_MANUAL_IP'); ?>" /><br /><input type="radio" name="wifi_type" value="dhcp" <?php if(($wifi_dhcp)||(strcmp("$wifi_ssid","")==0)) echo 'checked'; ?>><?php echo __('DYNAMIC_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_DYNAMIC_IP'); ?>" /></td>
+                            <input type="radio" name="wifi_type" value="dhcp" <?php if(($wifi_dhcp)||(strcmp("$wifi_ssid","")==0)) echo 'checked'; ?>><?php echo __('DYNAMIC_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_DYNAMIC_IP'); ?>" />
+                            <input type="radio" name="wifi_type" value="static" <?php if(($wifi_static)&&(strcmp("$wifi_ssid","")!=0)) echo 'checked'; ?>><?php echo __('MANUAL_IP_ADDR'); ?><img src="main/libs/img/infos.png" alt="" title="<?php echo __('TOOLTIP_MANUAL_IP'); ?>" /><br /></td>
                         <td></td>   
                 </table>
             <div id="manual_ip_wifi" <?php if((!$wifi_static)||(strcmp("$wifi_ssid","")==0)) echo "style='display:none'"; ?>>
@@ -745,7 +738,7 @@
 </div>
 
 <div id="network_new_addr_set" style="display:none">
-    <?php echo __('AVAILABLE_MODULE_SET'); ?>: <p class='p_center'><a class='note_link' href='http://<?php echo $hostname; ?>/cultibox/' target='_blank'>http://<?php echo $hostname; ?>/cultibox/</a></p>"
+    <?php echo __('AVAILABLE_MODULE_SET'); ?>: <p class='p_center'><a class='note_link' href='http://<?php echo $hostname; ?>/cultibox/' target='_blank'>http://<?php echo $hostname; ?>/cultibox/</a></p>
 </div>
 
 <div id="error_restore_conf" style="display:none">
@@ -883,6 +876,7 @@
             $dir    = $GLOBALS['CULTIPI_CONF_TEMP_PATH'] . '/' .  'serverSupervision' . '/';
             $files  = array_diff(scandir($dir), array('..', '.', 'conf.xml'));
             sort($files,SORT_STRING);
+            $processID  = 0;
 
             foreach ($files as $file)
             {
