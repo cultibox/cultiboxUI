@@ -1258,7 +1258,7 @@ function create_network_file($myConf) {
 
     if(count($myDns)>0) {
         if($f=fopen("/tmp/resolv.conf","w")) {
-            foreach($myArray as $myInf) {
+            foreach($myDns as $myInf) {
                 fputs($f,"$myInf\n");
             }
         } else {
