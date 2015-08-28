@@ -2217,7 +2217,7 @@ $(document).ready(function() {
     $('#supervision_config').click(function(e) {
         e.preventDefault();
         $("#supervision_config_div").dialog({
-            width: 900,
+            width: 500,
             modal: true,
             resizable: false,
             dialogClass: "popup_message",
@@ -2253,6 +2253,7 @@ $(document).ready(function() {
         $("#" + dialogMsgToShow).dialog({
             modal: true,
             resizable: false,
+            minWidth: 500,
             dialogClass: "popup_message",
             buttons: [{
                 text: SAVE_button,
@@ -2276,6 +2277,7 @@ $(document).ready(function() {
                                 action: "checkSensor",
                                 eMail: $("#supervision_edit_checkSensor_eMail").val(),
                                 sensor: $("#supervision_edit_checkSensor_sensor").val(),
+                                sensorName: $("#supervision_edit_checkSensor_sensorName").val(),
                                 sensorOutput: $("#supervision_edit_checkSensor_sensorOutput").val(),
                                 valueSeuil: $("#supervision_edit_checkSensor_valueSeuil").val(),
                                 timeSeuilInS: $("#supervision_edit_checkSensor_timeSeuilInS").val(),
@@ -2402,7 +2404,7 @@ $(document).ready(function() {
         });
     });
     
-    // To configure an supervion element 
+    // To configure an supervision element 
     $('#supervision_config_table').on("click", "input[name='button_supervision_configure']", function(e){  
         e.preventDefault();
         
