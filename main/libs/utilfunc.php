@@ -1140,6 +1140,7 @@ function create_network_file($myConf) {
     if(count($myConf)==0) return 2;
     
     $myArray=array();
+    $myDns=array();
     $myArray[]="# interfaces(5) file used by ifup(8) and ifdown(8)";
     $myArray[]="";
     $myArray[]="#IFACE LO";
@@ -1147,29 +1148,35 @@ function create_network_file($myConf) {
     $myArray[]="iface lo inet loopback";
     $myArray[]="";
 
-    if(strcmp($myConf['activ_wire'],"True")==0) {
-        $myArray[]="#IFACE ETH0";
-        $myArray[]="allow-hotplug eth0";
+    $myArray[]="#IFACE ETH0";
+    $myArray[]="allow-hotplug eth0";
 
-        if(strcmp($myConf['wire_type'],"static")==0) {
-            $myArray[]="iface eth0 inet static";
-            $myArray[]="address ".$myConf['wire_address'];
-            $myArray[]="netmask ".$myConf['wire_mask'];
+    if(strcmp($myConf['wire_type'],"static")==0) {
+        $myArray[]="iface eth0 inet static";
+        $myArray[]="address ".$myConf['wire_address'];
+        $myArray[]="netmask ".$myConf['wire_mask'];
 
-            if((strcmp($myConf['wire_gw'],"")!=0)&&(strcmp($myConf['wire_gw'],"0.0.0.0")!=0)) {
-                $myArray[]="gateway ".$myConf['wire_gw'];
-                $myArray[]="post-up /sbin/route add default gw ".$myConf['wire_gw']." eth0";
-                $route_gw=true;  
-            }
-        } else {
-            $myArray[]="iface eth0 inet dhcp";
+        if((strcmp($myConf['wire_gw'],"")!=0)&&(strcmp($myConf['wire_gw'],"0.0.0.0")!=0)) {
+            $myArray[]="gateway ".$myConf['wire_gw'];
+            $myArray[]="post-up /sbin/route add default gw ".$myConf['wire_gw']." eth0";
+            $route_gw=true;  
         }
-        $myArray[]="";
 
+
+        $myDns[]="nameserver 208.67.222.222";
+        $myDns[]="nameserver 208.67.220.220";
+
+
+        
+    } else {
+        $myArray[]="iface eth0 inet dhcp";
     }
+    $myArray[]="";
 
 
-    if(strcmp($myConf['activ_wifi'],"True")==0) {
+
+    
+    if((strcmp($myConf['wifi_ssid'],"")!=0)||(strcmp($myConf['wifi_password'],"")!=0)) {
         $myArray[]="#IFACE WLAN0";
         $myArray[]="wireless-power off";
         $myArray[]="auto wlan0";
@@ -1186,6 +1193,12 @@ function create_network_file($myConf) {
                     $myArray[]="post-up /sbin/route add default gw ".$myConf['wifi_gw']." wlan0";
                     $myArray[]="post-down /bin/pkill -9 wpa_supplicant";
                 }
+            }
+
+
+            if(count($myDns)==0) {
+                $myDns[]="nameserver 208.67.222.222";
+                $myDns[]="nameserver 208.67.220.220";
             }
         } else {
             $myArray[]="iface wlan0 inet dhcp";
@@ -1221,6 +1234,15 @@ function create_network_file($myConf) {
                     $myArray[]="wpa-psk ".$output[0];
                     break;  
         }
+    } else {
+        //Setup of the cultipi_network conf:
+        $myArray[]="#IFACE WLAN0";
+        $myArray[]="auto wlan0";
+        $myArray[]="allow-hotplug wlan0";
+        $myArray[]="iface wlan0 inet static";
+        $myArray[]="address 10.0.0.100";
+        $myArray[]="netmask 255.0.0.0";
+        $myArray[]="post-up /etc/rc.local; /etc/init.d/isc-dhcp-server force-reload; /etc/init.d/dnsmasq force-reload; /etc/init.d/hostapd force-reload";
     }
 
 
@@ -1232,6 +1254,17 @@ function create_network_file($myConf) {
         return 4;
     }
     fclose($f);
+
+
+    if(count($myDns)>0) {
+        if($f=fopen("/tmp/resolv.conf","w")) {
+            foreach($myDns as $myInf) {
+                fputs($f,"$myInf\n");
+            }
+        } else {
+            return 4;
+        }
+    }
     return 1;
 }
 // }}}

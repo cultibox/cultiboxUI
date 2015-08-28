@@ -26,7 +26,7 @@ if((isset($_GET['page']))&&(!empty($_GET['page']))) {
 
 
    if((isset($GLOBALS['MODE']))&&(strcmp($GLOBALS['MODE'],"cultipi")==0)) {
-        if(strpos($_SERVER['REMOTE_ADDR'],"10.0.0.")!==false) {
+        if(strpos($_SERVER['REMOTE_ADDR'],"10.0.0.100")!==false) {
             if((!isset($_COOKIE['ADHOC']))||(strcmp($_COOKIE['ADHOC'],"True")!=0)) {
                 $page="configuration";
                 $submenu="network_conf_ui";

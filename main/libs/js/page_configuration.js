@@ -1556,22 +1556,6 @@ $(document).ready(function() {
         }
     });
 
-    $("#activ_wire").change(function() {
-        if($("#activ_wire").val()=="True") {
-            $("#wire_interface").show();
-        } else {
-            $("#wire_interface").css("display","none");
-        }
-    });
-
-
-    $("#activ_wifi").change(function() {
-        if($("#activ_wifi").val()=="True") {
-            $("#wifi_interface").show();
-        } else {
-            $("#wifi_interface").css("display","none");
-        }
-    })
 
      $("#eyes").mousedown(function() {
         if($('#wifi_key_type').val()!="NONE") {
@@ -1689,99 +1673,84 @@ $(document).ready(function() {
       e.preventDefault();
 
 
-      if(($("#activ_wire option:selected").val()=="False")&&($("#activ_wifi option:selected").val()=="False")) {
-         $("#empty_network_conf").dialog({
-            resizable: false,
-            width: 400,
-            modal: true,
-            closeOnEscape: true,
-            dialogClass: "popup_error",
-            buttons: [{
-                text: CLOSE_button,
-                click: function () {
-                    $( this ).dialog( "close" ); return false;
+      $("#error_wire_ip").css("display","none");
+      $("#error_wire_mask").css("display","none");
+      $("#error_wifi_ssid").css("display","none");
+      $("#error_wifi_password").css("display","none");
+      $("#error_wifi_password_confirm").css("display","none");
+      $("#error_password_wep").css("display","none");
+      $("#error_password_hexa").css("display","none");
+      $("#error_password_wpa").css("display","none");
+      $("#error_wifi_ip").css("display","none");
+      $("#error_wifi_mask").css("display","none");
+
+
+      // block user interface during checking and saving
+      $.blockUI({
+          message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+          centerY: 0,
+          css: {
+              top: '20%',
+              border: 'none',
+              padding: '5px',
+              backgroundColor: 'grey',
+              '-webkit-border-radius': '10px',
+              '-moz-border-radius': '10px',
+              opacity: .9,
+              color: '#fffff'
+          },
+          onBlock: function() {
+
+              var checked=true;
+
+              if($('input[name=wire_type]:radio:checked').val()=="static") {
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/check_value.php",
+
+                        data: {value:$("#wire_address").val(),type:'ip'}
+                    }).done(function (data) {
+                        if(data!=1) {
+                            $("#error_wire_ip").show(700);
+                            checked=false;
+                        } else {
+                            $("#error_wire_ip").css("display","none");
+                        }
+                    });
+
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/check_value.php",
+
+                        data: {value:$("#wire_mask").val(),type:'ip'}
+                    }).done(function (data) {
+                        if(data!=1) {
+                            $("#error_wire_mask").show(700);
+                            checked=false;
+                        } else {
+                            $("#error_wire_mask").css("display","none");
+                        }
+                    });
+
+                    $.ajax({
+                        cache: false,
+                        async: false,
+                        url: "main/modules/external/check_value.php",
+
+                        data: {value:$("#wire_gw").val(),type:'ip'}
+                    }).done(function (data) {
+                        if(data!=1) {
+                            $("#wire_gw").val("0.0.0.0");
+                        } 
+                    });
                 }
-            }]
-        });
-      } else {
-        $("#error_wire_ip").css("display","none");
-        $("#error_wire_mask").css("display","none");
-        $("#error_wifi_ssid").css("display","none");
-        $("#error_wifi_password").css("display","none");
-        $("#error_wifi_password_confirm").css("display","none");
-        $("#error_password_wep").css("display","none");
-        $("#error_password_hexa").css("display","none");
-        $("#error_password_wpa").css("display","none");
-        $("#error_wifi_ip").css("display","none");
-        $("#error_wifi_mask").css("display","none");
 
-
-        // block user interface during checking and saving
-        $.blockUI({
-            message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
-            centerY: 0,
-            css: {
-                top: '20%',
-                border: 'none',
-                padding: '5px',
-                backgroundColor: 'grey',
-                '-webkit-border-radius': '10px',
-                '-moz-border-radius': '10px',
-                opacity: .9,
-                color: '#fffff'
-            },
-            onBlock: function() {
-
-                var checked=true;
-
-                if($("#activ_wire option:selected").val()=="True") {            
-                    if($('input[name=wire_type]:radio:checked').val()=="static") {
-                        $.ajax({
-                            cache: false,
-                            async: false,
-                            url: "main/modules/external/check_value.php",
-
-                            data: {value:$("#wire_address").val(),type:'ip'}
-                        }).done(function (data) {
-                            if(data!=1) {
-                                $("#error_wire_ip").show(700);
-                                checked=false;
-                            } else {
-                                $("#error_wire_ip").css("display","none");
-                            }
-                        });
-
-                        $.ajax({
-                            cache: false,
-                            async: false,
-                            url: "main/modules/external/check_value.php",
-
-                            data: {value:$("#wire_mask").val(),type:'ip'}
-                        }).done(function (data) {
-                            if(data!=1) {
-                                $("#error_wire_mask").show(700);
-                                checked=false;
-                            } else {
-                                $("#error_wire_mask").css("display","none");
-                            }
-                        });
-
-                        $.ajax({
-                            cache: false,
-                            async: false,
-                            url: "main/modules/external/check_value.php",
-
-                            data: {value:$("#wire_gw").val(),type:'ip'}
-                        }).done(function (data) {
-                            if(data!=1) {
-                                $("#wire_gw").val("0.0.0.0");
-                            } 
-                        });
-                    }
-                }
 
                 var type_password="";
-                if($("#activ_wifi option:selected").val()=="True") {
+                //If password and SSID is not set, we use the adHoc connection:
+                if(($("#wifi_ssid").val()!="")||($("#wifi_password").val()!="")||($("#wifi_password_confirm").val()!="")) {
                     $.ajax({
                         cache: false,
                         async: false,
@@ -2060,7 +2029,6 @@ $(document).ready(function() {
                 }
               }
         });
-      }
     });
 
     

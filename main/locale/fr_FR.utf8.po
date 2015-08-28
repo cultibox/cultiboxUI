@@ -2347,10 +2347,10 @@ msgid "DEACTIVATED"
 msgstr "Désactivée"
 
 msgid "MANUAL_IP_ADDR"
-msgstr "Adresse manuelle"
+msgstr "Configuration manuelle"
 
 msgid "DYNAMIC_IP_ADDR"
-msgstr "Adresse automatique"
+msgstr "Configuration automatique"
 
 msgid "IP_ADDR"
 msgstr "Adresse du réseau"

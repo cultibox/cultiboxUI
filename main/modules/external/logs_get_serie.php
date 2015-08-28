@@ -76,8 +76,8 @@ switch ($datatype)
         $db_sensors = logs\get_sensor_db_type($_GET['sensor']);
 
         // Retrieve logs curve
-        $logsValue = logs\get_sensor_log($_GET['sensor'],$startDay,$endDay,$_GET['month'],$db_sensors[0]['ratio']);
-        
+        $logsValue = logs\get_sensor_log($_GET['sensor'],$startDay,$endDay,$_GET['month'],$db_sensors[0]['ratio'],$db_sensors[0]['display']);
+
         // Search if there are fake
         $fake = logs\are_fake_logs($_GET['sensor'],$startDay,$endDay,$_GET['month']);
 
@@ -86,6 +86,7 @@ switch ($datatype)
         $retInfo = program\get_curve_information($db_sensors[0]['type'] . "1",$_GET['sensor'] - 1);
         
         $retarray['sensor_1']['data'] = $logsValue[0];
+
         
         // Init return array
         $retarray['sensor_1']['name']       = $retInfo['name'] . " (" . __('SENSOR') . " " . $_GET['sensor'] . " )";

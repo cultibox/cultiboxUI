@@ -185,7 +185,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 0,
                     "sensorName" => "",
                     "translation" => "NO_SENSOR_DEFINED",
-                    "unity" => ""
+                    "unity" => "",
+                    "display" => ""
                 ); 
                 $nb_sens=$nb_sens+1;
                 break;
@@ -198,7 +199,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "temperature",
                     "translation" => "TEMP_SENSOR",
-                    "unity" => "°C/%"
+                    "unity" => "°C/%",
+                    "display" => ""
                 );
                 $sensors[]=array(
                     "id" => $sens['id'],
@@ -207,7 +209,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "humidity",
                     "translation" => "HUMI_SENSOR",
-                    "unity" => "°C/%"
+                    "unity" => "°C/%",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -220,7 +223,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "water",
                     "translation" => "WATER_SENSOR",
-                    "unity" => "°C"
+                    "unity" => "°C",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -234,7 +238,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "level",
                     "translation" => "LEVEL_SENSOR",
-                    "unity" => "cm"
+                    "unity" => "cm",
+                    "display" => "program"
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -247,7 +252,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "ph",
                     "translation" => "PH_SENSOR",
-                    "unity" => " "
+                    "unity" => " ",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -260,7 +266,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 1,
                     "sensorName" => "ec",
                     "translation" => "EC_SENSOR",
-                    "unity" => "µs/cm"
+                    "unity" => "µs/cm",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -273,7 +280,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "od",
                     "translation" => "OD_SENSOR",
-                    "unity" => "mg/l"
+                    "unity" => "mg/l",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -286,7 +294,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 1,
                     "sensorName" => "orp",
                     "translation" => "ORP_SENSOR",
-                    "unity" => "mV"
+                    "unity" => "mV",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -299,7 +308,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "co2",
                     "translation" => "CO2_SENSOR",
-                    "unity" => "ppm"
+                    "unity" => "ppm",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -312,7 +322,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 100,
                     "sensorName" => "pressure",
                     "translation" => "PRESSURE_SENSOR",
-                    "unity" => "bar"
+                    "unity" => "bar",
+                    "display" => "program"
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -325,7 +336,8 @@ function get_sensor_db_type($sensor = "") {
                     "ratio" => 0,
                     "sensorName" => "",
                     "translation" => "",
-                    "unity" => ""
+                    "unity" => "",
+                    "display" => ""
                 );
                 $nb_sens=$nb_sens+1;
                 break;
@@ -343,7 +355,7 @@ function get_sensor_db_type($sensor = "") {
 // IN day : Define if we want a day view or a month view
 // IN ratio : define the diviser for each record
 // RET array with logs value
-function get_sensor_log ($sensor, $dateStart, $dateEnd, $day="day",$ratio=100) {
+function get_sensor_log ($sensor, $dateStart, $dateEnd, $day="day",$ratio=100,$display="logs") {
 
     // Init return array
     $serie = array();
@@ -379,6 +391,9 @@ function get_sensor_log ($sensor, $dateStart, $dateEnd, $day="day",$ratio=100) {
     }
 
     $lastTimeInS = 0;
+    $oldRecord1 = 0;
+    $oldRecord2 = 0;
+
     // For each point
     while ($row = $sth->fetch()) 
     {
@@ -393,17 +408,19 @@ function get_sensor_log ($sensor, $dateStart, $dateEnd, $day="day",$ratio=100) {
         if ($realTimeInS >= ($lastTimeInS + $divider))
         {
 
-            /*
-            if(!$first) {
-                $first=true;
-                $first_date=strtotime($row['date_catch'] . " " . "00:00:01");
-                $serie[0][(string)(1000 * ($first_date))] = "null"; 
+            //If there is a change state and display like program, add a point to the same time:
+            if(strcmp("$display","program")==0) {
+                if(($oldRecord1!=$row['record1'])&&(!isset($serie[(string)(1000 * ($realTimeInS))-1]))) {
+                    $serie[0][(string)((1000 * ($realTimeInS))-1)] = $oldRecord1 / $ratio;
+                }
 
-                if ($row['record2'] != "" && $row['record2'] != 0) {
-                    $serie[1][(string)(1000 * ($first_date))] = "null";
-                } 
+
+                if(($row['record2'] != "") &&($row['record2'] != null)) {
+                  if(($oldRecord2!=$row['record2'])&&(!isset($serie[(string)(1000 * ($realTimeInS))-1]))) {
+                    $serie[1][(string)((1000 * ($realTimeInS))-1)] = $oldRecord2 / $ratio;
+                    }
+                }
             }
-            */
 
             // WTF ! 7200
             $serie[0][(string)(1000 * ($realTimeInS))] = $row['record1'] / $ratio;
@@ -412,11 +429,16 @@ function get_sensor_log ($sensor, $dateStart, $dateEnd, $day="day",$ratio=100) {
                 $serie[1][(string)(1000 * ($realTimeInS))] = $row['record2'] / $ratio;
             
             $lastTimeInS = $realTimeInS;
+            $oldRecord1=$row['record1'];
+        
+             if ($row['record2'] != "" && $row['record2'] != null)
+                 $oldRecord2=$row['record2'];
         }
     }
     return $serie ;
 }
 // }}}
+
 
 // {{{ are_fake_logs()
 // ROLE Retrieve if logs are fake
@@ -564,8 +586,6 @@ function save_log($file="",$month=0,$day=0,$type="logs") {
     return 1;
 }
 // }}}
-
-
 
 }
 

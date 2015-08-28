@@ -18,6 +18,7 @@
             break;
         default : 
             if(($path_output!="")&&(is_dir($path_output))) {
+                exec("sudo mv $path_output/* /tmp/",$ret,$err);
                 exec("sudo cp -R $path_input_linux_cp $path_output/",$ret,$err);
                 if ($err != 0) 
                 {

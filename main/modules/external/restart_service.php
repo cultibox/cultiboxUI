@@ -7,6 +7,10 @@ if ($_GET['type'] == "wep") {
 }
     
 
+if(is_file("/tmp/resolv.conf")) {
+     exec("sudo /bin/cp /etc/resolv.conf /etc/resolv.conf.SAVE");
+     exec("sudo /bin/mv /tmp/resolv.conf /etc/");
+}
 
 if(is_file("/tmp/interfaces")) {
     exec("sudo /bin/cp /etc/network/interfaces /etc/network/interfaces.SAVE");
@@ -48,6 +52,10 @@ if(is_file("/tmp/interfaces")) {
         echo json_encode("1");
     } else {
         exec("sudo /bin/mv /etc/network/interfaces.SAVE /etc/network/interfaces");
+
+        if(is_file("/etc/resolv.conf.SAVE")) {
+            exec("sudo /bin/mv /etc/resolv.conf.SAVE /etc/resolv.conf");
+        }
         echo json_encode("0");
     }
 } else {
