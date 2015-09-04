@@ -1269,6 +1269,178 @@ function create_network_file($myConf) {
 }
 // }}}
 
+// {{{ getSocket()
+// ROLE Return cocket number of cultipi module
+// IN  $server   Server name
+// RET socket number
+function getSocket($server) {
+    
+    switch ($server) {
+        case "serverCultipi":
+            return 6000;
+            break;
+        case "serverLog":
+            return 6003;
+            break;
+        case "serverPlugUpdate":
+            return 6004;
+            break;
+        case "serverAcqSensor":
+            return 6006;
+            break;
+        case "serverHisto":
+            return 6009;
+            break;
+        case "serverIrrigation":
+            return 6011;
+            break;
+        case "serverCultibox":
+            return 6013;
+            break;
+        case "serverMail":
+            return 6015;
+            break;
+        case "serverSupervision":
+            return 6019;
+            break;
+        case "serverGet":
+            return 6022;
+            break;
+        case "serverGetCommand":
+            return 6023;
+            break;
+        case "serverSet":
+            return 6024;
+            break;
+        case "serverSetCommand":
+            return 6025;
+            break;
+        case "serverTrigger":
+            return 6026;
+            break;
+        case "serverPHP":
+            return 6027;
+            break;
+        default :
+            return "NA";
+            break;
+    }
+}
+//}}}
+
+// {{{ sendBySocket()
+// ROLE Send data using socket
+// IN  $server server name 
+// IN  $ip ip
+// IN  $message message to send
+// RET Nothing
+function sendBySocket($server, $ip, $message) {
+    
+        // Retrieve socket number
+        $socketNumber = getSocket($server);
+        $socketServerNumber = getSocket("serverPHP");
+    
+        // Init socket
+        $sock = socket_create(AF_INET, SOCK_STREAM, 0);
+        
+        // create connection
+        socket_connect($sock , $ip , $socketNumber);
+
+        // send data
+        $message = $socketServerNumber . " 0 " . $message;
+        socket_send ( $sock , $message , strlen($message) , 0);
+        
+        socket_close($sock );
+}
+//}}}
+
+// {{{ readBySocket()
+// ROLE Send data using socket
+// IN  $server server name 
+// IN  $ip ip
+// IN  $message message to send
+// RET Reading value
+function readBySocket($server, $ip, $message) {
+    
+        // Retrieve socket number
+        $socketNumber = getSocket($server);
+        $socketServerNumber = getSocket("serverPHP");
+        
+        // Init socket
+        $sock1 = socket_create(AF_INET, SOCK_STREAM, 0);
+        
+        // create connection
+        socket_connect($sock1 , $ip , $socketNumber);
+
+        // send data
+        $message = $socketServerNumber . " 0 " . $message;
+        socket_send ( $sock1 , $message , strlen($message) , 0);
+        
+        socket_close($sock1 );
+        
+        
+        // Create server for receiving data 
+        if(!($sock = socket_create(AF_INET, SOCK_STREAM, 0)))
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+             
+            die("Couldn't create socket: [$errorcode] $errormsg \n");
+        }
+
+         
+        // Bind the source address
+        if( !socket_bind($sock, $ip , $socketServerNumber) )
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+             
+            socket_close($sock );
+             
+            die("Could not bind socket : [$errorcode] $errormsg \n");
+        }
+
+         
+        if(!socket_listen ($sock , 10))
+        {
+            $errorcode = socket_last_error();
+            $errormsg = socket_strerror($errorcode);
+             
+            socket_close($sock );
+             
+            die("Could not listen on socket : [$errorcode] $errormsg \n");
+        }
+
+        socket_set_nonblock ($sock);
+         
+        //start loop to listen for incoming connections
+        $timeout = 4000;
+        $startMillisensond = round(microtime(true) * 1000);
+        while ((round(microtime(true) * 1000) - $startMillisensond) < $timeout) 
+        {
+            
+            // Trick ...
+            usleep(100);
+            
+            //Accept incoming connection - This is a blocking call
+            $client =  socket_accept($sock);
+            
+            if ($client !== FALSE) {
+                //read data from the incoming socket
+                $input = socket_read($client, 1024000);
+                
+                socket_close($sock );
+                
+                return $input;
+            }
+
+            usleep(100);
+        }
+        
+        return "TIMEOUT";
+        
+}
+//}}}
 
 ?>
 

@@ -356,20 +356,8 @@ function reloadXMLinServer ($server) {
     
     $return_array = array();
 
-    try {
-        switch(php_uname('s')) {
-            case 'Windows NT':
-                $return_array["status"] = exec('C:\Tcl\bin\tclsh.exe "D:\CBX\cultipiCore\cultiPi\setCommand.tcl" ' . $server . ' localhost reloadXML');
-                break;
-            default : 
-                $return_array["status"] = exec('tclsh "/opt/cultipi/cultiPi/getCommand.tcl" ' . $server . ' localhost reloadXML');
-                break;
-        }
-    } catch (Exception $e) {
-        echo 'Exception reçue : ',  $e->getMessage(), "\n";
-        $return_array["status"] = $e->getMessage();
-    }
-
+    $return_array["status"] = sendBySocket($server, "localhost", "reloadXML");
+    
     return $return_array;
     
 }
@@ -382,20 +370,8 @@ function serverEmail_test ($mail) {
     
     $return_array = array();
 
-    try {
-        switch(php_uname('s')) {
-            case 'Windows NT':
-                $return_array["status"] = exec('C:\Tcl\bin\tclsh.exe "D:\CBX\cultipiCore\cultiPi\getCommand.tcl" -timeout 20000 serverMail localhost sendMailTest ' . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
-                break;
-            default : 
-                $return_array["status"] = exec('tclsh "/opt/cultipi/cultiPi/getCommand.tcl" -timeout 20000 serverMail localhost sendMailTest ' . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
-                break;
-        }
-    } catch (Exception $e) {
-        echo 'Exception reçue : ',  $e->getMessage(), "\n";
-        $return_array["status"] = $e->getMessage();
-    }
-
+    $return_array["status"] = readBySocket("serverMail", "localhost", "sendMailTest " . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
+    
     return $return_array;
     
 }
