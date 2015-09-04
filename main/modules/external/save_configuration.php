@@ -37,6 +37,17 @@ switch ($parttosave)
         // Write it in XML
         configuration\serverEmail_createXMLConf();
         
+        // Reload configuration 
+        configuration\reloadXMLinServer("serverMail");
+        
+        break;
+        
+    case "testemail":
+    
+        $err = configuration\serverEmail_test(getvar("EMAIL_ADRESS"));
+        
+        echo json_encode($err);
+        
         break;
         
     case "supervision":

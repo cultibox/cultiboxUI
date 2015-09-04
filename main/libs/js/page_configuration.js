@@ -2099,6 +2099,89 @@ $(document).ready(function() {
             closeOnEscape: false,
             dialogClass: "popup_message",
             buttons: [{
+                text: TEST_button,
+                click: function () {
+                    $.blockUI({
+                        message: "<?php echo __('SAVING_DATA'); ?>  <img src=\"main/libs/img/waiting_small.gif\" />",
+                        centerY: 0,
+                        css: {
+                            top: '20%',
+                            border: 'none',
+                            padding: '5px',
+                            backgroundColor: 'grey',
+                            '-webkit-border-radius': '10px',
+                            '-moz-border-radius': '10px',
+                            opacity: .9,
+                            color: '#fffff'
+                        },
+                        onBlock: function() {
+                            
+                            // Create XML 
+                            EMAIL_USE_SSL = "false";
+                            if( $('#EMAIL_USE_SSL').is(':checked') ){
+                                EMAIL_USE_SSL = "true";
+                            }
+                            
+                            $.ajax({
+                                async: true,
+                                url: "main/modules/external/save_configuration.php",
+                                data: {
+                                    parttosave:"email",
+                                    EMAIL_PROVIDER:$('#EMAIL_PROVIDER').val(),
+                                    EMAIL_SMTP:$('#EMAIL_SMTP').val(),
+                                    EMAIL_PORT:$('#EMAIL_PORT').val(),
+                                    EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                                    EMAIL_PASSWORD:$('#EMAIL_PASSWORD').val(),
+                                    EMAIL_USE_SSL:EMAIL_USE_SSL
+                                }
+                            }).done(function (data) {
+                                
+                                // Test send eMail
+                                $.ajax({
+                                    async: true,
+                                    url: "main/modules/external/save_configuration.php",
+                                    data: {
+                                        parttosave:"testemail",
+                                        EMAIL_ADRESS:$('#EMAIL_ADRESS').val(),
+                                    }
+                                }).done(function (data) {
+                                    
+                                    var objJSON = jQuery.parseJSON(data)
+
+                                    $.unblockUI();
+                                    $("#test_send_mail").dialog({
+                                        resizable: false,
+                                        width: 500,
+                                        modal: true,
+                                        closeOnEscape: true,
+                                        dialogClass: "popup_message",
+                                        buttons: [{
+                                             text: CLOSE_button,
+                                             click: function () {
+                                                $( this ).dialog( "close" );
+                                                return false;
+                                             }
+                                         }]
+                                     });
+                                     
+                                     // Erreur lorsque le smtp n'est pas le bon :
+                                     // couldn't        open    socket: Le      nom     demandé est     valide, mais    aucune  donnée  du  type        requise n?a     été     trouvée.
+                                     // Mauvais nom d'utilisateur ou Mot de passe :
+                                     // 530:    5.5.1   Authentication  Required.       Learn   more    at 
+                                     // L'utilisateur doit cocher la case SSL :
+                                     // 530:    5.7.0   Must    issue   a       STARTTLS        command first.  mc18sm5886048wic.23     -   gsmtp
+                                     // Autres tests a realiser : utilisation du mauvais port
+                                     if (objJSON.status != "OK") 
+                                     {
+                                        $("#test_send_mail_return").html(objJSON.status);
+                                     }
+                                     
+                                });
+                            });
+                        }
+                    });
+                }
+            }, {
                 text: SAVE_button,
                 click: function () {
                     $(this).dialog("close");

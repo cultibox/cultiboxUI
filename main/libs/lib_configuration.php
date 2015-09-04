@@ -343,8 +343,64 @@ function serverEmail_createXMLConf () {
     );
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
     
+    // Add it in générale conf 
+    \create_conf_XML($GLOBALS['CULTIPI_CONF_OUT_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
+    
 }
 // }}}
+
+// {{{ reloadXMLinServer()
+// ROLE reload XML in server
+// RET
+function reloadXMLinServer ($server) {
+    
+    $return_array = array();
+
+    try {
+        switch(php_uname('s')) {
+            case 'Windows NT':
+                $return_array["status"] = exec('C:\Tcl\bin\tclsh.exe "D:\CBX\cultipiCore\cultiPi\setCommand.tcl" ' . $server . ' localhost reloadXML');
+                break;
+            default : 
+                $return_array["status"] = exec('tclsh "/opt/cultipi/cultiPi/getCommand.tcl" ' . $server . ' localhost reloadXML');
+                break;
+        }
+    } catch (Exception $e) {
+        echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        $return_array["status"] = $e->getMessage();
+    }
+
+    return $return_array;
+    
+}
+// }}}
+
+// {{{ serverEmail_test()
+// ROLE Test send mail
+// RET
+function serverEmail_test ($mail) {
+    
+    $return_array = array();
+
+    try {
+        switch(php_uname('s')) {
+            case 'Windows NT':
+                $return_array["status"] = exec('C:\Tcl\bin\tclsh.exe "D:\CBX\cultipiCore\cultiPi\getCommand.tcl" -timeout 20000 serverMail localhost sendMailTest ' . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
+                break;
+            default : 
+                $return_array["status"] = exec('tclsh "/opt/cultipi/cultiPi/getCommand.tcl" -timeout 20000 serverMail localhost sendMailTest ' . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
+                break;
+        }
+    } catch (Exception $e) {
+        echo 'Exception reçue : ',  $e->getMessage(), "\n";
+        $return_array["status"] = $e->getMessage();
+    }
+
+    return $return_array;
+    
+}
+// }}}
+
 
 }
 ?>
