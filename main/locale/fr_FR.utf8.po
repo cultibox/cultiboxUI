@@ -202,6 +202,9 @@ msgstr "Configuration de l'envoi des mails"
 msgid "MAIL_CONFIG"
 msgstr "Configurer le serveur de mail pour l'envoie des alertes"
 
+msgid "TEST_SEND_MAIL"
+msgstr "Envoi d'un mail test réalisé"
+
 msgid "DL_WIFI_FIRM"
 msgstr "Télécharger le firmware du module Wifi"
 

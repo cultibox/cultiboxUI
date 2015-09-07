@@ -343,8 +343,40 @@ function serverEmail_createXMLConf () {
     );
     \create_conf_XML($GLOBALS['CULTIPI_CONF_TEMP_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
     
+    // Add it in générale conf 
+    \create_conf_XML($GLOBALS['CULTIPI_CONF_OUT_PATH'] . "/serverMail/conf.xml" , $paramListServerMail);
+    
 }
 // }}}
+
+// {{{ reloadXMLinServer()
+// ROLE reload XML in server
+// RET
+function reloadXMLinServer ($server) {
+    
+    $return_array = array();
+
+    $return_array["status"] = sendBySocket($server, "localhost", "reloadXML");
+    
+    return $return_array;
+    
+}
+// }}}
+
+// {{{ serverEmail_test()
+// ROLE Test send mail
+// RET
+function serverEmail_test ($mail) {
+    
+    $return_array = array();
+
+    $return_array["status"] = readBySocket("serverMail", "localhost", "sendMailTest " . $mail . ' "Email test" "Email envoyé automatiquement avec le bouton test"');
+    
+    return $return_array;
+    
+}
+// }}}
+
 
 }
 ?>

@@ -15,6 +15,7 @@ var LOADING="";
 var NEXT_button="";
 var PREVIOUS_button="";
 var COMPUTE_button="";
+var TEST_button="";
 var diffVal=[];
 
 
@@ -68,8 +69,9 @@ if(lang=="it_IT") {
     DIR_CONF_NOT_UPTODATE="La configurazione utilizzata non è aggiornata, clicca qui per aggiornare la configurazione: <button id='update_conf'>Aggiorna configurazione</button>";
     LOADING="Caricamento in corso, attendere prego...";
     NEXT_button="Prossimo passo";
-    PREVIOUS_button="Fase precedente"
-    COMPUTE_button="Mostra risultati"
+    PREVIOUS_button="Fase precedente";
+    COMPUTE_button="Mostra risultati";
+    TEST_button="Test";
 } else if(lang=="de_DE") {
     RELOAD_button="Rescan Netzwerke";
     SELECT_button="Prüfen";
@@ -87,8 +89,9 @@ if(lang=="it_IT") {
     DIR_CONF_NOT_UPTODATE="verwendet wird, nicht aktualisierte Konfiguration, klicken Sie hier, um die Konfiguration zu aktualisieren: <button id='update_conf'>Aktualisieren Sie Konfiguration</button>";
     LOADING="Laden Laden, bitte warten...";
     NEXT_button="Nächster Schritt";
-    PREVIOUS_button="Vorheriger Schritt"
-    COMPUTE_button="Ergebnisse anzeigen"
+    PREVIOUS_button="Vorheriger Schritt";
+    COMPUTE_button="Ergebnisse anzeigen";
+    TEST_button="Test";
 } else if(lang=="en_GB") {
     RELOAD_button="Rescan networks";
     SELECT_button="Validate";
@@ -106,8 +109,9 @@ if(lang=="it_IT") {
     DIR_CONF_NOT_UPTODATE="The configuration used is not updated, click here to update the configuration: <button id='update_conf'> Update configuration </button>";
     LOADING="Loading, please wait...";
     NEXT_button="Next step";
-    PREVIOUS_button="Previous step"
-    COMPUTE_button="Display result"
+    PREVIOUS_button="Previous step";
+    COMPUTE_button="Display result";
+    TEST_button="Test";
 } else if(lang=="es_ES") {
     RELOAD_button="Volver a examinar las redes";
     SELECT_button="Validar";
@@ -125,8 +129,9 @@ if(lang=="it_IT") {
     DIR_CONF_NOT_UPTODATE="La configuración utilizada no está actualizado, haga clic aquí para actualizar la configuración: <button id='update_conf'>Actualizar configuración botón</button>";
     LOADING="Cargando, espere por favor...";
     NEXT_button="Paso siguiente";
-    PREVIOUS_button="Paso previo"
-    COMPUTE_button="Mostrar resultados"
+    PREVIOUS_button="Paso previo";
+    COMPUTE_button="Mostrar resultados";
+    TEST_button="Test";
 } else {
     RELOAD_button="Re-scanner les réseaux";
     SELECT_button="Valider";
@@ -144,8 +149,9 @@ if(lang=="it_IT") {
     DIR_CONF_NOT_UPTODATE="La configuration utilisée n'est pas à jour, cliquez ici pour mettre la configuration à jour: <button id='update_conf'>Mise à jour de la configuration</button>";
     LOADING="Chargement des données en cours, patientez s'il vous plait...";
     NEXT_button="Etape suivante";
-    PREVIOUS_button="Etape précédente"
-    COMPUTE_button="Afficher le résultat"
+    PREVIOUS_button="Etape précédente";
+    COMPUTE_button="Afficher le résultat";
+    TEST_button="Test";
 }
 
 

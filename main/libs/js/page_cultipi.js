@@ -987,6 +987,7 @@ $(document).ready(function(){
         e.preventDefault();
 
         idOfElem = $(this).attr('id').split("_")[2];
+        idButton = $(this).attr('id');
         
         // retriev name of this element
         elementTitle = $("#syno_elem_title_" + idOfElem).html();
@@ -997,6 +998,11 @@ $(document).ready(function(){
             data: {
                 id:idOfElem,
                 action:"getParam"
+            },
+            position: { 
+                my: "left top", 
+                at: "center", 
+                of: "#" + idButton
             },
             url: "main/modules/external/synoptic.php",
             success: function (data) {
@@ -1237,6 +1243,7 @@ $(document).ready(function(){
         e.preventDefault();
 
         idOfElem = $(this).attr('id').split("_")[2];
+        idButton = $(this).attr('id');
 
         // Retrieve name of this element
         elementTitle = $("#syno_elem_title_" + idOfElem).html();
@@ -1303,6 +1310,11 @@ $(document).ready(function(){
                         resizable: true,
                         width: 600,
                         closeOnEscape: true,
+                        position: { 
+                            my: "left top", 
+                            at: "center", 
+                            of: "#" + idButton
+                        },
                         dialogClass: "popup_message",
                         title:"<?php echo __('CULTIPI_SYNO_PILOTER'); ?> " + elementTitle,
                         buttons: [{
