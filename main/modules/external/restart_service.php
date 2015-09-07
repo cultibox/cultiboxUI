@@ -29,8 +29,10 @@ if(is_file("/tmp/interfaces")) {
             exec("sudo /sbin/shutdown -r now",$output,$err);
         } else {
             exec("sudo /sbin/modprobe -r rt2800usb",$output,$err);
+			exec("sudo /sbin/modprobe -r 8192cu",$output,$err);
             exec("sleep 2",$output,$err);
             exec("sudo /sbin/modprobe rt2800usb",$output,$err);
+			exec("sudo /sbin/modprobe 8192cu",$output,$err);
             exec("sleep 5",$output,$err);
             
             exec("sudo /usr/sbin/invoke-rc.d networking force-reload",$output,$err);
