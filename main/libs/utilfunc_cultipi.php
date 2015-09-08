@@ -425,6 +425,14 @@ function write_pluga($sd_card,&$out) {
                     }
                     $tmp_pluga = $base + $tmp_MODULE_OUTPUT - 1;
                     break; 
+                case "bulcky":
+                    // bulcky plug case 
+                    // Module 1 : (Adresse 2000 --> 2004)
+                    // Module 2 : (Adresse 2010 --> 2014)
+                    // Module 3 : (Adresse 2020 --> 2024)
+                    //$tmp_pluga = 2000 + 10 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
+                    $tmp_pluga = 2000 + $tmp_MODULE_OUTPUT - 1;
+                    break;   
             }
 
             while(strlen($tmp_pluga)<3) {

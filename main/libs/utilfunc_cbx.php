@@ -283,6 +283,7 @@ function compare_pluga($sd_card) {
 
             // Create adress for this plug
             $tmp_pluga = 0;
+
             switch ($tmp_MODULE) {
                 case "wireless":
                     if ($tmp_power_max == "3500") {
@@ -319,10 +320,27 @@ function compare_pluga($sd_card) {
                     break;
                 case "pwm":
                     // pwm plug case 
-                    // Module 1 : (Adresse 31 --> 36)
-                    // Module 2 : (Adresse 37 --> 42)
-                    // Module 3 : (Adresse 43 --> 48)
-                    $tmp_pluga = 31 + 6 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
+                    // Module 1 : (Adresse 31 --> 38)
+                    // Module 2 : (Adresse 39 --> 44)
+                    // Module 3 : (Adresse 45 --> 49)
+                    $base = 31;
+                    if ($tmp_NUM_MODULE == 2)
+                    {
+                        $base = 39;
+                    }
+                    if ($tmp_NUM_MODULE == 3)
+                    {
+                        $base = 45;
+                    }
+                    $tmp_pluga = $base + $tmp_MODULE_OUTPUT - 1;
+                    break; 
+                case "bulcky":
+                    // bulcky plug case 
+                    // Module 1 : (Adresse 2000 --> 2004)
+                    // Module 2 : (Adresse 2010 --> 2014)
+                    // Module 3 : (Adresse 2020 --> 2024)
+                    //$tmp_pluga = 2000 + 10 * ($tmp_NUM_MODULE - 1) + $tmp_MODULE_OUTPUT - 1;
+                    $tmp_pluga = 2000 + $tmp_MODULE_OUTPUT - 1;
                     break;    
             }
 

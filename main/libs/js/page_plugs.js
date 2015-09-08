@@ -222,6 +222,7 @@ $(document).ready(function(){
         $("#select_canal_network"+id).css("display","none");
         $("#select_canal_xmax"+id).css("display","none");
         $("#select_canal_pwm"+id).css("display","none");
+        $("#select_canal_bulcky"+id).css("display","none");
         $("#select_canal_" + $(this).val() + id).show();
         
         
@@ -256,7 +257,12 @@ $(document).ready(function(){
                 if ($("#plug_power_max"+id).val() > "<?php echo $GLOBALS['NB_MAX_CANAL_PWM']; ?>") {
                     $("#plug_power_max"+id).val() = "1";
                 }
-                break;                  
+                break;
+            case 'bulcky':
+                if ($("#plug_power_max"+id).val() > "<?php echo $GLOBALS['NB_MAX_CANAL_BULCKY']; ?>") {
+                    $("#plug_power_max"+id).val() = "1";
+                }
+                break;                
             default:
                 break;
         }
@@ -653,7 +659,8 @@ function open_plugs_dial(htmlPlug) {
                             data_array['plug_module'+i] == "mcp230xx" || 
                             data_array['plug_module'+i] == "dimmer" || 
                             data_array['plug_module'+i] == "network" || 
-                            data_array['plug_module'+i] == "pwm") {
+                            data_array['plug_module'+i] == "pwm" || 
+                            data_array['plug_module'+i] == "bulcky") {
                             data_array['plug_module_output'+i] = $("select[name=" + data_array['plug_module'+i] + "_module_ouput" + i + "]").val();
                         }                        
 

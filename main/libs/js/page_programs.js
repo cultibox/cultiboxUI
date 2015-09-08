@@ -72,9 +72,18 @@ function getRegulation(i, type, module) {
         var divLabelRegul = document.getElementById('regul_label');
 
         switch(i) {
-         case 'regul' : divLabelRegul.style.display = ''; divValueRegul.style.display = ''; break;
-         case 'dimmer': divLabelRegul.style.display = 'none'; divValueRegul.style.display = ''; break;
-         default: divLabelRegul.style.display = 'none'; divValueRegul.style.display = 'none'; break;
+            case 'regul' :
+                divLabelRegul.style.display = '';
+                divValueRegul.style.display = '';
+                break;
+            case 'dimmer':
+                divLabelRegul.style.display = 'none';
+                divValueRegul.style.display = '';
+                break;
+            default:
+                divLabelRegul.style.display = 'none';
+                divValueRegul.style.display = 'none';
+                break;
         }
 
         switch(module) {
