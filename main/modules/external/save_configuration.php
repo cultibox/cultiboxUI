@@ -93,7 +93,7 @@ switch ($parttosave)
         // Write in XML
         sensors\serverAcqSensor_createXMLConf();
             
-        break;        
+        break; 
         
     default:
         break;
