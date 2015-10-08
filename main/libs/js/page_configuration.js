@@ -2314,11 +2314,27 @@ $(document).ready(function() {
 
                     switch (dialogMsgToShow) {
                         case "supervision_edit_checkPing" :
+                            nbIpToDeclare = 0;
+                            for (i =0 ; i < 5 ; i++) 
+                            {
+                                if ($("#supervision_edit_checkPing_ip_" + i).val() != "") 
+                                {
+                                    nbIpToDeclare++;
+                                } else {
+                                    i = 6;                                                
+                                }
+                            }
                             XMLVal = {
                                 action: "checkPing",
-                                ip: $("#supervision_edit_checkPing_ip").val(),
-                                timeMax: $("#supervision_edit_checkPing_timeMax").val(),
-                                eMail:   $("#supervision_edit_checkPing_eMail").val()
+                                "IP,0": $("#supervision_edit_checkPing_ip_0").val(),
+                                "IP,1": $("#supervision_edit_checkPing_ip_1").val(),
+                                "IP,2": $("#supervision_edit_checkPing_ip_2").val(),
+                                "IP,3": $("#supervision_edit_checkPing_ip_3").val(),
+                                "IP,4": $("#supervision_edit_checkPing_ip_4").val(),
+                                nbIP:nbIpToDeclare,
+                                timeMax: $("#supervision_edit_checkPing_timemax").val(),
+                                eMail:   $("#supervision_edit_checkPing_email").val(),
+                                "error,action":   "sendMail " + $("#supervision_edit_checkPing_email").val()
                             }
                             actionVal = "checkPing";
                             actionName = "Vérification ping";
@@ -2326,13 +2342,13 @@ $(document).ready(function() {
                         case "supervision_edit_checkSensor" :
                             XMLVal = {
                                 action: "checkSensor",
-                                eMail: $("#supervision_edit_checkSensor_eMail").val(),
+                                eMail: $("#supervision_edit_checkSensor_email").val(),
                                 sensor: $("#supervision_edit_checkSensor_sensor").val(),
-                                sensorName: $("#supervision_edit_checkSensor_sensorName").val(),
-                                sensorOutput: $("#supervision_edit_checkSensor_sensorOutput").val(),
-                                valueSeuil: $("#supervision_edit_checkSensor_valueSeuil").val(),
-                                timeSeuilInS: $("#supervision_edit_checkSensor_timeSeuilInS").val(),
-                                alertIf: $("#supervision_edit_checkSensor_alertIf").val()
+                                sensorName: $("#supervision_edit_checkSensor_sensorname").val(),
+                                sensorOutput: $("#supervision_edit_checkSensor_sensoroutput").val(),
+                                valueSeuil: $("#supervision_edit_checkSensor_valueseuil").val(),
+                                timeSeuilInS: $("#supervision_edit_checkSensor_timeseuilinS").val(),
+                                alertIf: $("#supervision_edit_checkSensor_alertif").val()
                             }
                             actionVal = "checkSensor";
                             actionName = "Vérification capteur";
@@ -2342,7 +2358,7 @@ $(document).ready(function() {
                                 action: "report",
                                 frequency: $("#supervision_edit_report_frequency").val(),
                                 hour: $("#supervision_edit_report_hour").val(),
-                                eMail: $("#supervision_edit_dailyReport_eMail").val()
+                                eMail: $("#supervision_edit_dailyReport_email").val()
                             }
                             actionVal = "report";
                             actionName = "Rapport";
@@ -2507,7 +2523,7 @@ $(document).ready(function() {
                         dialogClass: "popup_message",
                         open: function( event, ui ) {
                             jQuery.each(objJSON, function(name, value) {
-                                $("#supervision_edit_" + supervisiontype + "_" + name).val(value);
+                                $("#supervision_edit_" + supervisiontype + "_" + name.toLowerCase().replace(",","_")).val(value);
                             });
                         },
                         buttons: [{
@@ -2518,22 +2534,38 @@ $(document).ready(function() {
 
                                 switch (dialogMsgToShow) {
                                     case "supervision_edit_checkPing" :
+                                        nbIpToDeclare = 0;
+                                        for (i =0 ; i < 5 ; i++) 
+                                        {
+                                            if ($("#supervision_edit_checkPing_ip_" + i).val() != "") 
+                                            {
+                                                nbIpToDeclare++;
+                                            } else {
+                                                i = 6;                                                
+                                            }
+                                        }
                                         XMLVal = {
                                             action: "checkPing",
-                                            ip: $("#supervision_edit_checkPing_ip").val(),
-                                            timeMax: $("#supervision_edit_checkPing_timeMax").val(),
-                                            eMail:   $("#supervision_edit_checkPing_eMail").val()
+                                            "IP,0": $("#supervision_edit_checkPing_ip_0").val(),
+                                            "IP,1": $("#supervision_edit_checkPing_ip_1").val(),
+                                            "IP,2": $("#supervision_edit_checkPing_ip_2").val(),
+                                            "IP,3": $("#supervision_edit_checkPing_ip_3").val(),
+                                            "IP,4": $("#supervision_edit_checkPing_ip_4").val(),
+                                            nbIP:nbIpToDeclare,
+                                            timeMax: $("#supervision_edit_checkPing_timemax").val(),
+                                            eMail:   $("#supervision_edit_checkPing_email").val(),
+                                            "error,action":   "sendMail " + $("#supervision_edit_checkPing_email").val()
                                         }
                                         break;
                                     case "supervision_edit_checkSensor" :
                                         XMLVal = {
                                             action: "checkSensor",
-                                            eMail: $("#supervision_edit_checkSensor_eMail").val(),
+                                            eMail: $("#supervision_edit_checkSensor_email").val(),
                                             sensor: $("#supervision_edit_checkSensor_sensor").val(),
-                                            sensorOutput: $("#supervision_edit_checkSensor_sensorOutput").val(),
-                                            valueSeuil: $("#supervision_edit_checkSensor_valueSeuil").val(),
-                                            timeSeuilInS: $("#supervision_edit_checkSensor_timeSeuilInS").val(),
-                                            alertIf: $("#supervision_edit_checkSensor_alertIf").val()
+                                            sensorOutput: $("#supervision_edit_checkSensor_sensoroutput").val(),
+                                            valueSeuil: $("#supervision_edit_checkSensor_valueseuil").val(),
+                                            timeSeuilInS: $("#supervision_edit_checkSensor_timeseuilins").val(),
+                                            alertIf: $("#supervision_edit_checkSensor_alertif").val()
                                         }
                                         break;
                                     case "supervision_edit_report" :
@@ -2541,7 +2573,7 @@ $(document).ready(function() {
                                             action: "report",
                                             frequency: $("#supervision_edit_report_frequency").val(),
                                             hour: $("#supervision_edit_report_hour").val(),
-                                            eMail: $("#supervision_edit_dailyReport_eMail").val()
+                                            eMail: $("#supervision_edit_dailyReport_email").val()
                                         }
                                         break;
                                 }

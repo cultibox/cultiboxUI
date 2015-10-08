@@ -2308,7 +2308,7 @@ function get_canal_status(&$out) {
         $value[]=$result['PLUG_POWER_MAX']; 
     }
 
-    for($i=1;$i<=$GLOBALS['NB_MAX_CANAL_DIMMER'];$i++) {
+    for($i=1;$i<=$GLOBALS['NB_MAX_CANAL_NETWORK'];$i++) {
         if(in_array($i, $value)) {
             $status[]=0;
         } else {
