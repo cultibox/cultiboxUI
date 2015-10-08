@@ -46,7 +46,7 @@ if(is_file("/tmp/interfaces")) {
             } else {
                 //For driver TP-Link TL-WN725N  and others : 
                 exec("/sbin/lsmod 2>/dev/null|/bin/grep \"8192cu\"",$output,$err);
-                if((count($output)>0) {
+                if(count($output)>0) {
                     exec("sudo /sbin/modprobe -r 8192cu",$output,$err);
                     exec("sleep 2",$output,$err);
                     exec("sudo /sbin/modprobe 8192cu",$output,$err);
