@@ -75,7 +75,8 @@ if(is_file("/tmp/interfaces")) {
             }
         }
         exec("sudo /bin/mv /var/cache/lighttpd/compress/cultibox /tmp/",$output,$err);
-        echo json_encode("1");
+        exec("sudo /etc/init.d/ntp force-reload",$output,$err);
+		echo json_encode("1");
     } else {
         exec("sudo /bin/mv /etc/network/interfaces.SAVE /etc/network/interfaces");
 

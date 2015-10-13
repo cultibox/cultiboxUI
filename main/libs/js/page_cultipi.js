@@ -97,7 +97,10 @@ function get_webcam(first) {
                             $("#screen_webcam"+idx).load( function(){
                                 $.unblockUI();
                                 show_webcam();
-                            }).attr('src', src);
+                            }).error(function(){
+								$.unblockUI();
+                                show_webcam();
+							}).attr('src', src);
                             present=true;
 
                             $("#screen_webcam"+idx).show();
