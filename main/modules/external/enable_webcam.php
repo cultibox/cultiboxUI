@@ -2,7 +2,7 @@
 
 $action=$_GET['action'];
 if((!isset($_GET['webcam']))||(empty($_GET['webcam']))) {
-    $webcam=1;
+    $webcam=0;
 } else {
     $webcam=$_GET['webcam'];
 }
