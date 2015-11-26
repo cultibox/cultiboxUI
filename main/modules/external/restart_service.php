@@ -28,12 +28,12 @@ if(is_file("/tmp/interfaces")) {
         if(strcmp("$type","password_wep")==0) {
             exec("sudo /sbin/shutdown -r now",$output,$err);
         } else {
-			exec("sudo /usr/sbin/hub-ctrl -h 0 -P 2 -p 0",$output,$err);
-			exec("sudo /usr/bin/ pkill -9 wpa_supplicant",$output,$err);
-			sleep(3);
-			exec("sudo /usr/sbin/hub-ctrl  -h 0 -P 2 -p 1",$output,$err);
-            sleep(5);   
+	    //exec("sudo /usr/sbin/hub-ctrl -h 0 -P 2 -p 0",$output,$err);
+	    //exec("sudo /usr/bin/ pkill -9 wpa_supplicant",$output,$err);
+	    //sleep(3);
+	    //exec("sudo /usr/sbin/hub-ctrl  -h 0 -P 2 -p 1",$output,$err);
             exec("sudo /usr/sbin/invoke-rc.d networking force-reload",$output,$err);
+	    sleep(5);   
 
             exec("grep 'post-up /sbin/route add default gw' /etc/network/interfaces|grep eth0|sed -e 's/post-up //g'",$out,$err);
             if((count($out)==1)&&(strcmp($out[0],"")!=0)) {
