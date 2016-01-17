@@ -28,14 +28,12 @@ if(is_file("/tmp/interfaces")) {
         if(strcmp("$type","password_wep")==0) {
             exec("sudo /sbin/shutdown -r now",$output,$err);
         } else {
-            exec("sudo /sbin/modprobe -r rt2800usb",$output,$err);
-			exec("sudo /sbin/modprobe -r 8192cu",$output,$err);
-            exec("sleep 2",$output,$err);
-            exec("sudo /sbin/modprobe rt2800usb",$output,$err);
-			exec("sudo /sbin/modprobe 8192cu",$output,$err);
-            exec("sleep 5",$output,$err);
-            
+	    //exec("sudo /usr/sbin/hub-ctrl -h 0 -P 2 -p 0",$output,$err);
+	    //exec("sudo /usr/bin/ pkill -9 wpa_supplicant",$output,$err);
+	    //sleep(3);
+	    //exec("sudo /usr/sbin/hub-ctrl  -h 0 -P 2 -p 1",$output,$err);
             exec("sudo /usr/sbin/invoke-rc.d networking force-reload",$output,$err);
+	    sleep(5);   
 
             exec("grep 'post-up /sbin/route add default gw' /etc/network/interfaces|grep eth0|sed -e 's/post-up //g'",$out,$err);
             if((count($out)==1)&&(strcmp($out[0],"")!=0)) {
@@ -51,7 +49,8 @@ if(is_file("/tmp/interfaces")) {
             }
         }
         exec("sudo /bin/mv /var/cache/lighttpd/compress/cultibox /tmp/",$output,$err);
-        echo json_encode("1");
+        exec("sudo /etc/init.d/ntp force-reload",$output,$err);
+		echo json_encode("1");
     } else {
         exec("sudo /bin/mv /etc/network/interfaces.SAVE /etc/network/interfaces");
 
